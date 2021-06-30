@@ -51,7 +51,7 @@ if (is_array($MyFrankyMonster->MyJSFile())) {
         foreach ($MyFrankyMonster->MyJSFile() as $_js) {
             if(!empty($js))
             {
-                $js[] ='/public/js/' . $_js ;
+                $js[] ='/modulos/'.$MyFrankyMonster->MyModulo().'/web/js/' . $_js ;
 
             }
         }
