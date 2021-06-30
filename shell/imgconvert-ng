@@ -6,7 +6,7 @@ $File = new File;
 
 echo shellFontColor("Buscando imagenes...","verde")."\n";
 
-$dirs = [PROJECT_DIR.'public/skin/', PROJECT_DIR.'public/upload/'];
+$dirs = [PROJECT_DIR.'modulos/', PROJECT_DIR.'public/upload/'];
 
 
 foreach($dirs as $dir)
