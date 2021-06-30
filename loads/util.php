@@ -630,15 +630,20 @@ function imageResize($img,$w,$h,$crop=false)
         }
 
         fclose($fp);
+       
+        $json = json_decode($json,true);
 
-        $json = json_decode($json,false);
+   
         $_modulos = [];
         foreach($json['require'] as $modulo => $v)
         {
             $modulo = explode("/",$modulo);
-            if(file_exists(PROJECT_DIR.'/modulos'.$modulo[1]))
+            if(isset($modulo[1]))
             {
-                $_modulos[] = $modulo[1];
+                if(file_exists(PROJECT_DIR.'/modulos/'.$modulo[1]))
+                {
+                    $_modulos[] = $modulo[1];
+                }
             }
         }
         $modulos = array($MyConfigure->getPathSite());
@@ -650,7 +655,6 @@ function imageResize($img,$w,$h,$crop=false)
         else{
             $modulos2 = array_merge($_modulos,$modulos);
         }
-
         return  $modulos2;
  }
 
