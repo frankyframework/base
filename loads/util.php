@@ -621,7 +621,7 @@ function imageResize($img,$w,$h,$crop=false)
         $json = "";
 
      
-        $fp = fopen("composer.json", "r");
+        $fp = fopen(PROJECT_DIR."/composer.json", "r");
 
         while(!feof($fp)) {
 
