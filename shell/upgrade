@@ -12,8 +12,8 @@ $files = $File->mkdir($path);
 
 echo shellFontColor("Descargando actualizaciones...","verde")."\n";
 
-$url = "https://codeload.github.com/frankyframework/franky-skeleton-application/zip/master";
-$destination = $path.'/master.zip';
+$url = "https://codeload.github.com/frankyframework/franky-skeleton-application/archive/refs/heads/2.0.zip";
+$destination = $path.'/2.0.zip';
 $fp = fopen ($destination, 'w+');
 $ch = curl_init();
 curl_setopt( $ch, CURLOPT_URL, $url );
@@ -37,20 +37,11 @@ if ($zip->open($destination) === TRUE) {
 
     $fullmkdir = array(
         "/bin",
-        "/public/skin/default/css",
-        "/public/skin/default/images",
-        "/public/skin/default/less",
+        "/public/css",
+        "/public/images",
+        "/public/less",
+        "/public/js"
     );
-    foreach($modulos as $modulo)
-    {
-        if(!empty($modulo)):
-            $fullmkdir[] = '/modulos/'.$modulo;
-            $fullmkdir[] = '/public/skin/'.$modulo.'/css';
-            $fullmkdir[] = '/public/skin/'.$modulo.'/images';
-            $fullmkdir[] = '/public/skin/'.$modulo.'/less';
-            $fullmkdir[] = '/public/ajax/'.$modulo;
-        endif; 
-    }
 
     $path =  $path.'franky-skeleton-application-master';
 
@@ -59,7 +50,7 @@ if ($zip->open($destination) === TRUE) {
 
 
 
-          $files = $File->getAllFiles($path.$file);
+        $files = $File->getAllFiles($path.$file);
 
 
 
@@ -88,26 +79,11 @@ if ($zip->open($destination) === TRUE) {
       }
 
       $archivos = array(
-                    $path."/public/js/blocks.js",
-                    $path."/public/js/analytics.js",
-                    $path."/public/js/funciones.js",
-                    $path."/public/js/menu.js",
-                    $path."/public/js/validaciones.js",
-                    $path."/public/js/viewport.js",
-                    $path."/public/js/menuSlide.js",
-                    $path."/public/js/google_maps.js",
-                    $path."/public/js/geolocalizacion.js",
-                    $path."/public/js/direccionMap.js",
-                    $path."/public/js/NumeroALetras.js",
-                    $path."/public/js/skrollr.js",
                     $path."/index.php",
                     $path."/public/ajax/ajax.js",
                     $path."/public/ajax/ajax.php",);
 
-    foreach($modulos as $modulo)
-    {
-        $archivos[] = $path.'/public/js/'.$modulo.'.js';
-    }
+
     foreach($archivos as $_file)
     {
         if(!file_exists(str_replace($path,PROJECT_DIR,$_file)) || md5_file($_file) !== md5_file(str_replace($path,PROJECT_DIR,$_file)))
