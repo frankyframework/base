@@ -1,0 +1,44 @@
+<?php
+use Franky\Filesystem\File;
+ini_set('memory_limit', '-1');
+
+$File = new File;
+
+
+$paths =[PROJECT_DIR."modulos/",PROJECT_DIR."vendor/"];
+
+$count = 0;
+foreach($paths as $path)
+{
+    $files = $File->getAllFiles($path);
+
+    foreach($files['dir'] as $file)
+    {
+
+        if(basename($file) == ".git")
+        {
+            $_files = $File->getAllFiles($file);
+
+            if(!empty($_files))
+            {
+
+                foreach ($_files['file'] as $_file) {
+                    unlink($_file);
+                }
+
+                krsort($_files['dir']);
+                foreach ($_files['dir'] as $dir) {
+                    rmdir($dir);
+                    echo shellFontColor("[rmdir git] ".$_file,"verde")."\n";
+                    $count++;
+                }
+            }
+
+            echo shellFontColor("[rmdir git] ".$file,"verde")."\n";
+        }
+    }
+}
+if($count == 0)
+{
+    echo shellFontColor("No se encontraron archivos GIT","verde")."\n";
+}
