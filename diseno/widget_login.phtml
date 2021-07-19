@@ -1,6 +1,6 @@
 
 	<?php if($MySession->LoggedIn()): ?>
-		<li  class="first"><a class="_account" href="<?php echo $MyRequest->url(ADMIN); ?>">Mi cuenta</a></li>
+		<li  class="first"><a class="_account" href="<?php echo $MyRequest->url(MI_CUENTA); ?>">Mi cuenta</a></li>
 	<?php else: ?>
 		<li  class="first"><a class="_account" href="<?php echo $MyRequest->url(LOGIN); ?>">Entrar</a></li>
 	<?php endif; ?>

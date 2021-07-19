@@ -8,24 +8,7 @@ return array(
                  "permiso" =>   ADMINISTRAR_OTROS_USUARIOS,
                  "url" => $MyRequest->url(LISTA_OPERADORES),
                  "etiqueta" => _("Usuarios")
-                ),
-                array(
-                 "permiso" =>   ADMINISTRAR_MI_USUARIO,
-                 "url" => $MyRequest->url(FRM_OPERADORES),
-                 "etiqueta" => _("Editar mis datos")
-                ),
-                 array(
-                 "permiso" =>   ADMINISTRAR_MI_CONTRASENA,
-                 "url" => $MyRequest->url(FRM_MY_PASSWORD),
-                 "etiqueta" => _("Cambiar mi contraseña")
-                ),
-               
-         
-               array(
-                "permiso" =>   ELIMINAR_MI_PERFIL,
-                "url" => $MyRequest->url(FRM_ELIMINAR_USER),
-                "etiqueta" => _("Eliminar mi cuenta")
-               )
+                )
         )
     ),
     array('title'=> "Contenido",

@@ -1224,4 +1224,80 @@ function saveDataCustomAttributeImport($id_ref,$entity,$_data)
     }
     
 }
+
+function getJqueryUIjs($js,$render_js)
+{
+    $jquery_ui = [
+        'datepicker' => ["keycode"],
+        'slider' => ["widget","keycode","mouse"],
+        'progressbar' => ["widget"],
+    'dialog' => ["widget","position","data-selector","disable-selection","focusable-selector","form-reset-mixin","keycode","labels","scroll-parent","tabbable-selector","unique-id"/*,"draggable","resizable"*/,"button","checkboxradio","controlgroup","mouse"],
+        'sortable' => ["widget","data-selector","scroll-parent","mouse"],
+        'tooltip' => ["widget","keycode","position","unique-id"],
+    ];
+    
+    
+ 
+    $_js = [];
+    if(!empty($js) && is_array($js))
+    {
+        foreach($js as $file)
+        {
+            $txt = "";
+            $fp = fopen(PROJECT_DIR.$file, "r");
+            while (!feof($fp)){
+                $txt .= fgets($fp);
+            }
+            fclose($fp);
+            foreach($jquery_ui as $function => $dependencias)
+            {
+                if(preg_match("/\.$function/",$txt))
+                {
+                    foreach($dependencias as $dependencia)
+                    {
+                        if(!in_array('/public/jquery-ui/js/'.$dependencia.'.js',$_js))
+                        {
+                            $_js[] = '/public/jquery-ui/js/'.$dependencia.'.js';
+                        }
+                    }
+
+
+                    if(!in_array('/public/jquery-ui/js/'.$function.'.js',$_js))
+                    {
+                        
+                        $_js[] = '/public/jquery-ui/js/'.$function.'.js';
+                    }
+                }
+            }
+            if(!in_array($file,$_js))
+            {
+                $_js[] = $file;
+            }
+            
+        }
+        
+    }
+    foreach($jquery_ui as $function => $dependencias)
+    {
+        if(preg_match("/\.$function/",$render_js))
+        {
+            foreach($dependencias as $dependencia)
+            {
+                if(!in_array('/public/jquery-ui/js/'.$dependencia.'.js',$_js))
+                {
+                    $_js[] = '/public/jquery-ui/js/'.$dependencia.'.js';
+                }
+            }
+
+
+            if(!in_array('/public/jquery-ui/js/'.$function.'.js',$_js))
+            {
+                $_js[] = '/public/jquery-ui/js/'.$function.'.js';
+            }
+        }
+    }
+
+    return $_js;
+
+}
 ?>

@@ -12,26 +12,9 @@
     <div id="loader" style="width: 100px;height: 100px;position: absolute;left:50%; top:50%;background: url('<?php echo getImg('SVG/loader.svg'); ?>') no-repeat center 0; margin:-50px 0 0 -50px;">&nbsp;</div>
 </div>
 <?php endif; ?>
-    <header>
-        <div class="w-xxxx-12">
-
-                <?php $logopanel = getImg('logo.png'); ?>
-
-                <?php
-                if(getCoreConfig('base/theme/logopanel') != "")
-                {
-                    if(file_exists(PROJECT_DIR.getCoreConfig('base/theme/logopanel')))
-                    {
-                        $logopanel = getCoreConfig('base/theme/logopanel');
-                    }
-
-                }
-                ?>
-                <a class="_admin_logo" href="<?php echo $MyRequest->url(ADMIN) ?>"><?php echo makeHTMLImg($logopanel,"","200","200","class='img_logo'"); ?></a>
-                <a target="_blank" class="_btn _txt _my_site" href="/">VER SITIO</a>
-
-        </div>
-    </header>
+    <div class="w-xxxx-12 header_wrapper">
+		<?php echo render("header.phtml"); ?>
+	</div>
         <main>
 
         	<div class="w-xxxx-12 page_wrapper">
@@ -41,6 +24,7 @@
                         <div class="_left_menu">
                             <ul class="_img_perfil">
                                 <li><span class="avatar_mask"><?php echo makeHTMLImg(getAvatar($MySession->GetVar('id'))); ?></span></li>
+                                <li><a class="_btn _editar_avatar" href="<?=$MyRequest->url(ADMIN_AVATAR); ?>">Editar</a></li>
                                 <?php if($MySession->LoggedIn()): ?>
                                     <li>
                                         <a class="_access _logout" href="/logout.php"><?php echo _("Cerrar sesión"); ?></a>
@@ -55,6 +39,7 @@
                        </div>
 
                         <div class="_panel_content">
+                        
                             <?php
                                 $centro = $MyFrankyMonster->MyPHPFile();
                                 $render_phtml = render(str_replace(".php",".phtml",$centro));
@@ -67,12 +52,14 @@
         	</div>
         </main>
         <footer>
-            <p><a target="_blank" href="www.cloudstudio.mx">Todos los derechos reservados CloudStudio</a></p>
+            <div class="w-xxxx-12 footer_wrapper">
+                <?php echo render("footer.phtml"); ?>
+            </div>
         </footer>
         <?php echo render("widget_link_up.phtml"); ?>
         <?php echo render("debug.phtml",$MyDebug->Dump()) ?>
-        <?php echo render("admin/layout/css.async.phtml"); ?>
-        <?php echo render("admin/layout/js.phtml",['render_phtml' => $render_phtml,'MyFrankyMonster' => $MyFrankyMonster,'MyConfigure' => $MyConfigure,'Mobile_detect' => $Mobile_detect,'MyMetatag' => $MyMetatag,'lang_root' => $lang_root,"MyRequest" => $MyRequest]); ?>
+        <?php echo render("mi-cuenta/layout/css.async.phtml"); ?>
+        <?php echo render("mi-cuenta/layout/js.phtml",['render_phtml' => $render_phtml,'MyFrankyMonster' => $MyFrankyMonster,'MyConfigure' => $MyConfigure,'Mobile_detect' => $Mobile_detect,'MyMetatag' => $MyMetatag,'lang_root' => $lang_root,"MyRequest" => $MyRequest]); ?>
         <?php echo render("msg.request.phtml"); ?>
 </body>
 </html>

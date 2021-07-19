@@ -7,8 +7,9 @@ $css[] = getCss("franky.mobile.css");
 $css[] = getCss("franky-font/header.css");
 $css[] = getCss("franky-font/footer.css");
 $css[] = getCss("franky-font/style.css");
-$css[] = "/public/jquery-ui/css/jquery-ui.min.css";
-$css[] = "/public/jquery-ui/css/jquery-ui.structure.css";
+$css[] = "/public/jquery-ui/themes/jquery-ui.structure.css";
+$css[] = "/public/jquery-ui/themes/".getCoreConfig('base/theme/jqueryiu-theme')."/jquery-ui.min.css";
+$css[] = "/public/jquery-ui/themes/".getCoreConfig('base/theme/jqueryiu-theme')."/theme.css";
 
 if(is_array($MyFrankyMonster->MyCSSFile()))
 {
@@ -50,7 +51,6 @@ if(getCoreConfig('base/debug/production')){
 
     $CssCreatos         = new Base\model\cssCreator();
     $CssCreatos->addCss($css);
-    $CssCreatos->setPath($MyConfigure->getPathSite()."/");
     $name_css =  getFriendly($MyFrankyMonster->MySeccion());
     $CssCreatos->setName((!empty($name_css) ? $name_css.".css" : "home.css"));
     if($MyFrankyMonster->MySeccion() == ERR_404)

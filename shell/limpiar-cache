@@ -1,0 +1,44 @@
+<?php
+use Franky\Core\validaciones;
+use Franky\Filesystem\File;
+ini_set('memory_limit', '-1');
+
+
+$help = helpShell([
+    
+]);
+
+
+
+
+$deletes = 0;
+$no_deletes = 0;
+
+$paths = array(PROJECT_DIR."/public/cache/css/",PROJECT_DIR."/public/cache/js/");
+
+$File = new File;
+
+foreach($paths as $path)
+{
+    if(file_exists($path))
+    {
+        $files = $File->getFiles($path);
+
+        foreach($files as $file)
+        {
+            if(unlink($path."/".$file))
+            {
+                echo shellFontColor("[success] El archivo ".$path."/".$file." se elimino correctamente","verde")."\n";
+                $deletes++;
+            }
+            else
+            {
+                echo shellFontColor("[error] El archivo ".$path."/".$file." no se puedo eliminar","rojo")."\n";
+                $no_deletes++;
+            }
+        }
+    }
+}
+
+echo shellFontColor("$deletes archivos borrados, $no_deletes archivos no se pudieron borrar")."\n";
+?>

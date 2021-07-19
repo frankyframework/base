@@ -27,4 +27,5 @@ define ("CONSULTAS_SUCCESS",        $error_code++);
 
 
 define ("PATH_ADMIN",     "admin");
+define ("PATH_ACCOUNT",     "mi-cuenta");
 ?>

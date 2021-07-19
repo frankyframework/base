@@ -218,7 +218,8 @@ if($error == false)
             
         endif;
 
-    unlink($CoreConfig->getServerUploadDir().'/core_config/core_config.php');
+      unlink($CoreConfig->getServerUploadDir().'/core_config/core_config.php');
+      include(PROJECT_DIR.'/modulos/base/loads/core_config.php');
 
 
 

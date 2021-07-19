@@ -4,8 +4,10 @@ return array
     "sitemap.xml" => PROJECT_DIR."/modulos/base/controller/sitemap.php",
     "lang.php" => PROJECT_DIR."/modulos/base/controller/lang.php",
     "login.php" => PROJECT_DIR."/modulos/base/controller/login.php",
+    "admin/login.php" => PROJECT_DIR."/modulos/base/controller/admin/login.php",
     "logout.php" => PROJECT_DIR."/modulos/base/controller/logout.php",
     "forgot.php" => PROJECT_DIR."/modulos/base/controller/forgot.php",
+    "admin/forgot.php" => PROJECT_DIR."/modulos/base/controller/admin/forgot.php",
     "contacto.submit.php" => PROJECT_DIR."/modulos/base/controller/contacto.submit.php",
     "registro/submit.users.php" => PROJECT_DIR."/modulos/base/controller/registro/submit.users.php",
     "registro/setVerificacion.php" => PROJECT_DIR."/modulos/base/controller/registro/setVerificacion.php",
@@ -13,8 +15,10 @@ return array
     "registro/alias.php" => PROJECT_DIR."/modulos/base/controller/registro/alias.php",
     "registro/email.php" => PROJECT_DIR."/modulos/base/controller/registro/email.php",
     "mfm.php" => PROJECT_DIR."/modulos/base/controller/mfm.php",
-    "admin/users/submit.avatar.php" => PROJECT_DIR."/modulos/base/controller/admin/users/submit.avatar.php",
-    "admin/users/chose.avatar.php" => PROJECT_DIR."/modulos/base/controller/admin/users/chose.avatar.php",
+    "mi-cuenta/users/submit.avatar.php" => PROJECT_DIR."/modulos/base/controller/mi-cuenta/users/submit.avatar.php",
+    "mi-cuenta/users/chose.avatar.php" => PROJECT_DIR."/modulos/base/controller/mi-cuenta/users/chose.avatar.php",
+    "mi-cuenta/users/submit.users.php" => PROJECT_DIR."/modulos/base/controller/mi-cuenta/users/submit.users.php",
+    "mi-cuenta/users/submit.pass.php" => PROJECT_DIR."/modulos/base/controller/mi-cuenta/users/submit.pass.php",
     "admin/users/submit.users.php" => PROJECT_DIR."/modulos/base/controller/admin/users/submit.users.php",
     "admin/users/submit.pass.php" => PROJECT_DIR."/modulos/base/controller/admin/users/submit.pass.php",
     "admin/cms/submit.php"  => PROJECT_DIR."/modulos/base/controller/admin/cms/submit.php",
@@ -25,5 +29,6 @@ return array
     "admin/url-internacional/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/url_internacional/submit.php",
     "admin/core-config/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/core_config/submit.php",
     "manifest.json" => PROJECT_DIR."/modulos/base/controller/manifest.php",
+    "service_worker.js" => PROJECT_DIR."/modulos/base/diseno/service_worker.js"
 );
 ?>

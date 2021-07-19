@@ -38,6 +38,13 @@ return array(
                               'validation' => array('required' => true),
                             'data' => ['default' => 'Default','theme1' => 'Tema 1'],
                               'value' => 'default'
+                          ),
+                          array('path' => 'base/theme/jqueryiu-theme',
+                            'type' => 'select',
+                            'label' => 'Tema Jquery UI',
+                              'validation' => array('required' => true),
+                            'data' =>  include(PROJECT_DIR.'/modulos/base/configure/jqueryui_thems.php'),
+                              'value' => 'base'
                             )
                           
           )

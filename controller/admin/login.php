@@ -61,7 +61,7 @@ if($error == false)
         }
         else
         {
-            $location =$MyRequest->url(MI_CUENTA);
+            $location =$MyRequest->url(ADMIN);
         }
     }
     else

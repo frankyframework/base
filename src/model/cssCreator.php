@@ -7,9 +7,8 @@ class cssCreator
 {
     
     private $css;
-    private $cssFolder = '/public/css/';
+    private $cssFolder = '/public/cache/css/';
     private $Namecss;
-    private $path;
     public function __construct($name="global.css") {
         $this->css = array();
         $this->Namecss = $name;
@@ -20,11 +19,7 @@ class cssCreator
     {
         $this->css = $css;
     }
-     public function setPath($path)
-    {
-        $this->path = $path;
-        
-    }
+ 
     
     public function setName($name)
     {
@@ -39,81 +34,12 @@ class cssCreator
             
         }
         
-        if(!file_exists(PROJECT_DIR.$this->cssFolder.$this->path))
-        {
-            mkdir(PROJECT_DIR.$this->cssFolder.$this->path,0777);
-            
-        }
-    }
-    private function compararHash()
-    {
-        
-       $this->MKD();
-        if(!file_exists(PROJECT_DIR.$this->cssFolder.$this->path.$this->Namecss.".hash"))
-        {
-            return true;
-        }
-
-        $file = fopen(PROJECT_DIR.$this->cssFolder.$this->path.$this->Namecss.".hash",'r');
-
-        $hash = json_decode(fgets($file),true);
-
-        fclose($file);
-
-        
-        if(is_array($this->css))
-        {
-            foreach($this->css as $file)
-            {
-                
-                if(md5_file(PROJECT_DIR.$file) != $hash[$file])
-                {
-                    return true;
-                }
-            }
-        }
-        else
-        {
-          
-            if(md5_file(PROJECT_DIR.$this->css) != $hash[$this->css])
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private function crearHash()
-    {
-       
-         $this->MKD();
-        $hash = array();
-        if(is_array($this->css))
-        {
-            foreach($this->css as $file)
-            {
-                $hash[$file] = md5_file(PROJECT_DIR.$file);
-             
-            }
-        }
-        else
-        {
-            $hash[$this->css] = md5_file(PROJECT_DIR.$this->css);
-        }
-        
-        $file = fopen(PROJECT_DIR.$this->cssFolder.$this->path.$this->Namecss.".hash",'w');
-        $hash = json_encode($hash);
-        fwrite($file,$hash.PHP_EOL);
-        fclose($file);
-
-        chmod(PROJECT_DIR.$this->cssFolder.$this->path.$this->Namecss.".hash", 0777);
-
-        return false;
+  
     }
     
     private function crearCss()
     {
-         $this->MKD();
+        $this->MKD();
         $buffer = "";
         if(is_array($this->css))
         {
@@ -133,7 +59,7 @@ class cssCreator
                     file_get_contents(PROJECT_DIR.$this->css));
         }
 
-        $globalFile = fopen(PROJECT_DIR.$this->cssFolder.$this->path.$this->Namecss, 'w');
+        $globalFile = fopen(PROJECT_DIR.$this->cssFolder.$this->Namecss, 'w');
         
         
         
@@ -146,7 +72,7 @@ class cssCreator
 
         fclose($globalFile);
 
-        chmod(PROJECT_DIR.$this->cssFolder.$this->path.$this->Namecss, 0777);
+        chmod(PROJECT_DIR.$this->cssFolder.$this->Namecss, 0777);
     }
     
     private function minify($contenido)
@@ -168,14 +94,13 @@ class cssCreator
     
     public function  get()
     {
-        if($this->compararHash())
+        if(!file_exists(PROJECT_DIR.$this->cssFolder.$this->Namecss))
         {
-            
-            $this->crearHash();
+         
             $this->crearCss();
         }
         
-        return $this->cssFolder.$this->path.$this->Namecss."?".md5_file(PROJECT_DIR.$this->cssFolder.$this->path.$this->Namecss);
+        return $this->cssFolder.$this->Namecss;
         
         
     }
