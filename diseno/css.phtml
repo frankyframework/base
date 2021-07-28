@@ -41,7 +41,8 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
     }
 }
 
-
+$css[] = getCss("style.css");
+$css[] = getCss("style_extended.css");
 
 if(getCoreConfig('base/debug/production')){
 
@@ -70,6 +71,5 @@ else
         <?php
     }
 }
-//echo $MyMetatag->getCss();
-$MyMetatag->setCss(getCss("style.css"));
+
 ?>
