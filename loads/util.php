@@ -171,9 +171,9 @@ function getCss($file)
     global $MyConfigure;
     global $MyFrankyMonster;
 
-    if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/css/".$file))
+    if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/web/css/".$file))
     {
-        return "/modulos/".$MyConfigure->getPathSite()."/css/".$file;
+        return "/modulos/".$MyConfigure->getPathSite()."/web/css/".$file;
     }
     elseif($MyFrankyMonster->MyModulo()!= "base" && file_exists(PROJECT_DIR."/modulos/".$MyFrankyMonster->MyModulo()."/web/css/".$file))
     {
