@@ -40,7 +40,9 @@ if ($zip->open($destination) === TRUE) {
         "/public/css",
         "/public/images",
         "/public/less",
-        "/public/js"
+        "/public/js",
+        "/public/jquery",
+        "/public/jquery-ui"
     );
 
     $path =  $path.'franky-skeleton-application-master';
