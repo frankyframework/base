@@ -21,14 +21,14 @@ return array(
                               'label' => 'Idiomas disponibles',
                               'validation' => array('required' => false),
                               'value' => ['es_MX'],
-                              'data' => PROJECT_DIR.'/modulos/base/configure/idiomas.php',
+                              'data' => include(PROJECT_DIR.'/modulos/base/configure/idiomas.php'),
                               'multiple' => true
                             ),
                       array('path' => 'base/theme/baselang',
                               'type' => 'select',
                               'label' => 'Idioma predefinodo',
                               'validation' => array('required' => false),
-                              'data' => PROJECT_DIR.'/modulos/base/configure/idiomas.php',
+                              'data' => include(PROJECT_DIR.'/modulos/base/configure/idiomas.php'),
                               'value' => 'es_MX'
                             ),
 
