@@ -12,7 +12,7 @@ $files = $File->mkdir($path);
 
 echo shellFontColor("Descargando actualizaciones...","verde")."\n";
 
-$url = "https://codeload.github.com/frankyframework/franky-skeleton-application/archive/refs/heads/2.0.zip";
+$url = "https://codeload.github.com/frankyframework/franky-skeleton-application/zip/refs/heads/2.0";
 $destination = $path.'/2.0.zip';
 $fp = fopen ($destination, 'w+');
 $ch = curl_init();
@@ -45,7 +45,7 @@ if ($zip->open($destination) === TRUE) {
         "/public/jquery-ui"
     );
 
-    $path =  $path.'franky-skeleton-application-master';
+    $path =  $path.'franky-skeleton-application-2.0';
 
     foreach($fullmkdir as $file)
     {

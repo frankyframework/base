@@ -37,15 +37,16 @@
         	<div class="w-xxxx-12 page_wrapper">
 
                     <div class="w-xxxx-12 cont_admin">
+                     <?php if($MySession->LoggedIn()): ?>
                         <div class="_btn_collapse_panel"></div>
                         <div class="_left_menu">
                             <ul class="_img_perfil">
                                 <li><span class="avatar_mask"><?php echo makeHTMLImg(getAvatar($MySession->GetVar('id'))); ?></span></li>
-                                <?php if($MySession->LoggedIn()): ?>
+                               
                                     <li>
                                         <a class="_access _logout" href="/logout.php"><?php echo _("Cerrar sesión"); ?></a>
                                     </li>
-                                <?php endif; ?>
+                              
                             </ul>
                             <ul class="_ul_nav_admin">
                            <?php
@@ -53,12 +54,13 @@
                            ?>
                            </ul>
                        </div>
-
+                       <?php endif; ?>
                         <div class="_panel_content">
                             <?php
                                 $centro = $MyFrankyMonster->MyPHPFile();
                                 $render_phtml = render(str_replace(".php",".phtml",$centro));
                                 echo stripJS($render_phtml);
+                              
                             ?>
                         </div>
 
@@ -72,6 +74,7 @@
         <?php echo render("widget_link_up.phtml"); ?>
         <?php echo render("debug.phtml",$MyDebug->Dump()) ?>
         <?php echo render("admin/layout/css.async.phtml"); ?>
+        
         <?php echo render("admin/layout/js.phtml",['render_phtml' => $render_phtml,'MyFrankyMonster' => $MyFrankyMonster,'MyConfigure' => $MyConfigure,'Mobile_detect' => $Mobile_detect,'MyMetatag' => $MyMetatag,'lang_root' => $lang_root,"MyRequest" => $MyRequest]); ?>
         <?php echo render("msg.request.phtml"); ?>
 </body>
