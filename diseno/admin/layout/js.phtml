@@ -90,16 +90,37 @@ $js = getJqueryUIjs($js,$render_js);
      // -->
     </script>
 <?php
+if(getCoreConfig('base/debug/production')){
 
-foreach($js as $_file_js)
-{
+    $JsCreatos   = new Base\model\jsCreator();
+    $JsCreatos->addJs($js);
+    $JsCreatos->setEmbebed($render_js);
+    $name_js =  getFriendly($MyFrankyMonster->MySeccion());
+    $JsCreatos->setName((!empty($name_js) ? $name_js.".js" : "home.js"));
+    if($MyFrankyMonster->MySeccion() == ERR_404)
+    {
+       $JsCreatos->setName("404.js");
+    }
     ?>
-    <script src='<?php echo $_file_js; ?>'  ></script>
+    <script <?=(!$MyRequest->isAjax() ? 'async' : '');?> src='<?php echo $JsCreatos->get(); ?>'  ></script>
+
+
+    <?php
+}
+else
+{
+    foreach($js as $_file_js)
+    {
+        ?>
+        <script src='<?php echo $_file_js; ?>'  ></script>
+        <?php
+    }
+    ?>
+    <script >
+        <!--
+        <?php echo $render_js; ?>
+        //-->
+    </script>
     <?php
 }
 ?>
-<script >
-    <!--
-    <?php echo $render_js; ?>
-    //-->
-</script>

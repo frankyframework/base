@@ -118,5 +118,10 @@ $(window).load(function() {
 
 
     $('.contenedor_columnas div').textToIcon();
+    if( $(".contenedor_columnas_info").length > 0 && window.admingrid)
+    {
+        $(".contenedor_columnas_info").htmlDataDum(window.admingrid,".no_hay_datos");
+    }
+    
 
 });

@@ -35,8 +35,6 @@
         </div>
     </div>
 </div>
-<script >
-<!--
-$(".contenedor_columnas_info").htmlDataDum(<?php echo json_encode($lista_admin_data); ?>,".no_hay_datos");
-// -->
+<script type="text/javascript">
+window.admingrid = <?php echo json_encode($lista_admin_data); ?>;
 </script>
