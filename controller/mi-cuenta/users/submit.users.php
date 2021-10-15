@@ -106,10 +106,9 @@ if(!$error)
               $campos = array( 'token'=> $token,'usuario' => $MySession->GetVar('usuario'), "url" => $MyRequest->getSERVER(),"email" => $MyUserEntity->getEmail());
 
               $TemplateemailModel    = new \Base\model\TemplateemailModel;
-              $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-              $SecciontransaccionalEntity->friendly('confirmacion-de-email');
-              $TemplateemailModel->setOrdensql('id DESC');
-              $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
+              $TemplateemailEntity    = new \Base\entity\TemplateemailEntity;
+              $TemplateemailEntity->id(getCoreConfig('base/user/email-template-validaremail'));
+              $TemplateemailModel->getData($TemplateemailEntity->getArrayCopy());
 
               $registro  = $TemplateemailModel->getRows();
 

@@ -165,7 +165,49 @@ return array(
                                     'validation' => array('required' => true),
                                     'data' => ['1' => 'Sin restriccion','2' => 'Almenos una mayuscula','3' => 'Almenos una mayuscula y un numero','4' => 'Almenos una ,ayuscula, un numero y un simbolo'],
                                     'value' => '1'
-                                  ),
+                            ),
+                            array('path' => 'base/user/email-template-newuser',
+                                    'type' => 'select',
+                                    'label' => 'Template E-mail Nuevo usuario',
+                                    'validation' => array('required' => true),
+                                    'data' => getTemplatesEmail(),
+                                    'value' => '1'
+                            ),
+                            array('path' => 'base/user/email-template-newuseradmin',
+                            'type' => 'select',
+                            'label' => 'Template E-mail Nuevo usuario admin',
+                            'validation' => array('required' => true),
+                            'data' => getTemplatesEmail(),
+                            'value' => '1'
+                    ),
+                            array('path' => 'base/user/email-template-validaremail',
+                                    'type' => 'select',
+                                    'label' => 'Template para verificación de E-mail',
+                                    'validation' => array('required' => true),
+                                    'data' => getTemplatesEmail(),
+                                    'value' => '1'
+                            ),
+                            array('path' => 'base/user/email-template-nuevodispositivo',
+                                    'type' => 'select',
+                                    'label' => 'Template para verificación de E-mail',
+                                    'validation' => array('required' => true),
+                                    'data' => getTemplatesEmail(),
+                                    'value' => '1'
+                            ),
+                            array('path' => 'base/user/email-template-forgot',
+                                    'type' => 'select',
+                                    'label' => 'Template para recuperar contraseña',
+                                    'validation' => array('required' => true),
+                                    'data' => getTemplatesEmail(),
+                                    'value' => '1'
+                            ),
+                            array('path' => 'base/user/email-template-forgotadmin',
+                                    'type' => 'select',
+                                    'label' => 'Template para recuperar contraseña de administraador',
+                                    'validation' => array('required' => true),
+                                    'data' => getTemplatesEmail(),
+                                    'value' => '1'
+                            ),
 
           )
   ),
@@ -180,6 +222,20 @@ return array(
                         'data' => ['0' => 'No', '1' => 'Si'],
                         'value' => '0'
                       ),
+                array('path' => 'base/user/email-contactanos',
+                              'type' => 'select',
+                              'label' => 'Template E-mail envío de contacto',
+                              'validation' => array('required' => true),
+                              'data' => getTemplatesEmail(),
+                              'value' => '1'
+                      ),
+                array('path' => 'base/user/email-user-contactanos',
+                      'type' => 'select',
+                      'label' => 'Template E-mail notificacion a usuario de contacto',
+                      'validation' => array('required' => true),
+                      'data' => getTemplatesEmail(),
+                      'value' => '1'
+                    ),
 
     )
 ),

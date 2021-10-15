@@ -2,7 +2,7 @@
 use PHPUnit\Framework\TestCase;
 use Franky\Core\MYDEBUG;
 use \Base\model\TemplateemailModel;
-use \Base\entity\SecciontransaccionalEntity;
+use \Base\entity\TemplateemailEntity;
 
 include(dirname(__FILE__).'/../loads/util.php');
 
@@ -10,12 +10,12 @@ class TransaccionalTest extends TestCase
 {
 
   private $TemplateemailModel;
-  private $SecciontransaccionalEntity;
+  private $TemplateemailEntity;
   public function setUp() {
     define(PROJECT_DIR,realpath(dirname(__FILE__).'/../../../'));
 
     $this->TemplateemailModel = new TemplateemailModel();
-    $this->SecciontransaccionalEntity         = new SecciontransaccionalEntity();
+    $this->TemplateemailEntity         = new TemplateemailEntity();
   }
 
 
@@ -30,10 +30,8 @@ class TransaccionalTest extends TestCase
         'sitio_titulo' => ''
       ];
 
-
-      $this->SecciontransaccionalEntity->friendly('contactanos');
-      $this->TemplateemailModel->setOrdensql('id DESC');
-      $result = $this->TemplateemailModel->getData([],$this->SecciontransaccionalEntity->getArrayCopy());
+      $this->TemplateemailEntity->id(getCoreConfig('base/user/email-contactanos'));
+      $result = $this->TemplateemailModel->getData($this->TemplateemailEntity->getArrayCopy());
 
       $this->assertSame($result, REGISTRO_SUCCESS);
 

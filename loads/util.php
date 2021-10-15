@@ -792,6 +792,28 @@ function selectSeccionTransaccional()
       return $secciones;
 }
 
+function getTemplatesEmail()
+{
+    $TemplateemailModel = new \Base\model\TemplateemailModel();
+    $TemplateemailEntity = new \Base\entity\TemplateemailEntity();
+
+    $TemplateemailEntity->status(1);
+    $templates = array("","selecciona");
+    $TemplateemailModel->setTampag(1000);
+    $TemplateemailModel->setOrdensql("nombre ASC");
+    if($TemplateemailModel->getData($TemplateemailEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+    {
+        while($registro = $TemplateemailModel->getRows())
+        {
+            $templates[$registro['id']] = $registro['nombre'];
+
+        }
+    }
+
+    return $templates;
+
+}
+
 
 function getNameDay($nombredia)
 {
@@ -919,10 +941,9 @@ function validLoginUserDevice()
             if($UserdeviceModel->getTotal() > 1)
             {
                 $TemplateemailModel    = new \Base\model\TemplateemailModel;
-                $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-                $SecciontransaccionalEntity->friendly('nuevo-dispositivo');
-                $TemplateemailModel->setOrdensql('id DESC');
-                $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
+                $TemplateemailEntity    = new \Base\entity\TemplateemailEntity;
+                $TemplateemailEntity->id(getCoreConfig('base/user/email-template-nuevodispositivo'));
+                $TemplateemailModel->getData($TemplateemailEntity->getArrayCopy());
 
 
                 $campos['email'] = $MySession->GetVar('email');

@@ -35,10 +35,9 @@ if($error == false)
 
 
         $TemplateemailModel    = new \Base\model\TemplateemailModel;
-        $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-        $SecciontransaccionalEntity->friendly('recuperar-contrasena');
-        $TemplateemailModel->setOrdensql('id DESC');
-        $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
+        $TemplateemailEntity    = new \Base\entity\TemplateemailEntity;
+        $TemplateemailEntity->id(getCoreConfig('base/user/email-template-forgotadmin'));
+        $TemplateemailModel->getData($TemplateemailEntity->getArrayCopy());
 
         $registro  = $TemplateemailModel->getRows();
         $campos =  array("email" => $email,"usuario" => (empty($MyLogin->usuario) ? $email : $MyLogin->usuario),"password" => $password, "nombre_web" => $MyRequest->getSERVER(), "url_web" => $MyRequest->getSERVER());

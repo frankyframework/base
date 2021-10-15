@@ -43,19 +43,17 @@ if($error== false)
                 $campos = $MyContactoEntity->getArrayCopy();
 
                 $TemplateemailModel    = new \Base\model\TemplateemailModel;
-                $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-                $SecciontransaccionalEntity->friendly('contactanos');
-                $TemplateemailModel->setOrdensql('id DESC');
-                $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
+                $TemplateemailEntity    = new \Base\entity\TemplateemailEntity;
+                $TemplateemailEntity->id(getCoreConfig('base/user/email-contactanos'));
+                $TemplateemailModel->getData($TemplateemailEntity->getArrayCopy());
 
                 $registro  = $TemplateemailModel->getRows();
 
                 sendEmail($campos,$registro);
 
                 if(getCoreConfig('base/contactanos/user-notification')==1):
-                    $SecciontransaccionalEntity->friendly('contactanos-user-notification');
-                    $TemplateemailModel->setOrdensql('id DESC');
-                    $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
+                    $TemplateemailEntity->id(getCoreConfig('base/user/email-user-contactanos'));
+                    $TemplateemailModel->getData($TemplateemailEntity->getArrayCopy());
     
                     $registro  = $TemplateemailModel->getRows();
     
