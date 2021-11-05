@@ -1270,6 +1270,7 @@ function getJqueryUIjs($js,$render_js)
                 $txt .= fgets($fp);
             }
             fclose($fp);
+            
             foreach($jquery_ui as $function => $dependencias)
             {
                 if(preg_match("/\.$function/",$txt))
@@ -1288,6 +1289,7 @@ function getJqueryUIjs($js,$render_js)
                         
                         $_js[] = '/public/jquery-ui/js/'.$function.'.js';
                     }
+                    unset($jquery_ui[$function]);
                 }
             }
             if(!in_array($file,$_js))
