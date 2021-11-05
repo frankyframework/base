@@ -1252,7 +1252,7 @@ function getJqueryUIjs($js,$render_js)
         'datepicker' => ["keycode"],
         'slider' => ["widget","keycode","mouse"],
         'progressbar' => ["widget"],
-    'dialog' => ["widget","position","data-selector","disable-selection","focusable-selector","form-reset-mixin","keycode","labels","scroll-parent","tabbable-selector","unique-id"/*,"draggable","resizable"*/,"button","checkboxradio","controlgroup","mouse"],
+        'dialog' => ["widget","position","data-selector","disable-selection","focusable-selector","form-reset-mixin","keycode","labels","scroll-parent","tabbable-selector","unique-id"/*,"draggable","resizable"*/,"button","checkboxradio","controlgroup","mouse"],
         'sortable' => ["widget","data-selector","scroll-parent","mouse"],
         'tooltip' => ["widget","keycode","position","unique-id"],
     ];
@@ -1264,6 +1264,16 @@ function getJqueryUIjs($js,$render_js)
     {
         foreach($js as $file)
         {
+            if(!preg_match("/public\/js\//",$file) && !preg_match("/web\/js\//",$file))
+            {
+                if(!in_array($file,$_js))
+                {
+                    $_js[] = $file;
+                }
+                continue;
+            }
+       
+           
             $txt = "";
             $fp = fopen(PROJECT_DIR.$file, "r");
             while (!feof($fp)){
