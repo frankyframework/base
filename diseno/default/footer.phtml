@@ -58,6 +58,9 @@
 						<?php if(getCoreConfig('base/empresa/whatsapp')): ?>
 							<li><a href="https://api.whatsapp.com/send?phone=<?=getCoreConfig('base/empresa/whatsapp')?>" target="_blank"><i class="icon icon-whatsapp"></i>  Whatsapp</a></li>
 						<?php endif; ?>
+						<?php if(getCoreConfig('base/empresa/linkedin')): ?>
+							<li><a href="<?=getCoreConfig('base/empresa/linkedin')?>" target="_blank"><i class="icon icon-linkedin"></i>  Linked In</a></li>
+						<?php endif; ?>
 						</ul>
 					</div>
 					<?php endif; ?>

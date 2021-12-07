@@ -144,7 +144,13 @@ return array(
           'label' => 'Whatsapp',
           'validation' => array('required' => false),
           'value' => ''
-        )
+        ),
+        array('path' => 'base/empresa/linkedin',
+        'type' => 'text',
+        'label' => 'Linked In',
+        'validation' => array('required' => false),
+        'value' => ''
+      )
 
     )
 ),
