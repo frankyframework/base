@@ -159,7 +159,7 @@ function getFriendly($string)
         $string = utf8_decode($string);
         $string = strtr($string, utf8_decode($a), $b);
         $string = strtolower($string);
-	$string = preg_replace('#([^.a-z0-9]+)#i', '-', $string);
+	    $string = preg_replace('#([^a-z0-9]+)#i', '-', $string);
         $string = preg_replace('#-{2,}#','-',$string);
         $string = trim($string,"-");
 	return $string;
