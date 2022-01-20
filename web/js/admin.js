@@ -123,5 +123,16 @@ $(window).load(function() {
         $(".contenedor_columnas_info").htmlDataDum(window.admingrid,".no_hay_datos");
     }
     
-
+    $(".switch").change(function()
+    {
+            if($(this).is(":checked"))
+            {
+                $(this).addClass('switchOn');
+            }
+            else
+            {
+                $(this).removeClass('switchOn');
+            }
+    });
+    $(".switch").trigger('change');
 });
