@@ -78,6 +78,12 @@
             "nombre" : "Notificacion de contactanos para usuario",
             "friendly": "contactanos-user-notification",
             "status" : 1
+        },
+        {
+            "id" : 8,
+            "nombre" : "SMTP test",
+            "friendly": "SMTP-test",
+            "status" : 1
         }
     ]
 }

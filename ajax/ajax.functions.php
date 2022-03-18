@@ -313,8 +313,6 @@ function EliminarUrlIternacional($id,$status)
 
 
 
-
-
 /******************************** EJECUTA *************************/
 
 $MyAjax->register("EliminarUser");
@@ -327,5 +325,4 @@ $MyAjax->register("setExplorador");
 $MyAjax->register("EliminarUrlIternacional");
 $MyAjax->register("BloquearDispositivo");
 $MyAjax->register("EliminarDispositivo");
-
 ?>

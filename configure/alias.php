@@ -28,6 +28,7 @@ return array
     "registro/verificacion.php" => PROJECT_DIR."/modulos/base/controller/registro/verificacion.php",
     "admin/url-internacional/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/url_internacional/submit.php",
     "admin/core-config/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/core_config/submit.php",
+    "admin/smtptest.php" => PROJECT_DIR."/modulos/base/controller/admin/smtp/test.php",
     "manifest.json" => PROJECT_DIR."/modulos/base/controller/manifest.php",
     "service_worker.js" => PROJECT_DIR."/modulos/base/diseno/service_worker.js"
 );

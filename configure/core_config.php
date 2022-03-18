@@ -369,7 +369,16 @@ return array(
                       'validation' => array('required' => true,'maxlength' => 1),
                       'data' => ['0' => '0','1' => '1','2' => '2'],
                       'value' => 0
+                      
                     ),
+                    array('path' => 'base/smtp/email-test',
+                    'type' => 'select',
+                    'label' => 'Template email test',
+                    'validation' => array('required' => true),
+                    'data' => getTemplatesEmail(),
+                    'value' => '',
+                    'html' => render('modulos/base/diseno/admin/smtp/link.phtml')
+            ),
 
         )
 
