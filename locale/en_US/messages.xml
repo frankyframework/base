@@ -2,323 +2,325 @@
 <mensajes>
     <prefijo></prefijo>
     <mensaje>
-        <llave>error_conexion</llave>
-        <valor>Error de conexión favor de intentar más tarde</valor>
+        <llave>connection_error</llave>
+        <valor>Connection error please try again later</valor>
     </mensaje>
     <mensaje>
         <llave>bad_request</llave>
-        <valor>Error de petición favor de intentar más tarde</valor>
+        <valor>Request error please try again later</valor>
     </mensaje>
     <mensaje>
         <llave>error_login</llave>
-        <valor>El nombre de usuario y/o contraseña no es válido</valor>
+        <valor>The username and/or password is not valid</valor>
     </mensaje>
     <mensaje>
         <llave>empty_login</llave>
-        <valor>Favor de escribir un nombre de usuario y una contraseña</valor>
+        <valor>Please enter a username and password</valor>
     </mensaje>
     <mensaje>
         <llave>error_message_key</llave>
-        <valor>La llave del mensaje no existe</valor>
+        <valor>Message key does not exist</valor>
     </mensaje>
     <mensaje>
         <llave>empty_input</llave>
-        <valor>Favor de llenar el campo %s</valor>
+        <valor>Please fill in the field %s</valor>
     </mensaje>
     <mensaje>
         <llave>bad_chars</llave>
-        <valor>El campo %s contiene caracteres no permitidos</valor>
+        <valor>Field %s contains illegal characters</valor>
     </mensaje>
     <mensaje>
         <llave>bad_email</llave>
-        <valor>El campo %s debe contener un correo electrónico</valor>
+        <valor>Field %s must contain an email</valor>
     </mensaje>
     <mensaje>
         <llave>bad_names</llave>
-        <valor>El campo %s contiene caracteres no válidos</valor>
+        <valor>Field %s contains invalid characters</valor>
     </mensaje>
     <mensaje>
         <llave>bad_url</llave>
-        <valor>El campo %s debe contener una URL válida</valor>
+        <valor>Field %s must contain a valid URL</valor>
     </mensaje>
     <mensaje>
         <llave>bad_numeric</llave>
-        <valor>El campo %s debe contener un valor númerico</valor>
+        <valor>Field %s must contain a numeric value</valor>
     </mensaje>
     <mensaje>
         <llave>spam_boot</llave>
-        <valor>Se a detectado un spam boot favor de revisar el contenido de su formulario</valor>
+        <valor>A spam boot has been detected, please check the content of your form</valor>
     </mensaje>
     <mensaje>
         <llave>puterias</llave>
-        <valor>El campo %s contiene palabras inapropiadas</valor>
+        <valor>Field %s contains inappropriate words</valor>
     </mensaje>
     <mensaje>
         <llave>error_max_length</llave>
-        <valor>El campo %s no debe exceder el límite de caracteres</valor>
+        <valor>Field %s must not exceed character limit</valor>
     </mensaje>
     <mensaje>
         <llave>error_min_length</llave>
-        <valor>El campo %s es demasiado corto</valor>
+        <valor>Field %s is too short</valor>
     </mensaje>
     <mensaje>
         <llave>no_login</llave>
-        <valor>Debes iniciar sesión para realizar esta operación</valor>
+        <valor>You must be logged in to perform this operation</valor>
     </mensaje>
     <mensaje>
         <llave>correo_no_verificado</llave>
-        <valor>Debes verificar tu correo electrónico para realizar esta operación</valor>
+        <valor>You must verify your email to perform this operation</valor>
     </mensaje>
     <mensaje>
         <llave>error_captcha</llave>
-        <valor>Lo sentimos, el código de verificación es incorrecto. Intenta de nuevo.</valor>
+        <valor>Sorry, the verification code is incorrect. Try again.</valor>
     </mensaje>
     <mensaje>
         <llave>email_no_register</llave>
-        <valor>El correo o el usuario que proporcionaste no esta registrado</valor>
+        <valor>The email or user you provided is not registered</valor>
     </mensaje>
     <mensaje>
         <llave>forgot_password_confirmation</llave>
-        <valor>Su contraseña fue enviada a su dirección de correo electrónico</valor>
+        <valor>Your password was sent to your email address</valor>
     </mensaje>
     <mensaje>
         <llave>frm_success</llave>
-        <valor>Tu información y comentario se envio correctamente</valor>
+        <valor>Your information and comment were sent successfully</valor>
     </mensaje>
     <mensaje>
         <llave>frm_err</llave>
-        <valor>Error al enviar, favor de intentar más tarde</valor>
+        <valor>Error sending, please try again later</valor>
     </mensaje>
     <mensaje>
         <llave>1_error</llave>
-        <valor>Te faltó llenar 1 campo. Está marcado en rojo.</valor>
+        <valor> You missed filling out 1 field. It is marked in red.</valor>
     </mensaje>
     <mensaje>
         <llave>n_error</llave>
-        <valor>Te faltó llenar '+errors+' campos.  Están marcados en rojo.</valor>
+        <valor>You missed filling '+errors+' fields. They are marked in red.</valor>
     </mensaje>
     <mensaje>
         <llave>error_pass_actual</llave>
-        <valor>La contraseña actual no es válida.</valor>
+        <valor>The current password is invalid.</valor>
     </mensaje>
        <mensaje>
      <llave>error_pass_admin</llave>
-     <valor>La contraseña de administrador no es válida.</valor>
-    </mensaje>
-    <mensaje>
-        <llave>delete_suscriptor_success</llave>
-        <valor>El usuario se eliminó correctamente</valor>
+     <valor>Admin password is invalid.</valor>
     </mensaje>
     <mensaje>
         <llave>delete_suscriptor_error</llave>
-        <valor>Error al eliminar el usuario intente mas tarde</valor>
+        <valor>User deleted successfully</valor>
+    </mensaje>
+    <mensaje>
+        <llave>delete_subscriber_error</llave>
+        <valor>Error deleting user try later</valor>
     </mensaje>
     <mensaje>
         <llave>success_send_email_verificacion_suscriptor</llave>
-        <valor>En breve recibirás un correo electrónico de confirmación</valor>
+        <valor>You will receive a confirmation email shortly</valor>
     </mensaje>
     <mensaje>
         <llave>error_send_email_verificacion_suscriptor</llave>
-        <valor>Error al enviar el correo electrónico de confirmación</valor>
+        <valor>Error sending confirmation email</valor>
     </mensaje>
     <mensaje>
         <llave>comparar_contrasenas</llave>
-        <valor>Las contraseñas con diferentes.</valor>
+        <valor>Passwords with different.</valor>
     </mensaje>
     <mensaje>
         <llave>nivel_user_invalido</llave>
-        <valor>El nivel de usuario no es válido</valor>
+        <valor>The user level is not valid</valor>
     </mensaje>
     <mensaje>
         <llave>username_duplicate</llave>
-        <valor>El nombre de usuario %s ya está siendo usado en otra cuenta</valor>
+        <valor>Username %s is already in use on another account</valor>
     </mensaje>
     <mensaje>
         <llave>email_duplicate</llave>
-        <valor>La dirección de email %s ya está siendo usada por otro usuario</valor>
+        <valor>The email address %s is already in use by another user</valor>
     </mensaje>
     <mensaje>
         <llave>aceptar_politicas</llave>
-        <valor>Debe aceptar las políticas de privacidad y condiciones de uso</valor>
+        <valor>You must accept the privacy policies and conditions of use</valor>
     </mensaje>
     <mensaje>
         <llave>regtistro_user_success</llave>
-        <valor>Te has registrado correctamente, en breve recibirás un correo electrónico de confirmación</valor>
+        <valor>You have successfully registered, you will receive a confirmation email shortly</valor>
     </mensaje>
     <mensaje>
         <llave>regtistro_user_error</llave>
-        <valor>Error al registrarte favor de intentar mas tarde</valor>
+        <valor>Error registering please try again later</valor>
     </mensaje>
     <mensaje>
         <llave>editar_perfil_success</llave>
-        <valor>Los datos de perfil se actualizarón correctamente</valor>
+        <valor>Profile data updated successfully</valor>
     </mensaje>
     <mensaje>
         <llave>editar_perfil_error</llave>
-        <valor>Error al intentar actualizar los datos de perfil intente más tarde</valor>
+        <valor>Error trying to update profile data try again later</valor>
     </mensaje>
     <mensaje>
         <llave>url_duplicada</llave>
-        <valor>Esta url ya está registrada</valor>
+        <valor>This url is already registered</valor>
     </mensaje>
     <mensaje>
         <llave>guardar_generico_success</llave>
-        <valor>El registro se agrego correctamente</valor>
+        <valor>The record was added successfully</valor>
     </mensaje>
     <mensaje>
         <llave>guardar_generico_error</llave>
-        <valor>Error al guardar el registro</valor>
+        <valor>Error saving record</valor>
     </mensaje>
     <mensaje>
         <llave>editar_generico_success</llave>
-        <valor>El registro se editó correctamente</valor>
+        <valor>The record was edited successfully</valor>
     </mensaje>
     <mensaje>
         <llave>editar_generico_error</llave>
-        <valor>Error al editar el registro</valor>
+        <valor>Error editing registry</valor>
     </mensaje>
     <mensaje>
         <llave>eliminar_generico_success</llave>
-        <valor>El registro se elimino correctamente</valor>
+        <valor>Record deleted successfully</valor>
     </mensaje>
     <mensaje>
         <llave>eliminar_generico_error</llave>
-        <valor>Error al eliminar el registro</valor>
+        <valor>Error deleting record</valor>
     </mensaje>
     <mensaje>
         <llave>activar_generico_success</llave>
-        <valor>El registro se activo correctamente</valor>
+        <valor>Log was successfully activated</valor>
     </mensaje>
     <mensaje>
         <llave>activar_generico_error</llave>
-        <valor>Error al activar el registro</valor>
+        <valor>Error activating logging</valor>
     </mensaje>
 
     <mensaje>
         <llave>nombre_template_duplicado</llave>
-        <valor>Existe otro template con este nombre.</valor>
+        <valor>Another template with this name exists.</valor>
     </mensaje>
     <mensaje>
         <llave>avatar_success</llave>
-        <valor>El avatar se guardó correctamente</valor>
+        <valor>Avatar saved successfully</valor>
     </mensaje>
-    <mensaje>
+<mensaje>
         <llave>avatar_error</llave>
-        <valor>Error al guardar el avatar: %s</valor>
+        <valor>Failed to save avatar: %s</valor>
     </mensaje>
     <mensaje>
         <llave>solo_imagen</llave>
-        <valor>Solo se permiten formatos de tipo imagen</valor>
+        <valor>Only image type formats are allowed</valor>
     </mensaje>
     <mensaje>
         <llave>solo_pdf</llave>
-        <valor>Solo se permiten formatos de tipo PDF</valor>
+        <valor>Only PDF type formats are allowed</valor>
     </mensaje>
     <mensaje>
         <llave>imagen_error</llave>
-        <valor>Error al guardar la imagen: %s</valor>
+        <valor>Failed to save image: %s</valor>
     </mensaje>
     <mensaje>
         <llave>pdf_error</llave>
-        <valor>Error al guardar el PDF: %s</valor>
+        <valor>Error saving PDF: %s</valor>
     </mensaje>
     <mensaje>
         <llave>editar_password_success</llave>
-        <valor>La contraseña se actualizó correctamente</valor>
+        <valor>Password updated successfully</valor>
     </mensaje>
     <mensaje>
         <llave>editar_password_error</llave>
-        <valor>Error al actualizar la contraseña</valor>
+        <valor>Failed to update password</valor>
     </mensaje>
     <mensaje>
         <llave>success_send_token_verificacion_email</llave>
-        <valor>El correo de verificación de e-mail se envio correctamente</valor>
+        <valor>The email verification email was sent successfully</valor>
     </mensaje>
     <mensaje>
         <llave>error_token_verificacion_email</llave>
-        <valor>Error al verificar tus datos, la solicitud de verificación no es válida</valor>
+        <valor>Error verifying your data, the verification request is not valid</valor>
     </mensaje>
     <mensaje>
         <llave>success_verificacion_email</llave>
-        <valor>Gracias, tu e-mail ha sido verificado</valor>
+        <valor>Thank you, your e-mail has been verified</valor>
     </mensaje>
     <mensaje>
         <llave>error_verificacion_email</llave>
-        <valor>Error al verificar tus datos, favor de intentar más tarde</valor>
+        <valor>Error verifying your data, please try again later</valor>
     </mensaje>
-    <mensaje>
+<mensaje>
         <llave>error_change_pass</llave>
-        <valor>Error al cambiar tu contraseña favor de intentar más tarde</valor>
+        <valor>Error changing your password please try again later</valor>
     </mensaje>
     <mensaje>
         <llave>sin_privilegios</llave>
-        <valor>No tienes los suficientes privilegios para realizar esta acción</valor>
+        <valor>You do not have sufficient privileges to perform this action</valor>
     </mensaje>
 
     <mensaje>
         <llave>error_mkdir</llave>
-        <valor>[!] Error al crear el directorio: %s</valor>
+        <valor>[!] Error creating directory: %s</valor>
     </mensaje>
     <mensaje>
         <llave>error_copy_file</llave>
-        <valor>[!] Error al copiar el archivo</valor>
+        <valor>[!] Error copying file</valor>
     </mensaje>
     <mensaje>
         <llave>rename_error</llave>
-        <valor>Error al intentar renombrar el archivo: %s</valor>
+        <valor>Error trying to rename file: %s</valor>
     </mensaje>
     <mensaje>
         <llave>error_sql</llave>
-        <valor>Error de sql: %s</valor>
+        <valor>sql error: %s</valor>
     </mensaje>
      <mensaje>
         <llave>telefono_duplicate</llave>
-        <valor>El teléfono %s ya está en uso</valor>
+        <valor>Phone %s is already in use</valor>
     </mensaje>
     <mensaje>
        <llave>password_level_2</llave>
-       <valor>La contraseña debe tener al menos una mayúscula</valor>
+       <valor>Password must have at least one uppercase letter</valor>
    </mensaje>
    <mensaje>
       <llave>password_level_3</llave>
-      <valor>La contraseña debe tener al menos una mayúscula y un número</valor>
+      <valor>Password must have at least one uppercase letter and one number</valor>
   </mensaje>
   <mensaje>
      <llave>password_level_4</llave>
-     <valor>La contraseña debe tener al menos una mayúscula, un número y un simbolo #?!@$%^&amp;*-.</valor>
+     <valor>Password must have at least one uppercase letter, one number and one symbol #?!@$%^&amp;*-.</valor>
  </mensaje>
-   <mensaje>
+ <mensaje>
         <llave>custom_attribute_error_delete</llave>
-        <valor>Error al eliminar el atributo</valor>
+        <valor>Error removing attribute</valor>
     </mensaje>
       <mensaje>
         <llave>attr_duplicado</llave>
-        <valor>Ya existe un atributo con este nombre</valor>
+        <valor>An attribute with this name already exists</valor>
     </mensaje>
      <mensaje>
         <llave>news_success</llave>
-        <valor>El e-mail se registro correctamente</valor>
+        <valor>The email was successfully registered</valor>
     </mensaje>
     <mensaje>
         <llave>news_error</llave>
-        <valor>Error favor de intentar mas tarde</valor>
+        <valor>Error please try again later</valor>
     </mensaje>
     <mensaje>
         <llave>news_bad</llave>
-        <valor>La direccion de e-mail no es valida</valor>
+        <valor>The email address is not valid</valor>
     </mensaje>
     <mensaje>
         <llave>news_duplicate</llave>
-        <valor>La direccion de e-mail ya esta registrada</valor>
+        <valor>The email address is already registered</valor>
     </mensaje>
      <mensaje>
         <llave>news_defaulterror</llave>
-        <valor>Error favor de intentar mas tarde</valor>
+        <valor>Error please try again later</valor>
     </mensaje>
     <mensaje>
         <llave>news_empty</llave>
-        <valor>The e-mail is empty</valor>
+        <valor>Please write an e-mail address</valor>
     </mensaje>
- 
- 
 </mensajes>
+
+
+
+
