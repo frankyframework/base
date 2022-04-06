@@ -10,13 +10,13 @@
             <div >
                 <div class="w-xxxx-12">
                     <div class="w-xxxx-12 contenedor_titulo_columnas">
-                      <div class="w-xxxx-2"><?php echo makeHTMLOrder( "tipo", "Tipo"); ?></div>
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "access_last", "Ultimo acceso"); ?></div>
-                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "os", "Sitema operativo"); ?></div>
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "ip", "IP"); ?></div>
-                        <div class="w-xxxx-3"><?php echo makeHTMLOrder( "user_agent", "User-Agent"); ?></div>
-                        <div class="w-xxxx-1">Permitir Acceso</div>
-                        <div class="w-xxxx-1">Eliminar</div>
+                      <div class="w-xxxx-2"><?php echo makeHTMLOrder( "tipo", _("Tipo")); ?></div>
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "access_last", _("Ultimo acceso")); ?></div>
+                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "os", _("Sitema operativo")); ?></div>
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "ip", _("IP")); ?></div>
+                        <div class="w-xxxx-3"><?php echo makeHTMLOrder( "user_agent", _("User-Agent")); ?></div>
+                        <div class="w-xxxx-1"><?=_('Permitir Acceso')?></div>
+                        <div class="w-xxxx-1"><?=_('Eliminar')?></div>
                     </div>
                     <div class="contenedor_columnas_info"  >
                     <div class="contenedor_columnas" id="content_row_{{_data.id}}" >
@@ -36,7 +36,7 @@
                 </div>
               </div>
                 <div class="w-xxxx-12">
-                    <div class="no_hay_datos" >No hay dispositivos registrados</div>
+                    <div class="no_hay_datos" ><?=_('No hay dispositivos registrados')?></div>
                 </div>
                 <div class="w-xxxx-12">
                     <?php echo render("admin/widget.paginar.phtml"); ?>

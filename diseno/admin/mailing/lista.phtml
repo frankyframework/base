@@ -15,8 +15,8 @@
             <div >
                 <div class="w-xxxx-12">
                     <div class="contenedor_titulo_columnas">
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "publicado", "Fecha"); ?></div>
-                        <div class="w-xxxx-4"><?php echo makeHTMLOrder( "email", "E-mail"); ?></div>
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "publicado", _("Fecha")); ?></div>
+                        <div class="w-xxxx-4"><?php echo makeHTMLOrder( "email", _("E-mail")); ?></div>
                     </div>
                     <div class="contenedor_columnas_info"  >
                     <div class="contenedor_columnas"  >
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="w-xxxx-12">
-                    <div class="no_hay_datos" >No hay emails registrados</div>
+                    <div class="no_hay_datos" ><?=_('No hay emails registrados')?></div>
                 </div>
                 <div class="w-xxxx-12">
                     <?php echo render("admin/widget.paginar.phtml"); ?>

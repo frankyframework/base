@@ -14,14 +14,14 @@
                 <div >
                     <div class="w-xxxx-12">
                         <div class="w-xxxx-12  contenedor_titulo_columnas">
-                            <div class="w-xxxx-2"><?php echo makeHTMLOrder( "fecha", "Fecha registro"); ?></div>
-                            <div class="w-xxxx-2"><?php echo makeHTMLOrder( "usuario", "Usuario"); ?></div>
-                            <div class="w-xxxx-1"><?php echo makeHTMLOrder( "email", "E-mail"); ?></div>
-                            <div class="w-xxxx-3"><?php echo makeHTMLOrder( "nombre", "Nombre"); ?></div>
-                            <div class="w-xxxx-1"><?php echo makeHTMLOrder( "nivel", "Tipo usuario"); ?></div>
-                            <div class="w-xxxx-1">Eliminar</div>
-                            <div class="w-xxxx-1">Editar</div>
-                            <div class="w-xxxx-1">Contraseña</div>
+                            <div class="w-xxxx-2"><?php echo makeHTMLOrder( "fecha", _("Fecha registro")); ?></div>
+                            <div class="w-xxxx-2"><?php echo makeHTMLOrder( "usuario", _("Usuario")); ?></div>
+                            <div class="w-xxxx-1"><?php echo makeHTMLOrder( "email", _("E-mail")); ?></div>
+                            <div class="w-xxxx-3"><?php echo makeHTMLOrder( "nombre", _("Nombre")); ?></div>
+                            <div class="w-xxxx-1"><?php echo makeHTMLOrder( "nivel", _("Tipo usuario")); ?></div>
+                            <div class="w-xxxx-1"><?=_('Eliminar')?></div>
+                            <div class="w-xxxx-1"><?=_('Editar')?></div>
+                            <div class="w-xxxx-1"><?=_('Contraseña')?></div>
                         </div>
                         <div class="contenedor_columnas_info"  >
                             <div class="contenedor_columnas"  >
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="w-xxxx-12">
-                        <div class="no_hay_datos" >No hay usuarios registrados</div>
+                        <div class="no_hay_datos" ><?=_('No hay usuarios registrados')?></div>
                     </div>
                     <div class="w-xxxx-12">
                         <?php echo render("admin/widget.paginar.phtml"); ?>

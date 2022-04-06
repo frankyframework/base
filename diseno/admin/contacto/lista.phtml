@@ -16,12 +16,12 @@
             <div >
                 <div class="w-xxxx-12">
                     <div class="w-xxxx-12 contenedor_titulo_columnas">
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "fecha", "Fecha"); ?></div>
-                        <div class="w-xxxx-4"><?php echo makeHTMLOrder( "nombre", "Nombre"); ?></div>
-                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "email", "E-mail"); ?></div>
-                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "telefono", "Telefono"); ?></div>
-                        <div class="w-xxxx-3"><?php echo makeHTMLOrder( "asunto", "Asunto"); ?></div>
-                        <div class="w-xxxx-1">Eliminar</div>
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "fecha", _("Fecha")); ?></div>
+                        <div class="w-xxxx-4"><?php echo makeHTMLOrder( "nombre", _("Nombre")); ?></div>
+                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "email", _("E-mail")); ?></div>
+                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "telefono", _("Telefono")); ?></div>
+                        <div class="w-xxxx-3"><?php echo makeHTMLOrder( "asunto", _("Asunto")); ?></div>
+                        <div class="w-xxxx-1"><?=_('Eliminar')?></div>
                     </div>
                     <div class="contenedor_columnas_info"  >
                     <div class="contenedor_columnas" id="content_row_{{_data.id}}" >
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="w-xxxx-12">
-                    <div class="no_hay_datos" >No hay informacion de contacto registrada</div>
+                    <div class="no_hay_datos" ><?=_('No hay informacion de contacto registrada')?></div>
                 </div>
                 <div class="w-xxxx-12">
                     <?php echo render("admin/widget.paginar.phtml"); ?>
