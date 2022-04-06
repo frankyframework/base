@@ -36,11 +36,11 @@ class registroForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'nombre',
-              //  'label' => 'Nombre:',
+              //  'label' => _('Nombre'),
                 'type'  => 'text',
                // 'required'  => true,
                 'atributos' => array(
-                    'placeholder' => 'Nombre',
+                    'placeholder' => _('Nombre'),
                     'maxlength' => 200
                  ),
                 'label_atributos' => array(
@@ -52,11 +52,11 @@ class registroForm extends \Franky\Form\Form
 
        $this->add(array(
                 'name' => 'email',
-                //'label' => 'E-mail:',
+                //'label' => _('E-mail'),
                 'type'  => 'text',
                // 'required'  => true,
                 'atributos' => array(
-                    'placeholder' => 'E-mail',
+                    'placeholder' => _('E-mail'),
                     'maxlength' => 200,
                     'minlength' => 5,
                     'type_mobile'  => 'email'
@@ -75,11 +75,11 @@ class registroForm extends \Franky\Form\Form
 
        $this->add(array(
                 'name' => 'telefono',
-               // 'label' => 'Teléfono celular:',
+               // 'label' => _('Teléfono celular'),
                 'type'  => 'text',
                // 'required'  => false,
                 'atributos' => array(
-                    'placeholder' => 'Teléfono celular',
+                    'placeholder' => ('Teléfono celular'),
                     'maxlength' => 10,
                     'type_mobile'  => 'tel'
                  ),
@@ -93,12 +93,12 @@ class registroForm extends \Franky\Form\Form
 
        $this->add(array(
                 'name' => 'sexo',
-                'label' => 'Sexo:',
+                'label' => _('Genero'),
                 'type'  => 'radio',
 
                 'required'  => false,
-                'options' =>  array("h" => "Hombre",
-                                     "m"  => "Mujer"),
+                'options' =>  array("h" => _("Masculino"),
+                                    "m"  => _("Femenino"),
 
 
 
@@ -110,7 +110,7 @@ class registroForm extends \Franky\Form\Form
         );
         $this->add(array(
                 'name' => 'fecha_nacimiento',
-                'label' => 'Fecha de nacimiento:',
+                'label' => _('Fecha de nacimiento'),
                 'type'  => 'date',
                 'required'  => false,
                 'atributos' => array(
@@ -135,7 +135,7 @@ class registroForm extends \Franky\Form\Form
                'type'  => 'submit',
                'atributos' => array(
                    'class'       => '_btn _btn-primary',
-                   'value' => "Guardar"
+                   'value' => _("Guardar")
                 )
 
            )
@@ -154,11 +154,11 @@ class registroForm extends \Franky\Form\Form
     {
         $this->add(array(
                 'name' => 'contrasena1',
-             //   'label' => 'Confirmar contraseña:',
+             //   'label' => _('Confirmar contraseña'),
                 'type'  => 'password',
               //  'required'  => true,
                 'atributos' => array(
-                    'placeholder' => 'Confirmar contraseña',
+                    'placeholder' => _('Confirmar contraseña'),
                     'maxlength' => 15,
                     'minlength' => 6,
                     'id'       => 'contrasena1'
@@ -173,11 +173,11 @@ class registroForm extends \Franky\Form\Form
     {
           $this->add(array(
                 'name' => 'contrasena',
-             //   'label' => 'Contraseña:',
+             //   'label' => _('Contraseña'),
                 'type'  => 'password',
                // 'required'  => true,
                 'atributos' => array(
-                    'placeholder' => 'Contraseña',
+                    'placeholder' => ('Contraseña'),
                     'maxlength' => 15,
                     'minlength' => 6,
                     'id'       => 'contrasena'
@@ -193,7 +193,7 @@ class registroForm extends \Franky\Form\Form
     {
         $this->add(array(
                 'name' => 'nivel',
-                'label' => 'Nivel:',
+                'label' => _('Nivel'),
                 'type'  => 'select',
                 'required'  => true,
                 'options' => array(),
@@ -210,11 +210,11 @@ class registroForm extends \Franky\Form\Form
     {
           $this->add(array(
                 'name' => 'contrasena_ant',
-            //    'label' => 'Contraseña actual:',
+            //    'label' => _('Contraseña actual'),
                 'type'  => 'password',
             //    'required'  => true,
                 'atributos' => array(
-                    'placeholder' => 'Contraseña actual',
+                    'placeholder' => ('Contraseña actual'),
                     'maxlength' => 15,
                     'minlength' => 6,
                     'id'       => 'contrasena'
@@ -229,11 +229,11 @@ class registroForm extends \Franky\Form\Form
     {
         $this->add(array(
                 'name' => 'usuario',
-            //    'label' => 'Usuario:',
+            //    'label' => ('Usuario'),
                 'type'  => 'text',
               //  'required'  => true,
                 'atributos' => array(
-                    'placeholder' => 'Usuario',
+                    'placeholder' => _('Usuario'),
                     'maxlength' => 15,
                     'minlength' => 3,
                  ),
@@ -247,11 +247,11 @@ class registroForm extends \Franky\Form\Form
     {
         $this->add(array(
                 'name' => 'biografia',
-            //    'label' => 'Biografia:',
+            //    'label' => ('Biografia'),
                 'type'  => 'textarea',
               //  'required'  => false,
                 'atributos' => array(
-                    'placeholder' => 'Biografia',
+                    'placeholder' => _('Biografia'),
                     'cols' => 45,
                     'rows' => 5,
                  ),
@@ -270,7 +270,7 @@ class registroForm extends \Franky\Form\Form
                 'atributos' => array(
                     'class' => 'required'
                  ),
-                'options' =>  array("1" => "He leído el aviso de privacidad y estoy de acuerdo con los términos y condiciones del servicio"),
+                'options' =>  array("1" => _("He leído el aviso de privacidad y estoy de acuerdo con los términos y condiciones del servicio")),
 
 
             )

@@ -317,7 +317,7 @@
     </mensaje>
     <mensaje>
         <llave>news_empty</llave>
-        <valor>Favor de escribir una direccion de e-mail</valor>
+        <valor>The e-mail is empty</valor>
     </mensaje>
  
  

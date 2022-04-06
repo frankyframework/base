@@ -20,7 +20,7 @@ class contactanosForm extends \Franky\Form\Form
          );
         $this->add(array(
                 'name' => 'nombre',
-                // 'label' => 'Nombre:',
+                // 'label' => _('Nombre'),
                 'type'  => 'text',
                 // 'required'  => true,
                 'atributos' => array(
@@ -37,7 +37,7 @@ class contactanosForm extends \Franky\Form\Form
 
        $this->add(array(
                 'name' => 'email',
-                // 'label' => 'E-mail:',
+                // 'label' => _('E-mail'),
                 'type'  => 'text',
 
                 // 'required'  => true,
@@ -56,7 +56,7 @@ class contactanosForm extends \Franky\Form\Form
 
        $this->add(array(
                 'name' => 'telefono',
-                // 'label' => 'Teléfono:',
+                // 'label' => _('Teléfono'),
                 'type'  => 'text',
                 // 'required'  => false,
                 'atributos' => array(
@@ -74,7 +74,7 @@ class contactanosForm extends \Franky\Form\Form
 
        $this->add(array(
                 'name' => 'asunto',
-                // 'label' => 'Asunto:',
+                // 'label' => _('Asunto'),
                 'type'  => 'text',
                 // 'required'  => true,
                 'atributos' => array(
@@ -91,7 +91,7 @@ class contactanosForm extends \Franky\Form\Form
 
        $this->add(array(
                 'name' => 'comentario',
-                // 'label' => 'Comentario:',
+                // 'label' => _('Comentario'),
                 'type'  => 'textarea',
                 // 'required'  => true,
                 'atributos' => array(

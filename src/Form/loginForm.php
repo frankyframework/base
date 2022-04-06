@@ -24,7 +24,7 @@ class loginForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'usuario',
-                'label' => 'E-mail:',
+                'label' => _('E-mail'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -39,7 +39,7 @@ class loginForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'contrasena',
-                'label' => "Contraseña",
+                'label' => _("Contraseña"),
                 'type'  => 'password',
                 'required'  => true,
                 'atributos' => array(

@@ -30,7 +30,7 @@ class cmsForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'titulo',
-                'label' => 'Titulo:',
+                'label' => _('Titulo:'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -58,7 +58,7 @@ class cmsForm extends \Franky\Form\Form
 
            $this->add(array(
                 'name' => 'template',
-                'label' => 'template:',
+                'label' => ('Template'),
                 'type'  => 'textarea',
                 'required'  => true,
                 'atributos' => array(
@@ -76,7 +76,7 @@ class cmsForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'meta_titulo',
-                'label' => 'Meta titulo:',
+                'label' => _('Meta titulo'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -92,7 +92,7 @@ class cmsForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'meta_descripcion',
-                'label' => 'Meta descripcion:',
+                'label' => _('Meta descripcion'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -107,7 +107,7 @@ class cmsForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'friendly',
-                'label' => 'URL:',
+                'label' => _('URL'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -126,7 +126,7 @@ class cmsForm extends \Franky\Form\Form
             'type'  => 'submit',
             'atributos' => array(
                 'class'       => '_btn _btn-primary',
-                'value' => "Guardar y continuar editando"
+                'value' => _("Guardar y continuar editando")
              )
 
         )
@@ -136,7 +136,7 @@ class cmsForm extends \Franky\Form\Form
                 'type'  => 'submit',
                 'atributos' => array(
                     'class'       => '_btn _btn-primary',
-                    'value' => "Guardar"
+                    'value' => _("Guardar")
                  )
 
             )

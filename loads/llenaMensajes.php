@@ -9,9 +9,15 @@ if(!empty($modulos))
     foreach($modulos as $modulo)
     {
 
-          if(file_exists(PROJECT_DIR."/modulos/".$modulo."/locale/".$lang."/messages.xml"))
+          if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/".$modulo."/locale/".$lang."/messages.xml"))
           {
-              $archivos_mensaje[] = PROJECT_DIR."/modulos/".$modulo."/locale/".$lang."/messages.xml";
+              $archivos_mensaje[] = PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/".$modulo."/locale/".$lang."/messages.xml";
+          }
+          else{
+            if(file_exists(PROJECT_DIR."/modulos/".$modulo."/locale/".$lang."/messages.xml"))
+            {
+                $archivos_mensaje[] = PROJECT_DIR."/modulos/".$modulo."/locale/".$lang."/messages.xml";
+            }
           }
 
     }

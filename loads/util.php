@@ -27,7 +27,25 @@ $_Months = Array ('01'=>"Ene",
                 '11'=>"Nov",
                 '12'=>"Dic");
 
+        
+
 $_Days = array('Dom','Lun','Mar','Mie','Jue','Vie','Sab');
+
+
+
+function __bindtextdomain($domain,$modulo)
+{
+    global $MyConfigure;
+    if(file_exists( PROJECT_DIR .'/modulos/'.$MyConfigure->getPathSite().'/'.$modulo.'/locale/'))
+    {
+        $dir = PROJECT_DIR .'/modulos/'.$modulo.'/locale/';
+    }
+    else{
+        $dir = PROJECT_DIR .'/modulos/'.$modulo.'/locale/';
+    }
+   
+    bindtextdomain($domain, $$dir);
+}
 
 function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0)
 {

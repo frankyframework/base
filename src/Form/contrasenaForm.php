@@ -29,7 +29,7 @@ class contrasenaForm extends \Franky\Form\Form
 
          $this->add(array(
                 'name' => 'contrasena',
-                'label' => 'Nueva contraseña:',
+                'label' => _('Nueva contraseña'),
                 'type'  => 'password',
                 'required'  => true,
                 'atributos' => array(
@@ -46,7 +46,7 @@ class contrasenaForm extends \Franky\Form\Form
 
        $this->add(array(
                 'name' => 'contrasena1',
-                'label' => 'Confirmar contraseña:',
+                'label' => _('Confirmar contraseña'),
                 'type'  => 'password',
                 'required'  => true,
                 'atributos' => array(
@@ -88,7 +88,7 @@ class contrasenaForm extends \Franky\Form\Form
     {
         $this->add(array(
                 'name' => 'contrasena_ant',
-                'label' => 'Contraseña actual:',
+                'label' => _('Contraseña actual'),
                 'type'  => 'password',
                 'required'  => true,
                 'atributos' => array(

@@ -34,7 +34,7 @@ class deleteForm extends \Franky\Form\Form
     {
          $this->add(array(
                 'name' => 'contrasena_ant',
-                'label' => "Contrase&ntilde;a actual",
+                'label' => _("Contrase&ntilde;a actual"),
                 'type'  => 'password',
                 'required'  => true,
                 'atributos' => array(

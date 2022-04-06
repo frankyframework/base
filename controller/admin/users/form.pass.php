@@ -33,7 +33,7 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)):
     endif;   
 else:
     $adminForm->addContrasenaAnterior();
-    $adminForm->setAtributoBaseInput("contrasena_ant","label", __("Contraseña de administrador"));
+    $adminForm->setAtributoBaseInput("contrasena_ant","label", _("Contraseña de administrador"));
 endif; 
 $adminForm->addSubmit();
 $adminForm->setAtributoInput("id","value", $id);

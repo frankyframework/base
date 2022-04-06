@@ -65,7 +65,7 @@ if($error == false)
                       if($config['validation'])
                       {
 
-                            $label = $config['label'].' de '.$val_config['menu'];
+                            $label = _($config['label']).' '._('de').' '.($val_config['menu']);
                             $validar = array($label => ['valor' =>  $MyRequest->getRequest(str_replace("/","_",$config['path']))]);
                             if(isset($config['validation']['required']) && $config['validation']['required'] == true)
                             {
@@ -125,7 +125,7 @@ if($error == false)
                               {
                                   if  (!in_array(strtolower(pathinfo($_FILES[str_replace("/","_",$config['path'])]["name"], PATHINFO_EXTENSION)),array("jpg","png","gif","bmp","jpe","jpeg","ico")))//($handle->file_is_image)
                                   {
-                                      $MyFlashMessage->setMsg("error","Solo de admiten imagenes en ".$config['label'].' de '.$val_config['menu']);
+                                      $MyFlashMessage->setMsg("error",_("Solo de admiten imagenes en").' '._($config['label']).' '._('de').' '._($val_config['menu']));
                                       $MyRequest->redirect($MyRequest->getReferer());
                                   }
                               }
@@ -173,7 +173,7 @@ if($error == false)
                               }
                               else
                               {
-                                  $MyFlashMessage->setMsg("error","imagen_error",$handle->error.' en '.$config['label'].' de '.$val_config['menu']);
+                                  $MyFlashMessage->setMsg("error","imagen_error",$handle->error.' '._('en').' '._($config['label']).' '._('de').' '._($val_config['menu']));
                                   $MyRequest->redirect($MyRequest->getReferer());
                               }
 
@@ -182,7 +182,7 @@ if($error == false)
                       else {
                         if(isset($config['validation']['required']) && $config['validation']['required'] == true && empty($core_config_db_actual[$config['path']]))
                         {
-                          $MyFlashMessage->setMsg("error",'La imagen es requerida en '.$config['label'].' de '.$val_config['menu']);
+                          $MyFlashMessage->setMsg("error",_('La imagen es requerida en').' '._($config['label']).' '._('de').' '._($val_config['menu']));
                           $MyRequest->redirect($MyRequest->getReferer());
                         }
                         $result = REGISTRO_SUCCESS;

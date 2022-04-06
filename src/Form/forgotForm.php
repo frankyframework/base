@@ -16,7 +16,7 @@ class forgotForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'email',
-                'label' => 'E-mail:',
+                'label' => _('E-mail'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(

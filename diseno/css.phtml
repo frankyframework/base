@@ -66,9 +66,11 @@ else
 {
     foreach($css as $_file_css)
     {
+        if(file_exists(PROJECT_DIR.'/'.$_file_css)):
         ?>
         <link rel='stylesheet' type='text/css' href="<?php echo $_file_css; ?>" />
         <?php
+        endif;
     }
 }
 

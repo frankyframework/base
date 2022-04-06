@@ -77,7 +77,7 @@ $Mobile_detect      = new \Mobile_Detect();
 $MyRedireccion      = new \Base\model\redireccionesModel();
 $ObserverManager    = new \Franky\Core\ObserverManager();
 
-define('LOCALE_DIR', PROJECT_DIR .'/modulos/base/locale/');
+
 $seccion = $MyRequest->getRequest('my_url_friendly');
 
 $_seccion = explode("/",$seccion);
@@ -143,8 +143,10 @@ else
     $idiomas = getCoreConfig('base/theme/langs');
 
     $locale = DEFAULT_LOCALE;
-    $_SESSION['lang'] = DEFAULT_LOCALE;
-
+    if(!$_SESSION['lang'])
+    {
+        $_SESSION['lang'] = DEFAULT_LOCALE;
+    }
     if($MyRequest->getRequest("lang") != "" && in_array($MyRequest->getRequest("lang"),$idiomas))
     {
         $locale = $MyRequest->Sanitizacion($MyRequest->getRequest("lang"));
@@ -187,7 +189,7 @@ else
 
 $domain = 'messages';
 
-bindtextdomain($domain, LOCALE_DIR);
+__bindtextdomain($domain, "base");
 
 
 if (function_exists('bind_textdomain_codeset'))

@@ -43,12 +43,12 @@ if($MyCMS->getTotal() > 0)
 
 
 $MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
-$title_grid = "CMS";
+$title_grid =_("CMS");
 $class_grid = "cont_cms";
-$error_grid = "No hay CMS registrados";
+$error_grid = _("No hay CMS registrados");
 $deleteFunction ="EliminarCMSTemplate";
 $frm_constante_link = FRM_CMS_TEMPLATE;
-$titulo_columnas_grid = array("id" => "ID","fecha" => "Fecha", "titulo" =>  "Titulo",'friendly' => "URL");
+$titulo_columnas_grid = array("id" => _("ID"),"fecha" => _("Fecha"), "titulo" =>  _("Titulo"),'friendly' => _("URL"));
 $value_columnas_grid = array("id" ,"fecha" , "titulo", "friendly");
 
 $css_columnas_grid = array("id" => "w-xxxx-1" ,"fecha" => "w-xxxx-2" , "titulo" => "w-xxxx-3" , "friendly" => "w-xxxx-3" );

@@ -46,12 +46,12 @@ if($TemplateemailModel->getTotal() > 0)
 }
 
 
-$title_grid = "E-mails transaccionales";
+$title_grid = _("E-mails transaccionales");
 $class_grid = "cont_transaccionales";
-$error_grid = "No hay templates de email registrados";
+$error_grid = _("No hay templates de email registrados");
 $deleteFunction = "EliminarTemplate";
 $frm_constante_link = FRM_EMAIL_TEMPLATE;
-$titulo_columnas_grid = array("fecha" => "Fecha", "templates_email.nombre" =>  "Nombre","secciones_transaccionales.nombre" =>  "Sección");
+$titulo_columnas_grid = array("fecha" => _("Fecha"), "templates_email.nombre" =>  _("Nombre"),"secciones_transaccionales.nombre" =>  _("Sección"));
 $value_columnas_grid = array("fecha" , "templates_email.nombre","secciones_transaccionales.nombre" );
 
 $css_columnas_grid = array("fecha" => "w-xxxx-2" , "templates_email.nombre" => "w-xxxx-4" ,"secciones_transaccionales.nombre" => "w-xxxx-4" );

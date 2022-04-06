@@ -25,7 +25,7 @@ class templateEmailForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'nombre',
-                'label' => 'Nombre:',
+                'label' => _('Nombre'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -57,7 +57,7 @@ class templateEmailForm extends \Franky\Form\Form
 
           $this->add(array(
                 'name' => 'Asunto',
-                'label' => 'Asunto:',
+                'label' => _('Asunto'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -72,7 +72,7 @@ class templateEmailForm extends \Franky\Form\Form
 
            $this->add(array(
                 'name' => 'destinatario',
-                'label' => 'Destinatarios(s):',
+                'label' => _('Destinatarios(s)'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -86,7 +86,7 @@ class templateEmailForm extends \Franky\Form\Form
         );
          $this->add(array(
                 'name' => 'cc',
-                'label' => 'Con copia(s):',
+                'label' => _('Con copia(s)'),
                 'type'  => 'text',
                 'required'  => false,
                 'atributos' => array(
@@ -100,7 +100,7 @@ class templateEmailForm extends \Franky\Form\Form
         );
          $this->add(array(
                 'name' => 'bcc',
-                'label' => 'Con copia oculta:',
+                'label' => _('Con copia oculta'),
                 'type'  => 'text',
                 'required'  => false,
                 'atributos' => array(
@@ -114,7 +114,7 @@ class templateEmailForm extends \Franky\Form\Form
         );
          $this->add(array(
                 'name' => 'name_from',
-                'label' => 'Nombre del remitente:',
+                'label' => ('Nombre del remitente'),
                 'type'  => 'text',
                 'required'  => false,
                 'atributos' => array(
@@ -128,7 +128,7 @@ class templateEmailForm extends \Franky\Form\Form
         );
         $this->add(array(
                 'name' => 'email_from',
-                'label' => 'E-mail del remitente:',
+                'label' => ('E-mail del remitente'),
                 'type'  => 'text',
                 'required'  => false,
                 'atributos' => array(
@@ -142,7 +142,7 @@ class templateEmailForm extends \Franky\Form\Form
         );
          $this->add(array(
                 'name' => 'reply',
-                'label' => 'Responder a:',
+                'label' => ('Responder a'),
                 'type'  => 'text',
                 'required'  => false,
                 'atributos' => array(
@@ -156,7 +156,7 @@ class templateEmailForm extends \Franky\Form\Form
         );
            $this->add(array(
                 'name' => 'html',
-                'label' => 'Template:',
+                'label' => ('Template'),
                 'type'  => 'textarea',
                 'required'  => true,
                 'atributos' => array(
@@ -179,7 +179,7 @@ class templateEmailForm extends \Franky\Form\Form
                       'type'  => 'submit',
                       'atributos' => array(
                           'class'       => '_btn _btn-primary',
-                          'value' => "Guardar"
+                          'value' => _("Guardar")
                        )
 
                   )

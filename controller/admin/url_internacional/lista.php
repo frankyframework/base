@@ -73,12 +73,12 @@ $MyFiltrosForm->setData($MyRequest->getRequest());
 $MyFiltrosForm->setAtributoInput("lang_b","value",$UrlInternacionalEntity->lang());
 
 $MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
-$title_grid = "URL Internacional";
+$title_grid = _("URL Internacional");
 $class_grid = "cont_urlinternacional";
-$error_grid = "No hay URLs registrados";
+$error_grid = _("No hay URLs registrados");
 $deleteFunction = "EliminarUrlIternacional";
 $frm_constante_link = FRM_URL_INTERNACIONAL;
-$titulo_columnas_grid = array("nombre" => "Nombre","urli" => "URL", "url" =>  "URL Internacional");
+$titulo_columnas_grid = array("nombre" => _("Nombre"),"urli" => _("URL"), "url" =>  _("URL Internacional"));
 $value_columnas_grid = array("nombre","urli" , "url");
 
 $css_columnas_grid = array("nombre" => "w-xxxx-4" ,"urli" => "w-xxxx-3", "url" => "w-xxxx-3");

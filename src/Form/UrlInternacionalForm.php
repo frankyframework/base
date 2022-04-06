@@ -24,7 +24,7 @@ class UrlInternacionalForm extends \Franky\Form\Form
 
        $this->add(array(
                 'name' => 'id_franky',
-                'label' => 'Página:',
+                'label' => _('Página'),
                 'type'  => 'select',
                 'required'  => true,
                 'atributos' => array(
@@ -40,7 +40,7 @@ class UrlInternacionalForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'url',
-                'label' => 'Path URL:',
+                'label' => _('Path URL'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -58,7 +58,7 @@ class UrlInternacionalForm extends \Franky\Form\Form
         $this->add(array(
                 'name' => "lang",
                 'type'  => 'select',
-                'label' => 'Idioma:',
+                'label' => _('Idioma'),
                 'required'  => true,
                 'atributos' => array(
                     'class'       => 'required',
@@ -76,7 +76,7 @@ class UrlInternacionalForm extends \Franky\Form\Form
                 'type'  => 'submit',
                 'atributos' => array(
                     'class'       => '_btn _btn-primary',
-                    'value' => "Guardar"
+                    'value' => _("Guardar")
                  )
 
             )
