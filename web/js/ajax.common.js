@@ -2,20 +2,15 @@ function registrarEmail()
 {
     var email = $("input[name=mailing]").val();
 
-    if(email == "")
-    {
-        $("#msg_mailing").css("display","").children("span").addClass("error").html("Favor de escribir una direccion de e-mail");
-    }
-    else
-    {
-        var var_query = {
-          "function": "registrarEmail",
-          "vars_ajax":[email]
-        };
+   
+    var var_query = {
+        "function": "registrarEmail",
+        "vars_ajax":[email]
+    };
 
 
-        pasarelaAjax('GET', var_query, "registrarEmailHTML", "");
-    }
+    pasarelaAjax('GET', var_query, "registrarEmailHTML", "");
+
 }
 
 
@@ -27,30 +22,35 @@ function registrarEmailHTML(response)
     {
         respuesta = JSON.parse(response);
 
-        if (respuesta["message"] == "success")
+        if (respuesta["result"] == "success")
         {
-             $("#msg_mailing").css("display","").children("span").addClass("success").html("El e-mail se registro correctamente");
+             $("#msg_mailing").css("display","").children("span").addClass("success").html(respuesta["message"]);
              $("input[name=mailing]").val("");
             return true;
         }
-        else if (respuesta["message"] == "error")
+        else if (respuesta["result"] == "error")
         {
-             $("#msg_mailing").css("display","").children("span").addClass("error").html("Error favor de intentar mas tarde");
+             $("#msg_mailing").css("display","").children("span").addClass("error").html(respuesta["message"]);
                 return true;
         }
-        else if (respuesta["message"] == "bad")
+        else if (respuesta["result"] == "bad")
         {
-             $("#msg_mailing").css("display","").children("span").addClass("error").html("La direccion de e-mail no es valida");
+             $("#msg_mailing").css("display","").children("span").addClass("error").html(respuesta["message"]);
                 return true;
         }
-        else if (respuesta["message"] == "duplicate")
+        else if (respuesta["result"] == "duplicate")
         {
-             $("#msg_mailing").css("display","").children("span").addClass("error").html("La direccion de e-mail ya esta registrada");
+             $("#msg_mailing").css("display","").children("span").addClass("error").html(respuesta["message"]);
+                return true;
+        }
+        else if (respuesta["result"] == "empty")
+        {
+             $("#msg_mailing").css("display","").children("span").addClass("error").html(respuesta["message"]);
                 return true;
         }
 
     }
-    $("#msg_mailing").css("display","").children("span").addClass("error").html("Error favor de intentar mas tarde");
+    $("#msg_mailing").css("display","").children("span").addClass("error").html(respuesta["message"]);
     return false;
 }
 
@@ -58,19 +58,14 @@ function registrarEmailCuerpo()
 {
     var email = $("input[name=mailing_cuerpo]").val();
 
-    if(email == "")
-    {
-        $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html("Favor de escribir una direccion de e-mail");
-    }
-    else
-    {
-        var var_query = {
-          "function": "registrarEmail",
-          "vars_ajax":[email]
-        };
+ 
+    var var_query = {
+        "function": "registrarEmail",
+        "vars_ajax":[email]
+    };
 
-        pasarelaAjax('GET', var_query, "registrarEmailCuerpoHTML", "");
-    }
+    pasarelaAjax('GET', var_query, "registrarEmailCuerpoHTML", "");
+
 }
 
 
@@ -82,30 +77,35 @@ function registrarEmailCuerpoHTML(response)
     {
         respuesta = JSON.parse(response);
 
-        if (respuesta["message"] == "success")
+        if (respuesta["result"] == "success")
         {
-             $("#msg_mailing_cuerpo").css("display","").children("span").addClass("success").html("El e-mail se registro correctamente");
+             $("#msg_mailing_cuerpo").css("display","").children("span").addClass("success").html(respuesta["message"]);
              $("input[name=mailing_cuerpo]").val("");
             return true;
         }
-        else if (respuesta["message"] == "error")
+        else if (respuesta["result"] == "error")
         {
-             $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html("Error favor de intentar mas tarde");
+             $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html(respuesta["message"]);
                 return true;
         }
-        else if (respuesta["message"] == "bad")
+        else if (respuesta["result"] == "bad")
         {
-             $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html("La direccion de e-mail no es valida");
+             $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html(respuesta["message"]);
                 return true;
         }
-        else if (respuesta["message"] == "duplicate")
+        else if (respuesta["result"] == "duplicate")
         {
-             $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html("La direccion de e-mail ya esta registrada");
+             $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html(respuesta["message"]);
+                return true;
+        }
+        else if (respuesta["result"] == "empty")
+        {
+             $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html(respuesta["message"]);
                 return true;
         }
 
     }
-    $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html("Error favor de intentar mas tarde");
+    $("#msg_mailing_cuerpo").css("display","").children("span").addClass("error").html(respuesta["message"]);
     return false;
 }
 

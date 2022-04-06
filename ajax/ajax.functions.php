@@ -229,6 +229,7 @@ function _getFiles($path,$file='file')
 
 function registrarEmail($email)
 {
+    global $MyMessageAlert;
     $Select = new \Franky\Database\Mysql\Select();
     $Insert = new \Franky\Database\Mysql\Insert();
     $From = new \Franky\Database\Mysql\From();
@@ -237,37 +238,51 @@ function registrarEmail($email)
     $ObserverManager = new \Franky\Core\ObserverManager();
 
 
+    $respuesta["result"] = "ndefaulterror";
+    $respuesta["message"] =  $MyMessageAlert->Message("news_defaulterror");
 
     $error = false;
     $From->addTable("mailing");
     $Where->addAnd('email',$email,'=');
 
-    if($validaciones->ValidaMail($email))
+    if(empty($email))
     {
-
-        if($Select->execute($From->get(), array("id"), $Where->get(), "", "id ASC")== CONSULTAS_SUCCESS)
-        {
-            $respuesta["message"] = "duplicate";
-        }
-        else
-        {
-            if($Insert->execute($From->get(), array("email"=> $email,"fecha" => date('Y-m-d')." ".date("H:i:s"))) == CONSULTAS_SUCCESS)
-            {
-                $respuesta["message"] = "success";
-                $ObserverManager->dispatch('register_news',[$email]);
-            }
-            else
-            {
-                $respuesta["message"] = "error";
-            }
-        }
+        $respuesta["result"] = "empty";
+        $respuesta["message"] =  $MyMessageAlert->Message("news_empty");
     }
     else
     {
-        $respuesta["message"] = "bad";
+        if($validaciones->ValidaMail($email))
+        {
 
+            if($Select->execute($From->get(), array("id"), $Where->get(), "", "id ASC")== CONSULTAS_SUCCESS)
+            {
+                $respuesta["result"] = "duplicate";
+                $respuesta["message"] =  $MyMessageAlert->Message("news_duplicate");
+            }
+            else
+            {
+                if($Insert->execute($From->get(), array("email"=> $email,"fecha" => date('Y-m-d')." ".date("H:i:s"))) == CONSULTAS_SUCCESS)
+                {
+                    $respuesta["result"] = "success";
+                    $respuesta["message"] =  $MyMessageAlert->Message("news_success");
+                    $ObserverManager->dispatch('register_news',[$email]);
+                }
+                else
+                {
+                    $respuesta["result"] = "error";
+                    $respuesta["message"] =  $MyMessageAlert->Message("news_success");
+                }
+            }
+        }
+        else
+        {
+            $respuesta["result"] = "bad";
+            $respuesta["message"] =  $MyMessageAlert->Message("news_bad");
+
+        }
     }
-        return $respuesta;
+    return $respuesta;
 }
 
 

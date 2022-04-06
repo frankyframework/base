@@ -20,7 +20,7 @@ if($UrlInternacionalModel->getTotal() > 0)
 	$iRow = 0;
 
 	while($registro = $UrlInternacionalModel->getRows())
-	{
+	{	
       $urlInternacional[$registro['lang']][$registro['id_franky']] = $registro['url'];
   }
 }
@@ -28,8 +28,14 @@ if($UrlInternacionalModel->getTotal() > 0)
 
 $modulos = getModulos();
 
-$idiomas =  getCoreConfig('base/theme/langs');
-
+if($MyFrankyMonster->isAdmin())
+{
+    
+	$idiomas =  getCoreConfig('base/theme/langs-admin');
+}
+else{
+	$idiomas =  getCoreConfig('base/theme/langs');
+}
 $paginasModel->setTampag(1000);
 $paginasModel->setOrdensql("id ASC");
 if($paginasModel->getData() == REGISTRO_SUCCESS)
@@ -41,42 +47,69 @@ if($paginasModel->getData() == REGISTRO_SUCCESS)
 			if(in_array($registro['modulo'],$modulos))
 			{
 
-	        foreach ($idiomas as $idioma)
-	        {
-	          if(!isset($urlInternacional[$idioma][$registro["id"]]))
-	          {
-	              if($registro["constante"] == 'HOME')
-	              {
-	                  $registro["url"] = "";
-	              }
+				foreach ($idiomas as $idioma)
+				{
+					if(!isset($urlInternacional[$idioma][$registro["id"]]))
+					{
+						if($registro["constante"] == 'HOME')
+						{
+							$registro["url"] = "";
+						}
 
-	              $urlInternacional[$idioma][$registro["id"]] = $registro["url"];
+						$urlInternacional[$idioma][$registro["id"]] = $registro["url"];
 
+					}
 
-	          }
+				}
 
-	    	}
-
-		    if(isset($urlInternacional[$_SESSION['lang']][$registro["id"]]))
-		    {
-		      $registro["url"] =$urlInternacional[$_SESSION['lang']][$registro["id"]];
-		    }
-
+				if(isset($urlInternacional[$_SESSION['lang']][$registro["id"]]))
+				{
+					$registro["url"] =$urlInternacional[$_SESSION['lang']][$registro["id"]];
+				}
 
 
-		    $keyCommand = (PREFIDIOMA !="" ? PREFIDIOMA."/".$registro["url"] : $registro["url"]);
-		    define($registro["constante"],$keyCommand);
+				$_seccion = explode("/",$registro["url"]);
+				
+				if($_seccion[0] == PATH_ADMIN)
+				{
+					if(isset($urlInternacional[$_SESSION['lang_admin']][$registro["id"]]))
+					{
+						$registro["url"] =$urlInternacional[$_SESSION['lang_admin']][$registro["id"]];
+					}
+					$keyCommand = $registro["url"];
 
-		    $MyFrankyMonster->pushCommand($keyCommand,array(
-		            json_decode($registro["permisos"],true),
-		            json_decode($registro["js"],true),
-		            json_decode($registro["css"],true),
-		            json_decode($registro["jquery"],true),
-		            json_decode($registro["ajax"],true),
-		            $registro["php"],
-		        $registro["modulo"],
-		        $registro["id"],
-		        $registro["nombre"]
+				}
+				elseif($_seccion[0] == PATH_ACCOUNT)
+				{
+					if(isset($urlInternacional[$_SESSION['lang']][$registro["id"]]))
+					{
+						$registro["url"] =$urlInternacional[$_SESSION['lang']][$registro["id"]];
+					}
+					$keyCommand =$registro["url"];
+
+				}else{
+
+					if(isset($urlInternacional[$_SESSION['lang']][$registro["id"]]))
+					{
+						$registro["url"] =$urlInternacional[$_SESSION['lang']][$registro["id"]];
+					}
+
+					$keyCommand = (PREFIDIOMA !="" ? PREFIDIOMA."/".$registro["url"] : $registro["url"]);
+				}
+				
+				
+				define($registro["constante"],$keyCommand);
+
+				$MyFrankyMonster->pushCommand($keyCommand,array(
+						json_decode($registro["permisos"],true),
+						json_decode($registro["js"],true),
+						json_decode($registro["css"],true),
+						json_decode($registro["jquery"],true),
+						json_decode($registro["ajax"],true),
+						$registro["php"],
+					$registro["modulo"],
+					$registro["id"],
+					$registro["nombre"]
 						));
 				}
 	}

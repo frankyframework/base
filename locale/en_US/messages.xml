@@ -1,13 +1,17 @@
 <?xml version='1.0' standalone='yes'?>
 <mensajes>
     <prefijo></prefijo>
-        <mensaje>
+    <mensaje>
         <llave>error_conexion</llave>
         <valor>Error de conexión favor de intentar más tarde</valor>
     </mensaje>
     <mensaje>
+        <llave>bad_request</llave>
+        <valor>Error de petición favor de intentar más tarde</valor>
+    </mensaje>
+    <mensaje>
         <llave>error_login</llave>
-        <valor>bad login</valor>
+        <valor>El nombre de usuario y/o contraseña no es válido</valor>
     </mensaje>
     <mensaje>
         <llave>empty_login</llave>
@@ -15,7 +19,7 @@
     </mensaje>
     <mensaje>
         <llave>error_message_key</llave>
-        <valor>La llave del mensaje no exite</valor>
+        <valor>La llave del mensaje no existe</valor>
     </mensaje>
     <mensaje>
         <llave>empty_input</llave>
@@ -30,12 +34,16 @@
         <valor>El campo %s debe contener un correo electrónico</valor>
     </mensaje>
     <mensaje>
+        <llave>bad_names</llave>
+        <valor>El campo %s contiene caracteres no válidos</valor>
+    </mensaje>
+    <mensaje>
         <llave>bad_url</llave>
         <valor>El campo %s debe contener una URL válida</valor>
     </mensaje>
     <mensaje>
         <llave>bad_numeric</llave>
-        <valor>El campo %s debe contener un valor numerico</valor>
+        <valor>El campo %s debe contener un valor númerico</valor>
     </mensaje>
     <mensaje>
         <llave>spam_boot</llave>
@@ -46,24 +54,20 @@
         <valor>El campo %s contiene palabras inapropiadas</valor>
     </mensaje>
     <mensaje>
-        <llave>recaptcha</llave>
-        <valor>Error al demostrar que no eres un robot</valor>
-    </mensaje>
-    <mensaje>
         <llave>error_max_length</llave>
-        <valor>El campo %s no debe exeder el limite de caracteres</valor>
+        <valor>El campo %s no debe exceder el límite de caracteres</valor>
     </mensaje>
     <mensaje>
         <llave>error_min_length</llave>
-        <valor>El campo %s es demaciado corto</valor>
+        <valor>El campo %s es demasiado corto</valor>
     </mensaje>
     <mensaje>
         <llave>no_login</llave>
-        <valor>Debes iniciar sesion para realizar esta operacion</valor>
+        <valor>Debes iniciar sesión para realizar esta operación</valor>
     </mensaje>
     <mensaje>
         <llave>correo_no_verificado</llave>
-        <valor>Debes verificar tu correlo electornico para realizar esta operacion</valor>
+        <valor>Debes verificar tu correo electrónico para realizar esta operación</valor>
     </mensaje>
     <mensaje>
         <llave>error_captcha</llave>
@@ -75,15 +79,15 @@
     </mensaje>
     <mensaje>
         <llave>forgot_password_confirmation</llave>
-        <valor>Su contraseña fue enviada a su direccion de correo electronico</valor>
+        <valor>Su contraseña fue enviada a su dirección de correo electrónico</valor>
     </mensaje>
     <mensaje>
         <llave>frm_success</llave>
-        <valor>Tu informacion y comentario se envio correctamente</valor>
+        <valor>Tu información y comentario se envio correctamente</valor>
     </mensaje>
     <mensaje>
         <llave>frm_err</llave>
-        <valor>Error al enviar, favor de intentar mas tarde</valor>
+        <valor>Error al enviar, favor de intentar más tarde</valor>
     </mensaje>
     <mensaje>
         <llave>1_error</llave>
@@ -95,7 +99,11 @@
     </mensaje>
     <mensaje>
         <llave>error_pass_actual</llave>
-        <valor>La contraseña actual no es valida.</valor>
+        <valor>La contraseña actual no es válida.</valor>
+    </mensaje>
+       <mensaje>
+     <llave>error_pass_admin</llave>
+     <valor>La contraseña de administrador no es válida.</valor>
     </mensaje>
     <mensaje>
         <llave>delete_suscriptor_success</llave>
@@ -107,7 +115,7 @@
     </mensaje>
     <mensaje>
         <llave>success_send_email_verificacion_suscriptor</llave>
-        <valor>En breve recibiras un correo electrónico de confirmación</valor>
+        <valor>En breve recibirás un correo electrónico de confirmación</valor>
     </mensaje>
     <mensaje>
         <llave>error_send_email_verificacion_suscriptor</llave>
@@ -118,12 +126,16 @@
         <valor>Las contraseñas con diferentes.</valor>
     </mensaje>
     <mensaje>
+        <llave>nivel_user_invalido</llave>
+        <valor>El nivel de usuario no es válido</valor>
+    </mensaje>
+    <mensaje>
         <llave>username_duplicate</llave>
-        <valor>El nombre de usuario %s ya esta siendo usado en otra cuenta</valor>
+        <valor>El nombre de usuario %s ya está siendo usado en otra cuenta</valor>
     </mensaje>
     <mensaje>
         <llave>email_duplicate</llave>
-        <valor>La dirección de email %s ya esta siendo usada por otro usuario</valor>
+        <valor>La dirección de email %s ya está siendo usada por otro usuario</valor>
     </mensaje>
     <mensaje>
         <llave>aceptar_politicas</llave>
@@ -143,11 +155,11 @@
     </mensaje>
     <mensaje>
         <llave>editar_perfil_error</llave>
-        <valor>Error al intentar actualizar los datos de perfil intente mas tarde</valor>
+        <valor>Error al intentar actualizar los datos de perfil intente más tarde</valor>
     </mensaje>
     <mensaje>
         <llave>url_duplicada</llave>
-        <valor>Esta url ya esta registrada</valor>
+        <valor>Esta url ya está registrada</valor>
     </mensaje>
     <mensaje>
         <llave>guardar_generico_success</llave>
@@ -181,41 +193,46 @@
         <llave>activar_generico_error</llave>
         <valor>Error al activar el registro</valor>
     </mensaje>
-    <mensaje>
-        <llave>nombre_pagina_duplicado</llave>
-        <valor>Este nombre ya esta en uso para otra pagina</valor>
-    </mensaje>
-    <mensaje>
-        <llave>constante_pagina_duplicado</llave>
-        <valor>El valor de la Constante ya esta en uso</valor>
-    </mensaje>
+
     <mensaje>
         <llave>nombre_template_duplicado</llave>
         <valor>Existe otro template con este nombre.</valor>
     </mensaje>
     <mensaje>
         <llave>avatar_success</llave>
-        <valor>El avatar se guardo correctamente</valor>
+        <valor>El avatar se guardó correctamente</valor>
     </mensaje>
     <mensaje>
         <llave>avatar_error</llave>
-        <valor>Error al guardar  el avatar: %s</valor>
+        <valor>Error al guardar el avatar: %s</valor>
     </mensaje>
     <mensaje>
         <llave>solo_imagen</llave>
         <valor>Solo se permiten formatos de tipo imagen</valor>
     </mensaje>
     <mensaje>
+        <llave>solo_pdf</llave>
+        <valor>Solo se permiten formatos de tipo PDF</valor>
+    </mensaje>
+    <mensaje>
         <llave>imagen_error</llave>
         <valor>Error al guardar la imagen: %s</valor>
     </mensaje>
     <mensaje>
+        <llave>pdf_error</llave>
+        <valor>Error al guardar el PDF: %s</valor>
+    </mensaje>
+    <mensaje>
         <llave>editar_password_success</llave>
-        <valor>La contraseña actualizó correctamente</valor>
+        <valor>La contraseña se actualizó correctamente</valor>
     </mensaje>
     <mensaje>
         <llave>editar_password_error</llave>
         <valor>Error al actualizar la contraseña</valor>
+    </mensaje>
+    <mensaje>
+        <llave>success_send_token_verificacion_email</llave>
+        <valor>El correo de verificación de e-mail se envio correctamente</valor>
     </mensaje>
     <mensaje>
         <llave>error_token_verificacion_email</llave>
@@ -223,11 +240,11 @@
     </mensaje>
     <mensaje>
         <llave>success_verificacion_email</llave>
-        <valor>Gracias, tu e-mail ha sido verificados</valor>
+        <valor>Gracias, tu e-mail ha sido verificado</valor>
     </mensaje>
     <mensaje>
         <llave>error_verificacion_email</llave>
-        <valor>Error al verificar tus datos, favor de intentar mas tarde</valor>
+        <valor>Error al verificar tus datos, favor de intentar más tarde</valor>
     </mensaje>
     <mensaje>
         <llave>error_change_pass</llave>
@@ -237,6 +254,7 @@
         <llave>sin_privilegios</llave>
         <valor>No tienes los suficientes privilegios para realizar esta acción</valor>
     </mensaje>
+
     <mensaje>
         <llave>error_mkdir</llave>
         <valor>[!] Error al crear el directorio: %s</valor>
@@ -253,4 +271,54 @@
         <llave>error_sql</llave>
         <valor>Error de sql: %s</valor>
     </mensaje>
+     <mensaje>
+        <llave>telefono_duplicate</llave>
+        <valor>El teléfono %s ya está en uso</valor>
+    </mensaje>
+    <mensaje>
+       <llave>password_level_2</llave>
+       <valor>La contraseña debe tener al menos una mayúscula</valor>
+   </mensaje>
+   <mensaje>
+      <llave>password_level_3</llave>
+      <valor>La contraseña debe tener al menos una mayúscula y un número</valor>
+  </mensaje>
+  <mensaje>
+     <llave>password_level_4</llave>
+     <valor>La contraseña debe tener al menos una mayúscula, un número y un simbolo #?!@$%^&amp;*-.</valor>
+ </mensaje>
+   <mensaje>
+        <llave>custom_attribute_error_delete</llave>
+        <valor>Error al eliminar el atributo</valor>
+    </mensaje>
+      <mensaje>
+        <llave>attr_duplicado</llave>
+        <valor>Ya existe un atributo con este nombre</valor>
+    </mensaje>
+     <mensaje>
+        <llave>news_success</llave>
+        <valor>El e-mail se registro correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>news_error</llave>
+        <valor>Error favor de intentar mas tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>news_bad</llave>
+        <valor>La direccion de e-mail no es valida</valor>
+    </mensaje>
+    <mensaje>
+        <llave>news_duplicate</llave>
+        <valor>La direccion de e-mail ya esta registrada</valor>
+    </mensaje>
+     <mensaje>
+        <llave>news_defaulterror</llave>
+        <valor>Error favor de intentar mas tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>news_empty</llave>
+        <valor>Favor de escribir una direccion de e-mail</valor>
+    </mensaje>
+ 
+ 
 </mensajes>

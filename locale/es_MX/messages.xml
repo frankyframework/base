@@ -295,7 +295,31 @@
         <llave>attr_duplicado</llave>
         <valor>Ya existe un atributo con este nombre</valor>
     </mensaje>
-
+     <mensaje>
+        <llave>news_success</llave>
+        <valor>El e-mail se registro correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>news_error</llave>
+        <valor>Error favor de intentar mas tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>news_bad</llave>
+        <valor>La direccion de e-mail no es valida</valor>
+    </mensaje>
+    <mensaje>
+        <llave>news_duplicate</llave>
+        <valor>La direccion de e-mail ya esta registrada</valor>
+    </mensaje>
+     <mensaje>
+        <llave>news_defaulterror</llave>
+        <valor>Error favor de intentar mas tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>news_empty</llave>
+        <valor>Favor de escribir una direccion de e-mail</valor>
+    </mensaje>
+ 
  
  
 </mensajes>
