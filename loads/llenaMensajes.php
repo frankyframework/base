@@ -3,10 +3,10 @@ $archivos_mensaje = array();
 
 if($MyFrankyMonster->isAdmin())
 {
-    $lang = (isset($_SESSION["lang"]) ? $_SESSION["lang"] : DEFAULT_LOCALE);
+    $lang = (isset($_SESSION["lang_admin"]) ? $_SESSION["lang_admin"] : DEFAULT_LOCALE);
 }
 else{
-    $lang = (isset($_SESSION["lang_admin"]) ? $_SESSION["lang_admin"] : DEFAULT_LOCALE);
+    $lang = (isset($_SESSION["lang"]) ? $_SESSION["lang"] : DEFAULT_LOCALE);
 }
 
 $modulos = getModulos();
