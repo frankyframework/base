@@ -14,7 +14,7 @@ class Mailing  extends \Franky\Database\Mysql\objectOperations
 
         function getData($busca='')
         {
-            $campos = array("email","fecha");
+            $campos = array("id","email","fecha");
 
             if(!empty($busca))
             {

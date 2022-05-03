@@ -17,11 +17,15 @@
                     <div class="contenedor_titulo_columnas">
                         <div class="w-xxxx-2"><?php echo makeHTMLOrder( "publicado", _("Fecha")); ?></div>
                         <div class="w-xxxx-4"><?php echo makeHTMLOrder( "email", _("E-mail")); ?></div>
+                        <div class="w-xxxx-1"><?=_('Eliminar')?></div>
                     </div>
                     <div class="contenedor_columnas_info"  >
                     <div class="contenedor_columnas"  >
                         <div class='w-xxxx-2'>{{_data.fecha}}</div>
                         <div class='w-xxxx-4 email'>{{_data.email}}</div>
+                        <div class='w-xxxx-1 _table_delete {{_data.thisClass}}'>
+                            <a class="btn_adm_eliminar" id="{{_data.id}}" href="#{{_data.nuevo_estado}}" ></a>
+                        </div>
                     </div>
                     </div>
                 </div>
@@ -37,4 +41,18 @@
 </div>
 <script type="text/javascript">
 window.admingrid = <?php echo json_encode($lista_admin_data); ?>;
+</script>
+<script >
+$(window).load(function(){
+    $(".btn_adm_eliminar").click(function(event){
+
+         event.preventDefault();
+         var nuevo_estado = ($(this).attr("href").replace("#","") == "activar" ? 1 : 0);
+
+         EliminarRegistro('<?php echo $deleteFunction; ?>',$(this).attr("id"),nuevo_estado,"","EliminarRegistorPanelRemove")
+
+    });
+
+
+});
 </script>

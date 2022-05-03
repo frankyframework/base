@@ -2,6 +2,10 @@
 use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
 use Base\model\Mailing;
+use Franky\Haxor\Tokenizer;
+
+
+$Tokenizer = new Tokenizer();
 
 $MyPaginacion = new paginacion();
 $MyMailing          = new Mailing;
@@ -30,8 +34,10 @@ if($MyMailing->getTotal() > 0)
 		$thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
 	               
                 $lista_admin_data[] = array_merge($registro,array(
+                        "id" => $Tokenizer->token("mailing", $registro["id"]),
                 "fecha"         => getFechaUI($registro["fecha"]),
-                "thisClass"     => $thisClass
+                "thisClass"     => $thisClass,
+                "nuevo_estado"  =>  "desactivar"
                 ));
 		 
                 $iRow++;
@@ -43,6 +49,6 @@ $MyFiltrosForm = new filtrosForm('paginar');
 $MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
-
+$deleteFunction ="EliminarEmailNews";
 $MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
 ?>

@@ -285,6 +285,49 @@ function registrarEmail($email)
     return $respuesta;
 }
 
+function EliminarEmailNews($id,$status = 0)
+{
+    global $MyMessageAlert;
+    global $MyAccessList;
+    $Delete = new \Franky\Database\Mysql\Delete();
+    
+    $From = new \Franky\Database\Mysql\From();
+    $Where = new \Franky\Database\Mysql\Where();
+   
+
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
+    $respuesta = null;
+
+    $error = false;
+    $From->addTable("mailing");
+    $Where->addAnd('id',$Tokenizer->decode($id),'=');
+
+    if(empty($id))
+    {
+        $respuesta["message"] =  $MyMessageAlert->Message("news_empty_id");
+    }
+    else
+    {
+        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_MAILING))
+        {
+
+            if($Delete->execute($From->get(), $Where->get())== CONSULTAS_SUCCESS)
+            {
+               
+            }
+            else
+            {
+                    $respuesta["message"] =  $MyMessageAlert->Message("news_error");
+            }
+        }
+        else
+        {
+            $respuesta[] = array("message" => $MyMessageAlert->Message("sin_privilegios"));
+
+        }
+    }
+    return $respuesta;
+}
 
 
 function setExplorador()
@@ -340,4 +383,5 @@ $MyAjax->register("setExplorador");
 $MyAjax->register("EliminarUrlIternacional");
 $MyAjax->register("BloquearDispositivo");
 $MyAjax->register("EliminarDispositivo");
+$MyAjax->register("EliminarEmailNews");
 ?>

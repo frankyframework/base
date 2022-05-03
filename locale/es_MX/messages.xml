@@ -319,6 +319,10 @@
         <llave>news_empty</llave>
         <valor>Favor de escribir una direccion de e-mail</valor>
     </mensaje>
+       <mensaje>
+        <llave>news_empty_id</llave>
+        <valor>Favor de escribir proporcionar el Id</valor>
+    </mensaje>
  
  
  
