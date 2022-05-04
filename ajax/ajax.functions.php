@@ -271,7 +271,7 @@ function registrarEmail($email)
                 else
                 {
                     $respuesta["result"] = "error";
-                    $respuesta["message"] =  $MyMessageAlert->Message("news_success");
+                    $respuesta["message"] =  $MyMessageAlert->Message("news_error");
                 }
             }
         }
