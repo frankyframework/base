@@ -23,6 +23,12 @@ if(!$valid)
     $MyFlashMessage->setMsg("error",$validaciones->getMsg());
     $error = true;
 }
+
+if(getCoreConfig('base/contactanos/captcha') == 1 && !verifyRecaptcha())
+{
+    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("bad_recaptcha"));
+    $error = true;
+}
 if($error== false)
 {
 

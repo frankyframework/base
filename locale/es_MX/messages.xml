@@ -319,11 +319,18 @@
         <llave>news_empty</llave>
         <valor>Favor de escribir una direccion de e-mail</valor>
     </mensaje>
-       <mensaje>
+    <mensaje>
         <llave>news_empty_id</llave>
         <valor>Favor de escribir proporcionar el Id</valor>
     </mensaje>
- 
- 
+    <mensaje>
+        <llave>recaptcha</llave>
+        <valor>Favor de indicar que no eres un robot</valor>
+    </mensaje>
+    <mensaje>
+        <llave>bad_recaptcha</llave>
+        <valor>Error al validar que no eres un robot</valor>
+    </mensaje>
+
  
 </mensajes>

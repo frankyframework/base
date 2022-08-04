@@ -18,6 +18,9 @@ class contactanosForm extends \Franky\Form\Form
 
              )
          );
+
+
+     
         $this->add(array(
                 'name' => 'nombre',
                 // 'label' => _('Nombre'),

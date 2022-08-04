@@ -7,9 +7,24 @@
         </div>
         <div class="w-xxxx-6">
             <?php echo $contactanosForm->openTag(); ?>
-            <?php echo $contactanosForm->getAllRow(); ?>
+            <?php echo $contactanosForm->get('token_xsrf'); ?>
+            <?php echo $contactanosForm->getRow('nombre'); ?>
+            <?php echo $contactanosForm->getRow('email'); ?>
+            <?php echo $contactanosForm->getRow('telefono'); ?>
+            <?php echo $contactanosForm->getRow('asunto'); ?>
+            <?php echo $contactanosForm->getRow('comentario'); ?>
+
+           
+            <?php if(getCoreConfig('base/contactanos/captcha') == 1): ?>
+               
+                 <div class="form-group form_asunto"> <div class="g-recaptcha" data-sitekey="<?=getCoreConfig('base/google/captcha-api')?>"></div> </div>
+                 <label id="recaptcha-error" class="error" for="recaptcha" style="display: none;"></label>
+            <?php endif; ?>
+            <?php echo $contactanosForm->getRow('send'); ?>
             <?php echo $contactanosForm->endTag(); ?>
         </div>
+
+       
         <div class="w-xxxx-6">
             <p class="align_center"><img src="<?=getImg("img_contactanos.png")?>" alt="" /></p>
             <p class="align_center">Si quieres saber más acerca de nuestros productos o servicios no dudes en contactarnos.</p>
@@ -23,6 +38,13 @@
     $("form[name=frmContacto]").validate({
                     submitHandler: function(form)
                     {
+                        $('#recaptcha-error').hide().html('');
+                        var response = grecaptcha.getResponse();
+                        if(response.length == 0) 
+                        { 
+                            $('#recaptcha-error').html('<?=$MyMessageAlert->Message("recaptcha")?>').show();
+                            return false;
+                        }
                         $("form[name=frmContacto]").find("input[type=submit]").attr('disabled',true);
                         return true;
 

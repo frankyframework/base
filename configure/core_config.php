@@ -258,6 +258,13 @@ return array(
                       'data' => getTemplatesEmail(),
                       'value' => '1'
                     ),
+                    array('path' => 'base/contactanos/captcha',
+                    'type' => 'select',
+                    'label' => 'Habilitar captcha google',
+                    'validation' => array('required' => true),
+                    'data' => ['1' => 'Si','0' => 'No'],
+                    'value' => '0'
+            ),
 
     )
 ),
@@ -277,6 +284,18 @@ return array(
                                 'validation' => array('required' => false),
                                 'value' => ''
                               ),
+                              array('path' => 'base/google/captcha-api',
+                              'type' => 'text',
+                              'label' => 'API Google captcha',
+                              'validation' => array('required' => false),
+                              'value' => ''
+                            ),
+                            array('path' => 'base/google/captcha-secret',
+                              'type' => 'text',
+                              'label' => 'Secred Google captcha',
+                              'validation' => array('required' => false),
+                              'value' => ''
+                            ),
 
 
           )
