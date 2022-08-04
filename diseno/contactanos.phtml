@@ -38,13 +38,15 @@
     $("form[name=frmContacto]").validate({
                     submitHandler: function(form)
                     {
-                        $('#recaptcha-error').hide().html('');
-                        var response = grecaptcha.getResponse();
-                        if(response.length == 0) 
-                        { 
-                            $('#recaptcha-error').html('<?=$MyMessageAlert->Message("recaptcha")?>').show();
-                            return false;
-                        }
+                        <?php if(getCoreConfig('base/contactanos/captcha') == 1): ?>
+                            $('#recaptcha-error').hide().html('');
+                            var response = grecaptcha.getResponse();
+                            if(response.length == 0) 
+                            { 
+                                $('#recaptcha-error').html('<?=$MyMessageAlert->Message("recaptcha")?>').show();
+                                return false;
+                            }
+                        <?php endif; ?>
                         $("form[name=frmContacto]").find("input[type=submit]").attr('disabled',true);
                         return true;
 
