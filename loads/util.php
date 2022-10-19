@@ -1291,17 +1291,17 @@ function getJqueryUIjs($js,$render_js)
             }
        
            
-            $txt = "";
-            $fp = fopen(PROJECT_DIR.$file, "r");
-            while (!feof($fp)){
-                $txt .= fgets($fp);
-            }
-            fclose($fp);
+          //  $txt = "";
+          //  $fp = fopen(PROJECT_DIR.$file, "r");
+          //  while (!feof($fp)){
+            //    $txt .= fgets($fp);
+          //  }
+          //  fclose($fp);
             
             foreach($jquery_ui as $function => $dependencias)
             {
-                if(preg_match("/\.$function/",$txt))
-                {
+                //if(preg_match("/\.$function/",$txt))
+                //{
                     foreach($dependencias as $dependencia)
                     {
                         if(!in_array('/public/jquery-ui/js/'.$dependencia.'.js',$_js))
@@ -1317,7 +1317,7 @@ function getJqueryUIjs($js,$render_js)
                         $_js[] = '/public/jquery-ui/js/'.$function.'.js';
                     }
                     unset($jquery_ui[$function]);
-                }
+                //}
             }
             if(!in_array($file,$_js))
             {
