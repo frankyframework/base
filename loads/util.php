@@ -845,7 +845,7 @@ function CalculaEdad( $fecha ) {
 }
 
 
-function getFormatoPrecio($number, $fractional=true,$simbol = true) {
+function getFormatoPrecio($number, $fractional=true,$simbol = '',$abr = '') {
 
     if(empty($number))
     {
@@ -863,9 +863,8 @@ function getFormatoPrecio($number, $fractional=true,$simbol = true) {
         }
     }
     $number = explode(".",$number);
-    return ($simbol ? '$ ' : '').$number[0].(isset($number[1]) ? '.<sup>'.$number[1].'</sup>': '').' MXN';
+    return $simbol.' '.$number[0].(isset($number[1]) ? '.<sup>'.$number[1].'</sup>': '').' '.$abr;
 }
-
 
 function getCoreConfig($path)
 {
