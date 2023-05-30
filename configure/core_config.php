@@ -143,6 +143,12 @@ return array(
           'validation' => array('url' => true),
           'value' => 'https://www.facebook.com/'
         ),
+        array('path' => 'base/empresa/youtube',
+        'type' => 'text',
+        'label' => 'Youtube',
+        'validation' => array('required' => false),
+        'value' => ''
+        ),
         array('path' => 'base/empresa/twitter',
         'type' => 'text',
         'label' => 'Twitter',
@@ -166,7 +172,7 @@ return array(
         'label' => 'Linked In',
         'validation' => array('required' => false),
         'value' => ''
-      )
+        )
 
     )
 ),
