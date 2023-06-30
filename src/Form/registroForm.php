@@ -100,7 +100,7 @@ class registroForm extends \Franky\Form\Form
                 'options' =>  array("h" => _("Masculino"),
                                     "m"  => _("Femenino"),
 
-
+                ),
 
                 'atributos' => array("value" => "h"),
                 'label_atributos' => array(
