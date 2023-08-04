@@ -22,6 +22,16 @@ return array(
                 "etiqueta" => _("Eliminar mi cuenta")
                )
         )
-    )
+               ),
+               array('title'=> "Configuración",
+               'children' =>  array(
+                        
+                  array(
+                   "permiso" =>   ADMINISTRAR_DEVICES,
+                   "url" => $MyRequest->url(ADMIN_DEVICES),
+                   "etiqueta" => _("Administrar dispositivos")
+                 )
+               )
+       ),
 );
 ?>
