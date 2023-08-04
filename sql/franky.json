@@ -398,13 +398,13 @@
             "modulo":"base"
         },
         {
-            "php":"admin/devices/lista.php",
+            "php":"mi-cuenta/devices/lista.php",
             "css":"",
             "js":"",
             "jquery":"",
             "permisos":[1,2,3],
             "constante":"ADMIN_DEVICES",
-            "url":"admin/devices/",
+            "url":"mi-cuenta/devices/",
             "nombre":"Administracion de dispositivos",
             "ajax":["base/ajax.admin.js"],
             "status":1,
