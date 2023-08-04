@@ -38,12 +38,6 @@ return array(
                  "url" => $MyRequest->url(LISTA_EMAIL_TEMPLATE),
                  "etiqueta" => _("E-mails transaccionales")
                 ),
-
-               array(
-                "permiso" =>   ADMINISTRAR_DEVICES,
-                "url" => $MyRequest->url(ADMIN_DEVICES),
-                "etiqueta" => _("Administrar dispositivos")
-              ),
                array(
                 "permiso" =>   ADMINISTRAR_CORE_CONFIG,
                 "url" => $MyRequest->url(ADMIN_CORE_CONFIG),
