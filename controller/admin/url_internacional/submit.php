@@ -19,7 +19,7 @@ if(!$valid)
     $error = true;
 }
 
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_URLINTERNACIONAL))
+if(!$MyAccessList->MeDasChancePasar("administrar_urlinternacional"))
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("sin_privilegios"));
     $error = true;

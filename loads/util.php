@@ -705,6 +705,7 @@ function breadcrumbs()
     global $MyRequest;
     global $MyFrankyMonster;
     global $MySession;
+    global $MyAccessList;
     $uri = parse_url($MyRequest->getURI());
 
     $uri = explode("/",trim($uri["path"],"/"));
@@ -728,7 +729,7 @@ function breadcrumbs()
                 $permiso = true;
                 if(is_array($uiCommand[0]) && count($uiCommand[0]) > 0)
             		{
-                	if(!in_array($MySession->GetVar('nivel'),$uiCommand[0]) && $MySession->GetVar('nivel') != NIVEL_USERDEVELOPER )
+                	if(!$MyAccessList->MeDasChancePasar($uiCommand[0]))
             			{
             				$permiso = false;
             			}
@@ -786,6 +787,28 @@ function selectPagina()
       }
 
 return ($paginas);
+}
+
+function getRoles()
+{
+
+    $RoleModel = new \Base\model\RoleModel();
+    $RoleEntity = new \Base\entity\RoleEntity();
+
+    $RoleEntity->status(1);
+    $loles = array();
+    $RoleModel->setTampag(1000);
+    $RoleModel->setOrdensql("name ASC");
+    if($RoleModel->getData($RoleEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+    {
+        while($registro = $RoleModel->getRows())
+        {
+            $roles[$registro['id']] = $registro['name'];
+
+        }
+    }
+
+    return ($roles);
 }
 
 

@@ -236,6 +236,13 @@ return array(
                                     'data' => getTemplatesEmail(),
                                     'value' => '1'
                             ),
+                            array('path' => 'base/user/default-role',
+                            'type' => 'select',
+                            'label' => 'Rol por defecto',
+                            'validation' => array('required' => true),
+                            'data' => getRoles(),
+                            'value' => '1'
+                    ),
 
           )
   ),

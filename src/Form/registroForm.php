@@ -192,8 +192,8 @@ class registroForm extends \Franky\Form\Form
     public function addNivel()
     {
         $this->add(array(
-                'name' => 'nivel',
-                'label' => _('Nivel'),
+                'name' => 'role',
+                'label' => _('Rol'),
                 'type'  => 'select',
                 'required'  => true,
                 'options' => array(),
@@ -239,24 +239,6 @@ class registroForm extends \Franky\Form\Form
                  ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_obligatorio'
-                 )
-            )
-        );
-    }
-    public function addBiografia()
-    {
-        $this->add(array(
-                'name' => 'biografia',
-            //    'label' => ('Biografia'),
-                'type'  => 'textarea',
-              //  'required'  => false,
-                'atributos' => array(
-                    'placeholder' => _('Biografia'),
-                    'cols' => 45,
-                    'rows' => 5,
-                 ),
-                'label_atributos' => array(
-
                  )
             )
         );

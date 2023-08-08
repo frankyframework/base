@@ -6,7 +6,6 @@ use Franky\Core\ObserverManager;
 $MyUser             = new USERS();
 $MyLogin = new \Franky\Core\LOGIN("users",array("usuario","email"),"contrasena",array("status" => "1"));
 
-
 $usuario	= $MyRequest->getRequest('usuario');
 $contrasena	= $MyRequest->getRequest('contrasena');
 $callback	= $MyRequest->getRequest('callback');
@@ -45,6 +44,7 @@ if($error == false)
 
 
         $MySession->SetVar('is_login',    true);
+
         $_SESSION["token_login"] = array();
 
         //$location = $_SESSION["url_location"];
@@ -52,7 +52,7 @@ if($error == false)
 
 
         $ObserverManager->dispatch('login_user');
-        $ObserverManager->dispatch('login_user_'.$MyLogin->nivel,[$MyLogin->id]);
+        $ObserverManager->dispatch('login_user_'.$MyLogin->role,[$MyLogin->id]);
 
 
         if(!empty($callback))

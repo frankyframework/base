@@ -10,7 +10,7 @@ namespace Base\entity;
     public $usuario;
     public $contrasena;
     public $email;
-    public $nivel;
+    public $role;
     public $fecha;
     public $ultimoAcceso;
     public $status;
@@ -19,7 +19,6 @@ namespace Base\entity;
     public $sexo;
     public $telefono;
     public $verificado;
-    public $biografia;
 
 
     public function __construct($data = null)
@@ -36,7 +35,7 @@ namespace Base\entity;
         $this->usuario         = (isset($data['usuario']))             ? $data['usuario']          : null;
         $this->contrasena      = (isset($data['contrasena']))          ? $data['contrasena']       : null;
         $this->email           = (isset($data['email']))               ? $data['email']            : null;
-        $this->nivel           = (isset($data['nivel']))               ? $data['nivel']            : null;
+        $this->role           = (isset($data['role']))               ? $data['role']            : null;
         $this->fecha           = (isset($data['fecha']))               ? $data['fecha']            : null;
         $this->ultimoAcceso    = (isset($data['ultimoAcceso']))        ? $data['ultimoAcceso']     : null;
         $this->status          = (isset($data['status']))              ? $data['status']           : null;
@@ -45,7 +44,6 @@ namespace Base\entity;
         $this->sexo            = (isset($data['sexo']))                ? $data['sexo']             : null;
         $this->telefono        = (isset($data['telefono']))            ? $data['telefono']         : null;
         $this->verificado      = (isset($data['verificado']))          ? $data['verificado']       : null;
-        $this->biografia       = (isset($data['biografia']))           ? $data['biografia']        : null;
 
     }
 
@@ -101,9 +99,9 @@ namespace Base\entity;
         return $this->email;
     }
 
-    public function getNivel()
+    public function getRole()
     {
-        return $this->nivel;
+        return $this->role;
     }
 
     public function getFecha()
@@ -145,12 +143,6 @@ namespace Base\entity;
         return $this->verificado;
     }
 
-    public function getBiografia()
-    {
-        return $this->biografia;
-    }
-
-
     public function setId($id)
     {
         $this->id = $id;
@@ -171,9 +163,9 @@ namespace Base\entity;
         $this->email = $email;
     }
 
-    public function setNivel($nivel)
+    public function setRole($role)
     {
-        $this->nivel = $nivel;
+        $this->role = $role;
     }
 
     public function setFecha($fecha)
@@ -214,12 +206,4 @@ namespace Base\entity;
     {
         $this->verificado = $verificado;
     }
-
-    public function setBiografia($biografia)
-    {
-        $this->biografia = $biografia;
-    }
-
-
-
- }
+}

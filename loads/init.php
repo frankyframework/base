@@ -76,7 +76,9 @@ $MyRequest          = new \Franky\Core\request();
 $Mobile_detect      = new \Mobile_Detect();
 $MyRedireccion      = new \Base\model\redireccionesModel();
 $ObserverManager    = new \Franky\Core\ObserverManager();
-
+$RoleModel          = new \Base\model\RoleModel;
+$RoleEntity         = new \Base\entity\RoleEntity;
+$MyAccessList       = new \Franky\Core\AccessList();
 
 $seccion = $MyRequest->getRequest('my_url_friendly');
 
@@ -210,8 +212,20 @@ header("Content-type: text/html; charset=UTF-8");
 
 $loginForm = new Base\Form\loginForm("autentificacion");
 
-
-include_once(PROJECT_DIR."/modulos/base/loads/lca.php");
+$RoleEntity->status(1);
+$RoleEntity->id($MySession->GetVar('role'));
+$RoleModel->setTampag(1000);
+$RoleModel->setOrdensql("name ASC");
+if($RoleModel->getData($RoleEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+{
+    $roles = [];
+    $registro = $RoleModel->getRows();
+    
+    $resources = json_decode($registro['resources'],true);
+    foreach($resources as $resource){
+        $MyAccessList->addRoll($resource);
+    }
+}
 
 include_once(PROJECT_DIR."/modulos/base/loads/llenaMensajes.php");
 
@@ -288,8 +302,8 @@ if(!$MyFrankyMonster->crearMonstruo(($seccion)) || $seccion == ERR_404)
 
       }
 }
-$permisos = $MyFrankyMonster->MyPermisos();
-if(is_array($permisos) && !empty($permisos))
+$resource = $MyFrankyMonster->MyResource();
+if(!empty($resource))
 {
     if(!$MySession->LoggedIn())
     {
@@ -297,7 +311,7 @@ if(is_array($permisos) && !empty($permisos))
     }
     else
     {
-        if(!in_array($MySession->GetVar('nivel'),$permisos) && $MySession->GetVar('nivel') != NIVEL_USERDEVELOPER )
+        if(!$MyAccessList->MeDasChancePasar($resource))
         {
             $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("sin_privilegios"));
             $MyRequest->redirect();

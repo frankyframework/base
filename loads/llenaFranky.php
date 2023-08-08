@@ -101,7 +101,7 @@ if($paginasModel->getData() == REGISTRO_SUCCESS)
 				define($registro["constante"],$keyCommand);
 
 				$MyFrankyMonster->pushCommand($keyCommand,array(
-						json_decode($registro["permisos"],true),
+						$registro["resource"],
 						json_decode($registro["js"],true),
 						json_decode($registro["css"],true),
 						json_decode($registro["jquery"],true),

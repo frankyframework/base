@@ -331,6 +331,13 @@
         <llave>bad_recaptcha</llave>
         <valor>Error al validar que no eres un robot</valor>
     </mensaje>
-
+    <mensaje>
+        <llave>rol_duplicado</llave>
+        <valor>Este nombre de rol ya está registrada</valor>
+    </mensaje>
+     <mensaje>
+        <llave>empty_rol</llave>
+        <valor>No se selecciono ninguna regla</valor>
+    </mensaje>
  
 </mensajes>

@@ -75,7 +75,7 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
             $varificado = 0;
         }
 
-        $MyUserEntity->setNivel(NIVEL_USERSUSCRIPTOR);
+        $MyUserEntity->setRole(getCoreConfig("base/user/default-role"));
         $MyUserEntity->setContrasena(password_hash($MyUserEntity->getContrasena(),PASSWORD_DEFAULT));
         $MyUserEntity->setVerificado($varificado);
         $MyUserEntity->setFecha(date('Y-m-d H:i:s'));

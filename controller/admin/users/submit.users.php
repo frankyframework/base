@@ -36,9 +36,9 @@ if(!$Tokenizer->decode($MyRequest->getRequest('token_xsrf')))
     $error = true;
 }
 
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTROS_USUARIOS))
+if(!$MyAccessList->MeDasChancePasar("administrar_otros_usuarios"))
 {
-    $MyUserEntity->setNivel($MySession->GetVar('nivel'));
+    $MyUserEntity->setRole($MySession->GetVar('role'));
     $MyUserEntity->setUsuario($MySession->GetVar('usuario'));
     $MyUserEntity->setId($MySession->GetVar('id'));
     $id_user = $MyUserEntity->getId();
@@ -96,9 +96,9 @@ if(!$error)
         $MyUserEntity->setContrasena(password_hash($contrasena,PASSWORD_DEFAULT));
         $MyUserEntity->setFecha(date('Y-m-d H:i:s'));
     }
-    if($MyUserEntity->getNivel() == "" || !in_array($MyUserEntity->getNivel(),  array_keys($_Niveles_usuarios)))
+    if($MyUserEntity->getRole() == "" || !in_array($MyUserEntity->getRole(),  getRoles()))
     {
-        $MyUserEntity->setNivel(NIVEL_USERSUSCRIPTOR);
+        $MyUserEntity->setRole(getCoreConfig("base/user/default-role"));
     }
 
     $MyUserEntity->setFecha_nacimiento($fecha_nacimiento);
@@ -176,7 +176,7 @@ if(!$error)
 
         $location = (!empty($callback) ? ($callback) : $MyRequest->url(LISTA_OPERADORES));
 
-        if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTROS_USUARIOS))
+        if(!$MyAccessList->MeDasChancePasar("administrar_otros_usuarios"))
         {
             $location = $MyRequest->url(ADMIN);
         }

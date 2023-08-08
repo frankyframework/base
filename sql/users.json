@@ -26,12 +26,11 @@
                 "type":"varchar",
                 "length":255,
                 "null":0
-            },
-          
+            },  
             {
-                "name":"nivel",
+                "name":"role",
                 "type":"int",
-                "length":2,
+                "length":5,
                 "null":0,
                 "default":0
                 
@@ -82,15 +81,8 @@
                 "type":"int",
                 "length":1,
                 "null":0,
-                "default":1
-                
-            },
-            {
-                "name":"biografia",
-                "type":"text",
-                "null":1
+                "default":1 
             }
-
         ],
         "config":{
             "primary":"id",
@@ -104,7 +96,7 @@
             "usuario":"molder",
             "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
             "email":"ussiel@gmail.com",
-            "nivel":"777",
+            "role":"1",
             "fecha":"0000-00-00",
             "ultimoAcceso":"",
             "nombre":"Ussiel",
@@ -119,45 +111,42 @@
             "usuario":"alberto",
             "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
             "email":"oxtlimail@gmail.com",
-            "nivel":"777",
+            "role":"1",
             "fecha":"0000-00-00",
             "ultimoAcceso":"",
             "nombre":"Alberto",
             "fecha_nacimiento": "0000-00-00",
             "sexo":"h",
             "telefono":"",
-            "verificado": "1",
-            "biografia": ""
+            "verificado": "1"
         },
         {
             "id" : 3,
             "usuario":"ssqueda",
             "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
             "email":"luis@cloudstudio.mx",
-            "nivel":"777",
+            "role":"1",
             "fecha":"0000-00-00",
             "ultimoAcceso":"",
             "nombre":"Jose luis",
             "fecha_nacimiento": "0000-00-00",
             "sexo":"h",
             "telefono":"",
-            "verificado": "1",
-            "biografia": ""
+            "verificado": "1"
         },
         {
             "id" : 4,
             "usuario":"brauer",
             "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
             "email":"max@cloudstudio.mx",
-            "nivel":"777",
+            "role":"1",
             "fecha":"0000-00-00",
             "ultimoAcceso":"",
             "nombre":"Jose luis",
             "fecha_nacimiento": "0000-00-00",
             "sexo":"h",
             "telefono":"",
-            "verificado": "1",
-            "biografia": ""
+            "verificado": "1"
         }
     ]
 }

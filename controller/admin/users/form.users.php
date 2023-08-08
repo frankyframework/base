@@ -10,7 +10,7 @@ $id		= $Tokenizer->decode($MyRequest->getRequest('id'));
 $callback	= $MyRequest->getRequest('callback');
 $data = $MyFlashMessage->getResponse();
 
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTROS_USUARIOS))
+if(!$MyAccessList->MeDasChancePasar("administrar_otros_usuarios"))
 {
 
 	$id= $MySession->GetVar('id');
@@ -38,11 +38,10 @@ else
     $adminForm->addUsuario();
 }
 $adminForm->addGeneral();
-if($MyAccessList->MeDasChancePasar(ADMINISTRAR_OTROS_USUARIOS)):
+if($MyAccessList->MeDasChancePasar("administrar_otros_usuarios")):
     $adminForm->addNivel();
-    $adminForm->setOptionsInput("nivel",$_Niveles_usuarios);
+    $adminForm->setOptionsInput("role",getRoles());
 endif;
-//$adminForm->addBiografia();
 $adminForm->addGuardar();
 $adminForm->setData($data);
 $adminForm->setAtributoInput("callback","value", urldecode($callback));

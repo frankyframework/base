@@ -45,7 +45,7 @@ if($CoreConfigModel->getTotal() > 0)
 $error = false;
 
 
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_CORE_CONFIG))
+if(!$MyAccessList->MeDasChancePasar("administrar_core_sistem"))
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("sin_privilegios"));
     $error = true;

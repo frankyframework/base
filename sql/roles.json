@@ -1,0 +1,56 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "key":"primary",
+                "auto_increment":1
+            },
+            {
+                "name":"name",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"resources",
+                "type":"text",
+                "null":1
+            },
+            {
+                "name":"status",
+                "type":"int",
+                "length":1,
+                "default":1,
+                "null":0
+            },
+            {
+                "name":"created_at",
+                "type":"datetime",
+                "null":0
+            },
+            {
+                "name":"update_at",
+                "type":"datetime",
+                "null":1
+            }
+        ],
+        "config":{
+            "primary":"id",
+            "engine":"MyISAM"
+        }
+    }
+    ,
+    "data":[
+        {
+            "name":"Developer",
+            "resources":["mi_cuenta_dashboard","admin_dashboard","admin_role","administrar_mi_usuario","administrar_mi_contrasena","eliminar_mi_perfil","administrar_devices"],
+            "created_at":"2018-06-14 14:42:37",
+            "status":1
+        }
+    ]
+}

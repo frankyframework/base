@@ -22,6 +22,7 @@ return array
     "mi-cuenta/users/submit.pass.php" => PROJECT_DIR."/modulos/base/controller/mi-cuenta/users/submit.pass.php",
     "admin/users/submit.users.php" => PROJECT_DIR."/modulos/base/controller/admin/users/submit.users.php",
     "admin/users/submit.pass.php" => PROJECT_DIR."/modulos/base/controller/admin/users/submit.pass.php",
+    "admin/roles/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/roles/submit.php",
     "admin/cms/submit.php"  => PROJECT_DIR."/modulos/base/controller/admin/cms/submit.php",
     "admin/template_email/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/template_email/submit.php",
     "admin/contacto/excel.php" => PROJECT_DIR."/modulos/base/controller/admin/contacto/excel.php",

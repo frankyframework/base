@@ -9,7 +9,7 @@ $MyUser             = new USERS();
 $id		= $Tokenizer->decode($MyRequest->getRequest('id'));
 $callback	= $MyRequest->getRequest('callback');
 
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA) || empty($id))
+if(!$MyAccessList->MeDasChancePasar("administrar_otra_contrasena") || empty($id))
 {
 	$id= $MySession->GetVar('id');
 }
@@ -27,7 +27,7 @@ if(!empty($id))
 }
 
 $adminForm = new contrasenaForm("userspass");
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)):
+if(!$MyAccessList->MeDasChancePasar("administrar_otra_contrasena")):
     if(!empty($contrasena_db)):
         $adminForm->addContrasenaAnterior();
     endif;   

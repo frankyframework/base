@@ -11,7 +11,7 @@ class paginasModel  extends \Franky\Database\Mysql\objectOperations
     }
         function getData($status='1',$modulo='')
         {
-            $campos = array("nombre","id","url","constante","permisos","js","css","jquery","ajax","php","modulo");
+            $campos = array("nombre","id","url","constante","resource","js","css","jquery","ajax","php","modulo");
 
             if($status != "")
             {

@@ -2,7 +2,7 @@
 use Base\model\mfm;
 use Franky\Filesystem\File;
 
-if (!$MyAccessList->MeDasChancePasar(ADMINISTRAR_UPLOADERS)) {  die('No autorizado'); }
+if (!$MyAccessList->MeDasChancePasar("administrar_uploaders")) {  die('No autorizado'); }
 
 $pwd = str_replace("..","",trim($MyRequest->getRequest("pwd")));
 

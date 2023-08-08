@@ -16,9 +16,9 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
     }
     
     
-    function getData($id='',$busca='',$nivel='',$status='1')
+    function getData($id='',$busca='',$role='',$status='1')
     {
-            $campos = array("id","nombre","usuario","email","nivel","fecha","fecha_nacimiento","sexo","telefono","contrasena","verificado","biografia","status");
+            $campos = array("id","nombre","usuario","email","role","fecha","fecha_nacimiento","sexo","telefono","contrasena","verificado","status");
 
             if(!empty($id))
             {
@@ -39,15 +39,15 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
                 $this->where()->addOr('email',"%$busca%",'like');
                 $this->where()->concat(')');
             }
-            if(!empty($nivel))
+            if(!empty($role))
             {
-                if(is_array($nivel))
+                if(is_array($role))
                 {
 
                     $this->where()->concat('AND (');
-                    foreach ($nivel as $k)
+                    foreach ($role as $k)
                     {
-                      $this->where()->addOr('nivel',$k,'=');
+                      $this->where()->addOr('role',$k,'=');
 
                     }
                     $this->where()->concat(')');
@@ -55,7 +55,7 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
                 }
                 else
                 {
-                  $this->where()->addAnd('nivel',$nivel,'=');
+                  $this->where()->addAnd('role',$role,'=');
                 }
             }
              if(!empty($status))

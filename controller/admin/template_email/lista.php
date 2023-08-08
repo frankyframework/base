@@ -56,7 +56,7 @@ $value_columnas_grid = array("fecha" , "templates_email.nombre","secciones_trans
 
 $css_columnas_grid = array("fecha" => "w-xxxx-2" , "templates_email.nombre" => "w-xxxx-4" ,"secciones_transaccionales.nombre" => "w-xxxx-4" );
 
-$permisos_grid = ADMINISTRAR_EMAIL_TEMPLATE;
+$permisos_grid = "administrar_template_de_mailings";
 $MyFiltrosForm = new filtrosForm('paginar');
 $MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();

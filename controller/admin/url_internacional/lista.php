@@ -82,7 +82,7 @@ $titulo_columnas_grid = array("nombre" => _("Nombre"),"urli" => _("URL"), "url" 
 $value_columnas_grid = array("nombre","urli" , "url");
 
 $css_columnas_grid = array("nombre" => "w-xxxx-4" ,"urli" => "w-xxxx-3", "url" => "w-xxxx-3");
-$permisos_grid = ADMINISTRAR_URLINTERNACIONAL;
+$permisos_grid = "administrar_urlinternacional";
 //exit;
 
 ?>

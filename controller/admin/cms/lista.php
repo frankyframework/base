@@ -53,7 +53,7 @@ $value_columnas_grid = array("id" ,"fecha" , "titulo", "friendly");
 
 $css_columnas_grid = array("id" => "w-xxxx-1" ,"fecha" => "w-xxxx-2" , "titulo" => "w-xxxx-3" , "friendly" => "w-xxxx-3" );
 
-$permisos_grid = ADMINISTRAR_CMS_TEMPLATE;
+$permisos_grid = "administrar_template_de_cms";
 $MyFiltrosForm = new filtrosForm('paginar');
 $MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();

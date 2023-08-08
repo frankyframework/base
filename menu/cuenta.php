@@ -5,19 +5,19 @@ return array(
     array('title'=> "Perfil",
             'children' =>  array(
                 array(
-                 "permiso" =>   ADMINISTRAR_MI_USUARIO,
+                 "permiso" =>   "administrar_mi_usuario",
                  "url" => $MyRequest->url(FRM_MIS_DATOS),
                  "etiqueta" => _("Editar mis datos")
                 ),
                  array(
-                 "permiso" =>   ADMINISTRAR_MI_CONTRASENA,
+                 "permiso" =>   "administrar_mi_contrasena",
                  "url" => $MyRequest->url(FRM_MY_PASSWORD),
                  "etiqueta" => _("Cambiar mi contraseña")
                 ),
                
          
                array(
-                "permiso" =>   ELIMINAR_MI_PERFIL,
+                "permiso" =>   "eliminar_mi_perfil",
                 "url" => $MyRequest->url(FRM_ELIMINAR_USER),
                 "etiqueta" => _("Eliminar mi cuenta")
                )
@@ -27,7 +27,7 @@ return array(
                'children' =>  array(
                         
                   array(
-                   "permiso" =>   ADMINISTRAR_DEVICES,
+                   "permiso" =>   "administrar_devices",
                    "url" => $MyRequest->url(ADMIN_DEVICES),
                    "etiqueta" => _("Administrar dispositivos")
                  )

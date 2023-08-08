@@ -11,7 +11,7 @@ function EliminarUser($id,$status)
         global $MyMessageAlert;
         global $MyFlashMessage;
         $respuesta = null;
-        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_OTROS_USUARIOS))
+        if($MyAccessList->MeDasChancePasar("administrar_otros_usuarios"))
         {
             $MyUserEntity->setId(addslashes($Tokenizer->decode($id)));
             $MyUserEntity->setStatus(addslashes($status));
@@ -43,7 +43,7 @@ function EliminarTemplate($id,$status)
         $respuesta = null;
         $TemplateemailEntity->status(addslashes($status));
         $TemplateemailEntity->id(addslashes($Tokenizer->decode($id)));
-        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_EMAIL_TEMPLATE))
+        if($MyAccessList->MeDasChancePasar("administrar_template_de_mailings"))
         {
             if($TemplateemailModel->save($TemplateemailEntity->getArrayCopy()) == REGISTRO_SUCCESS)
             {
@@ -69,7 +69,7 @@ function EliminarCMSTemplate($id,$status)
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
-        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CMS_TEMPLATE))
+        if($MyAccessList->MeDasChancePasar("administrar_template_de_cms"))
         {
             if($MyCMS->delete(addslashes($id),addslashes($status)) == REGISTRO_SUCCESS)
             {
@@ -101,7 +101,7 @@ function EliminarDispositivo($password,$id,$status)
         $respuesta = null;
         if(password_verify($password,$MySession->GetVar('contrasena')))
         {
-          if($MyAccessList->MeDasChancePasar(ADMINISTRAR_DEVICES))
+          if($MyAccessList->MeDasChancePasar("administrar_devices"))
           {
 
             $UserdeviceEntity->id(addslashes($Tokenizer->decode($id)));
@@ -144,7 +144,7 @@ function BloquearDispositivo($password,$id,$status)
 
         if(password_verify($password,$MySession->GetVar('contrasena')))
         {
-          if($MyAccessList->MeDasChancePasar(ADMINISTRAR_DEVICES))
+          if($MyAccessList->MeDasChancePasar("administrar_devices"))
           {
 
             $UserdeviceEntity->id(addslashes($Tokenizer->decode($id)));
@@ -183,7 +183,7 @@ function EliminarComentario($id,$status)
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
-        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CONTACTANOS))
+        if($MyAccessList->MeDasChancePasar("administrar_contactanos"))
         {
             if($ContactoModel->delete(addslashes($id)) == REGISTRO_SUCCESS)
             {
@@ -308,7 +308,7 @@ function EliminarEmailNews($id,$status = 0)
     }
     else
     {
-        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_MAILING))
+        if($MyAccessList->MeDasChancePasar("administrar_mailing"))
         {
 
             if($Delete->execute($From->get(), $Where->get())== CONSULTAS_SUCCESS)
@@ -347,7 +347,7 @@ function EliminarUrlIternacional($id,$status)
 
         $Tokenizer = new \Franky\Haxor\Tokenizer;
         $respuesta = null;
-        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_URLINTERNACIONAL))
+        if($MyAccessList->MeDasChancePasar("administrar_urlinternacional"))
         {
             $UrlInternacionalEntity->id(addslashes($Tokenizer->decode($id)));
             $UrlInternacionalEntity->status(addslashes($status));
@@ -369,6 +369,36 @@ function EliminarUrlIternacional($id,$status)
 }
 
 
+function EliminarRol($id,$status)
+{
+
+        $RoleModel             = new \Base\model\RoleModel();
+        $RoleEntity    = new \Base\entity\RoleEntity();
+        $Tokenizer = new \Franky\Haxor\Tokenizer;
+        global $MyAccessList;
+        global $MyMessageAlert;
+        $respuesta = null;
+        if($MyAccessList->MeDasChancePasar("admin_role"))
+        {
+            $RoleEntity->id(addslashes($Tokenizer->decode($id)));
+            $RoleEntity->status(addslashes($status));
+            if($RoleModel->save($RoleEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+            {
+
+            }
+            else
+            {
+		            $respuesta[] = array("message" => $MyMessageAlert->Message("eliminar_generico_error"));
+            }
+        }
+        else
+        {
+             $respuesta[] = array("message" => $MyMessageAlert->Message("sin_privilegios"));
+        }
+
+	return $respuesta;
+}
+
 
 
 /******************************** EJECUTA *************************/
@@ -384,4 +414,5 @@ $MyAjax->register("EliminarUrlIternacional");
 $MyAjax->register("BloquearDispositivo");
 $MyAjax->register("EliminarDispositivo");
 $MyAjax->register("EliminarEmailNews");
+$MyAjax->register("EliminarRol");
 ?>

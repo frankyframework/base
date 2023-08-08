@@ -1,0 +1,97 @@
+<div class="w-xxxx-12">
+    <div class="content">
+        <h1 class="align_center"></h1>
+        <h3 class="align_center"></h3>
+        <?php echo $adminForm->openTag(); ?>
+        <?php  echo $adminForm->get("callback"); ?>
+
+
+        <?php if(!empty($id)): ?>
+        <?php  echo $adminForm->get("id"); ?>
+        <?php endif; ?>
+  
+        <?php  echo $adminForm->getRow("name"); ?>
+        
+        <div class="form-group">
+          <h3>Permisos</h3>
+         
+          <div id="jstree">
+            
+            <ul>
+                <li id="cat_0" >Permisos
+                    <?php  if(!empty($resources)):?>
+                    <ul>
+                    <?php foreach($resources as $name => $resource): ?>
+                    
+                        
+                        <li id="cat_<?=getFriendly($name); ?>"   <?=(in_array('cat_'.getFriendly($name), $data['resources']) ? "data-jstree='{ \"selected\" : true }'": '')?>> <?=_($name); ?>
+                            <?php  if(!empty($resource)):?>
+                                <ul>
+                                <?php foreach($resource as $k => $v): ?>
+                    
+                        
+                                    <li id="cat_<?=$k; ?>"  <?=(in_array($k, $data['resources']) ? "data-jstree='{ \"selected\" : true }'": '')?>>
+                                      <?=_($v); ?>
+                                    </li>
+                                    
+                                <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                        
+                    <?php endforeach; ?>
+                    </ul>
+                    <?php endif; ?>
+                </li>
+            </ul>
+            
+        </div>
+        <div style="overflow:hidden;width: 1px; height:1px;">
+        <?php  echo $adminForm->getRow("resources[]"); ?>
+        </div>
+        <label id="resources[]-error" class="error" for="resources[]" style="display:none;"></label>
+        <label id="resources[]-error" class="error" for="resources[]" style="display:none;"></label>
+        </div>
+     
+        <?php  echo $adminForm->getRow("guardar"); ?>
+
+        <?php echo $adminForm->endTag(); ?>
+
+    </div>
+
+  
+
+</div>
+
+
+
+<script >
+$(document).ready(function()
+{
+  $( "#frmroles" ).validate();
+});
+</script>
+<script >
+
+$('#jstree').on('changed.jstree', function (e, data) {
+    var i, j, r = [];
+    $('input[name="resources[]"]').prop('checked',false);
+    for(i = 0, j = data.selected.length; i < j; i++) {
+     
+      $('input[name="resources[]"][value="'+data.instance.get_node(data.selected[i]).id.replace('cat_','')+'"]').prop('checked',true);
+      for(k = 0, l = +data.instance.get_node(data.selected[i]).parents.length; k < l; k++) {
+        $('input[name="resources[]"][value="'+data.instance.get_node(data.selected[i]).parents[k].replace('cat_','')+'"]').prop('checked',true);
+      }
+    }
+    
+  }).jstree({
+    'checkbox': {
+        three_state: false,
+        cascade: 'up,down'
+    },
+  "plugins" : [ "checkbox" ]
+});
+
+
+
+</script>

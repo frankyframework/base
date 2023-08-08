@@ -38,6 +38,7 @@ $MyUser->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden(
 $result	 		= $MyUser->getData('', $busca_b,$nivel_b,'');
 $MyPaginacion->setTotal($MyUser->getTotal());
 $lista_admin_data = array();
+$_Niveles_usuarios = getRoles();
 if($MyUser->getTotal() > 0)
 {
 
@@ -52,7 +53,7 @@ if($MyUser->getTotal() > 0)
                 "thisClass"     => $thisClass,
                 "id" => $Tokenizer->token("users", $registro["id"]),
                 "callback" => $Tokenizer->token("users", $MyRequest->getURI()),
-                "nivel"         => $_Niveles_usuarios[$registro["nivel"]],
+                "role"         => $_Niveles_usuarios[$registro["role"]],
                 "nuevo_estado"  => ($registro["status"] == 1 ? "desactivar" : "activar"),
                 "fecha"         => getFechaUI($registro["fecha"]),
                 ));
@@ -71,7 +72,7 @@ $MyFiltrosForm->addFecha('rango_final');
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 $MyFiltrosForm->addNivel();
-$MyFiltrosForm->setOptionsInput("nivel_b", $_Niveles_usuarios);
+$MyFiltrosForm->setOptionsInput("nivel_b", getRoles());
 $MyFiltrosForm->setAtributoInput("nivel_b", "value", $nivel_b);
 $MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
 $MyFiltrosForm->setAtributoInput("rango_inicial", "value",$rango_inicial);

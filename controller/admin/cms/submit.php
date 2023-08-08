@@ -37,7 +37,7 @@ if($MyCMS->existeTemplate($nombre,$id) == REGISTRO_SUCCESS)
     $error = true;
 }
 
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_CMS_TEMPLATE))
+if(!$MyAccessList->MeDasChancePasar("administrar_template_de_cms"))
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("sin_privilegios"));
     $error = true;

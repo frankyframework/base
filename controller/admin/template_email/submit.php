@@ -42,7 +42,7 @@ if($TemplatemmailModel->existe($nombre,$id) == REGISTRO_SUCCESS)
     $error = true;
 }
 
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_EMAIL_TEMPLATE))
+if(!$MyAccessList->MeDasChancePasar("administrar_template_de_mailings"))
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("sin_privilegios"));
     $error = true;

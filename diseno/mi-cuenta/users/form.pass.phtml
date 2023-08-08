@@ -16,7 +16,7 @@
 $( "#userspass" ).validate({
 rules: {
 
-    <?php if(!empty($contrasena_db) && !$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)): ?>
+    <?php if(!empty($contrasena_db) && !$MyAccessList->MeDasChancePasar("administrar_otra_contrasena")): ?>
     contrasena_ant: {
             required: true,
             minlength: 6
@@ -34,7 +34,7 @@ rules: {
 
 },
 messages: {
-    <?php if(!empty($contrasena_db) && !$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)): ?>
+    <?php if(!empty($contrasena_db) && !$MyAccessList->MeDasChancePasar("administrar_otra_contrasena")): ?>
     contrasena_ant: {
             required: "Escribe tu contrase&ntilde;a actual",
             minlength: jQuery.validator.format("Tu contrase&ntilde;a actual debe tener minimo {0} caracteres"),

@@ -14,7 +14,7 @@ $contrasena_ant	= $MyRequest->getRequest('contrasena_ant');
 
 $error = false;
 
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA))
+if(!$MyAccessList->MeDasChancePasar("administrar_otra_contrasena"))
 {
 	$id= $MySession->GetVar('id');
 }
@@ -27,7 +27,7 @@ $contrasena_db = $registro["contrasena"];
 $rules = array();
 
 
-if(!empty($contrasena_db) && !$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA))
+if(!empty($contrasena_db) && !$MyAccessList->MeDasChancePasar("administrar_otra_contrasena"))
 {
     $rules["Contraseña anterior"] = array("valor" => $contrasena_ant, "required");
 }
@@ -56,7 +56,7 @@ if(!empty($contrasena_db))
 {
     if(!password_verify($contrasena_ant,$contrasena_db))
     {
-        if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)):
+        if(!$MyAccessList->MeDasChancePasar("administrar_otra_contrasena")):
             $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("error_pass_actual"));
         else:
             $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("error_pass_admin"));
@@ -84,7 +84,7 @@ if(!$error)
 
         $location = (!empty($callback) ? ($callback) : $MyRequest->url(LISTA_OPERADORES));
 
-        if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA))
+        if(!$MyAccessList->MeDasChancePasar("administrar_otra_contrasena"))
         {
             $location = $MyRequest->url(ADMIN);
         }
