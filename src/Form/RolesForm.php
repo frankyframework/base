@@ -31,7 +31,7 @@ class RolesForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'name',
-                'label' => _catalog('Nombre'),
+                'label' => _('Nombre'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -68,7 +68,7 @@ class RolesForm extends \Franky\Form\Form
                 'type'  => 'submit',
                 'atributos' => array(
                     'class'       => 'btn btn-primary btn-big float_right',
-                    'value' => _catalog("Guardar")
+                    'value' => _("Guardar")
                  )
 
             )

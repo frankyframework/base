@@ -67,12 +67,12 @@ if($RoleModel->getTotal() > 0)
 //$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
 $title_grid = _("Roles");
 $class_grid = "roles";
-$error_grid = _catalog("No hay roles registrados");
+$error_grid = _("No hay roles registrados");
 $deleteFunction = "EliminarRol";
 
 $frm_constante_link = FRM_ROLES;
 
-$titulo_columnas_grid = array("_id" => _("ID"),"name" =>  _catalog("Nombre"));
+$titulo_columnas_grid = array("_id" => _("ID"),"name" =>  _("Nombre"));
 $value_columnas_grid = array("_id", "name");
 
 $css_columnas_grid = array("_id" => "w-xxxx-2", "name" => "w-xxxx-5");
