@@ -489,6 +489,12 @@ return array(
                               'data' => ['0' => 'No','1' => 'Sí'],
                               'value' => '0'
                         ),
+                        array('path' => 'base/debug/cacheversion',
+                                'type' => 'text',
+                                'label' => 'Cache Version',
+                                'validation' => array('required' => true),
+                                'value' => '1'
+                              ),
 
             )
     ),

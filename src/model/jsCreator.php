@@ -80,9 +80,9 @@ class jsCreator
     
 
     
-    public function  get()
+    public function  get($version)
     {
-        if(!file_exists(PROJECT_DIR.$this->jsFolder.$this->Namejs))
+        if(!file_exists(PROJECT_DIR.$this->jsFolder.$version."/".$this->Namejs))
         {
             $this->crearJs();
         }

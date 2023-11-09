@@ -55,7 +55,7 @@ if(getCoreConfig('base/debug/production')){
        $CssCreatos->setName("404.css");
     }
 
-    $global_css = $CssCreatos->get();
+    $global_css = $CssCreatos->get(getCoreConfig('base/debug/cacheversion'));
     ?>
     <link rel='stylesheet' type='text/css' href="<?php echo $global_css; ?>" />
     <?php

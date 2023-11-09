@@ -101,7 +101,7 @@ if(getCoreConfig('base/debug/production')){
        $JsCreatos->setName("404.js");
     }
     ?>
-    <script <?=(!$MyRequest->isAjax() ? 'async' : '');?> src='<?php echo $JsCreatos->get(); ?>'  ></script>
+    <script <?=(!$MyRequest->isAjax() ? 'async' : '');?> src='<?php echo $JsCreatos->get(getCoreConfig('base/debug/cacheversion')); ?>'  ></script>
 
 
     <?php
