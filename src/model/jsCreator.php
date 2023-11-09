@@ -41,6 +41,12 @@ class jsCreator
             mkdir(PROJECT_DIR.$this->jsFolder,0777);
             
         }
+        if(!file_exists(PROJECT_DIR.$this->jsFolder.$this->version))
+        {
+            mkdir(PROJECT_DIR.$this->jsFolder.$this->version,0777);
+            
+        }
+        
     }
    
     
@@ -82,11 +88,12 @@ class jsCreator
     
     public function  get($version)
     {
+        $this->version =  $version;
         if(!file_exists(PROJECT_DIR.$this->jsFolder.$version."/".$this->Namejs))
         {
             $this->crearJs();
         }
-        return $this->jsFolder.$this->Namejs;   
+        return $this->jsFolder.$version."/".$this->Namejs;   
     }
     
     

@@ -9,6 +9,7 @@ class cssCreator
     private $css;
     private $cssFolder = '/public/cache/css/';
     private $Namecss;
+    private $version;
     public function __construct($name="global.css") {
         $this->css = array();
         $this->Namecss = $name;
@@ -28,9 +29,14 @@ class cssCreator
     
     private function MKD()
     {
-         if(!file_exists(PROJECT_DIR.$this->cssFolder))
+        if(!file_exists(PROJECT_DIR.$this->cssFolder))
         {
             mkdir(PROJECT_DIR.$this->cssFolder,0777);
+            
+        }
+        if(!file_exists(PROJECT_DIR.$this->cssFolder.$this->version))
+        {
+            mkdir(PROJECT_DIR.$this->cssFolder.$this->version,0777);
             
         }
         
@@ -94,13 +100,14 @@ class cssCreator
     
     public function  get($version)
     {
+        $this->version =  $version;
         if(!file_exists(PROJECT_DIR.$this->cssFolder.$version."/".$this->Namecss))
         {
          
             $this->crearCss();
         }
         
-        return $this->cssFolder.$this->Namecss;
+        return $this->cssFolder.$version."/".$this->Namecss;
         
         
     }
