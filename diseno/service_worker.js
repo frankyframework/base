@@ -2,13 +2,13 @@
 use Franky\Filesystem\File;
 $File = new File();
 header("Content-type: text/javascript"); ?>
-var cacheName = 'mylines-v-2-2';
+var cacheName = 'mylines-v-2-3';
 var filesToCache = [
     '/index.php'
 ];
 
 <?php
-$files = $File->getFiles(PROJECT_DIR."/public/cache/css/");
+$files = $File->getFiles(PROJECT_DIR."/public/cache/css/".getCoreConfig('base/debug/cacheversion'));
 foreach($files as $file):
         if(substr($file,-4) =='.css' && file_exists(PROJECT_DIR."/public/cache/css/".getCoreConfig('base/debug/cacheversion')."/".$file)):
 ?>
@@ -17,7 +17,7 @@ filesToCache.push('/public/cache/css/<?php echo $file; ?>');
  endforeach; ?>
 
 <?php
-$files = $File->getFiles(PROJECT_DIR."/public/cache/js/");
+$files = $File->getFiles(PROJECT_DIR."/public/cache/js/".getCoreConfig('base/debug/cacheversion'));
 foreach($files as $file):
         if(substr($file,-3) =='.js' && file_exists(PROJECT_DIR."/public/cache/js/".getCoreConfig('base/debug/cacheversion')."/".$file)):
 ?>
@@ -56,13 +56,4 @@ self.addEventListener('activate', function(e) {
    return self.clients.claim();
 });
 
-self.addEventListener('fetch', function(e) {
 
-
-    e.respondWith(
-        caches.match(e.request).then(function(response) {
-        return response || fetch(e.request);
-        })
-    );
-    
-});
