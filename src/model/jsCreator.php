@@ -69,7 +69,7 @@ class jsCreator
 
        
         
-        $globalFile = fopen(PROJECT_DIR.$this->jsFolder.$this->Namejs, 'w');
+        $globalFile = fopen(PROJECT_DIR.$this->jsFolder.$this->version."/".$this->Namejs, 'w');
         
 
         $contenidoJs = Minifier::minify($buffer."\n".$this->embebed);
@@ -81,7 +81,7 @@ class jsCreator
 
         fclose($globalFile);
 
-        chmod(PROJECT_DIR.$this->jsFolder.$this->Namejs, 0777);
+        chmod(PROJECT_DIR.$this->jsFolder.$this->version."/".$this->Namejs, 0777);
     }
     
 

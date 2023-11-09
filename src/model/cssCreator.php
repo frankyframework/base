@@ -65,7 +65,7 @@ class cssCreator
                     file_get_contents(PROJECT_DIR.$this->css));
         }
 
-        $globalFile = fopen(PROJECT_DIR.$this->cssFolder.$this->Namecss, 'w');
+        $globalFile = fopen(PROJECT_DIR.$this->cssFolder.$this->version."/".$this->Namecss, 'w');
         
         
         
@@ -78,7 +78,7 @@ class cssCreator
 
         fclose($globalFile);
 
-        chmod(PROJECT_DIR.$this->cssFolder.$this->Namecss, 0777);
+        chmod(PROJECT_DIR.$this->cssFolder.$this->version."/".$this->Namecss, 0777);
     }
     
     private function minify($contenido)
