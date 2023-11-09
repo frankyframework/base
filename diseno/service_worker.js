@@ -2,7 +2,7 @@
 use Franky\Filesystem\File;
 $File = new File();
 header("Content-type: text/javascript"); ?>
-var cacheName = 'mylines-v-2-1';
+var cacheName = 'mylines-v-2-2';
 var filesToCache = [
     '/index.php'
 ];
@@ -10,7 +10,7 @@ var filesToCache = [
 <?php
 $files = $File->getFiles(PROJECT_DIR."/public/cache/css/");
 foreach($files as $file):
-        if(substr($file,-4) =='.css' && file_exists(PROJECT_DIR."/public/cache/css/".$file)):
+        if(substr($file,-4) =='.css' && file_exists(PROJECT_DIR."/public/cache/css/".getCoreConfig('base/debug/cacheversion')."/".$file)):
 ?>
 filesToCache.push('/public/cache/css/<?php echo $file; ?>');
 <?php endif;
@@ -19,7 +19,7 @@ filesToCache.push('/public/cache/css/<?php echo $file; ?>');
 <?php
 $files = $File->getFiles(PROJECT_DIR."/public/cache/js/");
 foreach($files as $file):
-        if(substr($file,-3) =='.js' && file_exists(PROJECT_DIR."/public/cache/js/".$file)):
+        if(substr($file,-3) =='.js' && file_exists(PROJECT_DIR."/public/cache/js/".getCoreConfig('base/debug/cacheversion')."/".$file)):
 ?>
 filesToCache.push('/public/cache/js/<?php echo $file; ?>');
 <?php endif;
