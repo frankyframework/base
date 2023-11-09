@@ -2,7 +2,7 @@
 use Franky\Filesystem\File;
 $File = new File();
 header("Content-type: text/javascript"); ?>
-var cacheName = 'mylines-v-2-3';
+var cacheName = 'franky-v-1-0';
 var filesToCache = [
     '/index.php'
 ];
@@ -57,3 +57,13 @@ self.addEventListener('activate', function(e) {
 });
 
 
+self.addEventListener('fetch', function(e) {
+
+
+  e.respondWith(
+      caches.match(e.request).then(function(response) {
+      return response || fetch(e.request);
+      })
+  );
+  
+});
