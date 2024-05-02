@@ -96,7 +96,7 @@ if(!$error)
         $MyUserEntity->setContrasena(password_hash($contrasena,PASSWORD_DEFAULT));
         $MyUserEntity->setFecha(date('Y-m-d H:i:s'));
     }
-    if($MyUserEntity->getRole() == "" || !in_array($MyUserEntity->getRole(),  getRoles()))
+    if($MyUserEntity->getRole() == "" || !in_array($MyUserEntity->getRole(),  array_keys(getRoles())))
     {
         $MyUserEntity->setRole(getCoreConfig("base/user/default-role"));
     }

@@ -66,24 +66,6 @@
             "name":"gravatar",
             "url":"https://www.gravatar.com/avatar/d15d103f43c648abf5af15d2a6b8fcdf",
             "status": 0
-        },
-        {
-            "id_user" : 2,
-            "name":"gravatar",
-            "url":"https://www.gravatar.com/avatar/8a561ae0822d948a4a0beb5b47e5d228",
-            "status": 0
-        },
-        {
-            "id_user" : 3,
-            "name":"gravatar",
-            "url":"https://www.gravatar.com/avatar/3323392916f0301df1ce65a787d3f55e",
-            "status": 0
-        },
-        {
-            "id_user" : 4,
-            "name":"gravatar",
-            "url":"https://www.gravatar.com/avatar/98cd4d8c6b159540319ce03cc64cf2a3",
-            "status": 0
         }
     ]
 }

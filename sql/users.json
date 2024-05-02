@@ -98,55 +98,13 @@
             "email":"ussiel@gmail.com",
             "role":"1",
             "fecha":"0000-00-00",
-            "ultimoAcceso":"",
+            "ultimoAcceso":"0000-00-00 00:00:00",
             "nombre":"Ussiel",
             "fecha_nacimiento": "0000-00-00",
             "sexo":"h",
             "telefono":"",
             "verificado": "1",
             "biografia": ""
-        },
-        {
-            "id" : 2,
-            "usuario":"alberto",
-            "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
-            "email":"oxtlimail@gmail.com",
-            "role":"1",
-            "fecha":"0000-00-00",
-            "ultimoAcceso":"",
-            "nombre":"Alberto",
-            "fecha_nacimiento": "0000-00-00",
-            "sexo":"h",
-            "telefono":"",
-            "verificado": "1"
-        },
-        {
-            "id" : 3,
-            "usuario":"ssqueda",
-            "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
-            "email":"luis@cloudstudio.mx",
-            "role":"1",
-            "fecha":"0000-00-00",
-            "ultimoAcceso":"",
-            "nombre":"Jose luis",
-            "fecha_nacimiento": "0000-00-00",
-            "sexo":"h",
-            "telefono":"",
-            "verificado": "1"
-        },
-        {
-            "id" : 4,
-            "usuario":"brauer",
-            "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
-            "email":"max@cloudstudio.mx",
-            "role":"1",
-            "fecha":"0000-00-00",
-            "ultimoAcceso":"",
-            "nombre":"Jose luis",
-            "fecha_nacimiento": "0000-00-00",
-            "sexo":"h",
-            "telefono":"",
-            "verificado": "1"
         }
     ]
 }
