@@ -229,7 +229,7 @@ return array(
                             ),
                             array('path' => 'base/user/email-template-nuevodispositivo',
                                     'type' => 'select',
-                                    'label' => 'Template para verificación de E-mail',
+                                    'label' => 'Template para nuevo dispositivo',
                                     'validation' => array('required' => true),
                                     'data' => getTemplatesEmail(),
                                     'value' => '1'
