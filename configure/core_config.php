@@ -4,7 +4,7 @@ return array(
           'menu' => "FRONTEND",
           'title' => "Configuración Front",
           'config' =>  array(
-                      array('path' => 'base/empresa/titulo',
+                      array('path' => 'base/theme/titulo',
                       'type' => 'text',
                       'label' => 'Titulo Sitio',
                       'validation' => array('required' => false),
