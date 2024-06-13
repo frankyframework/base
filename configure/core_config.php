@@ -4,11 +4,23 @@ return array(
           'menu' => "FRONTEND",
           'title' => "Configuración Front",
           'config' =>  array(
+                      array('path' => 'base/empresa/titulo',
+                      'type' => 'text',
+                      'label' => 'Titulo Sitio',
+                      'validation' => array('required' => false),
+                      'value' => ''
+                    ),
                       array('path' => 'base/theme/favicon',
                               'type' => 'file',
                               'label' => 'Favicon',
                               'validation' => array('image' => true),
                               'value' => ''
+                            ),
+                            array('path' => 'base/theme/logo',
+                            'type' => 'file',
+                            'label' => 'Logo',
+                            'validation' => array('image' => true),
+                            'value' => ''
                             ),
                             array('path' => 'base/theme/logopanel',
                               'type' => 'file',
