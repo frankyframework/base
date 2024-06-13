@@ -1,6 +1,7 @@
 <noscript id="deferred-styles">
 <?php echo render("css.phtml"); ?>
     <?php echo $MyMetatag->getCss(); ?>
+    <link rel='stylesheet' type='text/css' href='/css_custom.css' />
 </noscript>
 <script >
     <!--
@@ -11,7 +12,7 @@
         document.body.appendChild(replacement)
         addStylesNode.parentElement.removeChild(addStylesNode);
     };
-    
+
     var raf = requestAnimationFrame || mozRequestAnimationFrame ||
      webkitRequestAnimationFrame || msRequestAnimationFrame;
     if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });

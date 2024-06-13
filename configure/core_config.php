@@ -73,6 +73,48 @@ return array(
                               'validation' => array('required' => true),
                             'data' =>  include(PROJECT_DIR.'/modulos/base/configure/jqueryui_thems.php'),
                               'value' => 'base'
+                            ),
+                             array('path' => 'base/theme/button-primary-color-text',
+                                'type' => 'text',
+                                'label' => 'Color texto botones primarios',
+                                'validation' => array(),
+                                'value' => ''
+                            ),
+                            array('path' => 'base/theme/button-primary-background-color',
+                                'type' => 'text',
+                                'label' => 'Fondo botones primarios',
+                                'validation' => array(),
+                                'value' => ''
+                            ),
+                            array('path' => 'base/theme/button-primary-background-color-hover',
+                              'type' => 'text',
+                              'label' => 'Fondo botones primarios (HOVER)',
+                              'validation' => array(),
+                              'value' => ''
+                            ),
+                            array('path' => 'base/theme/a-color',
+                                'type' => 'text',
+                                'label' => 'Color de links generales',
+                                'validation' => array(),
+                                'value' => ''
+                            ),
+                            array('path' => 'base/theme/a-color-hover',
+                              'type' => 'text',
+                              'label' => 'Color de links generales (HOVER)',
+                              'validation' => array(),
+                              'value' => ''
+                            ),
+                            array('path' => 'base/theme/a-footer-color',
+                                'type' => 'text',
+                                'label' => 'Color de links footer',
+                                'validation' => array(),
+                                'value' => ''
+                            ),
+                            array('path' => 'base/theme/a-footer-color-hover',
+                              'type' => 'text',
+                              'label' => 'Color de links footer (HOVER)',
+                              'validation' => array(),
+                              'value' => ''
                             )
                           
           )

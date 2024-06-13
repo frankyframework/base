@@ -32,6 +32,7 @@ return array
     "admin/core-config/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/core_config/submit.php",
     "admin/smtptest.php" => PROJECT_DIR."/modulos/base/controller/admin/smtp/test.php",
     "manifest.json" => PROJECT_DIR."/modulos/base/controller/manifest.php",
-    "service_worker.js" => PROJECT_DIR."/modulos/base/diseno/service_worker.js"
+    "service_worker.js" => PROJECT_DIR."/modulos/base/diseno/service_worker.js",
+    "css_custom.css" => PROJECT_DIR."/modulos/base/controller/css_custom.php"
 );
 ?>
