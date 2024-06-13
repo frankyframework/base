@@ -537,6 +537,34 @@
             "status":1,
             "editable":1,
             "modulo":"base"
-        }
+        },
+        {
+        "php":"admin/bloque/lista.php",
+        "css":"",
+        "js":"",
+        "jquery":"",
+        "resource":"administrar_template_de_bloque",
+        "constante":"LISTA_CMS_BLOQUE",
+        "url":"admin/bloque/",
+        "nombre":"Bloques",
+        "ajax":["base/ajax.admin.js"],
+        "status":1,
+        "editable":1,
+        "modulo":"base"
+    },
+    {
+        "php":"admin/bloque/form.php",
+        "css":"",
+        "js":[],
+        "jquery":["jquery-validate","flexslider"],
+        "resource":"administrar_template_de_bloque",
+        "constante":"FRM_CMS_BLOQUE",
+        "url":"admin/bloque/frm/",
+        "nombre":"Alta de bloques",
+        "ajax":"",
+        "status":1,
+        "editable":1,
+        "modulo":"base"
+    }
     ]
 }

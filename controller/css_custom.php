@@ -36,3 +36,39 @@ footer a:hover {
         color: <?=getCoreConfig('base/theme/a-footer-color-hover')?>;
     <?php endif; ?>
 }
+header .content_header .menu_web ._nav_menu li._nav_catalog ul li a, header .content_header .menu_web ._nav_menu li._menu_section ul li a {
+    <?php if(!empty(getCoreConfig('base/theme/a-header-color'))): ?>
+        color: <?=getCoreConfig('base/theme/a-header-color')?>;
+    <?php endif; ?>
+}
+header .content_header .menu_web ._nav_menu li._nav_catalog ul li a:hover, header .content_header .menu_web ._nav_menu li._menu_section ul li a:hover {
+    <?php if(!empty(getCoreConfig('base/theme/a-header-color-hover'))): ?>
+        color: <?=getCoreConfig('base/theme/a-header-color-hover')?>;
+    <?php endif; ?>
+}
+header .content_header ._ul_login li a {
+    <?php if(!empty(getCoreConfig('base/theme/a-header-color'))): ?>
+        color: <?=getCoreConfig('base/theme/a-header-color')?>;
+    <?php endif; ?>
+}
+header .content_header ._ul_login li a:hover {
+    <?php if(!empty(getCoreConfig('base/theme/a-header-color-hover'))): ?>
+        color: <?=getCoreConfig('base/theme/a-header-color-hover')?>;
+    <?php endif; ?>
+}
+header .content_header {
+    <?php if(!empty(getCoreConfig('base/theme/background-header'))): ?>
+        background-color: <?=getCoreConfig('base/theme/background-header')?>;
+    <?php endif; ?>
+}
+
+footer .footer_wrapper {
+    <?php if(!empty(getCoreConfig('base/theme/background-footer'))): ?>
+        background: <?=getCoreConfig('base/theme/background-footer')?>;
+    <?php endif; ?>
+}
+footer .footer_wrapper .footer_2 {
+    <?php if(!empty(getCoreConfig('base/theme/background-footer2'))): ?>
+        background: <?=getCoreConfig('base/theme/background-footer2')?>;
+    <?php endif; ?>
+}

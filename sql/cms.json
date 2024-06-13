@@ -41,6 +41,12 @@
                 "null":0
             },
             {
+                "name":"update_at",
+                "type":"datetime",
+                "null":1,
+                "default":"0000-00-00 00:00:00"
+            },
+            {
                 "name":"status",
                 "type":"int",
                 "length":1,

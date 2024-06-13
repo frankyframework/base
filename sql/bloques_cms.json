@@ -1,0 +1,60 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "key":"primary",
+                "auto_increment":1
+            },
+            {
+                "name":"titulo",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"friendly",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"template",
+                "type":"text",
+                "null":0
+                
+            },
+            {
+                "name":"fecha",
+                "type":"datetime",
+                "null":0
+            },
+            {
+                "name":"update_at",
+                "type":"datetime",
+                "null":1,
+                "default":"0000-00-00 00:00:00"
+            },
+            {
+                "name":"status",
+                "type":"int",
+                "length":1,
+                "default":1,
+                "null":0
+            }
+
+        ],
+        "config":{
+            "primary":"id",
+            "engine":"MyISAM"
+        }
+    }
+    ,
+    "data":[
+       
+    ]
+}

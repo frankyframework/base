@@ -24,6 +24,7 @@ return array
     "admin/users/submit.pass.php" => PROJECT_DIR."/modulos/base/controller/admin/users/submit.pass.php",
     "admin/roles/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/roles/submit.php",
     "admin/cms/submit.php"  => PROJECT_DIR."/modulos/base/controller/admin/cms/submit.php",
+    "admin/bloque/submit.php"  => PROJECT_DIR."/modulos/base/controller/admin/bloque/submit.php",
     "admin/template_email/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/template_email/submit.php",
     "admin/contacto/excel.php" => PROJECT_DIR."/modulos/base/controller/admin/contacto/excel.php",
     "admin/mailing/excel.php" => PROJECT_DIR."/modulos/base/controller/admin/mailing/excel.php",

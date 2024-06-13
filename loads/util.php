@@ -1401,4 +1401,19 @@ function verifyRecaptcha()
 
     return true;
 }
+
+function getBloqueCMS($id)
+{
+    $MyCMS = new \Base\model\Bloque;
+    $result = $MyCMS->getData($id,"",1);
+    
+    if ($MyCMS->getTotal() > 0) {
+        $data   = $MyCMS->getRows();
+
+        return $data["template"];
+
+    }
+    return "";
+}
+
 ?>

@@ -25,6 +25,11 @@ return array(
                         "url" => $MyRequest->url(LISTA_CMS_TEMPLATE),
                         "etiqueta" => _("CMS")
                         ),
+                        array(
+                        "permiso" =>   "administrar_template_de_bloque",
+                        "url" => $MyRequest->url(LISTA_CMS_BLOQUE),
+                        "etiqueta" => _("Bloques")
+                        ),
                 ),
         ),
         array('title'=> "Marketing",  

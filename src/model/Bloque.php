@@ -2,19 +2,19 @@
 namespace Base\model;
 
 
-class CMS  extends \Franky\Database\Mysql\objectOperations
+class Bloque  extends \Franky\Database\Mysql\objectOperations
 {
 
 
           public function __construct()
           {
             parent::__construct();
-            $this->from()->addTable('cms');
+            $this->from()->addTable('bloques_cms');
           }
 
         function getData($id='',$busca="",$status="",$url="")
         {
-            $campos = array("id","titulo","friendly","template","fecha","status","meta_titulo","meta_descripcion","mostrar_titulo");
+            $campos = array("id","titulo","friendly","template","fecha","status");
 
 
             if(!empty($id))
@@ -47,15 +47,12 @@ class CMS  extends \Franky\Database\Mysql\objectOperations
         }
 
 
-        function save($titulo,$friendly,$template,$meta_titulo,$meta_descripcion,$mostrar_titulo)
+        function save($titulo,$friendly,$template)
         {
             $nvoregistro = array(
                 "titulo" => $titulo,
-                "mostrar_titulo" => $mostrar_titulo,
                 "friendly" => $friendly,
                 "template" => $template,
-                "meta_titulo" => $meta_titulo,
-                "meta_descripcion" => $meta_descripcion,
                 "fecha" => date('Y-m-d')." ".date('H:i:s'),
                 "status" => "1"
             );
@@ -65,15 +62,12 @@ class CMS  extends \Franky\Database\Mysql\objectOperations
             return $this->guardarRegistro( $nvoregistro);
         }
 
-        function edit($id,$titulo,$friendly,$template,$meta_titulo,$meta_descripcion,$mostrar_titulo)
+        function edit($id,$titulo,$friendly,$template)
         {
             $nvoregistro = array(
                 "titulo" => "$titulo",
-                "mostrar_titulo" => "$mostrar_titulo",
                 "friendly" => "$friendly",
                 "template" => "$template",
-                "meta_titulo" => "$meta_titulo",
-                "meta_descripcion" => "$meta_descripcion",
                 "update_at" => date('Y-m-d H:i:s')
             );
 

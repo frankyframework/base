@@ -399,7 +399,32 @@ function EliminarRol($id,$status)
 	return $respuesta;
 }
 
+function EliminarBloque($id,$status)
+{
 
+	    $MyCMS = new \Base\model\Bloque;
+        global $MyAccessList;
+        global $MyMessageAlert;
+        $respuesta = null;
+        if($MyAccessList->MeDasChancePasar("administrar_template_de_bloque"))
+        {
+            if($MyCMS->delete(addslashes($id),addslashes($status)) == REGISTRO_SUCCESS)
+            {
+
+
+            }
+            else
+            {
+		  $respuesta[] = array("message" => $MyMessageAlert->Message(($status == 1 ? "activar" : "eliminar")."_generico_error"));
+            }
+        }
+        else
+        {
+             $respuesta[] = array("message" => $MyMessageAlert->Message("sin_privilegios"));
+        }
+
+	return $respuesta;
+}
 
 /******************************** EJECUTA *************************/
 
@@ -415,4 +440,5 @@ $MyAjax->register("BloquearDispositivo");
 $MyAjax->register("EliminarDispositivo");
 $MyAjax->register("EliminarEmailNews");
 $MyAjax->register("EliminarRol");
+$MyAjax->register("EliminarBloque");
 ?>

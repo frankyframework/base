@@ -27,6 +27,7 @@ return [
     "Contenido"   =>
         [
             "administrar_template_de_cms" => "Administrar CMS",
+            "administrar_template_de_bloque" => "Administrar Bloques",
             "administrar_uploaders" => "Upload en editores de contenido"
 
         ],

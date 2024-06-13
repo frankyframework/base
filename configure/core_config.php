@@ -115,7 +115,37 @@ return array(
                               'label' => 'Color de links footer (HOVER)',
                               'validation' => array(),
                               'value' => ''
-                            )
+                          ),
+                            array('path' => 'base/theme/a-header-color',
+                            'type' => 'text',
+                            'label' => 'Color de links header',
+                            'validation' => array(),
+                            'value' => ''
+                          ),
+                          array('path' => 'base/theme/a-header-color-hover',
+                            'type' => 'text',
+                            'label' => 'Color de links header (HOVER)',
+                            'validation' => array(),
+                            'value' => ''
+                        ),
+                          array('path' => 'base/theme/background-header',
+                            'type' => 'text',
+                            'label' => 'Color de fondo header',
+                            'validation' => array(),
+                            'value' => ''
+                      ),
+                      array('path' => 'base/theme/background-footer',
+                      'type' => 'text',
+                      'label' => 'Color de fondo footer 1',
+                      'validation' => array(),
+                      'value' => ''
+                    ),
+                    array('path' => 'base/theme/background-footer2',
+                    'type' => 'text',
+                    'label' => 'Color de fondo footer 2',
+                    'validation' => array(),
+                    'value' => ''
+                  )
                           
           )
   ),
