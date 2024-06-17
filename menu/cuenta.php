@@ -14,7 +14,11 @@ return array(
                  "url" => $MyRequest->url(FRM_MY_PASSWORD),
                  "etiqueta" => _("Cambiar mi contraseña")
                 ),
-               
+                array(
+                     "permiso" =>   "dashboard",
+                     "url" => $MyRequest->url(ADMIN),
+                     "etiqueta" => _("Panel de administrador")
+                ),
          
                array(
                 "permiso" =>   "eliminar_mi_perfil",
@@ -32,6 +36,12 @@ return array(
                    "etiqueta" => _("Administrar dispositivos")
                  )
                )
+
+               admin_array(
+                     "permiso" =>   "eliminar_mi_perfil",
+                     "url" => $MyRequest->url(FRM_ELIMINAR_USER),
+                     "etiqueta" => _("Eliminar mi cuenta")
+                    )
        ),
 );
 ?>
