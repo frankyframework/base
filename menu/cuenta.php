@@ -15,7 +15,7 @@ return array(
                  "etiqueta" => _("Cambiar mi contraseña")
                 ),
                 array(
-                     "permiso" =>   "dashboard",
+                     "permiso" =>   "admin_dashboard",
                      "url" => $MyRequest->url(ADMIN),
                      "etiqueta" => _("Panel de administrador")
                 ),
