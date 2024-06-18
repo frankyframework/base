@@ -8,7 +8,7 @@ $MyPaginacion = new paginacion();
 $Tokenizer = new Tokenizer();
 
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"usuario"));
+$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"nombre"));
 $MyPaginacion->setOrden($MyRequest->getRequest('order',"ASC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
 $busca_b	= $MyRequest->getRequest('busca_b');

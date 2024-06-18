@@ -10,12 +10,6 @@
                 "auto_increment":1
             },
             {
-                "name":"usuario",
-                "type":"varchar",
-                "length":30,
-                "null":0
-            },
-            {
                 "name":"contrasena",
                 "type":"varchar",
                 "length":255,
@@ -93,7 +87,6 @@
     "data":[
         {
             "id" : 1,
-            "usuario":"molder",
             "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
             "email":"ussiel@gmail.com",
             "role":"1",

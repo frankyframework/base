@@ -40,7 +40,7 @@ if($error == false)
         $TemplateemailModel->getData($TemplateemailEntity->getArrayCopy());
 
         $registro  = $TemplateemailModel->getRows();
-        $campos =  array("email" => $email,"usuario" => (empty($MyLogin->usuario) ? $email : $MyLogin->usuario),"password" => $password, "nombre_web" => $MyRequest->getSERVER(), "url_web" => $MyRequest->getSERVER());
+        $campos =  array("email" => $email,"nombre" => (empty($MyLogin->nombre) ? $email : $MyLogin->nombre),"password" => $password, "nombre_web" => $MyRequest->getSERVER(), "url_web" => $MyRequest->getSERVER());
 
         sendEmail($campos,$registro);
 

@@ -15,10 +15,10 @@
                     <div class="w-xxxx-12">
                         <div class="w-xxxx-12  contenedor_titulo_columnas">
                             <div class="w-xxxx-2"><?php echo makeHTMLOrder( "fecha", _("Fecha registro")); ?></div>
-                            <div class="w-xxxx-2"><?php echo makeHTMLOrder( "usuario", _("Usuario")); ?></div>
                             <div class="w-xxxx-1"><?php echo makeHTMLOrder( "email", _("E-mail")); ?></div>
                             <div class="w-xxxx-3"><?php echo makeHTMLOrder( "nombre", _("Nombre")); ?></div>
                             <div class="w-xxxx-1"><?php echo makeHTMLOrder( "role", _("Tipo usuario")); ?></div>
+                            <div class="w-xxxx-1"><?php echo makeHTMLOrder( "telefono", _("Teléfono")); ?></div>
                             <div class="w-xxxx-1"><?=_('Eliminar')?></div>
                             <div class="w-xxxx-1"><?=_('Editar')?></div>
                             <div class="w-xxxx-1"><?=_('Contraseña')?></div>
@@ -26,9 +26,9 @@
                         <div class="contenedor_columnas_info"  >
                             <div class="contenedor_columnas"  >
                                  <div class='{{_data.thisClass}} w-xxxx-2'>{{_data.fecha}} &nbsp;</div>
-                                <div class='{{_data.thisClass}} w-xxxx-2'>{{_data.usuario}} &nbsp;</div>
                                 <div class='{{_data.thisClass}} w-xxxx-1 email'>{{_data.email}} &nbsp;</div>
                                 <div class='{{_data.thisClass}} w-xxxx-3'>{{_data.nombre}} &nbsp;</div>
+                                <div class='{{_data.thisClass}} w-xxxx-1'>{{_data.telefono}} &nbsp;</div>
                                 <div class='{{_data.thisClass}} w-xxxx-1'>{{_data.role}} &nbsp;</div>
                                 <div class='{{_data.thisClass}} w-xxxx-1'><a class="btn_adm_eliminar " id="{{_data.id}}" href="#{{_data.nuevo_estado}}" ></a></div>
                                 <div class='{{_data.thisClass}} w-xxxx-1'><a class="btn_adm_editar" href="<?php echo $MyRequest->link(FRM_OPERADORES . "?id={{_data.id}}&amp;callback={{_data.callback}}"); ?>"><i class="icon icon-editar"> </i></a></div>

@@ -21,7 +21,6 @@ if(!$MyAccessList->MeDasChancePasar("administrar_otra_contrasena"))
 
 $result     = $MyUser->getData($MySession->GetVar('id'));
 $registro   = $MyUser->getRows();
-$usuario_db = $registro["usuario"];
 $contrasena_db = $registro["contrasena"];
 
 $rules = array();

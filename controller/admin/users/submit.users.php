@@ -39,7 +39,6 @@ if(!$Tokenizer->decode($MyRequest->getRequest('token_xsrf')))
 if(!$MyAccessList->MeDasChancePasar("administrar_otros_usuarios"))
 {
     $MyUserEntity->setRole($MySession->GetVar('role'));
-    $MyUserEntity->setUsuario($MySession->GetVar('usuario'));
     $MyUserEntity->setId($MySession->GetVar('id'));
     $id_user = $MyUserEntity->getId();
 }
@@ -54,12 +53,7 @@ if(!$valid)
     $error = true;
 }
 
-$usuario = $MyUserEntity->getUsuario();
-if(!empty($usuario) && $MyUser->findUser($MyUserEntity->getUsuario(),$MyUserEntity->getId()) == REGISTRO_SUCCESS)
-{
-    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("username_duplicate",$MyUserEntity->getUsuario()));
-    $error = true;
-}
+
 if($MyUser->findEmail($MyUserEntity->getEmail(),$MyUserEntity->getId()) == REGISTRO_SUCCESS)
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("email_duplicate",$MyUserEntity->getEmail()));
@@ -122,7 +116,7 @@ if(!$error)
 
             $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("guardar_generico_success"));
 
-              $campos = array(    'usuario'           =>	$MyUserEntity->getUsuario(),
+              $campos = array(
                             'contrasena'        =>	$contrasena,
                             'email'             =>	$MyUserEntity->getEmail(),
                             'fecha'             =>	date('Y-m-d'),
@@ -159,7 +153,7 @@ if(!$error)
               $token = $Tokenizer->token('validar_email', time());
               $VerificacionesPendientes->addVerifica($MySession->GetVar('id'),  $token);
 
-              $campos = array( 'token'=> $token,'usuario' => $MySession->GetVar('usuario'), "url" => $MyRequest->getSERVER(),"email" => $MyUserEntity->getEmail());
+              $campos = array( 'token'=> $token,'nombre' => $MySession->GetVar('nombre'), "url" => $MyRequest->getSERVER(),"email" => $MyUserEntity->getEmail());
 
               $TemplateemailModel    = new \Base\model\TemplateemailModel;
               $TemplateemailEntity    = new \Base\entity\TemplateemailEntity;

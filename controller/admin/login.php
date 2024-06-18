@@ -4,7 +4,7 @@ use Base\entity\users as entityUser;
 use Franky\Core\ObserverManager;
 
 $MyUser             = new USERS();
-$MyLogin = new \Franky\Core\LOGIN("users",array("usuario","email"),"contrasena",array("status" => "1"));
+$MyLogin = new \Franky\Core\LOGIN("users",array("telefono","email"),"contrasena",array("status" => "1"));
 
 
 $usuario	= $MyRequest->getRequest('usuario');

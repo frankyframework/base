@@ -5,20 +5,6 @@
 <script>
 $( "#users" ).validate({
 rules: {
-    usuario: {
-        required: true,
-        minlength: 3,
-        ValidaCaracteres: true,
-        remote: {
-            url: "/registro/alias.php",
-            type: "post",
-            data: {
-                usuario: function() {
-                    return $( "input[name=usuario]" ).val();
-                }
-            }
-        }
-    },
     email: {
         required: true,
         email: true,
@@ -57,12 +43,6 @@ messages: {
               required: "Escribe tu nombre completo",
               'name-validation': 'El campo nombre contiene caracteres no permitidos'
               },
-    usuario: {
-            required: "Escribe tu nombre de usuario",
-            minlength: jQuery.validator.format("El nombre de usuario debe tener minimo {0} caracteres"),
-            ValidaCaracteres:"El nombre de usuario no puede contener caracteres extra&ntilde;os",
-            remote: jQuery.validator.format("El nombre de usuario {0} ya esta en uso")
-    },
     fecha_nacimiento: {
         required: "Favor de seleccionar tu fecha de nacimiento",
     },

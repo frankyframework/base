@@ -225,24 +225,7 @@ class registroForm extends \Franky\Form\Form
             )
         );
     }
-    public function addUsuario()
-    {
-        $this->add(array(
-                'name' => 'usuario',
-            //    'label' => ('Usuario'),
-                'type'  => 'text',
-              //  'required'  => true,
-                'atributos' => array(
-                    'placeholder' => _('Usuario'),
-                    'maxlength' => 15,
-                    'minlength' => 3,
-                 ),
-                'label_atributos' => array(
-                    'class'       => 'desc_form_obligatorio'
-                 )
-            )
-        );
-    }
+
 
     public function addAcepto()
     {

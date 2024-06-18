@@ -34,8 +34,8 @@ if($error == false)
 
             $MyUser->getData($id);
             $registro = $MyUser->getRows();
-            $MyLogin = new \Franky\Core\LOGIN("users",array("usuario","email"),1,array("status" => "1"));
-            $MyLogin->setLogin($registro["usuario"], 1);
+            $MyLogin = new \Franky\Core\LOGIN("users",array("telefono","email"),1,array("status" => "1"));
+            $MyLogin->setLogin($registro["email"], 1);
 
 
             $inputs = $MyLogin->getInputs();

@@ -28,11 +28,11 @@ class AcountTest extends TestCase
      */
     public function testLogin($data)
     {
-        $MyLogin = new LOGIN("users",array("usuario","email"),1,array("status" => "1"));
+        $MyLogin = new LOGIN("users",array("telefono","email"),1,array("status" => "1"));
 
-        $result	 = $MyLogin->setLogin($data['usuario'], 1) ;
+        $result	 = $MyLogin->setLogin($data['email'], 1) ;
 
-        $this->assertSame($result, LOGIN_SUCCESS,$data['usuario'].":".$data['contrasena']);
+        $this->assertSame($result, LOGIN_SUCCESS,$data['email'].":".$data['contrasena']);
 
     }
 

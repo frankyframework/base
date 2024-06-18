@@ -7,7 +7,6 @@ $callback	= $MyRequest->getRequest('callback');
 $registroForm = new registroForm("users");
 $registroForm->setMobile($Mobile_detect->isMobile());
 
-$registroForm->addUsuario();
 $registroForm->addContrasena();
 $registroForm->addContrasena1();
 $registroForm->addGeneral();

@@ -24,7 +24,7 @@ class loginForm extends \Franky\Form\Form
 
         $this->add(array(
                 'name' => 'usuario',
-                'label' => _('E-mail'),
+                'label' => _('E-mail / Teléfono'),
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(

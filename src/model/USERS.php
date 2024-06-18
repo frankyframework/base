@@ -18,7 +18,7 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
     
     function getData($id='',$busca='',$role='',$status='1')
     {
-            $campos = array("id","nombre","usuario","email","role","fecha","fecha_nacimiento","sexo","telefono","contrasena","verificado","status");
+            $campos = array("id","nombre","email","role","fecha","fecha_nacimiento","sexo","telefono","contrasena","verificado","status");
 
             if(!empty($id))
             {
@@ -26,16 +26,11 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
                 {
                   $this->where()->addAnd('id',$id,'=');
                 }
-                else
-                {
-                  $this->where()->addAnd('usuario',$id,'=');
-                }
 
             }
             if(!empty($busca))
             {
                 $this->where()->concat('AND (');
-                $this->where()->addOr('usuario',"%$busca%",'like');
                 $this->where()->addOr('email',"%$busca%",'like');
                 $this->where()->concat(')');
             }
@@ -78,25 +73,11 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
 
 
 
-
-
-    function findUser($usuario,$id=null)
-    {
-        $campos = array("usuario");
-        $this->where()->addAnd('usuario',$usuario,'=');
-
-        if(!empty($id))
-        {
-            $this->where()->addAnd('id',$id,'<>');
-        }
-
-        return $this->getColeccion($campos);
-
-    }
     function findEmail($email,$id=null)
     {
         $campos = array("email");
         $this->where()->addAnd('email',$email,'=');
+        $this->where()->addAnd('status',1,'=');
         if(!empty($id))
         {
           $this->where()->addAnd('id',$id,'<>');
@@ -109,6 +90,7 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
     {
         $campos = array("telefono");
         $this->where()->addAnd('telefono',$telefono,'=');
+        $this->where()->addAnd('status',1,'=');
         if(!empty($id))
         {
           $this->where()->addAnd('id',$id,'<>');

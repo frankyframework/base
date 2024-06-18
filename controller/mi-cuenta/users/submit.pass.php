@@ -17,7 +17,6 @@ $error = false;
 
 $result     = $MyUser->getData($id);
 $registro   = $MyUser->getRows();
-$usuario_db = $registro["usuario"];
 $contrasena_db = $registro["contrasena"];
 
 $rules = array();

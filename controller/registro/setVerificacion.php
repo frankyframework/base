@@ -10,7 +10,7 @@ if($MySession->GetVar('id') != "")
 
     $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("success_send_token_verificacion_email"));
 
-    $campos = array( 'token'=> $token,'usuario' => $MySession->GetVar('usuario'), "url" => $MyRequest->getSERVER(),"email" => $MySession->GetVar('email'));
+    $campos = array( 'token'=> $token,'nombre' => $MySession->GetVar('nombre'), "url" => $MyRequest->getSERVER(),"email" => $MySession->GetVar('email'));
 
 
 

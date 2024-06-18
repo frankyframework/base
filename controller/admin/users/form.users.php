@@ -33,10 +33,6 @@ if(!empty($id))
         $adminForm->addId();
 
 }
-else
-{
-    $adminForm->addUsuario();
-}
 $adminForm->addGeneral();
 if($MyAccessList->MeDasChancePasar("administrar_otros_usuarios")):
     $adminForm->addNivel();

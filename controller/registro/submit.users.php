@@ -48,11 +48,7 @@ if($MyUserEntity->getContrasena() != $contrasena1)
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("comparar_contrasenas"));
     $error = true;
 }
-if($MyUser->findUser($MyUserEntity->getUsuario()) == REGISTRO_SUCCESS)
-{
-    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("username_duplicate",$MyUserEntity->getUsuario()));
-    $error = true;
-}
+
 if($MyUser->findEmail($MyUserEntity->getEmail()) == REGISTRO_SUCCESS)
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("email_duplicate",$MyUserEntity->getEmail()));
@@ -101,8 +97,8 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
             $VerificacionesPendientes   = new VerificacionesPendientes();
             $VerificacionesPendientes->addVerifica($id_user, $token );
 
-            $MyLogin = new \Franky\Core\LOGIN("users",array("usuario","email"),1,array("status" => "1"));
-            $MyLogin->setLogin($MyUserEntity->getUsuario(), 1);
+            $MyLogin = new \Franky\Core\LOGIN("users",array("telefono","email"),1,array("status" => "1"));
+            $MyLogin->setLogin($MyUserEntity->getEmail(), 1);
 
 
             $inputs = $MyLogin->getInputs();
@@ -127,11 +123,11 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
             }
             else
             {
-                $location =$MyRequest->url(ADMIN);
+                $location =$MyRequest->url(MI_CUENTA);
             }
 
 
-            $campos = array(   'usuario'           =>	$MyUserEntity->getUsuario(),
+            $campos = array(
                                     'url'               =>      $MyRequest->getSERVER(),
                                     'token'             =>	$token,
                                     'contrasena'	=>	$contrasena1,

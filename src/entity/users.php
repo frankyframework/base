@@ -7,7 +7,6 @@ namespace Base\entity;
  class users
  {
     public $id;
-    public $usuario;
     public $contrasena;
     public $email;
     public $role;
@@ -32,7 +31,6 @@ namespace Base\entity;
     public function exchangeArray($data)
     {
         $this->id              = (isset($data['id']))                  ? $data['id']               : null;
-        $this->usuario         = (isset($data['usuario']))             ? $data['usuario']          : null;
         $this->contrasena      = (isset($data['contrasena']))          ? $data['contrasena']       : null;
         $this->email           = (isset($data['email']))               ? $data['email']            : null;
         $this->role           = (isset($data['role']))               ? $data['role']            : null;
@@ -56,7 +54,6 @@ namespace Base\entity;
     {
 
         return array(
-            "Usuario" => array("valor" => $this->usuario,"required","valid_chars" => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.","length" => array("max" => "15")),
             "Nombre" => array("valor" => $this->nombre,"required",'name-validation',"length" => array("max" => "255")),
             "Teléfono" => array("valor" => $this->telefono,"length" => array("max" => "10")),
             "Email" => array("valor" => $this->email,"required", "email"),
@@ -71,10 +68,7 @@ namespace Base\entity;
             "Nombre" => array("valor" => $this->nombre,"required","length" => array("max" => "255")),
             "Email" => array("valor" => $this->email,"required", "email")
         );
-        if(empty($this->id))
-        {
-            $rules["Usuario"] = array("valor" => $this->usuario, "required" ,"valid_chars" => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.","length" => array("max" => "15"));
-        }
+      
         return $rules;
     }
 
@@ -84,10 +78,6 @@ namespace Base\entity;
         return $this->id;
     }
 
-    public function getUsuario()
-    {
-        return $this->usuario;
-    }
 
     public function getContrasena()
     {
@@ -148,10 +138,6 @@ namespace Base\entity;
         $this->id = $id;
     }
 
-    public function setUsuario($usuario)
-    {
-        $this->usuario = $usuario;
-    }
 
     public function setContrasena($contrasena)
     {

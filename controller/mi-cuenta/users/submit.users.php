@@ -43,8 +43,6 @@ if(!$valid)
     $error = true;
 }
 
-$usuario = $MyUserEntity->getUsuario();
-
 if($MyUser->findEmail($MyUserEntity->getEmail(),$MyUserEntity->getId()) == REGISTRO_SUCCESS)
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("email_duplicate",$MyUserEntity->getEmail()));
@@ -103,7 +101,7 @@ if(!$error)
               $token = $Tokenizer->token('validar_email', time());
               $VerificacionesPendientes->addVerifica($MySession->GetVar('id'),  $token);
 
-              $campos = array( 'token'=> $token,'usuario' => $MySession->GetVar('usuario'), "url" => $MyRequest->getSERVER(),"email" => $MyUserEntity->getEmail());
+              $campos = array( 'token'=> $token,'nombre' => $MySession->GetVar('nombre'), "url" => $MyRequest->getSERVER(),"email" => $MyUserEntity->getEmail());
 
               $TemplateemailModel    = new \Base\model\TemplateemailModel;
               $TemplateemailEntity    = new \Base\entity\TemplateemailEntity;
