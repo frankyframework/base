@@ -6,6 +6,7 @@ use Base\model\AvataresModel;
 use Base\entity\AvataresEntity;
 use Base\model\Emails;
 use Franky\Haxor\Tokenizer;
+use Franky\Core\ObserverManager;
 
 $Tokenizer = new Tokenizer();
 $Emails = new Emails();
@@ -132,6 +133,8 @@ if(!$error)
             $registro  = $TemplateemailModel->getRows();
 
             sendEmail($campos,$registro);
+            $ObserverManager = new ObserverManager;
+            $ObserverManager->dispatch('register_new_user_admin',[$MyLogin->id]);
         }
         else
         {

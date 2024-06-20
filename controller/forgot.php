@@ -43,6 +43,7 @@ if($error == false)
         $registro  = $TemplateemailModel->getRows();
         $campos =  array("email" => $email,"nombre" => (empty($MyLogin->nombre) ? $email : $MyLogin->nombre),"password" => $password, "nombre_web" => $MyRequest->getSERVER(), "url_web" => $MyRequest->getSERVER());
 
+        
         sendEmail($campos,$registro);
 
         $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("forgot_password_confirmation"));
