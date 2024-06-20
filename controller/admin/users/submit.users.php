@@ -134,7 +134,7 @@ if(!$error)
 
             sendEmail($campos,$registro);
             $ObserverManager = new ObserverManager;
-            $ObserverManager->dispatch('register_new_user_admin',[$MyLogin->id]);
+            $ObserverManager->dispatch('register_new_user_admin',[$MyUser->getUltimoID()]);
         }
         else
         {
