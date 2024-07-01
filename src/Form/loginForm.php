@@ -29,7 +29,7 @@ class loginForm extends \Franky\Form\Form
                 'required'  => true,
                 'atributos' => array(
                     'class'       => 'required',
-                    'maxlength' => 30
+                    'maxlength' => 100
                  ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_obligatorio'
