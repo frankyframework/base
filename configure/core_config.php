@@ -522,13 +522,13 @@ return array(
                 array('path' => 'base/server/session_path',
                 'type' => 'text',
                 'label' => 'Path para guardar las sesiones',
-                'validation' => array('required' => true),
+                'validation' => array('required' => false),
                 'value' => 'sess_tmp' 
                 ),
                 array('path' => 'base/server/session_time',
                 'type' => 'text',
                 'label' => 'Tiempo de vida de la sesion en segundos',
-                'validation' => array('required' => true),
+                'validation' => array('required' => false),
                 'value' => '43200' //12 hrs
                 ),
             

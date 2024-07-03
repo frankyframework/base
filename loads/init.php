@@ -21,12 +21,15 @@ $session_autorenew = getCoreConfig('base/server/session_renew');
 $session_path =  PROJECT_DIR.'/'.getCoreConfig('base/server/session_path');
 $enable_ip = 0;
 
-// Set the maxlifetime of session
-ini_set( "session.gc_maxlifetime", $session_time );
-// Also set the session cookie timeout
-ini_set( "session.cookie_lifetime", $session_time );
-ini_set('session.save_path',$session_path);
-
+if(!empty($session_time)) {
+    // Set the maxlifetime of session
+    ini_set( "session.gc_maxlifetime", $session_time );
+    // Also set the session cookie timeout
+    ini_set( "session.cookie_lifetime", $session_time );
+}
+if(!empty($session_path)) {
+    ini_set('session.save_path',$session_path);
+}
 
 $handler = new \Base\model\FileSessionHandler(new \Franky\Filesystem\File);
 session_set_save_handler($handler, true);
