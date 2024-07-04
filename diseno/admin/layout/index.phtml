@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="<?php echo $lang_root; ?>">
 <head>
-    <?php if($MyRequest->getPROTOCOLO() == "https://" && $Mobile_detect->isMobile()): ?>
+    <?php if($Mobile_detect->isMobile()): ?>
         <link rel="manifest" href="/manifest.json">
         <meta name="theme-color" content="<?=getCoreConfig('base/pwa/theme-color')?>">
         <?php if(getCoreConfig('base/pwa/iconios') != ""): ?>
@@ -99,7 +99,6 @@
         <footer>
             <p><a target="_blank" href="www.cloudstudio.mx">Todos los derechos reservados CloudStudio</a></p>
         </footer>
-        <?php echo render("widget_link_up.phtml"); ?>
         <?php echo render("debug.phtml",$MyDebug->Dump()) ?>
         <?php echo render("admin/layout/css.async.phtml"); ?>
         
