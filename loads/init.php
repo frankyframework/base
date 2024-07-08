@@ -29,12 +29,10 @@ if(!empty($session_time)) {
 }
 if(!empty($session_path)) {
     ini_set('session.save_path',$session_path);
+    $handler = new \Base\model\FileSessionHandler(new \Franky\Filesystem\File);
+    session_set_save_handler($handler, true);
+    register_shutdown_function('session_write_close');
 }
-
-$handler = new \Base\model\FileSessionHandler(new \Franky\Filesystem\File);
-session_set_save_handler($handler, true);
-register_shutdown_function('session_write_close');
-
 session_start();
 
 $sessionName = session_name();

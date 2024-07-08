@@ -44,7 +44,8 @@ class loginForm extends \Franky\Form\Form
                 'required'  => true,
                 'atributos' => array(
                     'class'       => 'required',
-                    'maxlength' => 15
+                    'maxlength' => 15,
+                    "showPassword" => 'Mostrar contraseña'
                  ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_obligatorio'

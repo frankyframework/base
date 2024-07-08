@@ -161,7 +161,8 @@ class registroForm extends \Franky\Form\Form
                     'placeholder' => _('Confirmar contraseña'),
                     'maxlength' => 15,
                     'minlength' => 6,
-                    'id'       => 'contrasena1'
+                    'id'       => 'contrasena1',
+                    "showPassword" => 'Mostrar contraseña'
                  ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_obligatorio'
@@ -180,7 +181,8 @@ class registroForm extends \Franky\Form\Form
                     'placeholder' => ('Contraseña'),
                     'maxlength' => 15,
                     'minlength' => 6,
-                    'id'       => 'contrasena'
+                    'id'       => 'contrasena',
+                    "showPassword" => 'Mostrar contraseña'
                  ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_obligatorio'
@@ -217,7 +219,8 @@ class registroForm extends \Franky\Form\Form
                     'placeholder' => ('Contraseña actual'),
                     'maxlength' => 15,
                     'minlength' => 6,
-                    'id'       => 'contrasena'
+                    'id'       => 'contrasena',
+                    "showPassword" => 'Mostrar contraseña'
                  ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_obligatorio'
