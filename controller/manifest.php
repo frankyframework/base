@@ -6,10 +6,11 @@ if(!empty($icon) || !empty($name))
   $manifest =array(
       "name"=> $name,
       "short_name" => $name,
-      "icons" => 
+      "icons" =>
       array(
           array("src" => imageResize($icon,512,512,true),"type" => "image/png","sizes" => "512x512"),
-          array("src" => imageResize($icon,192,192,true),"type" => "image/png","sizes" => "192x192"),
+          array("src" => imageResize($icon,512,512,true),"type" => "image/png","sizes" => "192x192","purpose" => "maskable"),
+          array("src" => imageResize($icon,192,192,true),"type" => "image/png","sizes" => "196x196"),
           array("src" => imageResize($icon,144,144,true),"type" => "image/png","sizes" => "144x144"),
           array("src" => imageResize($icon,96,96,true),"type" => "image/png","sizes" => "96x96"),
           array("src" => imageResize($icon,48,48,true),"type" => "image/png","sizes" => "48x48")
