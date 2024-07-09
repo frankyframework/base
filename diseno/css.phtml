@@ -57,7 +57,7 @@ if(getCoreConfig('base/debug/production')){
 
     $global_css = $CssCreatos->get(getCoreConfig('base/debug/cacheversion'));
     ?>
-    <link rel='stylesheet' type='text/css' href="<?php echo $global_css; ?>" />
+    <link rel='stylesheet' type='text/css' href="<?php echo $global_css; ?>" >
     <?php
 
 
@@ -68,7 +68,7 @@ else
     {
         if(file_exists(PROJECT_DIR.'/'.$_file_css)):
         ?>
-        <link rel='stylesheet' type='text/css' href="<?php echo $_file_css; ?>" />
+        <link rel='stylesheet' type='text/css' href="<?php echo $_file_css; ?>" >
         <?php
         endif;
     }
