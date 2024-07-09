@@ -89,7 +89,7 @@ function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0)
         
         if($live == 0)
         {
-            $html = "<img src=\"$src\" $width $height  alt=\"$alt\"  $extra />";
+            $html = "<img src=\"$src\" $width $height  alt=\"$alt\"  $extra >";
         }
         else {
             if($live == 1)
@@ -99,7 +99,7 @@ function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0)
             else {
             $img_live = $live;
             }
-            $html = "<img src=\"$img_live\" data-alive=\"$src\" $width $height  alt=\"$alt\"  $extra />";
+            $html = "<img src=\"$img_live\" data-alive=\"$src\" $width $height  alt=\"$alt\"  $extra >";
         }
     }
     
