@@ -96,7 +96,7 @@ if(getCoreConfig('base/debug/production')){
     $JsCreatos->addJs($js);
     $JsCreatos->setEmbebed($render_js);
     $name_js =  getFriendly($MyFrankyMonster->MySeccion());
-    if ($MyFrankyMonster->MySeccion() == ADMIN_CORE_CONFIG) {
+    if (in_array($MyFrankyMonster->MySeccion(),[ADMIN_CORE_CONFIG,ADMIN_CORE_CONFIG_SECCION])) {
         $name_js =  getFriendly($MyRequest->getURI());
     }
     $JsCreatos->setName((!empty($name_js) ? $name_js.".js" : "home.js"));
