@@ -18,7 +18,7 @@ $enable_debug_php = getCoreConfig('base/debug/display_errors');
 $enable_debug_site = getCoreConfig('base/debug/debug');
 $session_time = getCoreConfig('base/server/session_time');
 $session_autorenew = getCoreConfig('base/server/session_renew');
-$session_path =  PROJECT_DIR.'/'.getCoreConfig('base/server/session_path');
+$session_path =  getCoreConfig('base/server/session_path');
 $enable_ip = 0;
 
 if(!empty($session_time)) {
@@ -28,7 +28,7 @@ if(!empty($session_time)) {
     ini_set( "session.cookie_lifetime", $session_time );
 }
 if(!empty($session_path)) {
-    ini_set('session.save_path',$session_path);
+    ini_set('session.save_path', PROJECT_DIR.'/'.$session_path);
     $handler = new \Base\model\FileSessionHandler(new \Franky\Filesystem\File);
     session_set_save_handler($handler, true);
     register_shutdown_function('session_write_close');
