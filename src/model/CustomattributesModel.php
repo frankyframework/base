@@ -17,7 +17,7 @@ class CustomattributesModel  extends \Franky\Database\Mysql\objectOperations
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["id","name","label","type","data","source","entity","createdAt","updateAt","status","required","extra"];
+        $campos = ["id","uid","name","label","type","data","source","entity","createdAt","updateAt","status","required","extra"];
 
         foreach($data as $k => $v)
         {
@@ -65,7 +65,7 @@ class CustomattributesModel  extends \Franky\Database\Mysql\objectOperations
 
     }
 
-    function existe($attribute,$entity,$id='')
+    function existe($attribute,$entity,$id='',$uid='')
     {
         $campos = array("id");
         $this->where()->addAnd('name',$attribute,'=');
@@ -73,6 +73,10 @@ class CustomattributesModel  extends \Franky\Database\Mysql\objectOperations
         if(!empty($id))
         {
                 $this->where()->addAnd('id',$id,'<>');
+        }
+        if(!empty($uid))
+        {
+                $this->where()->addAnd('uid',$id,'=');
         }
         return $this->getColeccion($campos);
     }

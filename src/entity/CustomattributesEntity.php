@@ -5,6 +5,7 @@ namespace Base\entity;
 class CustomattributesEntity
 {
     private $id;
+    private $uid;
     private $name;
     private $label;
     private $type;
@@ -29,6 +30,7 @@ class CustomattributesEntity
     public function exchangeArray($data)
     {
         $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->uid = (isset($data["uid"]) ? $data["uid"] : null);
         $this->name = (isset($data["name"]) ? $data["name"] : null);
         $this->label = (isset($data["label"]) ? $data["label"] : null);
         $this->type = (isset($data["type"]) ? $data["type"] : null);
@@ -60,6 +62,8 @@ class CustomattributesEntity
     
 
     public function id($id = null){ if($id != null){ $this->id=$id; }else{ return $this->id; } }
+
+    public function uid($uid = null){ if($uid != null){ $this->uid=$uid; }else{ return $this->uid; } }
 
     public function name($name = null){ if($name != null){ $this->name=$name; }else{ return $this->name; } }
 

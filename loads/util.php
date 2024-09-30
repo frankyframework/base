@@ -1021,7 +1021,7 @@ function validUserDevice()
       }
 }
 
-function getDataCustomAttribute($id_ref,$entity)
+function getDataCustomAttribute($id_ref,$entity,$uid='')
 {
     $CustomattributesModel              = new Base\model\CustomattributesModel();
     $CustomattributesEntity             = new Base\entity\CustomattributesEntity();
@@ -1031,8 +1031,13 @@ function getDataCustomAttribute($id_ref,$entity)
 
     $custom_imputs = [];
     $values_attrs = [];
+    $friendly_values_attrs = [];
     $CustomattributesEntity->entity($entity);
     $CustomattributesEntity->status(1);
+    if(!empty($uid)){
+        $CustomattributesEntity->uid($uid);
+    }
+
     $CustomattributesModel->setTampag(100);
     $CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
 
@@ -1071,13 +1076,14 @@ function getDataCustomAttribute($id_ref,$entity)
                     $value = $_values_attrs['value'];
                 }
                 $values_attrs[$custom_imputs[$_values_attrs['id_attribute']]['name']] = $value;
+                $friendly_values_attrs[$custom_imputs[$_values_attrs['id_attribute']]['label']] = (!in_array($custom_imputs[$_values_attrs['id_attribute']]['type'],["textarea","text","file","multifile"]) ? $custom_imputs[$_values_attrs['id_attribute']]['data'][$value] : $value);
             
             }
             
         }
     }
 
-    return ['custom_imputs' => $custom_imputs,'custom_values'=>$values_attrs];
+    return ['custom_imputs' => $custom_imputs,'custom_values'=>$values_attrs,'friendly_values_attrs'=>$friendly_values_attrs];
 
 
 }
