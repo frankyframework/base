@@ -30,7 +30,7 @@ class templateEmailForm extends \Franky\Form\Form
                 'required'  => true,
                 'atributos' => array(
                     'class'       => 'required',
-                    'maxlength' => 50
+                    'maxlength' => 250
                  ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_obligatorio'
