@@ -1227,7 +1227,12 @@ function saveDataCustomAttribute($id_ref,$entity)
                     
                 }
             }
-            $value = json_encode($multifiles);
+            $value = "";
+            if(!empty($multifiles)) 
+            {
+                $value = json_encode($multifiles);
+            }
+            
             
             
         }
