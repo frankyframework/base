@@ -96,8 +96,7 @@
             "fecha_nacimiento": "0000-00-00",
             "sexo":"h",
             "telefono":"",
-            "verificado": "1",
-            "biografia": ""
+            "verificado": "1"
         }
     ]
 }
