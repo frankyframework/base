@@ -1109,9 +1109,9 @@ function saveDataCustomAttribute($id_ref,$entity)
     }
 
    
-//print_r($custom_imputs);
-//print_r($MyRequest->getRequest());
-//die;
+    //print_r($custom_imputs);
+    //print_r($MyRequest->getRequest());
+    //die;
     foreach($custom_imputs as $input)
     {
         
@@ -1421,7 +1421,7 @@ function getBloqueCMS($id)
     if ($MyCMS->getTotal() > 0) {
         $data   = $MyCMS->getRows();
 
-        return $data["template"];
+        return "<div id=\"".str_replace("-","_",$data["friendly"])."\" class=\"".str_replace("-","_",$data["friendly"])."\">".$data["template"]."</div>";
 
     }
     return "";
