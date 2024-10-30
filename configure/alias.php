@@ -34,6 +34,8 @@ return array
     "admin/smtptest.php" => PROJECT_DIR."/modulos/base/controller/admin/smtp/test.php",
     "manifest.json" => PROJECT_DIR."/modulos/base/controller/manifest.php",
     "service_worker.js" => PROJECT_DIR."/modulos/base/diseno/service_worker.js",
-    "css_custom.css" => PROJECT_DIR."/modulos/base/controller/css_custom.php"
+    "css_custom.css" => PROJECT_DIR."/modulos/base/controller/css_custom.php",
+    "admin/media/uploadify.php"=> PROJECT_DIR."/modulos/base/controller/admin/media/uploadify.php",
+    "admin/media/descargar.php"=> PROJECT_DIR."/modulos/base/controller/admin/media/descargar.php",
 );
 ?>

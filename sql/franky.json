@@ -565,6 +565,20 @@
         "status":1,
         "editable":1,
         "modulo":"base"
+    },
+    {
+        "php":"admin/media/ftp.php",
+        "css":[],
+        "js":[],
+        "jquery":["jquery-validate"],
+        "resource":"administrar_media_gallery",
+        "constante":"MEDIA_GALLERY",
+        "url":"admin/media/",
+        "nombre":"Media Gallery",
+        "ajax":["base/ajax.ftp.js"],
+        "status":1,
+        "editable":1,
+        "modulo":"base"
     }
     ]
 }

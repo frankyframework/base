@@ -30,6 +30,11 @@ return array(
                         "url" => $MyRequest->url(LISTA_CMS_BLOQUE),
                         "etiqueta" => _("Bloques")
                         ),
+                        array(
+                        "permiso" =>   "administrar_media_gallery",
+                        "url" => $MyRequest->url(MEDIA_GALLERY),
+                        "etiqueta" => _("Media")
+                        ),
                 ),
         ),
         array('title'=> "Marketing",  

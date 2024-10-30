@@ -31,6 +31,10 @@ return [
             "administrar_uploaders" => "Upload en editores de contenido"
 
         ],
+    "Media Gallery" =>
+        [
+            "administrar_media_gallery" => "Administrar media"
+        ],
     "Systema"   =>
         [
             "administrar_core_sistem" => "Configuraciones globales de sistema",

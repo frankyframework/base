@@ -538,7 +538,13 @@ return array(
                       'validation' => array('required' => true,'maxlength' => 1),
                       'data' => ['0' => 'No','1' => 'Sí'],
                       'value' => 0
-                    )
+              ),
+              array('path' => 'base/server/validmediaextension',
+              'type' => 'text',
+              'label' => 'Tipo de archivo validos para media',
+              'validation' => array('required' => false),
+              'value' => 'jpg,jpeg,png,gif,svg,mp4,mov,avi,mpg,wmv,mpeg4,webM' //12 hrs
+              )
       )
 
   ),
