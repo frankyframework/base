@@ -30,7 +30,7 @@ if($error == false)
 
         $MyUserEntity    = new entityUser();
         $MyUserEntity->setContrasena(password_hash($password,PASSWORD_DEFAULT));
-        $MyUserEntity->setId($MyLogin->id);
+        $MyUserEntity->setId($MyLogin->getInputs('id'));
         $result = $MyUser->save($MyUserEntity->getArrayCopy());
 
 
@@ -41,7 +41,7 @@ if($error == false)
 
 
         $registro  = $TemplateemailModel->getRows();
-        $campos =  array("email" => $email,"nombre" => (empty($MyLogin->nombre) ? $email : $MyLogin->nombre),"password" => $password, "nombre_web" => $MyRequest->getSERVER(), "url_web" => $MyRequest->getSERVER());
+        $campos =  array("email" => $email,"nombre" => (empty($MyLogin->getInputs('nombre')) ? $email : $MyLogin->getInputs('nombre')),"password" => $password, "nombre_web" => $MyRequest->getSERVER(), "url_web" => $MyRequest->getSERVER());
 
         
         sendEmail($campos,$registro);

@@ -39,9 +39,9 @@ if($error == false)
 
 
             $inputs = $MyLogin->getInputs();
-            foreach($inputs as $k)
+            foreach($inputs as $k => $v)
             {
-                $MySession->SetVar($k,   	$MyLogin->{$k});
+                $MySession->SetVar($k,  $v);
             }
 
 

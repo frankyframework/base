@@ -37,7 +37,7 @@ if($error == false)
         }
 
         $MyUserEntity    = new entityUser();
-        $MyUserEntity->setId($MyLogin->id);
+        $MyUserEntity->setId($MyLogin->getInputs('id'));
         $MyUserEntity->setUltimoAcceso( date('Y-m-d'));
 
         $MyUser->save($MyUserEntity->getArrayCopy());

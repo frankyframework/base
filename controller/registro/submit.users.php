@@ -102,9 +102,9 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
 
 
             $inputs = $MyLogin->getInputs();
-            foreach($inputs as $k)
+            foreach($inputs as $k => $v)
             {
-                $MySession->SetVar($k,   	$MyLogin->{$k});
+                $MySession->SetVar($k,  $v);
             }
 
 
@@ -116,7 +116,7 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
             $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("regtistro_user_success"));
 
             $ObserverManager = new ObserverManager;
-            $ObserverManager->dispatch('register_new_user',[$MyLogin->id]);
+            $ObserverManager->dispatch('register_new_user',[$MyLogin->getInputs('id')]);
             if(!empty($callback))
             {
                 $location = $callback;
