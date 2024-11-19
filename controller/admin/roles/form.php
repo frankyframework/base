@@ -52,7 +52,7 @@ $optionsResource = [];
 foreach ($resources as $name => $resource) {
     $optionsResource = array_merge($optionsResource,$resource);
 }
-$adminForm->setOptionsInput("set_attribute",$set_attribute);
+
 $adminForm->setOptionsInput("resources[]",$optionsResource);
 $adminForm->setData($data);
 $adminForm->setAtributoInput("callback","value", urldecode($callback));

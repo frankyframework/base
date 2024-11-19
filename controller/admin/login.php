@@ -31,9 +31,9 @@ if($error == false)
     {
 
         $inputs = $MyLogin->getInputs();
-        foreach($inputs as $k)
+        foreach($inputs as $k => $v)
         {
-            $MySession->SetVar($k,   	$MyLogin->{$k});
+            $MySession->SetVar($k, $v);
         }
 
         $MyUserEntity    = new entityUser();
@@ -52,7 +52,7 @@ if($error == false)
 
 
         $ObserverManager->dispatch('login_user');
-        $ObserverManager->dispatch('login_user_'.$MyLogin->nivel,[$MyLogin->id]);
+        $ObserverManager->dispatch('login_user_'.$MyLogin->getInputs('role'),[$MyLogin->getInputs('id')]);
 
 
         if(!empty($callback))

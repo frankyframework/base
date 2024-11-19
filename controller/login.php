@@ -30,13 +30,13 @@ if($error == false)
     {
 
         $inputs = $MyLogin->getInputs();
-        foreach($inputs as $k)
+        foreach($inputs as $k => $v)
         {
-            $MySession->SetVar($k,   	$MyLogin->{$k});
+            $MySession->SetVar($k, $v);
         }
 
         $MyUserEntity    = new entityUser();
-        $MyUserEntity->setId($MyLogin->id);
+        $MyUserEntity->setId($MyLogin->getInputs('id'));
         $MyUserEntity->setUltimoAcceso( date('Y-m-d'));
 
         $MyUser->save($MyUserEntity->getArrayCopy());
@@ -52,7 +52,7 @@ if($error == false)
 
 
         $ObserverManager->dispatch('login_user');
-        $ObserverManager->dispatch('login_user_'.$MyLogin->role,[$MyLogin->id]);
+        $ObserverManager->dispatch('login_user_'.$MyLogin->getInputs('role'),[$MyLogin->getInputs('id')]);
 
 
         if(!empty($callback))
