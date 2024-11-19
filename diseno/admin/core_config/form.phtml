@@ -41,13 +41,13 @@
 
                         if($config['type'] == 'file' && isset($core_config_db[$config['path']]) && !empty($core_config_db[$config['path']]))
                         {
-                           $config['validation']['required'] =false;
+                           $config['validation']['x'] =false;
                         }
                           $input = array(
                                 'name' => str_replace("/","_",$config['path']),
                                 'label' => _($config['label']),
                                 'type'  => $config['type'],
-                                'required' => ($config['validation']['required'] ? true : false),
+                                'required' => (isset($config['validation']['required'])  && $config['validation']['required'] == true ? true : false),
                                 'atributos' => array(
                                     'class' => (isset($config['validation']['image']) ? 'image ' : '').
                                                 (isset($config['validation']['required']) && $config['validation']['required'] == true ? ' required ' : ''),
@@ -66,7 +66,7 @@
                         'name' => str_replace("/","_",$config['path']),
                         'label' => _($config['label']),
                         'type'  => $config['type'],
-                        'required' => ($config['validation']['required'] ? true : false),
+                        'required' => (isset($config['validation']['required'])   && $config['validation']['required'] == true ? true : false),
                         'atributos' => array(
                             'class' => (isset($config['validation']['required']) && $config['validation']['required'] == true ? ' required ' : ''),
                             'value' => (!isset($core_config_db[$config['path']]) ? '' : $core_config_db[$config['path']])

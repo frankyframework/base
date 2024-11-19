@@ -857,7 +857,7 @@ function getTemplatesEmail()
     $TemplateemailEntity->status(1);
     $templates = array("","selecciona");
     $TemplateemailModel->setTampag(1000);
-    $TemplateemailModel->setOrdensql("nombre ASC");
+    $TemplateemailModel->setOrdensql("templates_email.nombre ASC");
     if($TemplateemailModel->getData($TemplateemailEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     {
         while($registro = $TemplateemailModel->getRows())
