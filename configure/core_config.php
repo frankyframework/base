@@ -519,12 +519,6 @@ return array(
       'menu' => "Servirdor",
       'title' => "Configurar Servidor",
       'config' => array(
-                array('path' => 'base/server/session_path',
-                'type' => 'text',
-                'label' => 'Path para guardar las sesiones',
-                'validation' => array('required' => false),
-                'value' => 'sess_tmp' 
-                ),
                 array('path' => 'base/server/session_time',
                 'type' => 'text',
                 'label' => 'Tiempo de vida de la sesion en segundos',

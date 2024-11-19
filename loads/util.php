@@ -32,7 +32,23 @@ $_Months = Array ('01'=>"Ene",
 $_Days = array('Dom','Lun','Mar','Mie','Jue','Vie','Sab');
 
 
+if (function_exists("get_magic_quotes_gpc") == false)
+{
 
+    function get_magic_quotes_gpc()
+    {
+        return 0;
+    }
+}
+
+function utf8decode($string)
+{
+    return mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8');
+}
+function utf8encode($string)
+{
+    return mb_convert_encoding($string, 'UTF-8', mb_list_encodings());
+}
 function __bindtextdomain($domain,$modulo)
 {
     global $MyConfigure;
@@ -174,8 +190,8 @@ function getFriendly($string)
         $string = trim($string,"?");
         $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
         $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
-        $string = utf8_decode($string);
-        $string = strtr($string, utf8_decode($a), $b);
+        $string = utf8decode($string);
+        $string = strtr($string, utf8decode($a), $b);
         $string = strtolower($string);
 	    $string = preg_replace('#([^a-z0-9]+)#i', '-', $string);
         $string = preg_replace('#-{2,}#','-',$string);
@@ -233,7 +249,7 @@ function stripJS($html)
 {
     $doc = new \DOMDocument();
 
-    $doc->loadHTML(utf8_decode($html));
+    $doc->loadHTML(utf8decode($html));
     $domxpath = new \DOMXPath($doc);
     $filtered = $domxpath->query("//script[not(@type)]");
     foreach ($filtered as $_p) {
@@ -523,7 +539,7 @@ function sendEmail($campos,$data)
     }
     if(getCoreConfig('base/smtp/enabled')==1):
         $Correo = new \Base\model\Correo();
-        return $Correo->Enviar(utf8_decode($data['Asunto']), $destinatario, $ContenidoString, $from,$reply,$bcc,$cc);
+        return $Correo->Enviar(utf8decode($data['Asunto']), $destinatario, $ContenidoString, $from,$reply,$bcc,$cc);
     endif;
 
     $Headers = "";

@@ -18,7 +18,7 @@ $enable_debug_php = getCoreConfig('base/debug/display_errors');
 $enable_debug_site = getCoreConfig('base/debug/debug');
 $session_time = getCoreConfig('base/server/session_time');
 $session_autorenew = getCoreConfig('base/server/session_renew');
-$session_path =  getCoreConfig('base/server/session_path');
+
 $enable_ip = 0;
 
 if(!empty($session_time)) {
@@ -27,12 +27,7 @@ if(!empty($session_time)) {
     // Also set the session cookie timeout
     ini_set( "session.cookie_lifetime", $session_time );
 }
-if(!empty($session_path)) {
-    ini_set('session.save_path', PROJECT_DIR.'/'.$session_path);
-    $handler = new \Base\model\FileSessionHandler(new \Franky\Filesystem\File);
-    session_set_save_handler($handler, true);
-    register_shutdown_function('session_write_close');
-}
+
 session_start();
 
 $sessionName = session_name();
@@ -146,7 +141,7 @@ else
     $idiomas = getCoreConfig('base/theme/langs');
 
     $locale = DEFAULT_LOCALE;
-    if(!$_SESSION['lang'])
+    if(!isset($_SESSION['lang']))
     {
         $_SESSION['lang'] = DEFAULT_LOCALE;
     }
@@ -253,6 +248,7 @@ if(!empty($modulos))
 }
 
 include_once(PROJECT_DIR."/modulos/base/loads/llenaFranky.php");
+
 include_once(PROJECT_DIR."/modulos/base/loads/core_config.php");
 
 
@@ -409,7 +405,4 @@ if(!empty($modulos))
         $MyMenuFront->setArraySeccion(PROJECT_DIR."/modulos/".$modulo."/menu/front.php","modulo_".$modulo);
     }
 }
-
-
-
 ?>
