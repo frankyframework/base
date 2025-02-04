@@ -17,6 +17,7 @@ class CustomattributesEntity
     private $status;
     private $required;
     private $extra;
+    private $position;
 
 
     public function __construct($data = null)
@@ -42,6 +43,7 @@ class CustomattributesEntity
         $this->status = (isset($data["status"]) ? $data["status"] : null);
         $this->required = (isset($data["required"]) ? $data["required"] : null);
         $this->extra = (isset($data["extra"]) ? $data["extra"] : null);
+        $this->position = (isset($data["position"]) ? $data["position"] : null);
 
     }
 
@@ -87,6 +89,7 @@ class CustomattributesEntity
 
     public function extra($extra = null){ if($extra !== null){ $this->extra=$extra; }else{ return $this->extra; } }
 
+    public function position($position = null){ if($position !== null){ $this->position=$position; }else{ return $this->position; } }
 
 }
 ?>
