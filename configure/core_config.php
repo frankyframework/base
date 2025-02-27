@@ -278,6 +278,13 @@ return array(
                                     'data' => ['1' => 'Sin restriccion','2' => 'Almenos una mayuscula','3' => 'Almenos una mayuscula y un numero','4' => 'Almenos una ,ayuscula, un numero y un simbolo'],
                                     'value' => '1'
                             ),
+                            array('path' => 'base/user/showgender',
+                                    'type' => 'select',
+                                    'label' => 'Usar sexo en cuenta',
+                                    'validation' => array('required' => true),
+                                    'data' => ['0' => 'No','1' => 'Si'],
+                                    'value' => '0'
+                            ),
                             array('path' => 'base/user/email-template-newuser',
                                     'type' => 'select',
                                     'label' => 'Template E-mail Nuevo usuario',

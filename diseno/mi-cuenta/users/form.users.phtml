@@ -7,7 +7,17 @@
                 <p>Aquí podrás editar la información de tu perfil.</p>
                 <p>Recuerda, es importante que tu perfil esté completo.</p>
                 <?php echo $adminForm->openTag(); ?>
-                <?php echo $adminForm->getAllRow(); ?>
+                <?php echo $adminForm->get('id'); ?>
+                <?php echo $adminForm->get('token_xsrf'); ?>
+                    <?php echo $adminForm->get('callback'); ?>
+                    <?php echo $adminForm->getRow('nombre'); ?>
+                    <?php echo $adminForm->getRow('email'); ?>
+                    <?php echo $adminForm->getRow('telefono'); ?>
+                    <?=(getCoreConfig("base/user/showgender") == 1 ? $adminForm->getRow('sexo') : "")?>
+                    <?php echo $adminForm->getRow('fecha_nacimiento'); ?>
+                    <div class="_tag_center">
+                      <?php echo $adminForm->getRow('guardar'); ?>
+                    </div>
                 <?php echo $adminForm->endTag(); ?>
            </div>
        </div>

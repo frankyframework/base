@@ -13,7 +13,7 @@
                     <?php echo $registroForm->getRow('email'); ?>
                     <?php echo $registroForm->getRow('telefono'); ?>
 
-                    <?php echo $registroForm->getRow('sexo'); ?>
+                    <?=(getCoreConfig("base/user/showgender") == 1 ? $registroForm->getRow('sexo') : "")?>
                     <?php echo $registroForm->getRow('fecha_nacimiento'); ?>
                     <?php echo $registroForm->getRow('acepto'); ?>
                     <label id="acepto-error" class="error" for="acepto" style="display:none;"></label>

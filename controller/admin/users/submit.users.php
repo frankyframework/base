@@ -90,6 +90,9 @@ if(!$error)
     {
         $MyUserEntity->setContrasena(password_hash($contrasena,PASSWORD_DEFAULT));
         $MyUserEntity->setFecha(date('Y-m-d H:i:s'));
+        if(getCoreConfig("base/user/showgender") == 0) {
+            $MyUserEntity->setSexo('');
+        }
     }
     if($MyUserEntity->getRole() == "" || !in_array($MyUserEntity->getRole(),  array_keys(getRoles())))
     {

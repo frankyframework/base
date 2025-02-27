@@ -77,7 +77,9 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
         $MyUserEntity->setFecha(date('Y-m-d H:i:s'));
         $MyUserEntity->setUltimoAcceso(date('Y-m-d'));
         $MyUserEntity->setFecha_nacimiento($fecha_nacimiento);
-
+        if(getCoreConfig("base/user/showgender") == 0) {
+            $MyUserEntity->setSexo('');
+        }
 
         $result = $MyUser->save($MyUserEntity->getArrayCopy());
         if($result == REGISTRO_SUCCESS)
