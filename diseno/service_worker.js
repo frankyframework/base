@@ -2,7 +2,7 @@
 use Franky\Filesystem\File;
 $File = new File();
 header("Content-type: text/javascript"); ?>
-var cacheName = 'franky-v-1-0';
+var cacheName = 'franky-v-'+ <?=str_replace(".","-",getCoreConfig('base/debug/cacheversion'))?>;
 var filesToCache = [
     '/index.php'
 ];
