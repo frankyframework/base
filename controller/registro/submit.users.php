@@ -33,7 +33,11 @@ if(!$Tokenizer->decode($MyRequest->getRequest('token_xsrf')))
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("bad_request"));
     $error = true;
 }
-
+if(getCoreConfig('base/contactanos/captcha') == 1 && !verifyRecaptcha())
+{
+    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("bad_recaptcha"));
+    $error = true;
+}
 $validaciones =  new validaciones();
 $valid = $validaciones->validRules($MyUserEntity->setValidation($contrasena1,getCoreConfig('base/user/passwordlength'),getCoreConfig('base/user/passwordlevel')));
 if(!$valid)
