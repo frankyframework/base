@@ -334,7 +334,7 @@ return array(
                             'data' => getRoles(),
                             'value' => '1'
                     ), 
-                    array('path' => 'base/contactanos/captcha',
+                    array('path' => 'base/user/captcha',
                     'type' => 'select',
                     'label' => 'Habilitar captcha google',
                     'validation' => array('required' => true),
