@@ -2,6 +2,7 @@
 <?php echo render("registro/_form.user.phtml"); ?>
 </div>
 <script type="text/javascript">
+window.captcha = {}
 window.captcha.enabled = <?=getCoreConfig('base/user/captcha')?>;
 window.captcha.msg = "<?=$MyMessageAlert->Message("recaptcha")?>";
 </script>
