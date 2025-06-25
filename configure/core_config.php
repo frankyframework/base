@@ -333,13 +333,13 @@ return array(
                             'validation' => array('required' => true),
                             'data' => getRoles(),
                             'value' => '1'
-                    ),
-                    array('path' => 'base/user/captcha',
-                    'type' => 'select',
-                    'label' => 'Habilitar captcha google',
-                    'validation' => array('required' => true),
-                    'data' => ['1' => 'Si','0' => 'No'],
-                    'value' => '0'
+                    ), 
+                    array('path' => 'base/user/captcha-secret',
+                    'type' => 'text',
+                    'label' => 'Secred Google captcha',
+                    'validation' => array('required' => false),
+                    'value' => ''
+                  ),
 
           )
   ),
