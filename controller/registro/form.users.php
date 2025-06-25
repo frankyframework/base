@@ -15,5 +15,8 @@ $registroForm->addGuardar();
 $registroForm->setData($MyFlashMessage->getResponse());
 $registroForm->setAtributoInput('callback', 'value',$callback);
 $registroForm->setAtributoInput('token_xsrf', 'value',$Tokenizer->token('users_xsrf', time()));
+if(getCoreConfig('base/contactanos/captcha') == 1):
+    $MyMetatag->setCode('<script src="https://www.google.com/recaptcha/api.js" async defer></script>'); 
+endif; 
 
 ?>
