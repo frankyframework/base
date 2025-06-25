@@ -1,7 +1,10 @@
 <div class="width_100">
 <?php echo render("registro/_form.user.phtml"); ?>
 </div>
-
+<script type="text/javascript">
+window.captcha.enabled = <?=getCoreConfig('base/user/captcha')?>;
+window.captcha.msg = "<?=$MyMessageAlert->Message("recaptcha")?>";
+</script>
 <script>
 $( "#users" ).validate({
 rules: {
@@ -62,6 +65,20 @@ messages: {
      acepto: {
             required: "Debes aceptar las condiciones y terminos del servicio"
     }
-}
+},submitHandler: function(form)
+                    {
+                        if (window.captcha.enabled == 1) {
+                            $('#recaptcha-error').hide().html('');
+                            var response = grecaptcha.getResponse();
+                            if(response.length == 0) 
+                            { 
+                                $('#recaptcha-error').html(window.captcha.msg).show();
+                                return false;
+                            }
+                        }
+                        $("form[name=users]").find("input[type=submit]").attr('disabled',true);
+                        return true;
+
+                    }
 });
 </script>

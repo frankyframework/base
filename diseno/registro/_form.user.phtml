@@ -17,6 +17,10 @@
                     <?php echo $registroForm->getRow('fecha_nacimiento'); ?>
                     <?php echo $registroForm->getRow('acepto'); ?>
                     <label id="acepto-error" class="error" for="acepto" style="display:none;"></label>
+                    <?php if(getCoreConfig('base/user/captcha') == 1): ?>
+                        <div class="form-group form_captcha"> <div class="g-recaptcha" data-sitekey="<?=getCoreConfig('base/google/captcha-api')?>"></div> </div>
+                        <label id="recaptcha-error" class="error" for="recaptcha" style="display: none;"></label>
+                    <?php endif; ?>
                     <div class="_tag_center">
                       <?php echo $registroForm->getRow('guardar'); ?>
                     </div>
