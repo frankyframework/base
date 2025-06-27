@@ -33,7 +33,7 @@ if(!$Tokenizer->decode($MyRequest->getRequest('token_xsrf')))
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("bad_request"));
     $error = true;
 }
-if(getCoreConfig('base/contactanos/captcha') == 1 && !verifyRecaptcha())
+if(getCoreConfig('base/user/captcha') == 1 && !verifyRecaptcha())
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("bad_recaptcha"));
     $error = true;
