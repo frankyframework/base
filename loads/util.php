@@ -1444,4 +1444,11 @@ function getBloqueCMS($id)
     return "";
 }
 
+function getFormatreplace($format,$arrayData) {
+    foreach($arrayData as $key => $val) {
+        $format = str_replace("{".$key."}",$val,$format);
+    }
+    return $format;
+}
+
 ?>
