@@ -28,17 +28,17 @@ foreach($paths as $path)
         {
             if(unlink($path."/".$file))
             {
-                echo shellFontColor("[success] El archivo ".$path."/".$file." se elimino correctamente","verde")."\n";
+                shellFontColor("[success] El archivo ".$path."/".$file." se elimino correctamente","verde")."\n";
                 $deletes++;
             }
             else
             {
-                echo shellFontColor("[error] El archivo ".$path."/".$file." no se puedo eliminar","rojo")."\n";
+                shellFontColor("[error] El archivo ".$path."/".$file." no se puedo eliminar","rojo")."\n";
                 $no_deletes++;
             }
         }
     }
 }
 
-echo shellFontColor("$deletes archivos borrados, $no_deletes archivos no se pudieron borrar")."\n";
+shellFontColor("$deletes archivos borrados, $no_deletes archivos no se pudieron borrar")."\n";
 ?>

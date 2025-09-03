@@ -12,18 +12,9 @@ function shellFontColor($txt,$color = "default")
             "azul" => "34",
             "default" => "0"
             );
-        return "\033[".$colors[$color]."m".$txt."\033[".$colors["default"]."m";
-    }
-    else
-    {
-        $colors = array(
-            "verde" => "green",
-            "rojo" => "red",
-            "amarillo" => "yellow",
-            "azul" => "blue",
-            "default" => ""
-            );
-            return "<p style='color:".$colors[$color]."'>".htmlentities($txt)."</p>";
+        echo "\033[".$colors[$color]."m".$txt."\033[".$colors["default"]."m";
+        ob_flush();
+        flush();
     }
 }
 
@@ -147,12 +138,12 @@ function SplitSQL($site, $file, $delimiter = ';')
 
                     if ($ibd->Execute($query) != IBD_SUCCESS)
                     {
-                        echo shellFontColor("[error] ".$query,'rojo'). "\n";
+                        shellFontColor("[error] ".$query,'rojo'). "\n";
                     }
 
                     else
                     {
-                       echo shellFontColor("[success] ".$query,'verde'). "\n";
+                       shellFontColor("[success] ".$query,'verde'). "\n";
                     }
 
                     while (ob_get_level() > 0)

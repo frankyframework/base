@@ -29,16 +29,16 @@ foreach($paths as $path)
                 krsort($_files['dir']);
                 foreach ($_files['dir'] as $dir) {
                     rmdir($dir);
-                    echo shellFontColor("[rmdir git] ".$_file,"verde")."\n";
+                    shellFontColor("[rmdir git] ".$_file,"verde")."\n";
                     $count++;
                 }
             }
 
-            echo shellFontColor("[rmdir git] ".$file,"verde")."\n";
+            shellFontColor("[rmdir git] ".$file,"verde")."\n";
         }
     }
 }
 if($count == 0)
 {
-    echo shellFontColor("No se encontraron archivos GIT","verde")."\n";
+    shellFontColor("No se encontraron archivos GIT","verde")."\n";
 }

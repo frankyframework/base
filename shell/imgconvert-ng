@@ -4,7 +4,7 @@ ini_set('memory_limit', '-1');
 
 $File = new File;
 
-echo shellFontColor("Buscando imagenes...","verde")."\n";
+shellFontColor("Buscando imagenes...","verde")."\n";
 
 $dirs = [PROJECT_DIR.'modulos/', PROJECT_DIR.'public/upload/'];
 
@@ -20,7 +20,7 @@ foreach($dirs as $dir)
     {
         if(in_array(pathinfo($_file,PATHINFO_EXTENSION),['jpg','png','jpeg']))
         {
-            echo shellFontColor("[*] Convirtiendo imagen ".$_file,"default")."\n";
+            shellFontColor("[*] Convirtiendo imagen ".$_file,"default")."\n";
 
 
             $path = pathinfo($_file,PATHINFO_DIRNAME).'/';
@@ -36,11 +36,11 @@ foreach($dirs as $dir)
                 isset($obData->webp) 
             )
             {
-                echo shellFontColor($obData->webp,"default");
+                shellFontColor($obData->webp,"default");
                 echo "\t".shellFontColor("[success]","verde")."\n";
             }
             else{
-                echo shellFontColor($obData->webp,"default");
+                shellFontColor($obData->webp,"default");
                 echo "\t".shellFontColor("[error]","rojo")."\n";
             }
 
@@ -48,11 +48,11 @@ foreach($dirs as $dir)
                 isset($obData->jpeg2000) 
             )
             {
-                echo shellFontColor($obData->jpeg2000,"default");
+                shellFontColor($obData->jpeg2000,"default");
                 echo "\t".shellFontColor("[success]","verde")."\n";
             }
             else{
-                echo shellFontColor($obData->jpeg2000,"default");
+                shellFontColor($obData->jpeg2000,"default");
                 echo "\t".shellFontColor("[error]","rojo")."\n";
             }
 
@@ -62,11 +62,11 @@ foreach($dirs as $dir)
             
             )
             {
-                echo shellFontColor($obData->jpegxr,"default");
+                shellFontColor($obData->jpegxr,"default");
                 echo "\t".shellFontColor("[success]","verde")."\n";
             }
             else{
-                echo shellFontColor($obData->jpegxr,"default");
+                shellFontColor($obData->jpegxr,"default");
                 echo "\t".shellFontColor("[error]","rojo")."\n";
             }
 
