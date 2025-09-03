@@ -1,21 +1,18 @@
 <?php
-function shellFontColor($txt,$color = "default")
+function shellFontColor($txt,$color = "default",$nl = true)
 {
-    global $argv;
-
-    if(!empty($argv))
-    {
-        $colors = array(
-            "verde" => "32",
-            "rojo" => "31",
-            "amarillo" => "33",
-            "azul" => "34",
-            "default" => "0"
-            );
-        echo "\033[".$colors[$color]."m".$txt."\033[".$colors["default"]."m";
-        ob_flush();
-        flush();
-    }
+    
+    $colors = array(
+        "verde" => "32",
+        "rojo" => "31",
+        "amarillo" => "33",
+        "azul" => "34",
+        "default" => "0"
+        );
+    echo "\033[".$colors[$color]."m".$txt."\033[".$colors["default"]."m".($nl ? "\n" : "");
+    ob_flush();
+    flush();
+    
 }
 
 
