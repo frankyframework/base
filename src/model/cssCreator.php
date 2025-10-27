@@ -13,7 +13,6 @@ class cssCreator
     public function __construct($name="global.css") {
         $this->css = array();
         $this->Namecss = $name;
-        $this->path = "";
     }
     
     public function addCss($css)
