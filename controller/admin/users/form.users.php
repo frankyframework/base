@@ -35,6 +35,7 @@ if(!empty($id))
 }
 $adminForm->addGeneral();
 if($MyAccessList->MeDasChancePasar("administrar_otros_usuarios")):
+
     $adminForm->addNivel();
     $adminForm->setOptionsInput("role",getRoles());
 endif;

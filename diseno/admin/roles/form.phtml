@@ -24,13 +24,13 @@
                     <?php foreach($resources as $name => $resource): ?>
                     
                         
-                        <li id="cat_<?=getFriendly($name); ?>"   <?=(in_array('cat_'.getFriendly($name), $data['resources']) ? "data-jstree='{ \"selected\" : true }'": '')?>> <?=_($name); ?>
+                        <li id="cat_<?=getFriendly($name); ?>"   <?=(!empty($data['resources']) && in_array('cat_'.getFriendly($name), $data['resources']) ? "data-jstree='{ \"selected\" : true }'": '')?>> <?=_($name); ?>
                             <?php  if(!empty($resource)):?>
                                 <ul>
                                 <?php foreach($resource as $k => $v): ?>
                     
                         
-                                    <li id="cat_<?=$k; ?>"  <?=(in_array($k, $data['resources']) ? "data-jstree='{ \"selected\" : true }'": '')?>>
+                                    <li id="cat_<?=$k; ?>"  <?=(!empty($data['resources']) && in_array($k, $data['resources']) ? "data-jstree='{ \"selected\" : true }'": '')?>>
                                       <?=_($v); ?>
                                     </li>
                                     

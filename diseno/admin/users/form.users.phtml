@@ -13,6 +13,13 @@
                     <?php echo $adminForm->getRow('nombre'); ?>
                     <?php echo $adminForm->getRow('email'); ?>
                     <?php echo $adminForm->getRow('telefono'); ?>
+                    <?php 
+                    
+                    if($MyAccessList->MeDasChancePasar("administrar_otros_usuarios")):
+                      
+                        echo $adminForm->getRow('role');
+                        endif;
+                    ?>
                     <?=(getCoreConfig("base/user/showgender") == 1 ? $adminForm->getRow('sexo') : "")?>
                     <?php echo $adminForm->getRow('fecha_nacimiento'); ?>
                     <div class="_tag_center">
