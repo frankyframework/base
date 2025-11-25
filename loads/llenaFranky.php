@@ -117,7 +117,7 @@ if($paginasModel->getData() == REGISTRO_SUCCESS)
 }
 else
 {
-    define(HOME,	"home");
+    define('HOME',	"home");
 
     $MyFrankyMonster->pushCommand(HOME,array(
             array(),

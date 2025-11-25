@@ -249,7 +249,7 @@ function stripJS($html)
 {
     $doc = new \DOMDocument();
 
-    $doc->loadHTML(utf8decode($html));
+    $doc->loadHTML(('<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'.$html));
     $domxpath = new \DOMXPath($doc);
     $filtered = $domxpath->query("//script[not(@type)]");
     foreach ($filtered as $_p) {
