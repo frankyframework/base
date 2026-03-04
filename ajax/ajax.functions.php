@@ -206,21 +206,128 @@ function EliminarComentario($id,$status)
 
 function _getFiles($path,$file='file')
 {
-	//echo $path;
-  $File = new \Franky\Filesystem\File;
-        $files = $File->getFiles(PROJECT_DIR.$path,$file);
-
+    global $MyAccessList;
+    global $MyMessageAlert;
+    
+    $respuesta = [];
+    
+    if(!$MyAccessList->MeDasChancePasar("administrar_media_gallery"))
+    {
+        $respuesta[] = array("message" => $MyMessageAlert->Message("sin_privilegios"));
+        return $respuesta;  
+    }
+    
+    $path = trim($path);
+    $file = trim($file);
+    
+    if (preg_match('/\.\.(\/|\\\\)/', $path) || 
+        preg_match('/\.\.(\/|\\\\)/', $file) ||
+        strpos($path, '~') !== false ||
+        strpos($file, '~') !== false) {
+        $respuesta[] = array("message" => "Path no permitido");
+        return $respuesta;
+    }
+    
+    $path = trim($path, '/\\');
+    
+    $allowedPaths = [
+        'uploads',
+        'public/uploads',
+        'modulos',
+        'public/jquery',
+        'public/css',
+        'public/js',
+        'public/images'
+    ];
+    
+    $isAllowed = false;
+    foreach ($allowedPaths as $allowed) {
+        if (strpos($path, $allowed) === 0) {
+            $isAllowed = true;
+            break;
+        }
+    }
+    
+    if (!$isAllowed) {
+        $isSubdirAllowed = false;
+        foreach ($allowedPaths as $allowed) {
+            if (strpos($allowed, $path) === 0) {
+                $isSubdirAllowed = true;
+                break;
+            }
+        }
+        
+        if (!$isSubdirAllowed) {
+            $respuesta[] = array("message" => "Acceso denegado a este directorio");
+            return $respuesta;
+        }
+    }
+    
+    if (!preg_match('/^[a-zA-Z0-9_\-\*\.]*$/', $file)) {
+        $respuesta[] = array("message" => "Patrón de búsqueda inválido");
+        return $respuesta;
+    }
+    
+    $fullPath = PROJECT_DIR . '/' . $path;
+    
+    if (!is_dir($fullPath)) {
+        $respuesta[] = array("message" => "El directorio no existe");
+        return $respuesta;
+    }
+    
+    if (!is_readable($fullPath)) {
+        $respuesta[] = array("message" => "No se puede leer el directorio");
+        return $respuesta;
+    }
+    
+    $File = new \Franky\Filesystem\File();
+    
+    try {
+        $files = $File->getFiles($fullPath, $file);
+        
         if(count($files) > 0)
         {
-            foreach($files as $file)
+            $safeFiles = [];
+            foreach($files as $filePath)
             {
-                $respuesta["file"][] =  $file;
+                $fileName = basename($filePath);
+                
+                if (preg_match('/^[a-zA-Z0-9_\-\., ]+$/', $fileName)) {
+                    $fileFullPath = $fullPath . '/' . $fileName;
+                    if (file_exists($fileFullPath)) {
+                        $fileInfo = [
+                            'name' => $fileName,
+                            'path' => $path . '/' . $fileName,
+                            'size' => filesize($fileFullPath) ?: 0,
+                            'modified' => date('Y-m-d H:i:s', filemtime($fileFullPath))
+                        ];
+                        
+                        $dangerousExtensions = ['php', 'phtml', 'inc', 'htaccess', 'env', 'sql', 'sh', 'bash'];
+                        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                        
+                        if (!in_array($extension, $dangerousExtensions)) {
+                            $safeFiles[] = $fileInfo;
+                        }
+                    }
+                }
+            }
+            
+            if (count($safeFiles) > 0) {
+                $respuesta["files"] = $safeFiles;
+                $respuesta["count"] = count($safeFiles);
+                $respuesta["path"] = $path;
+            } else {
+                $respuesta[] = array("message" => "No se encontraron archivos seguros");
             }
         }
         else
         {
-            $respuesta[] = array("message" => "error");
+            $respuesta[] = array("message" => "No se encontraron archivos");
         }
+    } catch (Exception $e) {
+        error_log("Error en _getFiles: " . $e->getMessage());
+        $respuesta[] = array("message" => "Error al procesar la solicitud");
+    }
 
 	return $respuesta;
 }
@@ -425,6 +532,7 @@ function EliminarBloque($id,$status)
 
 	return $respuesta;
 }
+
 
 /******************************** EJECUTA *************************/
 
