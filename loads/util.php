@@ -63,31 +63,25 @@ function __bindtextdomain($domain,$modulo)
     bindtextdomain($domain, $dir);
 }
 
-function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0)
-{
-    $is_next_generation = false;
-    if(getCoreConfig("base/pwa/images-next-generation") == 1)
+function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0, $excludeWP=0)
+{ 
+    if(getCoreConfig("base/pwa/images-next-generation") == 1 && $excludeWP==0)
     {
         global $MyRequest;
         $img = $MyRequest->link($src,false,false);
-
-        $html = "<picture>";
-        
         $schemaImg = pathinfo($img);
-        if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.jxr')):
-            $is_next_generation = true;
-            $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.jxr'."\" type='image/vnd.ms-photo'>";
-        endif;
-        if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.jp2')):
-            $is_next_generation = true;
-            $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.jp2'."\" type='image/jp2'>";
-        endif;
+        $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
+        
+        $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
+
         if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
             $is_next_generation = true;
+            $html = "<picture>";
             $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp'."\" type='image/webp'>";
+            $html .= "<img src=\"".$src."\" alt=\"$alt\">";
+            $html .= "</picture>";
         endif;
-        $html .= "<img src=\"".$src."\" alt=\"$alt\">";
-        $html .= "</picture>";
+      
 
     }
     
