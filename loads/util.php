@@ -1455,7 +1455,7 @@ function getBloqueCMS($id)
     if ($MyCMS->getTotal() > 0) {
         $data   = $MyCMS->getRows();
 
-        return "<div id=\"".str_replace("-","_",$data["friendly"])."\" class=\"".str_replace("-","_",$data["friendly"])."\">".$data["template"]."</div>";
+        return "<div id=\"".str_replace("-","_",$data["friendly"])."\" class=\"".str_replace("-","_",$data["friendly"])."\">".contentWebP($data["template"])."</div>";
 
     }
     return "";
