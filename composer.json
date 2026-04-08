@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": ">=7.3",
-        "frankyframework/module-installer-plugin" : "1.0.x-dev"
+        "frankyframework/module-installer-plugin" : "1.0.x-dev",
+        "matthiasmullie/minify": "*"
     },
     "autoload": {
         "psr-4": {
