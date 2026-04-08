@@ -13,7 +13,7 @@
     "require": {
         "php": ">=7.3",
         "frankyframework/module-installer-plugin" : "1.0.x-dev",
-        "matthiasmullie/minify": "*"
+        "tedivm/jshrink": "*"
     },
     "autoload": {
         "psr-4": {
