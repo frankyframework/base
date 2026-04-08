@@ -1,6 +1,6 @@
 <?php
 namespace Base\model;
-use Base\model\Minifier;
+use MatthiasMullie\Minify;
 
 
 class jsCreator
@@ -13,8 +13,6 @@ class jsCreator
     public function __construct($name="global.js") {
         $this->js = array();
         $this->Namejs = $name;
-        $this->path = "";
-        $this->embebed = "";
     }
     
     public function addJs($js)
@@ -72,7 +70,7 @@ class jsCreator
         $globalFile = fopen(PROJECT_DIR.$this->jsFolder.$this->version."/".$this->Namejs, 'w');
         
 
-        $contenidoJs = Minifier::minify($buffer."\n".$this->embebed);
+        $contenidoJs = \JShrink\Minifier::minify($buffer."\n".$this->embebed);
 
         $objDate = new \DateTime();
         $objDate->setTimezone(new \DateTimeZone('America/Mexico_City'));
