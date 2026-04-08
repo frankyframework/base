@@ -78,7 +78,7 @@ function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0, $e
             $is_next_generation = true;
             $html = "<picture>";
             $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp'."\" type='image/webp'>";
-            $html .= "<img src=\"".$src."\" alt=\"$alt\">";
+            $html .= "<img src=\"".$src."\" alt=\"$alt\" $extra >";
             $html .= "</picture>";
         endif;
       
