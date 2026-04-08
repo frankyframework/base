@@ -117,6 +117,29 @@ function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0, $e
 	return ($html);
 }
 
+function contentWebP($txt) {
+    global $MyRequest;
+    if(getCoreConfig("base/pwa/images-next-generation") == 1)
+    {
+        preg_match_all('/(src=")([^"]+\.(?:jpg|png|gif))(")/i', $txt,$resultImages);
+        
+        foreach($resultImages[2] as  $val) {
+
+            $img = $MyRequest->link(str_replace("../","",$val),false,false);
+            $schemaImg = pathinfo($img);
+            $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
+            
+            $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
+    
+            if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
+                $txt = str_replace($val, $schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp', $txt);
+            endif;
+
+        }
+    } 
+    return $txt;
+}
+
 function makeHTMLOrder($campo, $caption)
 {
         global $MyPaginacion;
