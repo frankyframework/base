@@ -1,6 +1,5 @@
 <?php
 namespace Base\model;
-use MatthiasMullie\Minify;
 
 
 class jsCreator
