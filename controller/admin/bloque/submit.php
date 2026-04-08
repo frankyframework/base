@@ -46,7 +46,7 @@ if($error == false)
         $result = $MyCMS->save($titulo,$nametemplate,$template);
         if($result == REGISTRO_SUCCESS)
         {
-            $dir_blog = $MyConfigure->getServerUploadDir()."/bloques/".$MySession->GetVar('path_img_blog')."/";
+            $dir_blog = $MyConfigure->getServerUploadDir()."/bloques/".$MySession->GetVar('path_img_bloque')."/";      
             rename($dir_blog,str_replace($MySession->GetVar('path_img_bloque'),$MyCMS->getUltimoID(),$dir_blog));
 
             $template = str_replace($MySession->GetVar('path_img_bloque'),$MyCMS->getUltimoID(),$template);
