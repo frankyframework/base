@@ -6,7 +6,8 @@ class jsCreator
 {
     
     private $js;   
-    private $embebed;   
+    private $embebed;  
+    private $version;   
     private $jsFolder = '/public/cache/js/';
     private $Namejs;
     public function __construct($name="global.js") {
