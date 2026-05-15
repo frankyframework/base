@@ -226,6 +226,8 @@ if($RoleModel->getData($RoleEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 include_once(PROJECT_DIR."/modulos/base/loads/llenaMensajes.php");
 
 
+include_once(PROJECT_DIR."/modulos/base/loads/core_config.php");
+
 $modulos = getModulos("DESC");
 
 if(!empty($modulos))
@@ -248,8 +250,6 @@ if(!empty($modulos))
 }
 
 include_once(PROJECT_DIR."/modulos/base/loads/llenaFranky.php");
-
-include_once(PROJECT_DIR."/modulos/base/loads/core_config.php");
 
 
 $ObserverManager->addObserver('login_user','validLoginUserDevice');
