@@ -26,7 +26,7 @@ class UserdeviceEntity
 
     public function exchangeArray($data)
     {
-        $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->id = (isset($data["id"]) && !empty($data["id"]) ? $data["id"] : null);
         $this->id_user = (isset($data["id_user"]) ? $data["id_user"] : null);
         $this->type = (isset($data["type"]) ? $data["type"] : null);
         $this->os = (isset($data["os"]) ? $data["os"] : null);

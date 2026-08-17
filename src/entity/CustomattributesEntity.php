@@ -30,7 +30,7 @@ class CustomattributesEntity
 
     public function exchangeArray($data)
     {
-        $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->id = (isset($data["id"]) && !empty($data["id"]) ? $data["id"] : null);
         $this->uid = (isset($data["uid"]) ? $data["uid"] : null);
         $this->name = (isset($data["name"]) ? $data["name"] : null);
         $this->label = (isset($data["label"]) ? $data["label"] : null);

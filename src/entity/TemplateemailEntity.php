@@ -30,7 +30,7 @@ class TemplateemailEntity
 
     public function exchangeArray($data)
     {
-        $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->id = (isset($data["id"]) && !empty($data["id"]) ? $data["id"] : null);
         $this->nombre = (isset($data["nombre"]) ? $data["nombre"] : null);
         $this->id_transaccional = (isset($data["id_transaccional"]) ? $data["id_transaccional"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);

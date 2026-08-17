@@ -20,7 +20,7 @@ class CoreConfigEntity
 
     public function exchangeArray($data)
     {
-        $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->id = (isset($data["id"]) && !empty($data["id"]) ? $data["id"] : null);
         $this->modulo = (isset($data["modulo"]) ? $data["modulo"] : null);
         $this->path = (isset($data["path"]) ? $data["path"] : null);
         $this->value = (isset($data["value"]) ? $data["value"] : null);

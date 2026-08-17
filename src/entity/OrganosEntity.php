@@ -30,7 +30,7 @@ class OrganosEntity
 
     public function exchangeArray($data)
     {
-        $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->id = (isset($data["id"]) && !empty($data["id"]) ? $data["id"] : null);
         $this->php = (isset($data["php"]) ? $data["php"] : null);
         $this->css = (isset($data["css"]) ? $data["css"] : null);
         $this->js = (isset($data["js"]) ? $data["js"] : null);

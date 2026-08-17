@@ -21,7 +21,7 @@ class AvataresEntity
 
     public function exchangeArray($data)
     {
-        $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->id = (isset($data["id"]) && !empty($data["id"]) ? $data["id"] : null);
         $this->id_user = (isset($data["id_user"]) ? $data["id_user"] : null);
         $this->name = (isset($data["name"]) ? $data["name"] : null);
         $this->url = (isset($data["url"]) ? $data["url"] : null);

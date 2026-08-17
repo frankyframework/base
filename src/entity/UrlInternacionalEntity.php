@@ -22,7 +22,7 @@ class UrlInternacionalEntity
 
     public function exchangeArray($data)
     {
-        $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->id = (isset($data["id"]) && !empty($data["id"]) ? $data["id"] : null);
         $this->id_franky = (isset($data["id_franky"]) ? $data["id_franky"] : null);
         $this->url = (isset($data["url"]) ? $data["url"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);

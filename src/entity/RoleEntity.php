@@ -22,7 +22,7 @@ class RoleEntity
 
     public function exchangeArray($data)
     {
-        $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->id = (isset($data["id"]) && !empty($data["id"]) ? $data["id"] : null);
         $this->name = (isset($data["name"]) ? $data["name"] : null);
         $this->resources = (isset($data["resources"]) ? $data["resources"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);
