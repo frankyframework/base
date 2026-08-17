@@ -70,12 +70,11 @@ function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0, $e
         global $MyRequest;
         $img = $MyRequest->link($src,false,false);
         $schemaImg = pathinfo($img);
-        if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
-            $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
+        $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
         
-            $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
+        $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
 
-        
+        if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
             $is_next_generation = true;
             $html = "<picture>";
             $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp'."\" type='image/webp'>";
@@ -116,29 +115,6 @@ function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0, $e
     
 
 	return ($html);
-}
-
-function contentWebP($txt) {
-    global $MyRequest;
-    if(getCoreConfig("base/pwa/images-next-generation") == 1)
-    {
-        preg_match_all('/(src=")([^"]+\.(?:jpg|png|gif))(")/i', $txt,$resultImages);
-        
-        foreach($resultImages[2] as  $val) {
-
-            $img = $MyRequest->link(str_replace("../","",$val),false,false);
-            $schemaImg = pathinfo($img);
-            $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
-            
-            $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
-    
-            if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
-                $txt = str_replace($val, $schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp', $txt);
-            endif;
-
-        }
-    } 
-    return $txt;
 }
 
 function makeHTMLOrder($campo, $caption)
@@ -1456,7 +1432,7 @@ function getBloqueCMS($id)
     if ($MyCMS->getTotal() > 0) {
         $data   = $MyCMS->getRows();
 
-        return "<div id=\"".str_replace("-","_",$data["friendly"])."\" class=\"".str_replace("-","_",$data["friendly"])."\">".contentWebP($data["template"])."</div>";
+        return "<div id=\"".str_replace("-","_",$data["friendly"])."\" class=\"".str_replace("-","_",$data["friendly"])."\">".$data["template"]."</div>";
 
     }
     return "";

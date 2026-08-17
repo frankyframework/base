@@ -1,18 +1,20 @@
 <?php
 namespace Base\model;
+use Base\model\Minifier;
 
 
 class jsCreator
 {
     
     private $js;   
-    private $embebed;  
+    private $embebed;   
     private $version;   
     private $jsFolder = '/public/cache/js/';
     private $Namejs;
     public function __construct($name="global.js") {
         $this->js = array();
         $this->Namejs = $name;
+  
     }
     
     public function addJs($js)
@@ -65,17 +67,17 @@ class jsCreator
             $buffer = file_get_contents($this->js);
         }
 
-       
-        
-        $globalFile = fopen(PROJECT_DIR.$this->jsFolder.$this->version."/".$this->Namejs, 'w');
         
 
-        $contenidoJs = \JShrink\Minifier::minify($buffer."\n".$this->embebed);
+        $globalFile = fopen(PROJECT_DIR.$this->jsFolder.$this->version."/".$this->Namejs, 'w');
+        
+        $contenidoJs = ($buffer."\n".$this->embebed);
 
         $objDate = new \DateTime();
         $objDate->setTimezone(new \DateTimeZone('America/Mexico_City'));
         
         fwrite($globalFile,'/***ARCHIVO GENERADO: '.$objDate->format(\DateTime::ISO8601).'***/ '.$contenidoJs);
+
 
         fclose($globalFile);
 
