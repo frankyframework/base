@@ -46,17 +46,7 @@
                 <a target="_blank" class="_btn _txt _my_site" href="/">VER SITIO</a>
             </div>
             <div class="w-xxxx-1 w-xxx-12  w-xx-12  w-x-12">
-                <form name="lang-admin-frm" action="/admin/lang.php" method="post">
-                <select name="lang_admin" onchange="$('form[name=lang-admin-frm]').submit();">
-                    <?php if(!empty(getCoreConfig('base/theme/langs-admin'))): ?>
-                    <?php foreach(getCoreConfig('base/theme/langs-admin') as $key_lang): ?>
-                    
-                        <option value="<?=$key_lang?>" <?=($_SESSION["lang_admin"] == $key_lang ? "selected='selected'" : "" )?>><?php echo strtolower($key_lang); ?></option>
-                   
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                </select>
-                </form>
+              
             </div>
         </div>
     </header>
@@ -74,6 +64,18 @@
                                 <?php if($MySession->LoggedIn()): ?>
                                     <li>
                                         <a class="_access _logout" href="/logout.php"><?php echo _("Cerrar sesión"); ?></a>
+
+                                        <form name="lang-admin-frm" action="/admin/lang.php" method="post">
+                                        <select name="lang_admin" onchange="$('form[name=lang-admin-frm]').submit();">
+                                            <?php if(!empty(getCoreConfig('base/theme/langs-admin'))): ?>
+                                            <?php foreach(getCoreConfig('base/theme/langs-admin') as $key_lang): ?>
+                                            
+                                                <option value="<?=$key_lang?>" <?=($_SESSION["lang_admin"] == $key_lang ? "selected='selected'" : "" )?>><?php echo strtolower($key_lang); ?></option>
+                                        
+                                            <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </select>
+                                        </form>
                                     </li>
                                 <?php endif; ?>
                               
