@@ -41,7 +41,6 @@ if(!empty($id))
 }
 
 $adminForm->addSubmit();
-$adminForm->setOptionsInput('id_transaccional',selectSeccionTransaccional());
 $adminForm->setData($data);
 
 $adminForm->setAtributoInput("callback","value", urldecode($callback));

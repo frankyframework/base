@@ -59,7 +59,9 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(e) {
 
-
+  if (event.request.url.includes('accounts.google.com')) {
+    return; // No llama a event.respondWith(), el navegador la maneja normal
+  }
   e.respondWith(
       caches.match(e.request).then(function(response) {
       return response || fetch(e.request);

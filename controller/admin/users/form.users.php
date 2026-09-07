@@ -1,10 +1,12 @@
 <?php
 use Base\Form\registroForm;
 use Base\model\USERS;
+use Base\entity\users as UserEntity;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $MyUser             = new USERS();
+$MyUserEntity       = new UserEntity();
 
 $id		= $Tokenizer->decode($MyRequest->getRequest('id'));
 $callback	= $MyRequest->getRequest('callback');
@@ -26,7 +28,8 @@ if(!empty($id))
 {
     $title = "Edición";
 
-        $MyUser->getData($id);
+    $MyUserEntity->setId($id);
+    $result	 		= $MyUser->getData($MyUserEntity->getArrayCopy());
 
 	$data = $MyUser->getRows();
         $data['id'] = $Tokenizer->token('users', $data['id']);

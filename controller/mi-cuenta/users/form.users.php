@@ -2,9 +2,11 @@
 use Base\Form\registroForm;
 use Base\model\USERS;
 use Franky\Haxor\Tokenizer;
+use Base\entity\users as UserEntity;
 
 $Tokenizer = new Tokenizer();
 $MyUser             = new USERS();
+$MyUserEntity       = new UserEntity();
 
 $callback	= $MyRequest->getRequest('callback');
 $data = $MyFlashMessage->getResponse();
@@ -16,8 +18,8 @@ $id= $MySession->GetVar('id');
 $adminForm = new registroForm("users");
 $adminForm->setMobile($Mobile_detect->isMobile());
 $adminForm->setAtributo("action","/mi-cuenta/users/submit.users.php");
-
-$MyUser->getData($id);
+$MyUserEntity->setId($id);
+$MyUser->getData($MyUserEntity->getArrayCopy());
 $data = $MyUser->getRows();
 $data['id'] = $Tokenizer->token('users', $data['id']);
 $adminForm->addId();

@@ -1,0 +1,93 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+        <div class="w-xxxx-12 cont_global_admin">
+        <h1 class="titulo_seccion_admin">CMS</h1>
+        <div class="w-xxxx-12 cont_header_panel">
+            <div class="_wrapp_form_serch">
+            <form name="buscarGrid" action="" method="get" id="paginar">                
+                <div class="form-group form_buscar"><input type="submit" name="buscar" class="_btn _primary" id="btsSearchGridAdmin" value="Buscar"></div>
+            </form>
+            <a href="<?php echo $MyRequest->url(FRM_CMS_TEMPLATE); ?>" class="_btn_new">Nuevo</a>
+            </div>
+            </div>
+            <div  class="w-xxxx-12 cont_gral_admin cont_cms_reg">
+            <table id="jqGrid"></table>
+            <div id="jqGridPager"></div>
+            </div>
+           
+    </div>
+</div>
+<script >
+$(window).load(function(){
+    var isGridMobile = ($(window).width() <= 767 ? true : false);
+    $("#jqGrid").GridAdmin({
+        search : true,
+        entity : 'cms',
+        redirectOnSelectRow:true,
+        gridPager : "#jqGridPager",
+        btnSearch: "#btsSearchGridAdmin",
+        redirectPath : '<?=$MyRequest->link(FRM_CMS_TEMPLATE)?>',
+        pathData : '<?=$MyRequest->url(LISTA_CMS_TEMPLATE)?>',
+        error : "<?=_('No hay paginas registradas')?>",
+        deleteFunction : "EliminarCMSTemplate",
+        colModel: [
+            { label: '<?=_('ID')?>', name: 'id', key:true, hidden:isGridMobile,  width: 100 },
+            { label: '<?=_('Callback')?>', name: 'callback',  hidden:true, width: 50 },
+            { label: '<?=_('Status')?>', name: 'status',  hidden:true, width: 50 },
+            { label: '<?=_('Fecha')?>', name: 'fecha', hidden:isGridMobile, width: 200,
+                
+                searchoptions: {
+                    dataInit: function (element) {
+                        $(element).datepicker({
+                            id: 'orderDate_datePicker',
+                            dateFormat:"yy-mm-dd",
+                            maxDate: "+0D",
+                            showOn: 'focus'
+                        });
+                    },
+                    sopt: ["ge","le","eq"]
+                }
+             },
+            { label: '<?=_('Titulo')?>', name: 'titulo',  width: 250 },
+            { label: '<?=_('URL')?>', name: 'friendly',  width: 250 },
+            { 
+            name: 'acciones', 
+            index: 'acciones', 
+            width: 200, 
+            align: 'center', 
+            sortable: false, 
+            search: false,
+            formatter: creadorDeBotones // Vincula la función que creamos en el paso 2
+            }
+        ],
+        subGrid: isGridMobile,
+        subGridRowExpanded: showChildGrid,
+        width:1020
+    });
+ });
+
+ function creadorDeBotones(cellvalue, options, rowObject) {
+    
+    var id = options.rowId; // Obtiene el ID único de la fila actual
+     
+    var icon_delete = (rowObject.status  == "activar" ? 'icon-c-encender' : 'icon-r-eliminar');
+    var boton1 = '<a href="<?=$MyRequest->link(FRM_CMS_TEMPLATE)?>?id=' + id + '&callback='+rowObject.callback+'" class="btn_adm_editar"><span class="icon icon-editar"> </span></a> ';
+    var boton2 = '<a class="btn_adm_eliminar " data-id="'+id+'" href="#'+rowObject.status+'"><span class="icon '+icon_delete+'"> </span></a>';
+
+    return boton1 + boton2;
+}
+
+function showChildGrid(parentRowID, parentRowKey) {
+    var childGridID = parentRowID + "_table";
+    var childGridPagerID = parentRowID + "_pager";
+    if($(window).width() <= 767) {
+        var fecha  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_fecha"]').text();
+        var id  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_id"]').text();
+      
+        $('#' + parentRowID).append('<p>ID: '+id+'</p>');
+        $('#' + parentRowID).append('<p>Fecha: '+fecha+'</p>');
+       
+    }
+}
+</script>
+

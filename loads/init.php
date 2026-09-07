@@ -272,10 +272,8 @@ if(!empty($files))
               $_files[$_k] = $_v;
       }
   }
-
   if(isset($_files[$phpfile]) && file_exists($_files[$phpfile]))
   {
-
       require($_files[$phpfile]);
       die;
   }
@@ -289,7 +287,11 @@ if(!$MyFrankyMonster->crearMonstruo(($seccion)) || $seccion == ERR_404)
 {
 
       $MyCMS = new \Base\model\CMS;
-      if($MyCMS->getData($MyRequest->getURI(),"",1) == REGISTRO_SUCCESS){
+      $CmsEntity = new \Base\entity\CmsEntity();
+      $CmsEntity->friendly($MyRequest->getURI());
+      $CmsEntity->status(1);
+
+      if($MyCMS->getData($CmsEntity->getArrayCopy()) == REGISTRO_SUCCESS){
             $MyFrankyMonster->crearMonstruo(CMS);
       }
       else {

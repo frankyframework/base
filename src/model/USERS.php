@@ -3,69 +3,58 @@ namespace Base\model;
 
 class USERS  extends \Franky\Database\Mysql\objectOperations
 {
-    protected $rango;
+    protected array $rango;
+
     public function __construct()
     {
       parent::__construct();
       $this->from()->addTable('users');
     }
   
-    public function setRango($rango)
+    public function setRango(array $rango)
     {
         $this->rango = $rango;
     }
     
     
-    function getData($id='',$busca='',$role='',$status='1')
+    function getData(array $data = [])
     {
+            $data = $this->optimizeEntity($data);
             $campos = array("id","nombre","email","role","fecha","fecha_nacimiento","sexo","telefono","contrasena","verificado","status");
 
-            if(!empty($id))
-            {
-                if(is_numeric($id))
-                {
-                  $this->where()->addAnd('id',$id,'=');
-                }
-
-            }
-            if(!empty($busca))
-            {
-                $this->where()->concat('AND (');
-                $this->where()->addOr('email',"%$busca%",'like');
-                $this->where()->concat(')');
-            }
-            if(!empty($role))
-            {
-                if(is_array($role))
-                {
-
-                    $this->where()->concat('AND (');
-                    foreach ($role as $k)
-                    {
-                      $this->where()->addOr('role',$k,'=');
-
-                    }
-                    $this->where()->concat(')');
-
-                }
-                else
-                {
-                  $this->where()->addAnd('role',$role,'=');
-                }
-            }
-             if(!empty($status))
-            {
-              $this->where()->addAnd('status',$status,'=');
-            }
-            
-             if(!empty($this->rango))
+            if(!empty($this->rango))
             {
                   $this->where()->concat('AND (');
                   $this->where()->addAnd('fecha',$this->rango[0],'>=');
                   $this->where()->addAnd('fecha',$this->rango[1],'<=');
                   $this->where()->concat(')');
+                  unset($data['fecha']);
             }
 
+            foreach($data as $k => $v)
+            {
+              if(!empty($v) || is_numeric($v))
+              {
+                if(is_array($v))
+                {
+                    $this->where()->concat('AND (');
+                    foreach ($v as $_v)
+                    {
+                      $this->where()->addOr($k,$_v,'=');
+
+                    }
+                    $this->where()->concat(')');
+                }
+                else
+                {
+                  if(in_array($k,['id','contrasena','status','verificado'])) {
+                    $this->where()->addAnd($k,$v,'=');
+                  } else {
+                      $this->where()->addAnd($k,"%".$v."%",'like');
+                  }
+                } 
+              }
+            }
 
             return $this->getColeccion($campos);
 
@@ -73,7 +62,7 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
 
 
 
-    function findEmail($email,$id=null)
+    function findEmail(string $email,int $id=null)
     {
         $campos = array("email");
         $this->where()->addAnd('email',$email,'=');
@@ -86,7 +75,7 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
         return $this->getColeccion($campos);
 
     }
-    function findTelefono($telefono,$id=null)
+    function findTelefono(string $telefono, int$id=null)
     {
         $campos = array("telefono");
         $this->where()->addAnd('telefono',$telefono,'=');
@@ -101,7 +90,7 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
     }
    
 
-    private function optimizeEntity($array)
+    private function optimizeEntity(array $array)
     {
         foreach ($array as $k => $v )
         {
@@ -112,7 +101,7 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
         return $array;
     }
 
-    public function save($user)
+    public function save(array $user)
     {
 
         $user = $this->optimizeEntity($user);

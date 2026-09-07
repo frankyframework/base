@@ -1,6 +1,8 @@
 <?php
 use Base\Form\cmsForm;
 use Franky\Haxor\Tokenizer;
+use \Base\model\CMS;
+use \Base\entity\CmsEntity;
 
 $Tokenizer = new Tokenizer;
 
@@ -14,8 +16,10 @@ $path_img_blog = 'temp/'.md5(time());
 $MySession->SetVar('path_img_blog',$path_img_blog);
 if(!empty($id))
 {
-    $MyCMS = new \Base\model\CMS;
-    $result = $MyCMS->getData($id);
+    $MyCMS = new CMS;
+    $CmsEntity = new CmsEntity;
+    $CmsEntity->id($id);
+    $result = $MyCMS->getData($CmsEntity->getArrayCopy());
     $data   = $MyCMS->getRows();
     $path_img_blog = $id;
 

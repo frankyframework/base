@@ -4,97 +4,96 @@
         <h1 class="titulo_seccion_admin">Contacto</h1>
         <div class="w-xxxx-12 cont_header_panel">
              <div class="_wrapp_form_serch">
-                <?php echo $MyFiltrosForm->openTag(); ?>
-                <?php echo $MyFiltrosForm->getAllRow(); ?>
-                <?php echo $MyFiltrosForm->endTag(); ?>
-                <a href="/admin/contacto/excel.php?busca_b=<?php echo $busca_b; ?>&amp;rango_inicial=<?php echo $rango_inicial; ?>&amp;rango_final=<?php echo $rango_final; ?>" target="_blank" class="_btn_new">Exportar</a>
+                <form name="buscarGrid" action="" method="get" id="paginar">                
+                        <div class="form-group form_buscar"><input type="submit" name="buscar" class="_btn _primary" id="btsSearchGridAdmin" value="Buscar"></div>
+                </form>
+                <a href="/admin/contacto/excel.php" target="_blank" class="_btn_new">Exportar</a>
 
             </div>
         </div>
-
         <div  class="w-xxxx-12 cont_gral_admin cont_contactos">
-            <div >
-                <div class="w-xxxx-12">
-                    <div class="w-xxxx-12 contenedor_titulo_columnas">
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "fecha", _("Fecha")); ?></div>
-                        <div class="w-xxxx-4"><?php echo makeHTMLOrder( "nombre", _("Nombre")); ?></div>
-                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "email", _("E-mail")); ?></div>
-                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "telefono", _("Telefono")); ?></div>
-                        <div class="w-xxxx-3"><?php echo makeHTMLOrder( "asunto", _("Asunto")); ?></div>
-                        <div class="w-xxxx-1"><?=_('Eliminar')?></div>
-                    </div>
-                    <div class="contenedor_columnas_info"  >
-                    <div class="contenedor_columnas" id="content_row_{{_data.id}}" >
-                        <div class='w-xxxx-2'>{{_data.fecha}}</div>
-                        <div class='w-xxxx-4'>{{_data.nombre}}</div>
-                        <div class='w-xxxx-1 email'>{{_data.email}}</div>
-                        <div class='w-xxxx-1 telephone'>{{_data.telefono}}</div>
-                        <div class='w-xxxx-3'>{{_data.asunto}}</div>
-                        <div class='w-xxxx-1 _table_delete {{_data.thisClass}}'>
-                            <a class="btn_adm_eliminar" id="{{_data.id}}" href="#{{_data.nuevo_estado}}" ></a>
-                        </div>
-                        <div class='w-xxxx-12 _open_comment'>
-                            <a href="javascript:void(0);" onclick="$(this).next('div').toggle('slow'); $(this).parent('div').toggleClass('active');">Ver comentario</a>
-                            <div style="display:none;">
-                            {{_data.comentario}}
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="w-xxxx-12">
-                    <div class="no_hay_datos" ><?=_('No hay informacion de contacto registrada')?></div>
-                </div>
-                <div class="w-xxxx-12">
-                    <?php echo render("admin/widget.paginar.phtml"); ?>
-                </div>
-            </div>
+            <table id="jqGrid"></table>
+            <div id="jqGridPager"></div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-window.admingrid = <?php echo json_encode($lista_admin_data); ?>;
-</script>
+
 <script >
 $(window).load(function(){
-    $(".btn_adm_eliminar").click(function(event){
+var isGridMobile = ($(window).width() <= 767 ? true : false);
 
-         event.preventDefault();
-         var nuevo_estado = ($(this).attr("href").replace("#","") == "activar" ? 1 : 0);
-
-         EliminarRegistro('<?php echo $deleteFunction; ?>',$(this).attr("id"),nuevo_estado,"","EliminarRegistorPanelRemove")
-
-    });
-
-
+$("#jqGrid").GridAdmin({
+    search : true,
+    entity : 'mailing',
+    redirectOnSelectRow:false,
+    gridPager : "#jqGridPager",
+    btnSearch: "#btsSearchGridAdmin",
+    redirectPath : '',
+    pathData : '<?=$MyRequest->url(CONTACTOS_LIST)?>',
+    error : "<?=_('No hay emails registrados')?>",
+    deleteFunction : "EliminarComentario",
+    colModel: [
+        { label: '<?=_('ID')?>', name: 'id', key:true,  width: 100 },
+        { label: '<?=_('Status')?>', name: 'status',  hidden:true, width: 50 },
+        { label: '<?=_('Fecha')?>', name: 'fecha',  width: 180,
+            
+            searchoptions: {
+                dataInit: function (element) {
+                    $(element).datepicker({
+                        id: 'orderDate_datePicker',
+                        dateFormat:"yy-mm-dd",
+                        maxDate: "+0D",
+                        showOn: 'focus'
+                    });
+                },
+                sopt: ["ge","le","eq"]
+            }
+        },
+        { label: '<?=_('Nombre')?>', name: 'nombre',hidden:isGridMobile,  width: 250 },
+        { label: '<?=_('Tel&eacute;fono')?>', name: 'telefono',hidden:isGridMobile,  width: 250 },
+        { label: '<?=_('Asunto')?>', name: 'asunto',  width: 250 },
+        { label: '<?=_('Email')?>', name: 'email', hidden:isGridMobile, width: 250 },
+        { label: '<?=_('Comentario')?>', name: 'comentario', hidden:true, width: 250 },
+        { 
+        name: 'acciones', 
+        index: 'acciones', 
+        width: 180, 
+        align: 'center', 
+        sortable: false, 
+        search: false,
+        formatter: creadorDeBotones,
+        }
+    ],
+    subGrid: true,
+    subGridRowExpanded: showChildGrid
 });
-</script>
-
-<?php if(!$Mobile_detect->isMobile()): ?>
-<script >
-$( document ).ready(function() {
- $(function() {
-     $( "input[name=rango_inicial]" ).datepicker({
-         defaultDate: "+1w",
-         changeMonth: false,
-         numberOfMonths: 3,
-         dateFormat:"yy-mm-dd",
-         maxDate: "+0D",
-         onClose: function( selectedDate ) {
-         $("input[name=rango_final]" ).datepicker( "option", "minDate", selectedDate );
-         }
-     });
-     $( "input[name=rango_final]" ).datepicker({
-         defaultDate: "+1w",
-         changeMonth: false,
-         numberOfMonths: 3,
-         dateFormat:"yy-mm-dd",
-         maxDate: "+0D",
-         onClose: function( selectedDate ) {
-         $( "input[name=rango_inicial]").datepicker( "option", "maxDate", selectedDate );
-         }
-     });
- });
 });
+
+function creadorDeBotones(cellvalue, options, rowObject) {
+
+    var id = options.rowId;
+    
+    var icon_delete = (rowObject.status  == "activar" ? 'icon-c-encender' : 'icon-r-eliminar');
+    var boton = '<a class="btn_adm_eliminar " data-id="'+id+'" href="#'+rowObject.status+'"><span class="icon '+icon_delete+'"> </span></a>';
+
+    return boton;
+}
+
+function showChildGrid(parentRowID, parentRowKey) {
+    var childGridID = parentRowID + "_table";
+    var childGridPagerID = parentRowID + "_pager";
+    var comentario  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_comentario"]').text();
+    if($(window).width() <= 767) {
+        var fecha  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_fecha"]').text();
+        var nombre  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_nombre"]').text();
+        var email  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_email"]').text();
+        var telefono  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_telefono"]').text();
+      
+        $('#' + parentRowID).append('<p>Fecha: '+fecha+'</p>');
+        $('#' + parentRowID).append('<p>Nombre: '+nombre+'</p>');
+        $('#' + parentRowID).append('<p>E-mail: '+email+'</p>');
+        $('#' + parentRowID).append('<p>Tel&eacute;fono: '+telefono+'</p>');
+    }
+    $('#' + parentRowID).append('<p>'+comentario+'</p>');
+}
 </script>
-<?php endif; ?>

@@ -70,11 +70,12 @@ function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0, $e
         global $MyRequest;
         $img = $MyRequest->link($src,false,false);
         $schemaImg = pathinfo($img);
-        $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
-        
-        $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
-
         if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
+            $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
+        
+            $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
+
+        
             $is_next_generation = true;
             $html = "<picture>";
             $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp'."\" type='image/webp'>";
@@ -115,6 +116,29 @@ function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0, $e
     
 
 	return ($html);
+}
+
+function contentWebP($txt) {
+    global $MyRequest;
+    if(getCoreConfig("base/pwa/images-next-generation") == 1)
+    {
+        preg_match_all('/(src=")([^"]+\.(?:jpg|png|gif))(")/i', $txt,$resultImages);
+        
+        foreach($resultImages[2] as  $val) {
+
+            $img = $MyRequest->link(str_replace("../","",$val),false,false);
+            $schemaImg = pathinfo($img);
+            $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
+            
+            $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
+    
+            if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
+                $txt = str_replace($val, $schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp', $txt);
+            endif;
+
+        }
+    } 
+    return $txt;
 }
 
 function makeHTMLOrder($campo, $caption)
@@ -555,7 +579,6 @@ function sendEmail($campos,$data)
         endif;
     endforeach;
     endif;
-    //echo $Headers;
     return mail($destinatario,$data['Asunto'],$ContenidoString, $Headers);
     
 }
@@ -773,6 +796,9 @@ function breadcrumbs()
 function getFechaUI($date)
 {
     global $_Months;
+    if(empty($date)) {
+        return "";
+    }
     $p	= explode(" ",$date);
     $f = explode("-",$p[0]);
     return $fecha = $f[2]." ".$_Months[$f[1]]." ".$f[0]." ".(isset($p[1]) ?substr($p[1],0,-3)." Hrs." : '');
@@ -821,27 +847,6 @@ function getRoles()
     return ($roles);
 }
 
-
-function selectSeccionTransaccional()
-{
-      $SecciontransaccionalModel = new \Base\model\SecciontransaccionalModel();
-      $SecciontransaccionalEntity = new \Base\entity\SecciontransaccionalEntity();
-
-      $SecciontransaccionalEntity->status(1);
-      $secciones = array();
-      $SecciontransaccionalModel->setTampag(1000);
-      $SecciontransaccionalModel->setOrdensql("nombre ASC");
-      if($SecciontransaccionalModel->getData($SecciontransaccionalEntity->getArrayCopy()) == REGISTRO_SUCCESS)
-      {
-        while($registro = $SecciontransaccionalModel->getRows())
-        {
-            $secciones[$registro['id']] = $registro['nombre'];
-
-        }
-      }
-
-      return $secciones;
-}
 
 function getTemplatesEmail()
 {
@@ -1424,15 +1429,23 @@ function verifyRecaptcha()
     return true;
 }
 
-function getBloqueCMS($id)
+function getBloqueCMS(int|string $id)
 {
     $MyCMS = new \Base\model\Bloque;
-    $result = $MyCMS->getData($id,"",1);
+    $BloqueEntity = new \Base\entity\BloqueEntity();
+    if(is_integer($id)) {
+        $BloqueEntity->id($id);
+    } else {
+        $BloqueEntity->friendly($id);
+    }
+    
+    $BloqueEntity->status(1);
+    $MyCMS->getData($BloqueEntity->getArrayCopy());
     
     if ($MyCMS->getTotal() > 0) {
         $data   = $MyCMS->getRows();
 
-        return "<div id=\"".str_replace("-","_",$data["friendly"])."\" class=\"".str_replace("-","_",$data["friendly"])."\">".$data["template"]."</div>";
+        return "<div id=\"".str_replace("-","_",$data["friendly"])."\" class=\"".str_replace("-","_",$data["friendly"])."\">".contentWebP($data["template"])."</div>";
 
     }
     return "";
@@ -1443,6 +1456,25 @@ function getFormatreplace($format,$arrayData) {
         $format = str_replace("{".$key."}",$val,$format);
     }
     return $format;
+}
+
+function prevoewEmailTemplate(string $html)
+{
+    global $MyConfigure;
+    $plantilla = new \Franky\Core\Plantilla();
+    $campos = [];
+    if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/email/header.html"))
+    {
+        $campos['header'] = render(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/email/header.html");
+    }
+    if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/email/footer.html"))
+    {
+        $campos['footer'] = render(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/email/footer.html");
+    }
+    $plantilla->asigna_variables($campos);
+    $ContenidoString = $plantilla->muestra($html);
+
+    return $ContenidoString;
 }
 
 ?>

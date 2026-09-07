@@ -3,70 +3,109 @@
     <div class="w-xxxx-12 cont_global_admin">
         <h1 class="titulo_seccion_admin">Dispositivos</h1>
         <div class="w-xxxx-12 cont_header_panel">
-
-        </div>
-
-        <div  class="w-xxxx-12 cont_gral_admin cont_contactos">
-            <div >
-                <div class="w-xxxx-12">
-                    <div class="w-xxxx-12 contenedor_titulo_columnas">
-                      <div class="w-xxxx-2"><?php echo makeHTMLOrder( "tipo", _("Tipo")); ?></div>
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "access_last", _("Ultimo acceso")); ?></div>
-                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "os", _("Sitema operativo")); ?></div>
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "ip", _("IP")); ?></div>
-                        <div class="w-xxxx-3"><?php echo makeHTMLOrder( "user_agent", _("User-Agent")); ?></div>
-                        <div class="w-xxxx-1"><?=_('Permitir Acceso')?></div>
-                        <div class="w-xxxx-1"><?=_('Eliminar')?></div>
-                    </div>
-                    <div class="contenedor_columnas_info"  >
-                    <div class="contenedor_columnas" id="content_row_{{_data.id}}" >
-                        <div class='w-xxxx-2'>{{_data.type}}</div>
-                        <div class='w-xxxx-2'>{{_data.access_last}}</div>
-                        <div class='w-xxxx-1 '>{{_data.os}}</div>
-                        <div class='w-xxxx-2 '>{{_data.ip}}</div>
-                        <div class='w-xxxx-3'>{{_data.user_agent}}</div>
-                        <div class='w-xxxx-1 _table_delete {{_data.thisClass}}'>
-                            <a class="btn_adm_eliminar_switch_device" id="{{_data.id}}" href="#{{_data.nuevo_estado}}" >Eliminar</a>
-                        </div>
-                        <div class='w-xxxx-1 _table_delete {{_data.thisClass}}'>
-                            <a class="btn_adm_eliminar " data-id="{{_data.id}}" href="#{{_data.delete}}" >Eliminar</a>
-                        </div>
-
-                    </div>
-                </div>
-              </div>
-                <div class="w-xxxx-12">
-                    <div class="no_hay_datos" ><?=_('No hay dispositivos registrados')?></div>
-                </div>
-                <div class="w-xxxx-12">
-                    <?php echo render("admin/widget.paginar.phtml"); ?>
+            <div class="_wrapp_form_serch">
+                    <form name="buscarGrid" action="" method="get" id="paginar">                
+                        <div class="form-group form_buscar"><input type="submit" name="buscar" class="_btn _primary" id="btsSearchGridAdmin" value="Buscar"></div>
+                    </form>
                 </div>
             </div>
+        <div  class="w-xxxx-12 cont_gral_admin cont_devices">
+            <table id="jqGrid"></table>
+            <div id="jqGridPager"></div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-window.admingrid = <?php echo json_encode($lista_admin_data); ?>;
-</script>
+
 <script >
+
 $(window).load(function(){
-    $(".btn_adm_eliminar_switch_device").click(function(event){
+    var isGridMobile = ($(window).width() <= 767 ? true : false);
 
-         event.preventDefault();
-         var nuevo_estado = ($(this).attr("href").replace("#","") == "activar" ? 1 : 0);
-
-         EliminarDevice('<?php echo $deleteFunction; ?>',$(this).attr("id"),nuevo_estado,'',"EliminarRegistroPanel")
-
+    $("#jqGrid").GridAdmin({
+        search : true,
+        entity : 'devicesa',
+        redirectOnSelectRow:false,
+        gridPager : "#jqGridPager",
+        btnSearch: "#btsSearchGridAdmin",
+        redirectPath : '',
+        pathData : window.location.pathname,
+        error : "<?=_calificaciones("No hay registros")?>",
+        deleteFunction : "",
+        colModel: [
+            { label: '<?=_('ID')?>', name: 'id', key:true, hidden:true, width: 50 },
+            { label: '<?=_('Fecha')?>', name: 'access_last', width: 150,
+                
+                searchoptions: {
+                    dataInit: function (element) {
+                        $(element).datepicker({
+                            id: 'orderDate_datePicker',
+                            dateFormat:"yy-mm-dd",
+                            maxDate: "+0D",
+                            showOn: 'focus'
+                        });
+                    },
+                    sopt: ["ge","le","eq"]
+                }
+            },
+            { label: '<?=_('Tipo')?>', name: 'type', width: 100 },
+            { label: '<?=_('OS')?>', name: 'os',  width: 100},
+            { label: '<?=_('IP')?>', name: 'ip',  width: 250 },
+            { label: '<?=_('User Agent')?>', name: 'user_agent', width: 250, hidden:true, },
+            { 
+            name: 'acciones', 
+            index: 'acciones', 
+            width: 250, 
+            align: 'center', 
+            sortable: false, 
+            search: false,
+            formatter: creadorDeBotones
+            }
+        ],
+        subGrid: true,
+        subGridRowExpanded: showChildGrid,
+        callbackFuncion:'deleteDevices',
+        width:900
     });
-    $(".btn_adm_eliminar").click(function(event){
+ });
 
-         event.preventDefault();
-         EliminarDevice('EliminarDispositivo',$(this).attr("data-id"),0,'¿Realmente quieres eliminar el dispositivo?',"EliminarRegistorPanelRemove")
+ function creadorDeBotones(cellvalue, options, rowObject) {
+    
+    var id = options.rowId; // Obtiene el ID único de la fila actual
+     
+    var icon_delete = (rowObject.status  == "activar" ? 'icon-c-encender' : 'icon-r-eliminar');
+    var boton1 = '<a class="_btn_adm_eliminar " data-id="'+id+'" href="#desactivar"><span class="icon icon-r-eliminar"> </span></a> ';
+    var boton2 = '<a class="btn_adm_eliminar_switch_device" data-id="'+id+'" href="#'+rowObject.status+'"><span class="icon '+icon_delete+'"> </span></a>';
+    
+    return boton1 + boton2;                       
+}
 
-    });
 
+function deleteDevices() {
     $.fn.buttonDelete('a.btn_adm_eliminar_switch_device')
+    
+    $(".btn_adm_eliminar_switch_device").click(function(event){
+        event.preventDefault();
+        var nuevo_estado = ($(this).attr("href").replace("#","") == "activar" ? 1 : 0);
+        EliminarDevice('BloquearDispositivo',$(this).attr("data-id"),nuevo_estado,'',"EliminarRegistroPanel")
 
+        
+    });
 
-});
+    $("._btn_adm_eliminar").click(function(event){
+        event.preventDefault();
+        EliminarDevice('EliminarDispositivo',$(this).attr("data-id"),0,'¿Realmente quieres eliminar el dispositivo?',"EliminarRegistorPanelRemove")
+
+    });
+}
+
+function showChildGrid(parentRowID, parentRowKey) {
+    var childGridID = parentRowID + "_table";
+    var childGridPagerID = parentRowID + "_pager";
+
+        var agent  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_user_agent"]').text();
+      
+        $('#' + parentRowID).append('<p>User Agent: '+agent+'</p>');
+       
+    
+}
 </script>

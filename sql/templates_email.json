@@ -16,12 +16,6 @@
                 "null":0
             },
             {
-                "name":"id_transaccional",
-                "type":"int",
-                "length":11,
-                "null":0
-            },
-            {
                 "name":"Asunto",
                 "type":"varchar",
                 "length":255,
@@ -91,16 +85,6 @@
         ],
         "config":{
             "primary":"id",
-            "keys":
-                {
-                    "secciones_transaccionales" : {
-                        "foreing" : "id",
-                        "local":"id_transaccional",
-                        "delete":"NO ACTION",
-                        "update":"NO ACTION"
-                    }
-                }
-            ,
             "engine":"InnoDB"
         }
     }
@@ -110,7 +94,6 @@
         {
             "id":1,
             "nombre":"Registro con confirmacion de email",
-            "id_transaccional":1,
             "status":1,
             "fecha":"2020-01-01 00:00:00",
             "Asunto":"Alta de usuario con confirmacion de email",
@@ -126,7 +109,6 @@
         {
             "id":2,
             "nombre":"Registro sin confirmación de email",
-            "id_transaccional":2,
             "status":1,
             "fecha":"2020-01-01 00:00:00",
             "Asunto":"Alta de usuario",
@@ -142,7 +124,6 @@
         {
             "id":3,
             "nombre":"Verificacion de email",
-            "id_transaccional":3,
             "status":1,
             "fecha":"2020-01-01 00:00:00",
             "Asunto":"Verificacion de Registro",
@@ -158,7 +139,6 @@
         {
             "id":4,
             "nombre":"Recuperar contraseña",
-            "id_transaccional":4,
             "status":1,
             "fecha":"2020-01-01 00:00:00",
             "Asunto":"Recuperar contraseña",
@@ -174,7 +154,6 @@
         {
             "id":5,
             "nombre":"Contactanos",
-            "id_transaccional":5,
             "status":1,
             "fecha":"2020-01-01 00:00:00",
             "Asunto":"Contactanos",
@@ -190,7 +169,6 @@
         {
             "id":6,
             "nombre":"Nuevo dispositivo",
-            "id_transaccional":6,
             "status":1,
             "fecha":"2020-01-01 00:00:00",
             "Asunto":"Se detecto un nuevo inicio de sesion",
@@ -206,7 +184,6 @@
         {
             "id":7,
             "nombre":"Notificacion de contactanos para usuario",
-            "id_transaccional":7,
             "status":1,
             "fecha":"2020-01-01 00:00:00",
             "Asunto":"Tu solicitud fue recibida",
@@ -222,7 +199,6 @@
         {
             "id":8,
             "nombre":"SMTP test",
-            "id_transaccional":7,
             "status":1,
             "fecha":"2020-01-01 00:00:00",
             "Asunto":"SMTP test",

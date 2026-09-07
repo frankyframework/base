@@ -1,13 +1,18 @@
 <?php
 use Base\entity\redireccionesEntity;
 use Franky\Core\validaciones;
+use Base\model\Bloque;
+use Franky\Haxor\Tokenizer;
 
+
+$MyCMS = new Bloque;
+$Tokenizer  = new Tokenizer();
 $id             = $MyRequest->getRequest('id');
-$callback       = $MyRequest->getRequest('callback');
+$callback	= $Tokenizer->decode($MyRequest->getRequest('callback'));
 $titulo         = $MyRequest->getRequest('titulo');
 $template       = $MyRequest->getRequest('template',"",true);
 $nametemplate    = $MyRequest->getRequest('friendly', getFriendly($titulo));
-$MyCMS = new \Base\model\Bloque;
+
 
 $error = false;
 
@@ -26,7 +31,7 @@ if(!$valid)
     $error = true;
 }
 
-if($MyCMS->existeTemplate($nombre,$id) == REGISTRO_SUCCESS)
+if($MyCMS->existeTemplate($titulo,$id) == REGISTRO_SUCCESS)
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("nombre_template_duplicado"));
     $error = true;
@@ -64,7 +69,7 @@ if($error == false)
     }
     else
     {
-        $MyCMS->getData($id);
+        $MyCMS->getData(['id' => $id]);
         $registro = $MyCMS->getRows();
         $_titulo		= $registro["titulo"];
         $friendly              = $registro["friendly"];

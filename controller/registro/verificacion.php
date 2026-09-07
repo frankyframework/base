@@ -32,7 +32,7 @@ if($error == false)
         {
             $VerificacionesPendientes->deleteVerificacion($token);
 
-            $MyUser->getData($id);
+            $MyUser->getData(['id' => $id]);
             $registro = $MyUser->getRows();
             $MyLogin = new \Franky\Core\LOGIN("users",array("telefono","email"),1,array("status" => "1"));
             $MyLogin->setLogin($registro["email"], 1);

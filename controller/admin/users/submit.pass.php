@@ -19,7 +19,7 @@ if(!$MyAccessList->MeDasChancePasar("administrar_otra_contrasena"))
 	$id= $MySession->GetVar('id');
 }
 
-$result     = $MyUser->getData($MySession->GetVar('id'));
+$result     = $MyUser->getData(['id' => $MySession->GetVar('id')]);
 $registro   = $MyUser->getRows();
 $contrasena_db = $registro["contrasena"];
 

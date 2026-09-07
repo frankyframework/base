@@ -38,24 +38,8 @@ class templateEmailForm extends \Franky\Form\Form
             )
         );
 
+
         $this->add(array(
-                'name' => "id_transaccional",
-                'type'  => 'select',
-
-                'required'  => true,
-                'atributos' => array(
-                    'class'       => 'required',
-                 ),
-                'options' => array(
-
-                ),
-                'label_atributos' => array(
-                    'class'       => 'desc_form_obligatorio'
-                 )
-        ));
-
-
-          $this->add(array(
                 'name' => 'Asunto',
                 'label' => _('Asunto'),
                 'type'  => 'text',

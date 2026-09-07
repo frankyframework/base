@@ -1,76 +1,54 @@
 <?php
-use Base\Form\filtrosForm;
-use Franky\Core\paginacion;
 use Base\model\Contacto;
-$MyPaginacion = new paginacion();
+use Base\entity\ContactoEntity;
+use Franky\Haxor\Tokenizer;
 
-$MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"fecha"));
-$MyPaginacion->setOrden($MyRequest->getRequest('order',"DESC"));
-$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
-$busca_b	= $MyRequest->getRequest('busca_b');
-$rango_inicial  = $MyRequest->getRequest("rango_inicial","");
-$rango_final    = $MyRequest->getRequest("rango_final","");
+if ($MyRequest->isAjax()) {
+    $callback	= $MyRequest->getRequest('callback');
+    $filters = $MyRequest->getRequest('filters');
+    $dataPost = json_decode(stripslashes($filters),true);
+    $dataPost = $dataPost['rules'];
+    $request = [];
+    foreach($dataPost as $data) {
+        $request[$data['field']] = $MyRequest->Sanitizacion($data['data']);
+    }
 
-$rango = array();
+    $Tokenizer = new Tokenizer();
+    $sortInput  = (!empty($MyRequest->getRequest('sidx',"fecha")) ? : "fecha");
+    $MyContacto = new Contacto();
+    $ContactoEntity = new ContactoEntity($request);
 
-if(!empty($rango_inicial) && !empty($rango_final))
-{
-    $rango = [$rango_inicial,$rango_final];
+    $MyContacto->setPage($MyRequest->getRequest('page',1));
+    $MyContacto->setTampag($MyRequest->getRequest('rows',12));
+    $MyContacto->setOrdensql($sortInput." ".$MyRequest->getRequest('sord',"ASC"));
+
+
+    $result	 = $MyContacto->getData($ContactoEntity->getArrayCopy());
+
+    $dataRows = ["rows" => [], "total" => ceil($MyContacto->getTotal() / $MyRequest->getRequest('rows',12)), "page" => (int)$MyRequest->getRequest('page',1),"records" => $MyContacto->getTotal()];
+
+    if($MyContacto->getTotal() > 0)
+    {
+        while($registro = $MyContacto->getRows())
+        {
+            $registro = array_filter($registro, function($llave) {
+                    $clavesPermitidas = ["id","nombre","email","telefono","asunto","comentario","fecha","ip"];
+                    return !is_numeric($llave)  && in_array($llave, $clavesPermitidas);
+            }, ARRAY_FILTER_USE_KEY);
+
+
+            $dataRows['rows'][] = array_merge($registro,array(
+                        "fecha"         => getFechaUI($registro["fecha"]),
+                        "status"  =>  "desactivar"
+                ));
+            }
+    }
+    header('Content-Type: application/json; charset=utf-8');
+    echo $callback . '(' . json_encode($dataRows). ');';
+    die;
+} else {
+    $MyMetatag->setJs("/public/plugins/jqGrid/js/jquery.jqGrid.js");
+    $MyMetatag->setJs("/public/plugins/jqGrid/js/i18n/grid.locale-$lang_root.js");
+    $MyMetatag->setCSS("/public/plugins/jqGrid/css/ui.jqgrid.css");
 }
-if(!empty($rango_inicial) && empty($rango_final))
-{
-    $rango = [$rango_inicial,date('Y-m-d')];
-}
-if(empty($rango_inicial) && !empty($rango_final))
-{
-    $rango = ['1900-01-01',$rango_final];
-}
-
-
-$MyContacto = new Contacto();
-$MyContacto->setPage($MyPaginacion->getPage());
-$MyContacto->setTampag($MyPaginacion->getTampageDefault());
-$MyContacto->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
-
-
-$result	 = $MyContacto->getData($busca_b,$rango);
-$MyPaginacion->setTotal($MyContacto->getTotal());
-
-
-$lista_admin_data = array();
-if($MyContacto->getTotal() > 0)
-{
-
-	$iRow = 0;
-
-	while($registro = $MyContacto->getRows())
-	{
-		$thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
-
-                $lista_admin_data[] = array_merge($registro,array(
-                "fecha"         => getFechaUI($registro["fecha"]),
-                "thisClass"     => $thisClass,
-                "nuevo_estado"  =>  "desactivar"
-		));
-
-                $iRow++;
-        }
-}
-
-
-$MyFiltrosForm = new filtrosForm('paginar');
-$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
-
-$MyFiltrosForm->addBusca();
-
-$deleteFunction ="EliminarComentario";
-$MyFiltrosForm->addFecha('rango_inicial');
-$MyFiltrosForm->addFecha('rango_final');
-$MyFiltrosForm->addSubmit();
-$MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
-$MyFiltrosForm->setAtributoInput("rango_inicial", "value",$rango_inicial);
-$MyFiltrosForm->setAtributoInput("rango_final", "value",$rango_final);
-$MyFiltrosForm->setAtributoInput("rango_inicial", "placeholder","Desde");
-$MyFiltrosForm->setAtributoInput("rango_final", "placeholder","Hasta");
 ?>

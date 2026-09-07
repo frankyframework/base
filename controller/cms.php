@@ -1,7 +1,10 @@
 <?php
 $MyCMS = new \Base\model\CMS;
+$CmsEntity = new \Base\entity\CmsEntity();
+$CmsEntity->friendly($MyRequest->getURI());
+$CmsEntity->status(1);
 
-if($MyCMS->getData($MyRequest->getURI() ,"",1) == REGISTRO_SUCCESS)
+if($MyCMS->getData($CmsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 {
 
 				$registro           = $MyCMS->getRows();

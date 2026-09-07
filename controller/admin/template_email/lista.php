@@ -1,66 +1,62 @@
 <?php
-use Base\Form\filtrosForm;
-use Franky\Core\paginacion;
 use Base\model\TemplateemailModel;
+use Base\entity\TemplateemailEntity;
 use Franky\Haxor\Tokenizer;
 
-$Tokenizer = new Tokenizer;
-$MyPaginacion = new paginacion();
-$TemplateemailModel    = new TemplateemailModel;
+if ($MyRequest->isAjax()) {
+    $callback	= $MyRequest->getRequest('callback');
+    $filters = $MyRequest->getRequest('filters');
+    $dataPost = json_decode(stripslashes($filters),true);
+    $dataPost = $dataPost['rules'];
+    $request = [];
+    foreach($dataPost as $data) {
+        $request[$data['field']] = $MyRequest->Sanitizacion($data['data']);
+    }
+
+    $Tokenizer = new Tokenizer();
+    $sortInput  = (!empty($MyRequest->getRequest('sidx',"fecha")) ? : "fecha");
+
+    $TemplateemailModel    = new TemplateemailModel;
+    $TemplateemailEntity    = new TemplateemailEntity($request);
 
 
-$MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"fecha"));
-$MyPaginacion->setOrden($MyRequest->getRequest('order',"DESC"));
-$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
-$busca_b	= $MyRequest->getRequest('busca_b');
+    $TemplateemailModel->setPage($MyRequest->getRequest('page',1));
+    $TemplateemailModel->setTampag($MyRequest->getRequest('rows',12));
+    $TemplateemailModel->setOrdensql($sortInput." ".$MyRequest->getRequest('sord',"ASC"));
+
+    $result	 = $TemplateemailModel->getData($TemplateemailEntity->getArrayCopy());
+    $dataRows = ["rows" => [], "total" => ceil($TemplateemailModel->getTotal() / $MyRequest->getRequest('rows',12)), "page" => (int)$MyRequest->getRequest('page',1),"records" => $TemplateemailModel->getTotal()];
+
+    if($TemplateemailModel->getTotal() > 0)
+    {
+
+        while($registro = $TemplateemailModel->getRows())
+        {
+            $registro = array_filter($registro, function($llave) {
+                    return !is_numeric($llave);
+            }, ARRAY_FILTER_USE_KEY);
 
 
-$TemplateemailModel->setPage($MyPaginacion->getPage());
-$TemplateemailModel->setTampag($MyPaginacion->getTampageDefault());
-$TemplateemailModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
+            $dataRows['rows'][] = array(
+                    "id" => $Tokenizer->token('templates',$registro["id"]),
+                    "_id" => $registro["id"],
+                    "callback" => $Tokenizer->token('templates',$MyRequest->getURI()),
+                    "fecha"        => getFechaUI($registro["fecha"]),
+                    "nombre"        => $registro["nombre"],
+                    "Asunto"        => $registro["Asunto"],
+                    "html"        => prevoewEmailTemplate($registro["html"]),
+                    "status"  =>  ($registro["status"] == 1 ? "desactivar" : "activar"),
+                );
+            }
+    }
 
-$result	 = $TemplateemailModel->getData([],[], $busca_b);
-$MyPaginacion->setTotal($TemplateemailModel->getTotal());
-$lista_admin_data = array();
-if($TemplateemailModel->getTotal() > 0)
-{
-
-	$iRow = 0;
-
-	while($registro = $TemplateemailModel->getRows())
-	{
-            $thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
-
-            $lista_admin_data[] = array(
-							"id" => $Tokenizer->token('templates',$registro["id"]),
-							"callback" => $Tokenizer->token('templates',$MyRequest->getURI()),
-                "fecha"        => getFechaUI($registro["fecha"]),
-								  "templates_email.nombre"        => $registro["nombre"],
-									  "secciones_transaccionales.nombre"        => $registro["seccion"],
-                "thisClass"     => $thisClass,
-                "nuevo_estado"  =>  ($registro["status"] == 1 ? "desactivar" : "activar"),
-            );
-            $iRow++;
-        }
+    header('Content-Type: application/json; charset=utf-8');
+    echo $callback . '(' . json_encode($dataRows). ');';
+    die;
+} else {
+    $MyMetatag->setJs("/public/plugins/jqGrid/js/jquery.jqGrid.js");
+    $MyMetatag->setJs("/public/plugins/jqGrid/js/i18n/grid.locale-$lang_root.js");
+    $MyMetatag->setCSS("/public/plugins/jqGrid/css/ui.jqgrid.css");
 }
 
-
-$title_grid = _("E-mails transaccionales");
-$class_grid = "cont_transaccionales";
-$error_grid = _("No hay templates de email registrados");
-$deleteFunction = "EliminarTemplate";
-$frm_constante_link = FRM_EMAIL_TEMPLATE;
-$titulo_columnas_grid = array("fecha" => _("Fecha"), "templates_email.nombre" =>  _("Nombre"),"secciones_transaccionales.nombre" =>  _("Sección"));
-$value_columnas_grid = array("fecha" , "templates_email.nombre","secciones_transaccionales.nombre" );
-
-$css_columnas_grid = array("fecha" => "w-xxxx-2" , "templates_email.nombre" => "w-xxxx-4" ,"secciones_transaccionales.nombre" => "w-xxxx-4" );
-
-$permisos_grid = "administrar_template_de_mailings";
-$MyFiltrosForm = new filtrosForm('paginar');
-$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
-$MyFiltrosForm->addBusca();
-$MyFiltrosForm->addSubmit();
-
-$MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
 ?>

@@ -1,82 +1,66 @@
 <?php
-use Base\Form\filtrosForm;
-use Franky\Core\paginacion;
 use Base\model\USERS;
+use Base\entity\users as EntityUser;
 use Franky\Haxor\Tokenizer;
-$MyUser             = new USERS();
-$MyPaginacion = new paginacion();
-$Tokenizer = new Tokenizer();
-
-$MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"nombre"));
-$MyPaginacion->setOrden($MyRequest->getRequest('order',"ASC"));
-$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
-$busca_b	= $MyRequest->getRequest('busca_b');
-$nivel_b	= $MyRequest->getRequest('nivel_b');
-$rango_inicial  = $MyRequest->getRequest("rango_inicial","");
-$rango_final    = $MyRequest->getRequest("rango_final","");
-
-$rango = array();
-
-if(!empty($rango_inicial) && !empty($rango_final))
-{
-    $rango = [$rango_inicial,$rango_final];
-}
-if(!empty($rango_inicial) && empty($rango_final))
-{
-    $rango = [$rango_inicial,date('Y-m-d')];
-}
-if(empty($rango_inicial) && !empty($rango_final))
-{
-    $rango = ['1900-01-01',$rango_final];
-}
-$MyUser->setRango($rango);
-
-$MyUser->setPage($MyPaginacion->getPage());
-$MyUser->setTampag($MyPaginacion->getTampageDefault());
-$MyUser->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
-$result	 		= $MyUser->getData('', $busca_b,$nivel_b,'');
-$MyPaginacion->setTotal($MyUser->getTotal());
-$lista_admin_data = array();
-$_Niveles_usuarios = getRoles();
-if($MyUser->getTotal() > 0)
-{
-
-	$iRow = 0;
-
-	while($registro = $MyUser->getRows())
-	{
-		$thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
 
 
-                $lista_admin_data[] = array_merge($registro,array(
-                "thisClass"     => $thisClass,
-                "id" => $Tokenizer->token("users", $registro["id"]),
-                "callback" => $Tokenizer->token("users", $MyRequest->getURI()),
-                "role"         => $_Niveles_usuarios[$registro["role"]],
-                "nuevo_estado"  => ($registro["status"] == 1 ? "desactivar" : "activar"),
-                "fecha"         => getFechaUI($registro["fecha"]),
-                ));
+if ($MyRequest->isAjax()) {
+    $callback	= $MyRequest->getRequest('callback');
+    $filters = $MyRequest->getRequest('filters');
+    $dataPost = json_decode(stripslashes($filters),true);
+    $dataPost = $dataPost['rules'];
+    $request = [];
+    foreach($dataPost as $data) {
+        $request[$data['field']] = $MyRequest->Sanitizacion($data['data']);
+    }
+    $MyUser     = new USERS();
+    $EntityUser = new EntityUser($request);
+    $Tokenizer  = new Tokenizer();
+    $sortInput  = (!empty($MyRequest->getRequest('sidx',"nombre")) ? : "nombre");
+    $rango = array();
 
-                $iRow++;
+    if(!empty($request['fecha']))
+    {
+        $rango = [$request['fecha']." 00::00:00",$request['fecha']." 23::59:59"];
+       
+        $MyUser->setRango($rango);
+    }
+
+    $MyUser->setPage($MyRequest->getRequest('page',1));
+    $MyUser->setTampag($MyRequest->getRequest('rows',12));
+    $MyUser->setOrdensql($sortInput." ".$MyRequest->getRequest('sord',"ASC"));
+    $result	 		= $MyUser->getData($EntityUser->getArrayCopy());
+    $lista_admin_data = [];
+    $_Niveles_usuarios = getRoles();
+    $dataRows = ["rows" => [], "total" => ceil($MyUser->getTotal() / $MyRequest->getRequest('rows',12)), "page" => (int)$MyRequest->getRequest('page',1),"records" => $MyUser->getTotal()];
+    if($MyUser->getTotal() > 0)
+    {
+        while($registro = $MyUser->getRows())
+        {
+            $registro = array_filter($registro, function($llave) {
+                $clavesPermitidas = ['id','fecha', 'email','nombre','role','telefono',"callback","status"];
+                return !is_numeric($llave)  && in_array($llave, $clavesPermitidas);
+            }, ARRAY_FILTER_USE_KEY);
+
+       
+            $dataRows['rows'][] = array_merge($registro,array(          
+            "id" => $Tokenizer->token("users", $registro["id"]),
+            "callback" => $Tokenizer->token("users", $MyRequest->getURI()),
+            "role"         => $_Niveles_usuarios[$registro["role"]],
+            "status"  => ($registro["status"] == 1 ? "desactivar" : "activar"),
+            "fecha"         => getFechaUI($registro["fecha"])
+            ));
         }
 
 
+    }
+    header('Content-Type: application/json; charset=utf-8');
+    echo $callback . '(' . json_encode($dataRows). ');';
+    die;
+
+} else {
+    $MyMetatag->setJs("/public/plugins/jqGrid/js/jquery.jqGrid.js");
+    $MyMetatag->setJs("/public/plugins/jqGrid/js/i18n/grid.locale-$lang_root.js");
+    $MyMetatag->setCSS("/public/plugins/jqGrid/css/ui.jqgrid.css");
 }
-
-
-$MyFiltrosForm = new filtrosForm('paginar');
-$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
-$MyFiltrosForm->addFecha('rango_inicial');
-$MyFiltrosForm->addFecha('rango_final');
-$MyFiltrosForm->addBusca();
-$MyFiltrosForm->addSubmit();
-$MyFiltrosForm->addNivel();
-$MyFiltrosForm->setOptionsInput("nivel_b", getRoles());
-$MyFiltrosForm->setAtributoInput("nivel_b", "value", $nivel_b);
-$MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
-$MyFiltrosForm->setAtributoInput("rango_inicial", "value",$rango_inicial);
-$MyFiltrosForm->setAtributoInput("rango_final", "value",$rango_final);
-$MyFiltrosForm->setAtributoInput("rango_inicial", "placeholder","Desde");
-$MyFiltrosForm->setAtributoInput("rango_final", "placeholder","Hasta");
 ?>

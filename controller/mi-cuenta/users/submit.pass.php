@@ -15,7 +15,7 @@ $contrasena_ant	= $MyRequest->getRequest('contrasena_ant');
 $error = false;
 
 
-$result     = $MyUser->getData($id);
+$result     = $MyUser->getData(['id' => $id]);
 $registro   = $MyUser->getRows();
 $contrasena_db = $registro["contrasena"];
 

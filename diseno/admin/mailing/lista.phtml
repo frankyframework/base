@@ -4,55 +4,72 @@
         <h1 class="titulo_seccion_admin">Newsletter</h1>
         <p>En esta sección podrás revisar los usuarios inscritos al Newsletter</p>
         <div class="w-xxxx-12 cont_header_panel">
-           <div class="form-group form-inline">
-                <?php echo $MyFiltrosForm->openTag(); ?>
-                <?php echo $MyFiltrosForm->getAllRow(); ?>
-                <?php echo $MyFiltrosForm->endTag(); ?>
-                <a href="/admin/mailing/excel.php?busca_b=<?php echo $busca_b; ?>" target="_blank" class="_btn_new">Exportar</a>
+            <div class="_wrapp_form_serch">
+            <form name="buscarGrid" action="" method="get" id="paginar">                
+                    <div class="form-group form_buscar"><input type="submit" name="buscar" class="_btn _primary" id="btsSearchGridAdmin" value="Buscar"></div>
+            </form>
+            <a href="/admin/mailing/excel.php" target="_blank" class="_btn_new">Exportar</a>
             </div>
         </div>
         <div  class="w-xxxx-12 cont_gral_admin cont_mailing">
-            <div >
-                <div class="w-xxxx-12">
-                    <div class="contenedor_titulo_columnas">
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "publicado", _("Fecha")); ?></div>
-                        <div class="w-xxxx-4"><?php echo makeHTMLOrder( "email", _("E-mail")); ?></div>
-                        <div class="w-xxxx-1"><?=_('Eliminar')?></div>
-                    </div>
-                    <div class="contenedor_columnas_info"  >
-                    <div class="contenedor_columnas"  >
-                        <div class='w-xxxx-2'>{{_data.fecha}}</div>
-                        <div class='w-xxxx-4 email'>{{_data.email}}</div>
-                        <div class='w-xxxx-1 _table_delete {{_data.thisClass}}'>
-                            <a class="btn_adm_eliminar" id="{{_data.id}}" href="#{{_data.nuevo_estado}}" ></a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="w-xxxx-12">
-                    <div class="no_hay_datos" ><?=_('No hay emails registrados')?></div>
-                </div>
-                <div class="w-xxxx-12">
-                    <?php echo render("admin/widget.paginar.phtml"); ?>
-                </div>
-            </div>
+            <table id="jqGrid"></table>
+            <div id="jqGridPager"></div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-window.admingrid = <?php echo json_encode($lista_admin_data); ?>;
-</script>
+
 <script >
 $(window).load(function(){
-    $(".btn_adm_eliminar").click(function(event){
 
-         event.preventDefault();
-         var nuevo_estado = ($(this).attr("href").replace("#","") == "activar" ? 1 : 0);
-
-         EliminarRegistro('<?php echo $deleteFunction; ?>',$(this).attr("id"),nuevo_estado,"","EliminarRegistorPanelRemove")
-
-    });
-
-
+$("#jqGrid").GridAdmin({
+    search : true,
+    entity : 'mailing',
+    redirectOnSelectRow:false,
+    gridPager : "#jqGridPager",
+    btnSearch: "#btsSearchGridAdmin",
+    redirectPath : '',
+    pathData : '<?=$MyRequest->url(MAILING)?>',
+    error : "<?=_('No hay emails registrados')?>",
+    deleteFunction : "EliminarEmailNews",
+    colModel: [
+        { label: '<?=_('ID')?>', name: 'id', key:true,  width: 100 },
+        { label: '<?=_('Status')?>', name: 'status',  hidden:true, width: 50 },
+        { label: '<?=_('Fecha')?>', name: 'fecha', width: 200,
+            
+            searchoptions: {
+                dataInit: function (element) {
+                    $(element).datepicker({
+                        id: 'orderDate_datePicker',
+                        dateFormat:"yy-mm-dd",
+                        maxDate: "+0D",
+                        showOn: 'focus'
+                    });
+                },
+                sopt: ["ge","le","eq"]
+            }
+         },
+        { label: '<?=_('Email')?>', name: 'email',  width: 250 },
+        { 
+        name: 'acciones', 
+        index: 'acciones', 
+        width: 200, 
+        align: 'center', 
+        sortable: false, 
+        search: false,
+        formatter: creadorDeBotones // Vincula la función que creamos en el paso 2
+        }
+    ],
+    width:750
 });
+});
+
+function creadorDeBotones(cellvalue, options, rowObject) {
+
+    var id = options.rowId;
+    
+    var icon_delete = (rowObject.status  == "activar" ? 'icon-c-encender' : 'icon-r-eliminar');
+    var boton = '<a class="btn_adm_eliminar " data-id="'+id+'" href="#'+rowObject.status+'"><span class="icon '+icon_delete+'"> </span></a>';
+
+    return boton;
+}
 </script>

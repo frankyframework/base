@@ -2,9 +2,11 @@
 use Base\Form\contrasenaForm;
 use Base\model\USERS;
 use Franky\Haxor\Tokenizer;
+use Base\entity\users as UserEntity;
 
 $Tokenizer = new Tokenizer();
 $MyUser             = new USERS();
+$MyUserEntity       = new UserEntity();
 
 $callback	= $MyRequest->getRequest('callback');
 
@@ -14,8 +16,8 @@ $id= $MySession->GetVar('id');
 	
 if(!empty($id))
 {
-	
-    $result	 		= $MyUser->getData($id);
+	$MyUserEntity->setId($id);
+    $result	 		= $MyUser->getData($MyUserEntity->getArrayCopy());
 
 	$registro = $MyUser->getRows();	
 	$id		= $Tokenizer->token('users',$registro["id"]);

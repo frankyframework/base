@@ -1,63 +1,57 @@
 <?php
-use Base\Form\filtrosForm;
-use Franky\Core\paginacion;
-$MyPaginacion = new paginacion();
+use \Base\entity\CmsEntity;
+use \Base\model\CMS;
+use Franky\Haxor\Tokenizer;
 
-$MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"fecha"));
-$MyPaginacion->setOrden($MyRequest->getRequest('order',"DESC"));
-$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
-$busca_b	= $MyRequest->getRequest('busca_b');
-
-$MyCMS = new \Base\model\CMS;
-
-$MyCMS->setPage($MyPaginacion->getPage());
-$MyCMS->setTampag($MyPaginacion->getTampageDefault());
-$MyCMS->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
-
-
-$result	 		= $MyCMS->getData('', $busca_b);
-$MyPaginacion->setTotal($MyCMS->getTotal());
-
-
-$lista_admin_data = array();
-if($MyCMS->getTotal() > 0)
-{
-
-	$iRow = 0;
-
-	while($registro = $MyCMS->getRows())
-	{
-		$thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
-
-                $lista_admin_data[] = array_merge($registro,array(
-                    "fecha"        => getFechaUI($registro["fecha"]),
-                    "friendly"     => '<a href="'.$MyRequest->link($registro['friendly']).'" target="_blank">'.$registro['titulo'].'</a>',
-                    "thisClass"     => $thisClass,
-                    "nuevo_estado"  => ($registro["status"] == 1 ? "desactivar" : "activar")
-                ));
-                $iRow++;
+if ($MyRequest->isAjax()) {
+        $callback	= $MyRequest->getRequest('callback');
+        $filters = $MyRequest->getRequest('filters');
+        $dataPost = json_decode(stripslashes($filters),true);
+        $dataPost = $dataPost['rules'];
+        $request = [];
+        foreach($dataPost as $data) {
+            $request[$data['field']] = $MyRequest->Sanitizacion($data['data']);
         }
+        $MyCMS = new CMS;
+        $CmsEntity = new CmsEntity($request);
+        $Tokenizer  = new Tokenizer();
+        $sortInput  = (!empty($MyRequest->getRequest('sidx',"fecha")) ? : "fecha");
+    
+        $MyCMS->setPage($MyRequest->getRequest('page',1));
+        $MyCMS->setTampag($MyRequest->getRequest('rows',12));
+        $MyCMS->setOrdensql($sortInput." ".$MyRequest->getRequest('sord',"ASC"));
+
+
+        $result	 		= $MyCMS->getData($CmsEntity->getArrayCopy());
+       
+        $lista_admin_data = [];
+        $dataRows = ["rows" => [], "total" => ceil($MyCMS->getTotal() / $MyRequest->getRequest('rows',12)), "page" => (int)$MyRequest->getRequest('page',1),"records" => $MyCMS->getTotal()];
+        
+        if($MyCMS->getTotal() > 0)
+        {
+                while($registro = $MyCMS->getRows())
+                {
+                        $registro = array_filter($registro, function($llave) {
+                                $clavesPermitidas = ['id','fecha', 'titulo','friendly',"status"];
+                                return !is_numeric($llave)  && in_array($llave, $clavesPermitidas);
+                        }, ARRAY_FILTER_USE_KEY);
+                
+                
+                        $dataRows['rows'][] = array_merge($registro,array(
+                        "fecha"        => getFechaUI($registro["fecha"]),
+                        "friendly"     => '<a href="'.$MyRequest->link($registro['friendly']).'" target="_blank">'.$registro['friendly'].'</a>',
+                        "status"  => ($registro["status"] == 1 ? "desactivar" : "activar"),
+                        "callback" => $Tokenizer->token("cms", $MyRequest->getURI())
+                        ));
+                }
+        }
+        header('Content-Type: application/json; charset=utf-8');
+        echo $callback . '(' . json_encode($dataRows). ');';
+        die;
+    
+} else {
+        $MyMetatag->setJs("/public/plugins/jqGrid/js/jquery.jqGrid.js");
+        $MyMetatag->setJs("/public/plugins/jqGrid/js/i18n/grid.locale-$lang_root.js");
+        $MyMetatag->setCSS("/public/plugins/jqGrid/css/ui.jqgrid.css");
 }
-
-
-
-$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
-$title_grid =_("CMS");
-$class_grid = "cont_cms";
-$error_grid = _("No hay CMS registrados");
-$deleteFunction ="EliminarCMSTemplate";
-$frm_constante_link = FRM_CMS_TEMPLATE;
-$titulo_columnas_grid = array("id" => _("ID"),"fecha" => _("Fecha"), "titulo" =>  _("Titulo"),'friendly' => _("URL"));
-$value_columnas_grid = array("id" ,"fecha" , "titulo", "friendly");
-
-$css_columnas_grid = array("id" => "w-xxxx-1" ,"fecha" => "w-xxxx-2" , "titulo" => "w-xxxx-3" , "friendly" => "w-xxxx-3" );
-
-$permisos_grid = "administrar_template_de_cms";
-$MyFiltrosForm = new filtrosForm('paginar');
-$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
-$MyFiltrosForm->addBusca();
-$MyFiltrosForm->addSubmit();
-
-$MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
 ?>

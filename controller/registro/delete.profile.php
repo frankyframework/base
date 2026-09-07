@@ -8,7 +8,7 @@ $contrasena_ant	= $MyRequest->getRequest('contrasena_ant');
 $error = false;
 
 
-$result	 = $MyUser->getData($MySession->GetVar('id'));
+$result	 = $MyUser->getData(['id' => $MySession->GetVar('id')]);
 $registro = $MyUser->getRows();
 $id		= $registro["id"];
 $contrasena_db	= $registro["contrasena"];

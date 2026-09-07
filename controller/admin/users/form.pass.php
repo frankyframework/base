@@ -1,10 +1,12 @@
 <?php
 use Base\Form\contrasenaForm;
 use Base\model\USERS;
+use Base\entity\users as UserEntity;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $MyUser             = new USERS();
+$MyUserEntity       = new UserEntity();
 
 $id		= $Tokenizer->decode($MyRequest->getRequest('id'));
 $callback	= $MyRequest->getRequest('callback');
@@ -16,8 +18,8 @@ if(!$MyAccessList->MeDasChancePasar("administrar_otra_contrasena") || empty($id)
 	
 if(!empty($id))
 {
-	
-        $result	 		= $MyUser->getData($id);
+	$MyUserEntity->setId($id);
+    $result	 		= $MyUser->getData($MyUserEntity->getArrayCopy());
 
 	$registro = $MyUser->getRows();	
 	$id		= $Tokenizer->token('users',$registro["id"]);

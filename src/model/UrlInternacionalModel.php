@@ -9,7 +9,7 @@ class UrlInternacionalModel  extends \Franky\Database\Mysql\objectOperations
         $this->from()->addTable('url_internacional');
     }
 
-    function getData($url = array(),$franky = array(),$busca = "")
+    function getData($url = array(),$franky = array())
     {
         $url = $this->optimizeEntity($url);
         $franky = $this->optimizeEntity($franky);
@@ -17,18 +17,54 @@ class UrlInternacionalModel  extends \Franky\Database\Mysql\objectOperations
 
          $this->where()->addAnd("franky.status",'1','=');
 
-         foreach($url as $k => $v)
-         {
-             $this->where()->addAnd("url_internacional.".$k,$v,'=');
-         }
-         foreach($franky as $k => $v)
-         {
-             $this->where()->addAnd("franky.".$k,$v,'=');
-         }
-
-        if(!empty($busca))
+        foreach($url as $k => $v)
         {
-           $this->where()->addAnd("nombre","%$busca%",'like');
+            if(!empty($v) || is_numeric($v))
+            {
+                if(is_array($v))
+                {
+                    $this->where()->concat('AND (');
+                    foreach ($v as $_v)
+                    {
+                        $this->where()->addOr("url_internacional.".$k,$_v,'=');
+
+                    }
+                    $this->where()->concat(')');
+                }
+                else
+                {
+                    if(in_array($k,['id','url','fecha','id_franky'])) {
+                        $this->where()->addAnd("url_internacional.".$k,$v,'=');
+                    } else {
+                        $this->where()->addAnd("url_internacional.".$k,"%".$v."%",'like');
+                    }
+                } 
+            }
+        }
+     
+        foreach($franky as $k => $v)
+        {
+            if(!empty($v) || is_numeric($v))
+            {
+                if(is_array($v))
+                {
+                    $this->where()->concat('AND (');
+                    foreach ($v as $_v)
+                    {
+                        $this->where()->addOr("franky.".$k,$_v,'=');
+
+                    }
+                    $this->where()->concat(')');
+                }
+                else
+                {
+                    if(in_array($k,['id','url'])) {
+                        $this->where()->addAnd("franky.".$k,$v,'=');
+                    } else {
+                        $this->where()->addAnd("franky.".$k,"%".$v."%",'like');
+                    }
+                } 
+            }
         }
 
         $this->from()->addInner('franky','url_internacional.id_franky','franky.id');

@@ -1,16 +1,20 @@
 <?php
 use Base\entity\redireccionesEntity;
 use Franky\Core\validaciones;
+use Franky\Haxor\Tokenizer;
+
+
+$MyCMS = new \Base\model\CMS;
+$Tokenizer  = new Tokenizer();
 
 $id             = $MyRequest->getRequest('id');
-$callback       = $MyRequest->getRequest('callback');
+$callback	= $Tokenizer->decode($MyRequest->getRequest('callback'));
 $mostrar_titulo = $MyRequest->getRequest('mostrar_titulo',0);
 $titulo         = $MyRequest->getRequest('titulo');
 $template       = $MyRequest->getRequest('template',"",true);
 $meta_titulo    = $MyRequest->getRequest('meta_titulo');
 $meta_descripcion       = $MyRequest->getRequest('meta_descripcion');
 $nametemplate    = $MyRequest->getRequest('friendly');
-$MyCMS = new \Base\model\CMS;
 
 $error = false;
 
@@ -96,7 +100,7 @@ if($error == false)
     }
     else
     {
-        $MyCMS->getData($id);
+        $MyCMS->getData(['id' => $id]);
         $registro = $MyCMS->getRows();
         $_titulo		= $registro["titulo"];
         $friendly              = $registro["friendly"];

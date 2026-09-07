@@ -6,31 +6,40 @@ class Contacto  extends \Franky\Database\Mysql\objectOperations
 {
 
 
-          public function __construct()
-          {
-            parent::__construct();
-            $this->from()->addTable('comentarios');
-          }
-
-        function getData($busca='',$rango=array())
+        public function __construct()
         {
+        parent::__construct();
+        $this->from()->addTable('comentarios');
+        }
+
+        function getData($data = [])
+        {
+            $data = $this->optimizeEntity($data);
             $campos = array("id","nombre","email","telefono","asunto","comentario","fecha","ip");
 
+            foreach($data as $k => $v)
+            {
+                if(!empty($v) || is_numeric($v))
+                {
+                    if(is_array($v))
+                    {
+                        $this->where()->concat('AND (');
+                        foreach ($v as $_v)
+                        {
+                        $this->where()->addOr($k,$_v,'=');
 
-            if(!empty($busca))
-            {
-                  $this->where()->concat('AND (');
-                  $this->where()->addOr('email','%'.$busca.'%','like');
-                  $this->where()->addOr('nombre','%'.$busca.'%','like');
-                  $this->where()->addOr('comentario','%'.$busca.'%','like');
-                  $this->where()->concat(')');
+                        }
+                        $this->where()->concat(')');
+                    }
+                    else
+                    {
+                        if(in_array($k,['id','fecha'])) {
+                            $this->where()->addAnd($k,$v,'=');
+                        } else {
+                            $this->where()->addAnd($k,"%".$v."%",'like');
+                        }
+                    } 
                 }
-            if(!empty($rango))
-            {
-                  $this->where()->concat('AND (');
-                  $this->where()->addAnd('Fecha',$rango[0].' 00:00:00','>=');
-                  $this->where()->addAnd('Fecha',$rango[1].' 23:59:59','<=');
-                  $this->where()->concat(')');
             }
 
             return $this->getColeccion($campos);

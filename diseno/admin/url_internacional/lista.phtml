@@ -1,0 +1,100 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+        <div class="w-xxxx-12 cont_global_admin">
+        <h1 class="titulo_seccion_admin">URL Internacional</h1>
+        <div class="w-xxxx-12 cont_header_panel">
+            <div class="_wrapp_form_serch">
+            <form name="buscarGrid" action="" method="get" id="paginar">                
+                <div class="form-group form_buscar"><input type="submit" name="buscar" class="_btn _primary" id="btsSearchGridAdmin" value="Buscar"></div>
+            </form>
+            <a href="<?php echo $MyRequest->url(FRM_URL_INTERNACIONAL); ?>" class="_btn_new">Nuevo</a>
+            </div>
+            </div>
+            <div  class="w-xxxx-12 cont_gral_admin cont_usuarios_reg">
+            <table id="jqGrid"></table>
+            <div id="jqGridPager"></div>
+            </div>
+           
+    </div>
+</div>
+<?php
+$idiomas = array();
+$idiomas_disponibles = getCoreConfig('base/theme/langs');
+foreach($idiomas_disponibles as $idioma)
+{
+    $idiomas[$idioma] = $idioma;
+}
+?>
+<script >
+$(window).load(function(){
+    var isGridMobile = ($(window).width() <= 767 ? true : false);
+
+    var  langsData = <?= json_encode($idiomas)?>;
+    langsData = Object.entries(langsData)
+    .map(([id, nombre]) => `${id}:${nombre}`)
+    .join(';');
+
+
+    $("#jqGrid").GridAdmin({
+        search : true,
+        entity : 'users',
+        redirectOnSelectRow:true,
+        gridPager : "#jqGridPager",
+        btnSearch: "#btsSearchGridAdmin",
+        redirectPath : '<?=$MyRequest->link(FRM_URL_INTERNACIONAL)?>',
+        pathData : '<?=$MyRequest->url(ADMIN_URL_INTERNACIONAL)?>',
+        error : "<?=_('No hay URLs registrados')?>",
+        deleteFunction : "EliminarUrlIternacional",
+        colModel: [
+            { label: '<?=_('ID')?>', name: 'id', key:true, hidden:true, width: 50 },
+            { label: '<?=_('Callback')?>', name: 'callback',  hidden:true, width: 50 },
+            { label: '<?=_('Status')?>', name: 'status',  hidden:true, width: 50 },
+            { label: '<?=_('Nombre')?>', name: 'nombre', width: 250 },
+            { label: '<?=_('Url')?>', name: 'urli',  width: 250 },
+            { label: '<?=_('Nueva Url')?>', name: 'url', hidden:isGridMobile, width: 250 },
+            { label: '<?=_('Idioma')?>', name: 'lang', width: 250,hidden:isGridMobile, stype: 'select',
+                searchoptions: { value: langsData}
+             },
+            { 
+            name: 'acciones', 
+            index: 'acciones', 
+            width: 200, 
+            align: 'center', 
+            sortable: false, 
+            search: false,
+            formatter: creadorDeBotones // Vincula la función que creamos en el paso 2
+            }
+        ],
+        subGrid: isGridMobile,
+        subGridRowExpanded: showChildGrid,
+        width:1220
+    });
+ });
+
+ function creadorDeBotones(cellvalue, options, rowObject) {
+    
+    var id = options.rowId; // Obtiene el ID único de la fila actual
+     
+    var icon_delete = (rowObject.status  == "activar" ? 'icon-c-encender' : 'icon-r-eliminar');
+    var boton1 = '<a href="<?=$MyRequest->link(FRM_URL_INTERNACIONAL)?>?id=' + id + '&callback='+rowObject.callback+'" class="btn_adm_editar"><span class="icon icon-editar"> </span></a> ';
+    var boton2 = '<a class="btn_adm_eliminar " data-id="'+id+'" href="#'+rowObject.status+'"><span class="icon '+icon_delete+'"> </span></a>';
+
+    return boton1 + boton2;
+}
+
+function showChildGrid(parentRowID, parentRowKey) {
+    var childGridID = parentRowID + "_table";
+    var childGridPagerID = parentRowID + "_pager";
+    
+    if($(window).width() <= 767) {
+      
+        var url  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_url"]').text();
+        var lang  = $(this).find('#' + parentRowKey + ' td[aria-describedby$="_lang"]').text();
+      
+        $('#' + parentRowID).append('<p>Nueva URL: '+url+'</p>');
+        $('#' + parentRowID).append('<p>Idioma: '+lang+'</p>');
+       
+    }
+}
+</script>
+

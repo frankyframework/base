@@ -12,38 +12,50 @@ class CMS  extends \Franky\Database\Mysql\objectOperations
             $this->from()->addTable('cms');
           }
 
-        function getData($id='',$busca="",$status="",$url="")
+        function getData($data = [])
         {
+            $data = $this->optimizeEntity($data);
             $campos = array("id","titulo","friendly","template","fecha","status","meta_titulo","meta_descripcion","mostrar_titulo");
 
 
-            if(!empty($id))
+            foreach($data as $k => $v)
             {
-                if(is_numeric($id))
+              if(!empty($v) || is_numeric($v))
+              {
+                if(is_array($v))
                 {
-                    $this->where()->addAnd('id',$id,'=');
+                    $this->where()->concat('AND (');
+                    foreach ($v as $_v)
+                    {
+                      $this->where()->addOr($k,$_v,'=');
 
+                    }
+                    $this->where()->concat(')');
                 }
                 else
                 {
-                    $this->where()->addAnd('friendly',$id,'=');
-                }
+                    if(in_array($k,['id','friendly','fecha'])) {
+                        $this->where()->addAnd($k,$v,'=');
+                    } else {
+                        $this->where()->addAnd($k,"%".$v."%",'like');
+                    }
+                } 
+              }
             }
-            if($status != "")
-            {
-                $this->where()->addAnd('status',$status,'=');
-            }
-            if($busca != "")
-            {
-              $this->where()->concat('AND (');
-              $this->where()->addOr('titulo','%'.$busca.'%','like');
-              $this->where()->addOr('template','%'.$busca.'%','like');
-              $this->where()->concat(')');
-            }
-
 
             return $this->getColeccion($campos);
 
+        }
+
+        private function optimizeEntity(array $array)
+        {
+            foreach ($array as $k => $v )
+            {
+                if (!isset($v)) {
+                    unset($array[$k]);
+                }
+            }
+            return $array;
         }
 
 

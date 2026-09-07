@@ -1,13 +1,14 @@
 <?php
 use Base\model\Mailing;
-$MyMailing          = new Mailing;
-$busca_b	= $MyRequest->getRequest('busca_b');
+use Base\entity\MailingEntity;
 
+$MyMailing          = new Mailing;
+$MailingEntity      = new MailingEntity;
 
 $MyMailing->setTampag(10000);
 $MyMailing->setOrdensql("fecha DESC");
 
-$result	 		= $MyMailing->getData($busca_b);
+$result	 		= $MyMailing->getData($MailingEntity->getArrayCopy());
 $total			= $MyMailing->getTotal();
 
 if($total > 0 && $MySession->LoggedIn())

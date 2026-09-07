@@ -1,33 +1,14 @@
 <?php
 use Base\model\Contacto;
+use Base\entity\ContactoEntity;
 $MyContacto         = new Contacto();
-$busca_b	= $MyRequest->getRequest('busca_b');
-
-$rango_inicial  = $MyRequest->getRequest("rango_inicial","");
-$rango_final    = $MyRequest->getRequest("rango_final","");
-
-
-$rango = array();
-
-
-if(!empty($rango_inicial) && !empty($rango_final))
-{
-    $rango = [$rango_inicial,$rango_final];
-}
-if(!empty($rango_inicial) && empty($rango_final))
-{
-    $rango = [$rango_inicial,date('Y-m-d')];
-}
-if(empty($rango_inicial) && !empty($rango_final))
-{
-    $rango = ['1900-01-01',$rango_final];
-}
+$ContactoEntity         = new ContactoEntity();
 
 
 $MyContacto->setTampag(10000);
 $MyContacto->setOrdensql("fecha DESC");
 
-$result	 		= $MyContacto->getData($busca_b,$rango);
+$result	 		= $MyContacto->getData($ContactoEntity->getArrayCopy());
 $total			= $MyContacto->getTotal();
 
 if($total > 0 && $MySession->LoggedIn())

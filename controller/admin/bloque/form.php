@@ -1,7 +1,8 @@
 <?php
 use Base\Form\bloqueForm;
 use Franky\Haxor\Tokenizer;
-
+use Base\model\Bloque;
+use Base\entity\BloqueEntity;
 $Tokenizer = new Tokenizer;
 
 
@@ -14,8 +15,10 @@ $path_img_blog = 'temp/'.md5(time());
 $MySession->SetVar('path_img_bloque',$path_img_blog);
 if(!empty($id))
 {
-    $MyCMS = new \Base\model\Bloque;
-    $result = $MyCMS->getData($id);
+    $MyCMS = new Bloque;
+    $BloqueEntity = new BloqueEntity;
+    $BloqueEntity->id($id);
+    $result = $MyCMS->getData($BloqueEntity->getArrayCopy());
     $data   = $MyCMS->getRows();
     $path_img_blog = $id;
 

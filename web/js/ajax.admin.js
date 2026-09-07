@@ -78,7 +78,8 @@ function EliminarRegistroPanel(response,id, status)
 
 
     }
-    $("#"+id).trigger("eliminar-registro")
+    $("#"+id).trigger("eliminar-registro");
+    $("#jqGrid").trigger("reloadGrid", [{ current: true }]);
 }
 
 function EliminarRegistorPanelRemove(response,id,status)
@@ -99,7 +100,8 @@ function EliminarRegistorPanelRemove(response,id,status)
         $("#content_row_"+id).remove()
         $("#cat_"+id).remove();
     }
-    $("#"+id).trigger("eliminar-registro")
+    $("#"+id).trigger("eliminar-registro");
+    $("#jqGrid").trigger("reloadGrid", [{ current: true }]);
 
 }
 

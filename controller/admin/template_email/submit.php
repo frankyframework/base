@@ -36,7 +36,7 @@ if(!$valid)
 }
 
 
-if($TemplatemmailModel->existe($nombre,$id) == REGISTRO_SUCCESS)
+if($TemplatemmailModel->existe($TemplatemmailEntity->nombre(),$id) == REGISTRO_SUCCESS)
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("nombre_template_duplicado"));
     $error = true;

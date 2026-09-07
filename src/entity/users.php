@@ -30,7 +30,7 @@ namespace Base\entity;
 
     public function exchangeArray($data)
     {
-        $this->id              = (isset($data['id']))                  ? $data['id']               : null;
+        $this->id              = (isset($data['id']) && !empty($data['id']))   ? $data['id']               : null;
         $this->contrasena      = (isset($data['contrasena']))          ? $data['contrasena']       : null;
         $this->email           = (isset($data['email']))               ? $data['email']            : null;
         $this->role           = (isset($data['role']))               ? $data['role']            : null;

@@ -35,8 +35,8 @@ function EliminarUser($id,$status)
 
 function EliminarTemplate($id,$status)
 {
-        $TemplateemailModel    = new\Base\model\TemplateemailModel;
-        $TemplateemailEntity    = new\Base\entity\TemplateemailEntity;
+        $TemplateemailModel    = new \Base\model\TemplateemailModel;
+        $TemplateemailEntity    = new \Base\entity\TemplateemailEntity;
           $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
