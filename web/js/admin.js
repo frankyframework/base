@@ -243,7 +243,7 @@ $.fn.GridAdmin = function(config)
             filters: initFilters ? JSON.stringify(initPostData) : "",
             _search: initFilters
         },
-        width: ($(window).width() <= 767 ? 750 : (config.width ? config.width : parseInt($('body.admin .content').css('max-width')))),
+        width: ($(window).width() <= 767 && $(window).width() >= 400 ? $(window).width() - 50 : (config.width <= parseInt($('body.admin .content').css('max-width')) ? config.width : parseInt($('body.admin .content').css('max-width')))),
         shrinkToFit: false, // Vital para habilitar el scroll horizontal real
         autowidth: false,
         
