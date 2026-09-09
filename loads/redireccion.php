@@ -1,7 +1,10 @@
 <?php
 $MyRedireccion      = new \Base\model\redireccionesModel();
+$redireccionesEntity      = new \Base\entity\redireccionesEntity();
 
-$result	 	= $MyRedireccion->getData("",parse_url($MyRequest->getURI(),PHP_URL_PATH),1);
+$redireccionesEntity->setUrl(parse_url($MyRequest->getURI(),PHP_URL_PATH));
+$redireccionesEntity->setStatus(1);
+$result	 	= $MyRedireccion->getData($redireccionesEntity->getArrayCopy());
 $total		= $MyRedireccion->getTotal();
 if($result == REGISTRO_SUCCESS)
 {

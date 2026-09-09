@@ -71,6 +71,7 @@ $MyFlashMessage     = new \Franky\Core\flashMessages($CONTEXT);
 $MyRequest          = new \Franky\Core\request();
 $Mobile_detect      = new \Mobile_Detect();
 $MyRedireccion      = new \Base\model\redireccionesModel();
+$MyRedireccionEntity      = new \Base\entity\redireccionesEntity();
 $ObserverManager    = new \Franky\Core\ObserverManager();
 $RoleModel          = new \Base\model\RoleModel;
 $RoleEntity         = new \Base\entity\RoleEntity;
@@ -365,7 +366,9 @@ if(!empty($modulos))
 
 if($MyRequest->getURI() != "")
 {
-      $result	 	= $MyRedireccion->getData("",$MyRequest->getPROTOCOLO().$MyRequest->getSERVER().$MyRequest->getURI(),1);
+      $MyRedireccionEntity->setUrl($MyRequest->getPROTOCOLO().$MyRequest->getSERVER().$MyRequest->getURI());
+      $MyRedireccionEntity->setStatus(1);
+      $result	 	= $MyRedireccion->getData($MyRedireccionEntity->getArrayCopy());
       $total		= $MyRedireccion->getTotal();
       if($result == REGISTRO_SUCCESS)
       {
@@ -373,7 +376,9 @@ if($MyRequest->getURI() != "")
           $redireccion = $registro["redireccion"];
           $MyRequest->redirect($redireccion,"301");
       }
-      $result	 	= $MyRedireccion->getData("",$MyRequest->getURI(),1);
+      $MyRedireccionEntity->setUrl($MyRequest->getURI());
+      $MyRedireccionEntity->setStatus(1);
+      $result	 	= $MyRedireccion->getData($MyRedireccionEntity->getArrayCopy());
       $total		= $MyRedireccion->getTotal();
       if($result == REGISTRO_SUCCESS)
       {

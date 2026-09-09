@@ -11,23 +11,34 @@ class redireccionesModel  extends \Franky\Database\Mysql\objectOperations
             $this->from()->addTable('redirecciones');
           }
 
-        function getData($id="", $url="",$status= "")
+        function getData($data = [])
         {
+          $data = $this->optimizeEntity($data);
             $campos = array("id","url","redireccion","status","fecha");
 
-            if(!empty($id))
+            foreach($data as $k => $v)
             {
-              $this->where()->addAnd('id',$id,'=');
-            }
-
-            if(!empty($url))
-            {
-              $this->where()->addAnd('url',$url,'=');
-            }
-
-            if(!empty($status))
-            {
-                $this->where()->addAnd('status',$status,'=');
+                  if(!empty($v) || is_numeric($v))
+                {
+                    if(is_array($v))
+                    {
+                        $this->where()->concat('AND (');
+                        foreach ($v as $_v)
+                        {
+                            $this->where()->addOr($k,$_v,'=');
+    
+                        }
+                        $this->where()->concat(')');
+                    }
+                    else
+                    {
+                        if(in_array($k,['id','url','status'])) {
+                            $this->where()->addAnd($k,$v,'=');
+                        } else {
+                            $this->where()->addAnd($k,"%".$v."%",'like');
+                        }
+                    } 
+                }
             }
 
 
@@ -83,6 +94,4 @@ class redireccionesModel  extends \Franky\Database\Mysql\objectOperations
 
         }
 }
-
-
 ?>
