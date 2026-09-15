@@ -1,18 +1,31 @@
 <div class="content">
     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12 cont_global_admin">
+        <h1 class="titulo_seccion_admin"><?= _($title_form) ?></h1>
+        <div class="w-xxxx-12 cont_header_panel">
+            <div class="_wrapp_form_serch">
+                <div class="form-group"><a class="_btn _secondary" href="<?= ($MyRequest->getRequest('callback') ? $Tokenizer->decode($MyRequest->getRequest('callback')) : $MyRequest->url(LISTA_OPERADORES))?>" ><?= _('Atras') ?></a></div>
+                <div class="form-group"><a class="_btn _primary save-form-top" href="#"><?= _('Guardar') ?></a></div>
+            </div>
+        </div>
+    </div>
+   
     <div class="w-xxxx-12">
-        <h1><?php echo $title_form; ?></h1>
-        
-         <div class="w-xxxx-6">
-            <?php echo $adminForm->openTag(); ?>
-            <?php echo $adminForm->getAllRow(); ?>
-            <?php echo $adminForm->endTag(); ?>
+        <div class="content_form">
+                <div class="w-xxxx-5">
+                        <?php echo $adminForm->openTag(); ?>
+                        <?php echo $adminForm->getAllRow(); ?>
+                        <?php echo $adminForm->endTag(); ?>
+                 </div>
        </div>
     </div>
 </div>
 
 <script >
-
+$('.save-form-top').click(function(e){
+    e.preventDefault();
+    $('#userspass').trigger('submit');
+});
 $( "#userspass" ).validate({
 rules: {
 

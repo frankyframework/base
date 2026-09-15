@@ -29,8 +29,18 @@ file_browser_callback: BrowseFiles
 
 <div class="content">
     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
-    <h1 class="titulo_seccion_admin"><?php echo $title_form; ?></h1>
+    <div class="w-xxxx-12 cont_global_admin">
+        <h1 class="titulo_seccion_admin"><?= _($title_form) ?></h1>
+        <div class="w-xxxx-12 cont_header_panel">
+            <div class="_wrapp_form_serch">
+                <div class="form-group"><a class="_btn _secondary" href="<?= ($MyRequest->getRequest('callback') ? $Tokenizer->decode($MyRequest->getRequest('callback')) : $MyRequest->url(LISTA_CMS_TEMPLATE))?>" ><?= _('Atras') ?></a></div>
+                <div class="form-group"><a class="_btn _primary save-form-top" href="#"><?= _('Guardar') ?></a></div>
+            </div>
+        </div>
+    </div>
+
     <div class="w-xxxx-12">
+    <div class="content_form">
     <?php echo $cmsForm->openTag(); ?>
       <?php echo $cmsForm->get('id'); ?>
       <?php echo $cmsForm->get('callback'); ?>
@@ -45,11 +55,16 @@ file_browser_callback: BrowseFiles
         <?php echo $cmsForm->get('guardar'); ?>
       </div>
     <?php echo $cmsForm->endTag(); ?>
+    </div>
    </div>
 </div>
 
 
 <script>
+$('.save-form-top').click(function(e){
+    e.preventDefault();
+    $('#frmcmstemplate').trigger('submit');
+});
 $('input[name=guardar_editar]').click(function(e){
 
   $('input[name=callback]').val('<?= $MyRequest->getURI()?>');
