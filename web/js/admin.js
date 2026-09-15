@@ -144,6 +144,9 @@ $.fn.GridAdmin = function(config)
     if(!page) {
         page = 1;
     }
+    if(config.rows) {
+        rows = config.rows;
+    }
     if(!rows) {
         rows = 12;
     }
