@@ -39,7 +39,8 @@ if ($MyRequest->isAjax()) {
 
             $dataRows['rows'][] = array_merge($registro,array(
                         "fecha"         => getFechaUI($registro["fecha"]),
-                        "status"  =>  "desactivar"
+                        "status"  =>  "desactivar",
+                        "comentario"  =>  htmlentities($registro["comentario"])
                 ));
             }
     }
