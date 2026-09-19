@@ -1322,6 +1322,7 @@ function getJqueryUIjs($js,$render_js)
         'dialog' => ["widget","position","data-selector","disable-selection","focusable-selector","form-reset-mixin","keycode","labels","scroll-parent","tabbable-selector","unique-id"/*,"draggable","resizable"*/,"button","checkboxradio","controlgroup","mouse"],
         'sortable' => ["widget","data-selector","scroll-parent","mouse"],
         'tooltip' => ["widget","keycode","position","unique-id"],
+        'selectmenu' => ["witget","position","menu"],
     ];
     
     
