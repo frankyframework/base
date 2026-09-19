@@ -1,8 +1,8 @@
 <?php
 return array(
   'theme' => array(
-          'menu' => "FRONTEND",
-          'title' => "Configuración Front",
+          'menu' => "Configuración Frontend",
+          'title' => "Configuración Frontend",
           'config' =>  array(
                       array('path' => 'base/theme/titulo',
                       'type' => 'text',
@@ -150,7 +150,7 @@ return array(
           )
   ),
   'empresa' => array(
-      'menu' => "EMPRESA",
+      'menu' => "Configuración Empresa",
       'title' => "Configuración Empresa",
       'config' =>  array(
           array('path' => 'base/empresa/contacto',
@@ -261,7 +261,7 @@ return array(
     )
 ),
   'user' => array(
-          'menu' => "USUARIO",
+          'menu' => "Configuración de usuario",
           'title' => "Configuración de usuario",
           'config' =>  array(
                       array('path' => 'base/user/passwordlength',
@@ -345,8 +345,8 @@ return array(
           )
   ),
   'contactanos' => array(
-    'menu' => "CONTACTANOS",
-    'title' => "Configuración de contactanos",
+    'menu' => "Configuración de formulario de contacto",
+    'title' => "Configuración de formulario de contacto",
     'config' =>  array(
                 array('path' => 'base/contactanos/user-notification',
                         'type' => 'select',
@@ -380,7 +380,7 @@ return array(
     )
 ),
   'google' => array(
-          'menu' => "GOOGLE",
+          'menu' => "Configuración de google",
           'title' => "Configuración de google",
           'config' =>  array(
                       array('path' => 'base/google/apimaps',
@@ -412,7 +412,7 @@ return array(
           )
   ),
   'pwa' => array(
-          'menu' => "PWA",
+          'menu' => "Configuración PWA",
           'title' => "Configuración PWA",
           'config' =>  array(
                       array('path' => 'base/pwa/icon',
@@ -462,7 +462,7 @@ return array(
 
           ),
     'smtp' => array(
-        'menu' => "SMTP",
+        'menu' => "Configurar SMTP",
         'title' => "Configurar SMTP",
         'config' => array(
                   array('path' => 'base/smtp/enabled',
@@ -530,8 +530,8 @@ return array(
 
     ),
     'servidor' => array(
-      'menu' => "Servirdor",
-      'title' => "Configurar Servidor",
+      'menu' => "Configurar de servidor",
+      'title' => "Configurar de servidor",
       'config' => array(
                 array('path' => 'base/server/session_time',
                 'type' => 'text',
@@ -557,7 +557,7 @@ return array(
 
   ),
     'debug' => array(
-            'menu' => "DEBUG",
+            'menu' => "Herramientas de debbuging",
             'title' => "Herramientas de debbuging",
             'config' =>  array(
                         array('path' => 'base/debug/ip',

@@ -1,28 +1,36 @@
 <div class="content">
     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
-    <h1 class="titulo_seccion_admin">Configuracion de sistema</h1>
-    <div class="w-xxxx-3">
-        <ul class="_ul_panel_config">
-        <?php
-        if(!empty($core_config)):
-        foreach($core_config as $key_config => $val_config):
+    <div class="w-xxxx-12 cont_global_admin">
+        <h1 class="titulo_seccion_admin"><?= _('Configuracion de sistema') ?></h1>
+        <div class="w-xxxx-12 cont_header_panel">
+            <div class="_wrapp_form_serch">
+                <div class="form-group">
+                <select name="menu_core_config">
+                    <?php
+                    if(!empty($core_config)):
+                    foreach($core_config as $key_config => $val_config):
 
-        ?>
-            <li  class="title_menu <?=(empty($seccion) ? 'active' : '')?>">
-                <a href="<?=$MyRequest->url(ADMIN_CORE_CONFIG_SECCION,['seccion' => $key_config])?>"  <?=(empty($seccion) ? 'class="active"' : '')?>><?=$val_config['menu']?></a>
-            </li>
-        <?php
-            if(empty($seccion)){
-                $seccion = $key_config;
-            }
-        endforeach;
-        endif;
-        ?>
-        </ul>
+                    ?>
+                      <option value="<?=$MyRequest->url(ADMIN_CORE_CONFIG_SECCION,['seccion' => $key_config])?>">
+                        <?=$val_config['menu']?>
+                      </option>
+                    <?php
+                        if(empty($seccion)){
+                            $seccion = $key_config;
+                        }
+                    endforeach;
+                    endif;
+                    ?>
+                    
+                </select>
+                </div>
+            </div>
+        </div>
     </div>
 
 
-    <div class="w-xxxx-9">
+
+    <div class="w-xxxx-12">
         <?php echo $Form->openTag(); ?>
     <?php
     if(!empty($core_config)):
@@ -140,6 +148,10 @@ $(document).ready(function(){
           			}
 
          });
+
+        $("select[name=menu_core_config]").change(function() {
+          window.location.href = $(this).val();
+        });
 
 });
 
