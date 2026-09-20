@@ -11,7 +11,8 @@
                     foreach($core_config as $key_config => $val_config):
 
                     ?>
-                      <option value="<?=$MyRequest->url(ADMIN_CORE_CONFIG_SECCION,['seccion' => $key_config])?>">
+                      <option value="<?=$MyRequest->url(ADMIN_CORE_CONFIG_SECCION,['seccion' => $key_config])?>" 
+                      <?= ($MyRequest->url(ADMIN_CORE_CONFIG_SECCION,['seccion' => $key_config])==$MyRequest->getURI() ? "selected='selected'" : "") ?>>
                         <?=$val_config['menu']?>
                       </option>
                     <?php
