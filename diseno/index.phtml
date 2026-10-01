@@ -52,5 +52,6 @@
 <?php echo render("css.async.phtml"); ?>
 <?php echo render("js.phtml",['render_phtml' => $render_phtml,'MyFrankyMonster' => $MyFrankyMonster,'MyConfigure' => $MyConfigure,'Mobile_detect' => $Mobile_detect,'MyMetatag' => $MyMetatag,'lang_root' => $lang_root, 'MyRequest' => $MyRequest]); ?>
 <?php echo render("msg.request.phtml"); ?>
+<?= $MyMetatag->getLdJson(); ?>
 </body>
 </html>
