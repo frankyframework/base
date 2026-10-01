@@ -339,6 +339,9 @@ foreach ($catalogo_idiomas as $idioma => $path_idioma)
 
       }
       else{
+        if(!isset($urlInternacional[$idioma])) {
+            continue;
+        }
         $callbacks_idioma[$idioma] = $MyRequest->url($path_idioma.$urlInternacional[$idioma][$MyFrankyMonster->MyId()],$MyRequest->getUrlParam(),true);
 
       }
