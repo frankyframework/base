@@ -1,6 +1,6 @@
 window.loaderStyle = $('#loader').attr('style');
 
-$(window).load(function() {
+$(window).on('load',function() {
 
 
 

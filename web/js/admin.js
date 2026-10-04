@@ -61,6 +61,48 @@ $.fn.htmlDataDum = function(data,fail)
     return true;
 }
 
+
+
+$.fn.buttonDelete = function(element)
+{
+    $(element).each(function(index,val)
+    {
+        var id = $(this).attr("id");
+        if(!id) {
+            id = $(this).attr("data-id");
+        }
+
+        if(id.search("{{") == -1)
+        {
+            $(this).addClass('switch');
+            if($(this).attr("href") == "#desactivar")
+            {
+                $(this).addClass('switchOn');
+            }
+            else
+            {
+                $(this).removeClass('switchOn');
+            }
+            $(this).on("eliminar-registro",function()
+            {
+                if($(this).attr("href") == "#desactivar")
+                {
+                    $(this).addClass('switchOn');
+                }
+                else
+                {
+                    $(this).removeClass('switchOn');
+                }
+            });
+
+
+        }
+
+    });
+
+}
+
+
 $(document).ready(function(){
     $("._btn_collapse_panel").click(function(){
         $(this).toggleClass( "active" );

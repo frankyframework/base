@@ -1,6 +1,6 @@
 <?php
 $js = array();
-
+$jsPage = [];
 $js[] = "/public/jquery/jquery-2.2.2.min.js";
 $js[] = "/public/ajax/ajax.js";
 $js[] = "/modulos/base/web/js/ajax.common.js";
@@ -9,7 +9,7 @@ if (is_array($MyFrankyMonster->MyAjaxFile())) {
     if (count($MyFrankyMonster->MyAjaxFile()) > 0) {
         foreach ($MyFrankyMonster->MyAjaxFile() as $ajax) {
             $ajax = explode('/',$ajax);
-            $js[]  = "/modulos/".$ajax[0]."/web/js/" . $ajax[1];
+            $jsPage[]  = "/modulos/".$ajax[0]."/web/js/" . $ajax[1];
         }
     }
 }
@@ -28,7 +28,7 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
                 {
 
 
-                        $js[] = "/public/jquery/$jquery/js/".$_js_jquery;
+                        $jsPage[] = "/public/jquery/$jquery/js/".$_js_jquery;
 
                 }
             }
@@ -41,34 +41,22 @@ $js[] = "/modulos/base/web/js/front.js";
 $js[] = "/modulos/base/web/js/admin.js";
 $js[] = "/public/js/menu.js";
 $js[] = "/public/js/blocks.js";
-$js[] = "/public/js/franky.mobile.js";
 
 if (is_array($MyFrankyMonster->MyJSFile())) {
     if (count($MyFrankyMonster->MyJSFile()) > 0) {
         foreach ($MyFrankyMonster->MyJSFile() as $_js) {
             if(!empty($js))
             {
-                $js[] ='/modulos/'.$MyFrankyMonster->MyModulo().'/web/js/' . $_js ;
+                $jsPage[] ='/modulos/'.$MyFrankyMonster->MyModulo().'/web/js/' . $_js ;
 
             }
         }
     }
 }
 
-if (is_array($MyMetatag->getJs(false))) {
-    if (count($MyMetatag->getJs(false)) > 0) {
-        foreach ($MyMetatag->getJs(false) as $_js) {
-            if(!empty($js))
-            {
-                $js[] = $_js ;
-
-            }
-        }
-    }
-}
 $render_js = getJSEmbebed($render_phtml);
 
-$js = getJqueryUIjs($js,$render_js);
+$js = getJqueryUIjs($js);
 
 ?>
     <script >
@@ -93,7 +81,26 @@ $js = getJqueryUIjs($js,$render_js);
 if(getCoreConfig('base/debug/production')){
 
     $JsCreatos   = new Base\model\jsCreator();
+
     $JsCreatos->addJs($js);
+    $JsCreatos->setEmbebed('');
+    $JsCreatos->setName("bundle.js");
+    ?>
+    <script src='<?php echo $JsCreatos->get(getCoreConfig('base/debug/cacheversion')); ?>'  ></script>
+    <?php
+    if (is_array($MyMetatag->getJs(false))) {
+        if (count($MyMetatag->getJs(false)) > 0) {
+            foreach ($MyMetatag->getJs(false) as $_js) {
+                if(!empty($js))
+                { 
+                ?>
+                <script  src='<?php echo $_js; ?>'  ></script>
+                <?php
+                }
+            }
+        }
+    }
+    $JsCreatos->addJs($jsPage);
     $JsCreatos->setEmbebed($render_js);
     $name_js =  getFriendly($MyFrankyMonster->MySeccion());
     $JsCreatos->setName((!empty($name_js) ? $name_js.".js" : "home.js"));
@@ -102,9 +109,7 @@ if(getCoreConfig('base/debug/production')){
        $JsCreatos->setName("404.js");
     }
     ?>
-    <script <?=(!$MyRequest->isAjax() ? 'async' : '');?> src='<?php echo $JsCreatos->get(getCoreConfig('base/debug/cacheversion')); ?>'  ></script>
-
-
+    <script async src='<?php echo $JsCreatos->get(getCoreConfig('base/debug/cacheversion')); ?>'  ></script>
     <?php
 }
 else
@@ -115,11 +120,27 @@ else
         <script src='<?php echo $_file_js; ?>'  ></script>
         <?php
     }
+    foreach($jsPage as $_file_js)
+    {
+        ?>
+        <script src='<?php echo $_file_js; ?>'  ></script>
+        <?php
+    }
+    if (is_array($MyMetatag->getJs(false))) {
+        if (count($MyMetatag->getJs(false)) > 0) {
+            foreach ($MyMetatag->getJs(false) as $_js) {
+                if(!empty($js))
+                { 
+                ?>
+                <script  src='<?php echo $_js; ?>'  ></script>
+                <?php
+                }
+            }
+        }
+    }
     ?>
     <script >
-        <!--
         <?php echo $render_js; ?>
-        //-->
     </script>
     <?php
 }

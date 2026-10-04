@@ -1313,7 +1313,7 @@ function saveDataCustomAttributeImport($id_ref,$entity,$_data)
     
 }
 
-function getJqueryUIjs($js,$render_js)
+function getJqueryUIjs(array $js)
 {
     $jquery_ui = [
         'datepicker' => ["keycode"],
@@ -1325,80 +1325,26 @@ function getJqueryUIjs($js,$render_js)
         'selectmenu' => ["witget","position","menu"],
     ];
     
-    
- 
-    $_js = [];
-    if(!empty($js) && is_array($js))
-    {
-        foreach($js as $file)
-        {
-            if(!preg_match("/public\/js\//",$file) && !preg_match("/web\/js\//",$file))
-            {
-                if(!in_array($file,$_js))
-                {
-                    $_js[] = $file;
-                }
-                continue;
-            }
-       
-           
-          //  $txt = "";
-          //  $fp = fopen(PROJECT_DIR.$file, "r");
-          //  while (!feof($fp)){
-            //    $txt .= fgets($fp);
-          //  }
-          //  fclose($fp);
-            
-            foreach($jquery_ui as $function => $dependencias)
-            {
-                //if(preg_match("/\.$function/",$txt))
-                //{
-                    foreach($dependencias as $dependencia)
-                    {
-                        if(!in_array('/public/jquery-ui/js/'.$dependencia.'.js',$_js))
-                        {
-                            $_js[] = '/public/jquery-ui/js/'.$dependencia.'.js';
-                        }
-                    }
-
-
-                    if(!in_array('/public/jquery-ui/js/'.$function.'.js',$_js))
-                    {
-                        
-                        $_js[] = '/public/jquery-ui/js/'.$function.'.js';
-                    }
-                    unset($jquery_ui[$function]);
-                //}
-            }
-            if(!in_array($file,$_js))
-            {
-                $_js[] = $file;
-            }
-            
-        }
-        
-    }
     foreach($jquery_ui as $function => $dependencias)
     {
-        if(preg_match("/\.$function/",$render_js))
-        {
+        
             foreach($dependencias as $dependencia)
             {
-                if(!in_array('/public/jquery-ui/js/'.$dependencia.'.js',$_js))
+                if(!in_array('/public/jquery-ui/js/'.$dependencia.'.js',$js))
                 {
-                    $_js[] = '/public/jquery-ui/js/'.$dependencia.'.js';
+                    $js[] = '/public/jquery-ui/js/'.$dependencia.'.js';
                 }
             }
 
 
-            if(!in_array('/public/jquery-ui/js/'.$function.'.js',$_js))
+            if(!in_array('/public/jquery-ui/js/'.$function.'.js',$js))
             {
-                $_js[] = '/public/jquery-ui/js/'.$function.'.js';
+                $js[] = '/public/jquery-ui/js/'.$function.'.js';
             }
-        }
+        
     }
 
-    return $_js;
+    return $js;
 
 }
 

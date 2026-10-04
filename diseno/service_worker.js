@@ -6,25 +6,34 @@ var cacheName = 'franky-v-'+ <?=str_replace(".","-",getCoreConfig('base/debug/ca
 var filesToCache = [
     '/index.php'
 ];
-
 <?php
-$files = $File->getFiles(PROJECT_DIR."/public/cache/css/".getCoreConfig('base/debug/cacheversion'));
-foreach($files as $file):
-        if(substr($file,-4) =='.css' && file_exists(PROJECT_DIR."/public/cache/css/".getCoreConfig('base/debug/cacheversion')."/".$file)):
+if (!empty(getCoreConfig('base/theme/favicon')) && file_exists(PROJECT_DIR.getCoreConfig('base/theme/favicon'))){
 ?>
-filesToCache.push('/public/cache/css/<?php echo $file; ?>');
-<?php endif;
- endforeach; ?>
-
+filesToCache.push(<?=getCoreConfig('base/theme/favicon')?>);
 <?php
-$files = $File->getFiles(PROJECT_DIR."/public/cache/js/".getCoreConfig('base/debug/cacheversion'));
-foreach($files as $file):
-        if(substr($file,-3) =='.js' && file_exists(PROJECT_DIR."/public/cache/js/".getCoreConfig('base/debug/cacheversion')."/".$file)):
+}
 ?>
-filesToCache.push('/public/cache/js/<?php echo $file; ?>');
-<?php endif;
- endforeach; ?>
-
+<?php
+if (!empty(getCoreConfig('base/theme/logo')) && file_exists(PROJECT_DIR.getCoreConfig('base/theme/logo'))){
+?>
+filesToCache.push(<?=getCoreConfig('base/theme/logo')?>);
+<?php
+}
+?>
+<?php
+if (file_exists(PROJECT_DIR."/public/cache/css/".getCoreConfig('base/debug/cacheversion')."/bundle.css")){
+?>
+filesToCache.push('/public/cache/css/<?=getCoreConfig('base/debug/cacheversion')?>/bundle.css');
+<?php
+}
+?>
+<?php
+if (file_exists(PROJECT_DIR."/public/cache/js/".getCoreConfig('base/debug/cacheversion')."/bundle.js")){
+?>
+filesToCache.push('/public/cache/js/<?=getCoreConfig('base/debug/cacheversion')?>/bundle.js');
+<?php
+}
+?>
 
 
 
@@ -59,8 +68,8 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(e) {
 
-  if (event.request.url.includes('accounts.google.com')) {
-    return; // No llama a event.respondWith(), el navegador la maneja normal
+  if (e.request.url.includes('accounts.google.com')) {
+    return;
   }
   e.respondWith(
       caches.match(e.request).then(function(response) {

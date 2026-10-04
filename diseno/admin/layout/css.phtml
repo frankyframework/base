@@ -1,7 +1,7 @@
 <?php
 $css = array();
+$pageCss = array();
 $css[] = getCss("panel.css");
-$css[] = getCss("panel_extended.css");
 $css[] = getCss("grid.css");
 $css[] = getCss("franky.mobile.css");
 $css[] = getCss("franky-font/header.css");
@@ -19,25 +19,25 @@ if(is_array($MyFrankyMonster->MyCSSFile()))
 		{
                     if(!empty($_css))
                     {
-                        $css[] = getCss($_css);
+                        $pageCss[] = getCss($_css);
                     }
 		}
 	}
 }
 
 
-
+$FILE =  new \Franky\Filesystem\File();
 if (is_array($MyFrankyMonster->MyJQueyfile())) {
     if (count($MyFrankyMonster->MyJQueyfile()) > 0) {
         foreach ($MyFrankyMonster->MyJQueyfile() as $jquery) {
 
             $path = PROJECT_DIR."/public/jquery/$jquery/css/";
-            $css_jquery = \Franky\Filesystem\File::getFiles($path);
+            $css_jquery = $FILE->getFiles($path);
             if(count($css_jquery) > 0)
             {
                 foreach($css_jquery as $_css_jquery)
                 {
-                    $css[] = "/public/jquery/$jquery/css/" . $_css_jquery;
+                    $pageCss[] = "/public/jquery/$jquery/css/" . $_css_jquery;
 
                 }
             }
@@ -46,31 +46,53 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
 }
 
 
+
 if(getCoreConfig('base/debug/production')){
 
     $CssCreatos         = new Base\model\cssCreator();
+
     $CssCreatos->addCss($css);
-    $name_css =  getFriendly($MyFrankyMonster->MySeccion());
-    $CssCreatos->setName((!empty($name_css) ? $name_css.".css" : "home.css"));
-    if($MyFrankyMonster->MySeccion() == ERR_404)
-    {
-       $CssCreatos->setName("404.css");
-    }
-
-    $global_css = $CssCreatos->get(getCoreConfig('base/debug/cacheversion'));
+    $CssCreatos->setName("bundle.admin.css");
+    $bundleCss = $CssCreatos->get(getCoreConfig('base/debug/cacheversion'));
     ?>
-    <link rel='stylesheet' type='text/css' href="<?php echo $global_css; ?>" />
+    <link rel='stylesheet' type='text/css' href="<?= $bundleCss ?>" >
     <?php
-
-
+    if(!empty($pageCss)) {
+        $CssCreatos->addCss($pageCss);
+        $name_css =  getFriendly($MyFrankyMonster->MySeccion());
+        $CssCreatos->setName((!empty($name_css) ? $name_css.".css" : "home.css"));
+        if($MyFrankyMonster->MySeccion() == ERR_404)
+        {
+        $CssCreatos->setName("404.css");
+        }
+        $pageCss = $CssCreatos->get(getCoreConfig('base/debug/cacheversion'));
+        ?>
+        <link rel='stylesheet' type='text/css' href="<?= $pageCss ?>" >
+    <?php
+    }
+    if(file_exists(PROJECT_DIR.'/'.getCss("panel_extended.css"))) {
+    ?>
+        <link rel='stylesheet' type='text/css' href="<?= getCss("panel_extended.css") ?>" >
+    <?php
+    }
 }
 else
 {
+    $css = array_merge($css, $pageCss);
     foreach($css as $_file_css)
     {
+        if(file_exists(PROJECT_DIR.'/'.$_file_css)):
         ?>
-        <link rel='stylesheet' type='text/css' href="<?php echo $_file_css; ?>" />
+        <link rel='stylesheet' type='text/css' href="<?= $_file_css ?>" >
         <?php
+        endif;
+    }
+    if(file_exists(PROJECT_DIR.'/'.getCss("panel_extended.css"))) {
+    ?>
+        <link rel='stylesheet' type='text/css' href="<?= getCss("panel_extended.css") ?>" >
+    <?php
     }
 }
+
+//$MyMetatag->setCss(getCss("style.css"));
 ?>
