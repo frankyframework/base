@@ -9,14 +9,14 @@ var filesToCache = [
 <?php
 if (!empty(getCoreConfig('base/theme/favicon')) && file_exists(PROJECT_DIR.getCoreConfig('base/theme/favicon'))){
 ?>
-filesToCache.push(<?=getCoreConfig('base/theme/favicon')?>);
+filesToCache.push('<?=getCoreConfig('base/theme/favicon')?>');
 <?php
 }
 ?>
 <?php
 if (!empty(getCoreConfig('base/theme/logo')) && file_exists(PROJECT_DIR.getCoreConfig('base/theme/logo'))){
 ?>
-filesToCache.push(<?=getCoreConfig('base/theme/logo')?>);
+filesToCache.push('<?=getCoreConfig('base/theme/logo')?>');
 <?php
 }
 ?>
