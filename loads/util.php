@@ -66,6 +66,10 @@ function __bindtextdomain($domain,$modulo)
 function makeHTMLImg(string $src, $width="", $height="", $alt="", $extra='',$live=0, $excludeWP=0)
 { 
     global $MyRequest;
+    $quality = (int)getCoreConfig("base/server/image-quality");
+    if($quality < 1 || $quality > 100) {
+        $quality = 80;
+    }
     $is_next_generation = false;
     $img = $MyRequest->link($src,false,false);
     $schemaImg = pathinfo($img);
@@ -73,8 +77,14 @@ function makeHTMLImg(string $src, $width="", $height="", $alt="", $extra='',$liv
     {
         if(!file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
             try {
-                $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
-                $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
+                $originalFile = PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename'];
+                $imageResize = new \Franky\Core\ImageResize($originalFile);
+                $tmpFile = PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.uniqid('tmp_', true).'.'.$schemaImg['extension'];
+                $imageResize->quality_jpg = $quality;
+                $imageResize->quality_png = max(0, min(9, (int)round((100 - $quality) / 10)));
+                $imageResize->save($tmpFile);
+                $tmpResize = new \Franky\Core\ImageResize($tmpFile);
+                $tmpResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp', $quality);
                 $is_next_generation = true;
             } catch(\Exception $e){
 
