@@ -79,6 +79,8 @@ function makeHTMLImg(string $src, $width="", $height="", $alt="", $extra='',$liv
             } catch(\Exception $e){
 
             }
+        else:
+            $is_next_generation = true;
         endif;
     }
 
