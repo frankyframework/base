@@ -530,8 +530,8 @@ return array(
 
     ),
     'servidor' => array(
-      'menu' => "Configurar de servidor",
-      'title' => "Configurar de servidor",
+      'menu' => "Configurar servidor",
+      'title' => "Configurar servidor",
       'config' => array(
                 array('path' => 'base/server/session_time',
                 'type' => 'text',
@@ -552,6 +552,12 @@ return array(
               'label' => 'Tipo de archivo validos para media',
               'validation' => array('required' => false),
               'value' => 'jpg,jpeg,png,gif,svg,mp4,mov,avi,mpg,wmv,mpeg4,webM' //12 hrs
+              ),
+              array('path' => 'base/server/image-quality',
+              'type' => 'text',
+              'label' => 'Calidad de compresión de imágenes (1-100)',
+              'validation' => array('required' => false,'numeric' => true,'maxlength' => 3),
+              'value' => '80'
               )
       )
 

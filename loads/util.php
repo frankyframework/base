@@ -108,8 +108,12 @@ function contentWebP($txt) {
     global $MyRequest;
 
     $webpEnabled = getCoreConfig("base/pwa/images-next-generation") == 1;
+    $quality = (int)getCoreConfig("base/server/image-quality");
+    if($quality < 1 || $quality > 100) {
+        $quality = 80;
+    }
 
-    $processImg = function($matches) use ($MyRequest, $webpEnabled) {
+    $processImg = function($matches) use ($MyRequest, $webpEnabled, $quality) {
         $imgTag = $matches[0];
         $src = $matches[1];
 
@@ -134,20 +138,20 @@ function contentWebP($txt) {
 
         if($webpEnabled) {
             // WebP para escritorio
-            $desktopUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp';
+            $desktopUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-'.$quality.'q.webp';
             $desktopFile = PROJECT_DIR.'/'.$desktopUrl;
 
             if(!file_exists($desktopFile)) {
                 try {
                     $imageResize = new \Franky\Core\ImageResize($originalFile);
-                    $imageResize->webpImage($desktopFile);
+                    $imageResize->webpImage($desktopFile, $quality);
                 } catch (\Exception $e) {
                     // Si no se puede convertir, se deja el <img> original
                 }
             }
 
             // WebP para moviles (maximo 480px)
-            $mobileUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-480w.webp';
+            $mobileUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-480w-'.$quality.'q.webp';
             $mobileFile = PROJECT_DIR.'/'.$mobileUrl;
 
             if(!file_exists($mobileFile)) {
@@ -156,10 +160,12 @@ function contentWebP($txt) {
                     $imageResize->resizeToWidth(480, false);
 
                     $tmpFile = PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.uniqid('tmp_', true).'.'.$schemaImg['extension'];
+                    $imageResize->quality_jpg = $quality;
+                    $imageResize->quality_png = max(0, min(9, (int)round((100 - $quality) / 10)));
                     $imageResize->save($tmpFile);
 
                     $tmpResize = new \Franky\Core\ImageResize($tmpFile);
-                    $tmpResize->webpImage($mobileFile);
+                    $tmpResize->webpImage($mobileFile, $quality);
 
                     @unlink($tmpFile);
                 } catch (\Exception $e) {
@@ -175,7 +181,7 @@ function contentWebP($txt) {
             }
         } else {
             // Version responsiva para moviles (maximo 480px) sin WebP
-            $mobileUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-480w.'.$schemaImg['extension'];
+            $mobileUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-480w-'.$quality.'q.'.$schemaImg['extension'];
             $mobileFile = PROJECT_DIR.'/'.$mobileUrl;
 
             if(!file_exists($mobileFile)) {
@@ -193,7 +199,7 @@ function contentWebP($txt) {
             }
 
             // Version redimensionada para escritorio sin convertir a WebP
-            $desktopUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-1200w.'.$schemaImg['extension'];
+            $desktopUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-1200w-'.$quality.'q.'.$schemaImg['extension'];
             $desktopFile = PROJECT_DIR.'/'.$desktopUrl;
 
             if(!file_exists($desktopFile)) {
