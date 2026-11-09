@@ -86,6 +86,7 @@ function makeHTMLImg(string $src, $width="", $height="", $alt="", $extra='',$liv
                 $tmpResize = new \Franky\Core\ImageResize($tmpFile);
                 $tmpResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp', $quality);
                 $is_next_generation = true;
+                @unlink($tmpFile);
             } catch(\Exception $e){
 
             }
