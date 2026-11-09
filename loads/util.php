@@ -63,59 +63,45 @@ function __bindtextdomain($domain,$modulo)
     bindtextdomain($domain, $dir);
 }
 
-function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0, $excludeWP=0)
+function makeHTMLImg(string $src, $width="", $height="", $alt="", $extra='',$live=0, $excludeWP=0)
 { 
+    global $MyRequest;
+    $is_next_generation = false;
+    $img = $MyRequest->link($src,false,false);
+    $schemaImg = pathinfo($img);
     if(getCoreConfig("base/pwa/images-next-generation") == 1 && $excludeWP==0)
     {
-        global $MyRequest;
-        $img = $MyRequest->link($src,false,false);
-        $schemaImg = pathinfo($img);
         if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
             $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
-        
             $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
-
-        
             $is_next_generation = true;
-            $html = "<picture>";
-            $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp'."\" type='image/webp'>";
-            $html .= "<img src=\"".$src."\" alt=\"$alt\" $extra >";
-            $html .= "</picture>";
         endif;
-      
+    }
 
+    if(!empty($height))
+    {
+        $height = "height='$height'";
+    }
+
+    if(!empty($width))
+    {
+        $width = "width='$width'";
+    }
+    $lazy = "";
+    if(!empty($alive))
+    {
+        $lazy = "loading='lazy'";
     }
     
-    if(!$is_next_generation){
-
-        if(!empty($height))
-        {
-            $height = "height='$height'";
-        }
-
-        if(!empty($width))
-        {
-            $width = "width='$width'";
-        }
-        
-        if($live == 0)
-        {
-            $html = "<img src=\"$src\" $width $height  alt=\"$alt\"  $extra >";
-        }
-        else {
-            if($live == 1)
-            {
-            $img_live = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg==";
-            }
-            else {
-            $img_live = $live;
-            }
-            $html = "<img src=\"$img_live\" data-alive=\"$src\" $width $height  alt=\"$alt\"  $extra >";
-        }
+    if($is_next_generation){
+        $html = "<picture>";
+        $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp'."\" type='image/webp'>";
+        $html .= "<img src=\"".$src."\" $width $height  alt=\"$alt\" $lazy $extra >";
+        $html .= "</picture>";
+        return $html;
+    } else {
+        return  "<img src=\"$src\" $width $height  alt=\"$alt\"  $lazy $extra >";
     }
-    
-
-	return ($html);
 }
 
 function contentWebP($txt) {

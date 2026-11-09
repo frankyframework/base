@@ -13,14 +13,6 @@ $(window).on('load',function() {
 
     }
 
-    $.fn.imgLoadAlive();
-    $(window).scroll(function () {
-      $.fn.imgLoadAlive();
-    });
-    $(document).ajaxComplete(function () {
-        $.fn.imgLoadAlive();
-    });
-
     if(isMobile())
     {
         $(".tel1").attr('href',"tel:"+$(".tel1").eq(0).text());
