@@ -106,25 +106,123 @@ function makeHTMLImg(string $src, $width="", $height="", $alt="", $extra='',$liv
 
 function contentWebP($txt) {
     global $MyRequest;
-    if(getCoreConfig("base/pwa/images-next-generation") == 1)
-    {
-        preg_match_all('/(src=")([^"]+\.(?:jpg|png|gif))(")/i', $txt,$resultImages);
-        
-        foreach($resultImages[2] as  $val) {
 
-            $img = $MyRequest->link(str_replace("../","",$val),false,false);
-            $schemaImg = pathinfo($img);
-            $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
-            
-            $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
-    
-            if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
-                $txt = str_replace($val, $schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp', $txt);
-            endif;
+    $webpEnabled = getCoreConfig("base/pwa/images-next-generation") == 1;
 
+    $processImg = function($matches) use ($MyRequest, $webpEnabled) {
+        $imgTag = $matches[0];
+        $src = $matches[1];
+
+        $img = $MyRequest->link(str_replace("../","",$src),false,false);
+        $schemaImg = pathinfo($img);
+
+        if(!isset($schemaImg['extension'])) {
+            return $imgTag;
         }
-    } 
-    return $txt;
+
+        $extension = strtolower($schemaImg['extension']);
+        if(!in_array($extension, ['jpg','jpeg','png','gif'])) {
+            return $imgTag;
+        }
+
+        $originalFile = PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename'];
+        if(!file_exists($originalFile)) {
+            return $imgTag;
+        }
+
+        $sources = '';
+
+        if($webpEnabled) {
+            // WebP para escritorio
+            $desktopUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp';
+            $desktopFile = PROJECT_DIR.'/'.$desktopUrl;
+
+            if(!file_exists($desktopFile)) {
+                try {
+                    $imageResize = new \Franky\Core\ImageResize($originalFile);
+                    $imageResize->webpImage($desktopFile);
+                } catch (\Exception $e) {
+                    // Si no se puede convertir, se deja el <img> original
+                }
+            }
+
+            // WebP para moviles (maximo 480px)
+            $mobileUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-480w.webp';
+            $mobileFile = PROJECT_DIR.'/'.$mobileUrl;
+
+            if(!file_exists($mobileFile)) {
+                try {
+                    $imageResize = new \Franky\Core\ImageResize($originalFile);
+                    $imageResize->resizeToWidth(480, false);
+
+                    $tmpFile = PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.uniqid('tmp_', true).'.'.$schemaImg['extension'];
+                    $imageResize->save($tmpFile);
+
+                    $tmpResize = new \Franky\Core\ImageResize($tmpFile);
+                    $tmpResize->webpImage($mobileFile);
+
+                    @unlink($tmpFile);
+                } catch (\Exception $e) {
+                    // Si no se puede redimensionar, se deja el <img> original
+                }
+            }
+
+            if(file_exists($mobileFile)) {
+                $sources .= '<source media="(max-width: 480px)" srcset="'.$mobileUrl.'" type="image/webp">';
+            }
+            if(file_exists($desktopFile)) {
+                $sources .= '<source media="(min-width: 481px)" srcset="'.$desktopUrl.'" type="image/webp">';
+            }
+        } else {
+            // Version responsiva para moviles (maximo 480px) sin WebP
+            $mobileUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-480w.'.$schemaImg['extension'];
+            $mobileFile = PROJECT_DIR.'/'.$mobileUrl;
+
+            if(!file_exists($mobileFile)) {
+                try {
+                    $imageResize = new \Franky\Core\ImageResize($originalFile);
+                    $imageResize->resizeToWidth(480, false);
+                    $imageResize->save($mobileFile);
+                } catch (\Exception $e) {
+                    // Si no se puede redimensionar, se deja el <img> original
+                }
+            }
+
+            if(file_exists($mobileFile)) {
+                $sources .= '<source media="(max-width: 480px)" srcset="'.$mobileUrl.'">';
+            }
+
+            // Version redimensionada para escritorio sin convertir a WebP
+            $desktopUrl = $schemaImg['dirname'].'/'.$schemaImg['filename'].'-1200w.'.$schemaImg['extension'];
+            $desktopFile = PROJECT_DIR.'/'.$desktopUrl;
+
+            if(!file_exists($desktopFile)) {
+                try {
+                    $imageResize = new \Franky\Core\ImageResize($originalFile);
+                    $imageResize->resizeToWidth(1200, false);
+                    $imageResize->save($desktopFile);
+                } catch (\Exception $e) {
+                    // Si no se puede redimensionar, se deja el <img> original
+                }
+            }
+
+            if(file_exists($desktopFile)) {
+                $sources .= '<source media="(min-width: 481px)" srcset="'.$desktopUrl.'">';
+            }
+        }
+
+        if($sources === '') {
+            return $imgTag;
+        }
+
+        return '<picture>'.$sources.$imgTag.'</picture>';
+    };
+
+    return preg_replace_callback(
+        '/<img\b[^>]*\bsrc\s*=\s*["\']([^"\']+\.(?:jpe?g|png|gif))["\'][^>]*>/i',
+        $processImg,
+        $txt
+    );
 }
 
 function makeHTMLOrder($campo, $caption)
