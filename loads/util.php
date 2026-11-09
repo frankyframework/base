@@ -88,7 +88,7 @@ function makeHTMLImg(string $src, $width="", $height="", $alt="", $extra='',$liv
         $width = "width='$width'";
     }
     $lazy = "";
-    if(!empty($alive))
+    if(!empty($live))
     {
         $lazy = "loading='lazy'";
     }
