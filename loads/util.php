@@ -71,10 +71,14 @@ function makeHTMLImg(string $src, $width="", $height="", $alt="", $extra='',$liv
     $schemaImg = pathinfo($img);
     if(getCoreConfig("base/pwa/images-next-generation") == 1 && $excludeWP==0)
     {
-        if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
-            $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
-            $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
-            $is_next_generation = true;
+        if(!file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
+            try {
+                $imageResize = new \Franky\Core\ImageResize(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename']);
+                $imageResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp');
+                $is_next_generation = true;
+            } catch(\Exception $e){
+
+            }
         endif;
     }
 
