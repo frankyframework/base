@@ -148,8 +148,9 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
         {
             ?>
             <div class="form_tampag"><form name='tamanopag'  action='' method='get'>
-            <span class='datos mostrar'>Mostrar</span>
-            <label class="inline" style="display:inline;">
+            
+            <label  style="display:inline;">
+                <span class='datos mostrar'>Mostrar</span>
             <select name='tam'>
             <?php
             foreach($MyPaginacion->getTamanosValidos() as $v)
@@ -160,8 +161,9 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             }
             ?>
             </select>
-            </label>
             <span class='datos registro'>Registros</span>
+            </label>
+            
             </form>
             <a class="tampag" href="#"></a>
             </div>
