@@ -48,7 +48,7 @@ class MinifyHtml
 
         //remove optional ending tags (see http://www.w3.org/TR/html5/syntax.html#syntax-tag-omission )
         $remove = array(
-            '</option>', '</li>', '</dt>', '</dd>', '</tr>', '</th>', '</td>', '</resource>'
+            '</option>', '</li>', '</dt>', '</dd>', '</tr>', '</th>', '</td>', '</source>'
         );
         $html = str_ireplace($remove, '', $html);
 
