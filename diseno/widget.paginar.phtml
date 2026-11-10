@@ -165,7 +165,6 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             </label>
             
             </form>
-            <a class="tampag" href="#"></a>
             </div>
             <?php
         }
@@ -184,7 +183,6 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             <?php $uri = preg_replace("/tampag=(\d+)\&/", "", $uri); ?>
             <?php $uri = preg_replace("/page=(\d+)\&/", "", $uri); ?>
 
-            $("a.tampag").attr('href','<?php echo $uri; ?>'+'page=1&tampag='+$(this).val());
-            $("a.tampag").get(0).click();
+            window.location = '<?php echo $uri; ?>page=1&tampag='+$(this).val();
         });
         </script>
