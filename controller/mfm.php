@@ -97,9 +97,9 @@ if(isset($_REQUEST['return'])) {
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="es" />
     <title><?php echo _("Administrador de archivos"); ?></title>
-    <link rel="stylesheet" href="/public/plugins/tinymce/mfm/style.css" type="text/css" />
-    <script  src="/public/jquery/jquery-2.2.2.min.js"></script>
-    <script  src="/public/plugins/tinymce/tinymce.min.js"></script>
+    <link rel="stylesheet" href='/plugins/tinymce/mfm/style.css" type="text/css" />
+    <script  src='/jquery/jquery-2.2.2.min.js"></script>
+    <script  src='/plugins/tinymce/tinymce.min.js"></script>
 
 
     <script >
@@ -108,7 +108,7 @@ if(isset($_REQUEST['return'])) {
         //load content using asynchronous HTML and HTTP
   	function load(query,targer) {
 
-            $("#"+targer).html('<img src="/public/plugins/tinymce/mfm/loading.gif" alt="" /> <?php echo _("cargando"); ?>');
+            $("#"+targer).html('<img src='/plugins/tinymce/mfm/loading.gif" alt="" /> <?php echo _("cargando"); ?>');
 
             $.ajax({
                 type: "GET",

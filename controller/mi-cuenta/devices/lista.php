@@ -57,8 +57,8 @@ if ($MyRequest->isAjax()) {
         echo $callback . '(' . json_encode($dataRows). ');';
         die;
 } else {
-        $MyMetatag->setJs("/public/plugins/jqGrid/js/jquery.jqGrid.js");
-        $MyMetatag->setJs("/public/plugins/jqGrid/js/i18n/grid.locale-$lang_root.js");
-        $MyMetatag->setCSS("/public/plugins/jqGrid/css/ui.jqgrid.css");
+        $MyMetatag->setJs("/plugins/jqGrid/js/jquery.jqGrid.js");
+        $MyMetatag->setJs("/plugins/jqGrid/js/i18n/grid.locale-$lang_root.js");
+        $MyMetatag->setCSS("/plugins/jqGrid/css/ui.jqgrid.css");
 }
 ?>

@@ -47,5 +47,5 @@ $adminForm->setAtributoInput("callback","value", urldecode($callback));
 
 $title_form = $title;
 
-$MyMetatag->setCode("<script  src='/public/plugins/tinymce/tinymce.min.js'></script>");
+$MyMetatag->setCode("<script  src='/plugins/tinymce/tinymce.min.js'></script>");
 ?>

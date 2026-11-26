@@ -25,7 +25,7 @@ function changeDir($path = null)
         }
         
     }
-    $path = str_replace( PROJECT_DIR."/public/upload/".$MyConfigure->getPathSite(), "", realpath($path));
+    $path = str_replace( realpath(PROJECT_DIR."/public/upload/".$MyConfigure->getPathSite()), "", realpath($path));
     return array("connect" => true,"ls_remoto" => $contenido,"pwd_remoto" => $path);
 }
 

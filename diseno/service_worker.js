@@ -21,16 +21,16 @@ filesToCache.push('<?=getCoreConfig('base/theme/logo')?>');
 }
 ?>
 <?php
-if (file_exists(PROJECT_DIR."/public/cache/css/".getCoreConfig('base/debug/cacheversion')."/bundle.css")){
+if (file_exists(PROJECT_DIR.'/cache/css/".getCoreConfig('base/debug/cacheversion')."/bundle.css")){
 ?>
-filesToCache.push('/public/cache/css/<?=getCoreConfig('base/debug/cacheversion')?>/bundle.css');
+filesToCache.push('/cache/css/<?=getCoreConfig('base/debug/cacheversion')?>/bundle.css');
 <?php
 }
 ?>
 <?php
-if (file_exists(PROJECT_DIR."/public/cache/js/".getCoreConfig('base/debug/cacheversion')."/bundle.js")){
+if (file_exists(PROJECT_DIR.'/cache/js/".getCoreConfig('base/debug/cacheversion')."/bundle.js")){
 ?>
-filesToCache.push('/public/cache/js/<?=getCoreConfig('base/debug/cacheversion')?>/bundle.js');
+filesToCache.push('/cache/js/<?=getCoreConfig('base/debug/cacheversion')?>/bundle.js');
 <?php
 }
 ?>

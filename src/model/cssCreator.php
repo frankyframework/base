@@ -53,7 +53,7 @@ class cssCreator
                                                
                 $buffer .= str_replace(array("../","fonts/franky-font."),
                         array(dirname($file)."/../",dirname($file)."/fonts/franky-font."),
-                        file_get_contents(PROJECT_DIR.$file));
+                        file_get_contents(PROJECT_DIR."/public/".$file));
 
             }
         }
@@ -61,7 +61,7 @@ class cssCreator
         {
             $buffer = str_replace(array("../","fonts/franky-font."),
                     array(dirname($this->css)."/../",dirname($this->css)."/fonts/franky-font."),
-                    file_get_contents(PROJECT_DIR.$this->css));
+                    file_get_contents(PROJECT_DIR."/public/".$this->css));
         }
 
         $globalFile = fopen(PROJECT_DIR.$this->cssFolder.$this->version."/".$this->Namecss, 'w');
@@ -106,7 +106,7 @@ class cssCreator
             $this->crearCss();
         }
         
-        return $this->cssFolder.$version."/".$this->Namecss;
+        return str_replace("/public","",$this->cssFolder).$version."/".$this->Namecss;
         
         
     }

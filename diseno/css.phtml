@@ -4,9 +4,9 @@ $pageCss = array();
 $css[] = getCss("grid.css");
 $css[] = getCss("franky.mobile.css");
 $css[] = getCss("franky-font/style.css");
-$css[] = "/public/jquery-ui/themes/jquery-ui.structure.css";
-$css[] = "/public/jquery-ui/themes/".getCoreConfig('base/theme/jqueryiu-theme')."/jquery-ui.min.css";
-$css[] = "/public/jquery-ui/themes/".getCoreConfig('base/theme/jqueryiu-theme')."/theme.css";
+$css[] = "/jquery-ui/themes/jquery-ui.structure.css";
+$css[] = "/jquery-ui/themes/".getCoreConfig('base/theme/jqueryiu-theme')."/jquery-ui.min.css";
+$css[] = "/jquery-ui/themes/".getCoreConfig('base/theme/jqueryiu-theme')."/theme.css";
 $css[] = getCss("style.css");
 
 
@@ -34,7 +34,7 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
             {
                 foreach($css_jquery as $_css_jquery)
                 {
-                    $pageCss[] = "/public/jquery/$jquery/css/" . $_css_jquery;
+                    $pageCss[] = "/jquery/$jquery/css/" . $_css_jquery;
 
                 }
             }
@@ -78,13 +78,13 @@ else
     $css = array_merge($css, $pageCss);
     foreach($css as $_file_css)
     {
-        if(file_exists(PROJECT_DIR.'/'.$_file_css)):
+        if(file_exists(PROJECT_DIR.'/public/'.$_file_css)):
         ?>
         <link rel='stylesheet' type='text/css' href="<?= $_file_css ?>" >
         <?php
         endif;
     }
-    if(file_exists(PROJECT_DIR.'/'.getCss("style_extended.css"))) {
+    if(file_exists(PROJECT_DIR.'/public/'.getCss("style_extended.css"))) {
     ?>
         <link rel='stylesheet' type='text/css' href="<?= getCss("style_extended.css") ?>" >
     <?php

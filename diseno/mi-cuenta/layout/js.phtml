@@ -1,15 +1,15 @@
 <?php
 $js = array();
 $jsPage = [];
-$js[] = "/public/jquery/jquery-2.2.2.min.js";
-$js[] = "/public/ajax/ajax.js";
-$js[] = "/modulos/base/web/js/ajax.common.js";
+$js[] = "/jquery/jquery-2.2.2.min.js";
+$js[] = "/ajax/ajax.js";
+$js[] = "/static/".getCoreConfig('base/debug/cacheversion')."/base/web/js/ajax.common.js";
 
 if (is_array($MyFrankyMonster->MyAjaxFile())) {
     if (count($MyFrankyMonster->MyAjaxFile()) > 0) {
         foreach ($MyFrankyMonster->MyAjaxFile() as $ajax) {
             $ajax = explode('/',$ajax);
-            $jsPage[]  = "/modulos/".$ajax[0]."/web/js/" . $ajax[1];
+            $jsPage[]  = "/static/".getCoreConfig('base/debug/cacheversion')."/".$ajax[0]."/web/js/" . $ajax[1];
         }
     }
 }
@@ -28,7 +28,7 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
                 {
 
 
-                        $jsPage[] = "/public/jquery/$jquery/js/".$_js_jquery;
+                        $jsPage[] = "/jquery/$jquery/js/".$_js_jquery;
 
                 }
             }
@@ -36,18 +36,18 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
     }
 }
 
-$js[] = "/public/js/funciones.js";
-$js[] = "/modulos/base/web/js/front.js";
-$js[] = "/modulos/base/web/js/admin.js";
-$js[] = "/public/js/menu.js";
-$js[] = "/public/js/blocks.js";
+$js[] = "/js/funciones.js";
+$js[] = "/static/".getCoreConfig('base/debug/cacheversion')."/base/web/js/front.js";
+$js[] = "/static/".getCoreConfig('base/debug/cacheversion')."/base/web/js/admin.js";
+$js[] = "/js/menu.js";
+$js[] = "/js/blocks.js";
 
 if (is_array($MyFrankyMonster->MyJSFile())) {
     if (count($MyFrankyMonster->MyJSFile()) > 0) {
         foreach ($MyFrankyMonster->MyJSFile() as $_js) {
             if(!empty($js))
             {
-                $jsPage[] ='/modulos/'.$MyFrankyMonster->MyModulo().'/web/js/' . $_js ;
+                $jsPage[] ='/static/'.getCoreConfig('base/debug/cacheversion').'/'.$MyFrankyMonster->MyModulo().'/web/js/' . $_js ;
 
             }
         }

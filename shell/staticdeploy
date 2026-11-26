@@ -1,0 +1,157 @@
+<?php
+use Franky\Filesystem\File;
+ini_set('memory_limit', '-1');
+
+$File = new File;
+
+global $argv;
+$verbose = isset($argv) && is_array($argv) && in_array('--verbose', $argv);
+
+$origenBase    = PROJECT_DIR . "/modulos";
+$destinoStatic = PROJECT_DIR . "/public/static";
+$destinoBase   = $destinoStatic . "/".getCoreConfig('base/debug/cacheversion');
+
+$extensionesPermitidas = [
+    'css','js','map','png','jpg','jpeg','bmp','gif','svg','webp','jp2','jxr','ico',
+    'woff','woff2','ttf','otf','eot','xml','txt','swf','jar','zip','kml','json','pdf','mp4','ogg','webm'
+];
+
+$directoriosExcluidos = ['less','scss','sass','node_modules','.git'];
+
+$archivosCopiados = 0;
+$bytesCopiados = 0;
+$errores = 0;
+
+function copiarEstaticos($origen, $destino, $extensiones, $directoriosExcluidos, &$archivosCopiados, &$bytesCopiados, &$errores, $verbose)
+{
+    if (!is_dir($origen)) {
+        return;
+    }
+
+    if (!is_dir($destino)) {
+        mkdir($destino, 0777, true);
+    }
+
+    $elementos = scandir($origen);
+    if ($elementos === false) {
+        shellFontColor("[error] No se pudo leer " . str_replace(PROJECT_DIR, '', $origen), "rojo");
+        $errores++;
+        return;
+    }
+
+    foreach ($elementos as $elemento) {
+        if ($elemento === '.' || $elemento === '..') {
+            continue;
+        }
+
+        $origenElemento  = $origen . '/' . $elemento;
+        $destinoElemento = $destino . '/' . $elemento;
+
+        if (is_dir($origenElemento)) {
+            if (in_array(strtolower($elemento), $directoriosExcluidos, true)) {
+                continue;
+            }
+
+            copiarEstaticos($origenElemento, $destinoElemento, $extensiones, $directoriosExcluidos, $archivosCopiados, $bytesCopiados, $errores, $verbose);
+            continue;
+        }
+
+        $extension = strtolower(pathinfo($elemento, PATHINFO_EXTENSION));
+        if (!in_array($extension, $extensiones, true)) {
+            if ($verbose) {
+                shellFontColor("[ignorado] " . str_replace(PROJECT_DIR, '', $origenElemento), "amarillo");
+            }
+            continue;
+        }
+
+        $directorioDestino = dirname($destinoElemento);
+        if (!is_dir($directorioDestino)) {
+            mkdir($directorioDestino, 0777, true);
+        }
+
+        if (!@copy($origenElemento, $destinoElemento)) {
+            shellFontColor("[error] No se pudo copiar " . str_replace(PROJECT_DIR, '', $origenElemento), "rojo");
+            $errores++;
+            continue;
+        }
+
+        $archivosCopiados++;
+        $bytesCopiados += (int) filesize($destinoElemento);
+
+        if ($verbose) {
+            shellFontColor("[copia] " . str_replace(PROJECT_DIR, '', $origenElemento), "verde");
+        }
+    }
+}
+
+if (is_dir($destinoBase)) {
+    shellFontColor("[limpieza] Eliminando " . str_replace(PROJECT_DIR, '', $destinoBase), "amarillo");
+    $File->rm($destinoBase);
+}
+
+if (!is_dir($destinoStatic)) {
+    $File->mkdir($destinoStatic);
+}
+$File->mkdir($destinoBase);
+
+$modulos = $File->getFiles($origenBase, 'dir');
+if (empty($modulos)) {
+    shellFontColor("No se encontraron módulos en " . str_replace(PROJECT_DIR, '', $origenBase), "rojo");
+    exit(1);
+}
+
+foreach ($modulos as $modulo) {
+    $origenWeb = $origenBase . '/' . $modulo . '/web';
+
+    if (!is_dir($origenWeb)) {
+        continue;
+    }
+
+    shellFontColor("[modulo] " . $modulo, "azul");
+
+    $destinoWeb = $destinoBase . '/' . $modulo . '/web';
+    copiarEstaticos($origenWeb, $destinoWeb, $extensionesPermitidas, $directoriosExcluidos, $archivosCopiados, $bytesCopiados, $errores, $verbose);
+}
+
+shellFontColor("", "default");
+shellFontColor("Resumen", "amarillo");
+shellFontColor("  Archivos copiados: " . $archivosCopiados, "verde");
+shellFontColor("  Tamaño total: " . number_format($bytesCopiados / 1048576, 2) . " MB", "verde");
+
+if ($errores > 0) {
+    shellFontColor("  Errores: " . $errores, "rojo");
+} else {
+    shellFontColor("  Errores: 0", "verde");
+}
+
+shellFontColor("  Destino: " . str_replace(PROJECT_DIR, '', $destinoBase), "verde");
+
+// Compile LESS after copying assets, because staticdeploy recreates this version folder.
+$gruntScript = PROJECT_DIR . "/node_modules/grunt/bin/grunt";
+if (!is_file($gruntScript)) {
+    shellFontColor("[error] No se encontró Grunt en node_modules. Instala las dependencias con npm install.", "rojo");
+    exit(1);
+}
+
+putenv("FRANKY_SITE_MODULE=" . $MyConfigure->getPathSite());
+$comandoGrunt = "node " . escapeshellarg($gruntScript) . " less";
+shellFontColor("[grunt] Compilando LESS en la carpeta estática", "azul");
+passthru($comandoGrunt, $codigoSalidaGrunt);
+
+if ($codigoSalidaGrunt !== 0) {
+    shellFontColor("[error] Falló la compilación de Grunt (código {$codigoSalidaGrunt}).", "rojo");
+    exit($codigoSalidaGrunt);
+}
+
+shellFontColor("[success] CSS compilados en la carpeta estática.", "verde");
+
+$frankyCli = PROJECT_DIR . "/bin/franky";
+shellFontColor("[cache] Limpiando caché CSS y JS", "azul");
+passthru(escapeshellarg(PHP_BINARY) . " " . escapeshellarg($frankyCli) . " base:limpiar-cache", $codigoSalidaCache);
+
+if ($codigoSalidaCache !== 0) {
+    shellFontColor("[error] Falló la limpieza de caché (código {$codigoSalidaCache}).", "rojo");
+    exit($codigoSalidaCache);
+}
+
+shellFontColor("[success] Caché CSS y JS limpiada.", "verde");

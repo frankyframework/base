@@ -73,7 +73,7 @@ function eliminarCarpeta(path,name)
     {
 
         var data = $.ajax({
-        url: '/public/ajax/ajax.php?function=getAllFiles&vars_ajax[]='+path+"/"+name,
+        url: '/ajax/ajax.php?function=getAllFiles&vars_ajax[]='+path+"/"+name,
         dataType: "json",
         async: false
         }).responseText;
@@ -85,7 +85,7 @@ function eliminarCarpeta(path,name)
             for(var i = data['file'].length-1; i >= 0; i--)
             {
                 $.ajax({
-                url: '/public/ajax/ajax.php?function=eliminarArchivo&vars_ajax[]='+data['file'][i],
+                url: '/ajax/ajax.php?function=eliminarArchivo&vars_ajax[]='+data['file'][i],
                 dataType: "json",
                 async: false
                 }).responseText;
@@ -96,7 +96,7 @@ function eliminarCarpeta(path,name)
         for(var i = data['dir'].length-1; i >= 0; i--)
         {
             $.ajax({
-                url: '/public/ajax/ajax.php?function=eliminarCarpeta&vars_ajax[]='+data['dir'][i],
+                url: '/ajax/ajax.php?function=eliminarCarpeta&vars_ajax[]='+data['dir'][i],
                 dataType: "json",
                 async: false
                 }).responseText;

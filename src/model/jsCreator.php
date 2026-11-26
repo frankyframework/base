@@ -54,10 +54,10 @@ class jsCreator
         $buffer = "";
         if (is_array($this->js)) {
             foreach ($this->js as $file) {
-                $buffer .= file_get_contents(PROJECT_DIR . $file);
+                $buffer .= file_get_contents(PROJECT_DIR ."/public/". $file);
             }
         } else {
-            $buffer = file_get_contents(PROJECT_DIR . $this->js);
+            $buffer = file_get_contents(PROJECT_DIR ."/public/". $this->js);
         }
 
         $contenidoJs = $buffer . "\n" . $this->embebed;
@@ -101,6 +101,6 @@ class jsCreator
         {
             $this->crearJs();
         }
-        return $this->jsFolder.$version."/".$this->Namejs;   
+        return str_replace("/public","",$this->jsFolder).$version."/".$this->Namejs;   
     }
 }

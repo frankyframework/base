@@ -43,5 +43,5 @@ $cmsForm = new bloqueForm("frmcmstemplate");
 $cmsForm->setData($data);
 $cmsForm->setAtributoInput("callback","value", urldecode($callback));
 $cmsForm->setAtributoInput("template","value", ($data['template']));
-$MyMetatag->setCode("<script  src='/public/plugins/tinymce/tinymce.min.js'></script>");
+$MyMetatag->setCode("<script  src='/plugins/tinymce/tinymce.min.js'></script>");
 ?>

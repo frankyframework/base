@@ -75,16 +75,16 @@ function makeHTMLImg(string $src, $width="", $height="", $alt="", $extra='',$liv
     $schemaImg = pathinfo($img);
     if(getCoreConfig("base/pwa/images-next-generation") == 1 && $excludeWP==0)
     {
-        if(!file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
+        if(!file_exists(PROJECT_DIR.'/public/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
             try {
-                $originalFile = PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['basename'];
+                $originalFile = PROJECT_DIR.'/public/'.$schemaImg['dirname'].'/'.$schemaImg['basename'];
                 $imageResize = new \Franky\Core\ImageResize($originalFile);
-                $tmpFile = PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.uniqid('tmp_', true).'.'.$schemaImg['extension'];
+                $tmpFile = PROJECT_DIR.'/public/'.$schemaImg['dirname'].'/'.uniqid('tmp_', true).'.'.$schemaImg['extension'];
                 $imageResize->quality_jpg = $quality;
                 $imageResize->quality_png = max(0, min(9, (int)round((100 - $quality) / 10)));
                 $imageResize->save($tmpFile);
                 $tmpResize = new \Franky\Core\ImageResize($tmpFile);
-                $tmpResize->webpImage(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp', $quality);
+                $tmpResize->webpImage(PROJECT_DIR.'/public/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp', $quality);
                 $is_next_generation = true;
                 @unlink($tmpFile);
             } catch(\Exception $e){
@@ -330,20 +330,20 @@ function getCss($file)
     global $MyConfigure;
     global $MyFrankyMonster;
 
-    if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/web/css/".$file))
+    if(file_exists(PROJECT_DIR."/public/static/".getCoreConfig('base/debug/cacheversion')."/".$MyConfigure->getPathSite()."/web/css/".$file))
     {
-        return "/modulos/".$MyConfigure->getPathSite()."/web/css/".$file;
+        return "/static/".getCoreConfig('base/debug/cacheversion')."/".$MyConfigure->getPathSite()."/web/css/".$file;
     }
-    elseif($MyFrankyMonster->MyModulo()!= "base" && file_exists(PROJECT_DIR."/modulos/".$MyFrankyMonster->MyModulo()."/web/css/".$file))
+    elseif($MyFrankyMonster->MyModulo()!= "base" && file_exists(PROJECT_DIR."/public/static/".getCoreConfig('base/debug/cacheversion')."/".$MyFrankyMonster->MyModulo()."/web/css/".$file))
     {
-        return "/modulos/".$MyFrankyMonster->MyModulo()."/web/css/".$file;
+        return "/static/".getCoreConfig('base/debug/cacheversion')."/".$MyFrankyMonster->MyModulo()."/web/css/".$file;
     }
-    elseif(file_exists(PROJECT_DIR."/modulos/base/web/".getCoreConfig('base/theme/theme')."/css/".$file))
+    elseif(file_exists(PROJECT_DIR."/public/static/".getCoreConfig('base/debug/cacheversion')."/base/web/".getCoreConfig('base/theme/theme')."/css/".$file))
     {
-        return "/modulos/base/web/".getCoreConfig('base/theme/theme')."/css/".$file;
+        return "/static/".getCoreConfig('base/debug/cacheversion')."/base/web/".getCoreConfig('base/theme/theme')."/css/".$file;
     }
     else {
-        return "/modulos/base/web/base/css/".$file;
+        return "/static/".getCoreConfig('base/debug/cacheversion')."/base/web/base/css/".$file;
     }
 
 }
@@ -352,20 +352,20 @@ function getImg($file)
 {
     global $MyConfigure;
     global $MyFrankyMonster;
-    if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/web/images/".$file))
+    if(file_exists(PROJECT_DIR."/public/static/".getCoreConfig('base/debug/cacheversion')."/".$MyConfigure->getPathSite()."/web/images/".$file))
     {
-        return "/modulos/".$MyConfigure->getPathSite()."/web/images/".$file;
+        return "/static/".getCoreConfig('base/debug/cacheversion')."/".$MyConfigure->getPathSite()."/web/images/".$file;
     }
-    if(file_exists(PROJECT_DIR."/modulos/".$MyFrankyMonster->MyModulo()."/web/images/".$file))
+    if(file_exists(PROJECT_DIR."/public/static/".getCoreConfig('base/debug/cacheversion')."/".$MyFrankyMonster->MyModulo()."/web/images/".$file))
     {
-        return "/modulos/".$MyFrankyMonster->MyModulo()."/web/images/".$file;
+        return "/static/".getCoreConfig('base/debug/cacheversion')."/".$MyFrankyMonster->MyModulo()."/web/images/".$file;
     }
-    elseif(file_exists(PROJECT_DIR."/modulos/base/web/".getCoreConfig('base/theme/theme')."/images/".$file))
+    elseif(file_exists(PROJECT_DIR."/public/static/".getCoreConfig('base/debug/cacheversion')."/base/web/".getCoreConfig('base/theme/theme')."/images/".$file))
     {
-        return "/modulos/base/web/".getCoreConfig('base/theme/theme')."/images/".$file;
+        return "/static/".getCoreConfig('base/debug/cacheversion')."/base/web/".getCoreConfig('base/theme/theme')."/images/".$file;
     }
     else {
-        return "/modulos/base/web/images/".$file;
+        return "/static/".getCoreConfig('base/debug/cacheversion')."/base/web/images/".$file;
     }
 }
 
@@ -741,20 +741,20 @@ function imageResize($img,$w,$h,$crop=false)
     $name = $array_archivo[count($array_archivo)-1];
 
 
-    list($ancho, $alto, $tipo, $atributos) = getimagesize(PROJECT_DIR.$img);
+    list($ancho, $alto, $tipo, $atributos) = getimagesize(PROJECT_DIR."/public/".$img);
 
     if($alto < $h || $ancho < $w)
     {
     //    return $img;
     }
-    if (file_exists(PROJECT_DIR.$img))
+    if (file_exists(PROJECT_DIR."/public/".$img))
     {
-        if (!file_exists(PROJECT_DIR.str_replace($name,$w."x".$h."_".($crop ? "crop_" : "").$name,$img)))
+        if (!file_exists(PROJECT_DIR."/public/".str_replace($name,$w."x".$h."_".($crop ? "crop_" : "").$name,$img)))
         {
 
 
 
-            $image = new Franky\Core\ImageResize(PROJECT_DIR.$img);
+            $image = new Franky\Core\ImageResize(PROJECT_DIR."/public/".$img);
             if($crop)
             {
                 $image->crop($w, $h);
@@ -763,7 +763,7 @@ function imageResize($img,$w,$h,$crop=false)
                 $image->resizeToBestFit($w, $h);
             }
 
-            $image->save(PROJECT_DIR.str_replace($name,$w."x".$h."_".($crop ? "crop_" : "").$name,$img));
+            $image->save(PROJECT_DIR."/public/".str_replace($name,$w."x".$h."_".($crop ? "crop_" : "").$name,$img));
         }
         return str_replace($name,$w."x".$h."_".($crop ? "crop_" : "").$name,$img);
     }
@@ -1429,7 +1429,7 @@ function getJqueryUIjs(array $js)
         'dialog' => ["widget","position","data-selector","disable-selection","focusable-selector","form-reset-mixin","keycode","labels","scroll-parent","tabbable-selector","unique-id"/*,"draggable","resizable"*/,"button","checkboxradio","controlgroup","mouse"],
         'sortable' => ["widget","data-selector","scroll-parent","mouse"],
         'tooltip' => ["widget","keycode","position","unique-id"],
-        'selectmenu' => ["witget","position","menu"],
+        'selectmenu' => ["widget","position","menu"],
     ];
     
     foreach($jquery_ui as $function => $dependencias)
@@ -1437,16 +1437,16 @@ function getJqueryUIjs(array $js)
         
             foreach($dependencias as $dependencia)
             {
-                if(!in_array('/public/jquery-ui/js/'.$dependencia.'.js',$js))
+                if(!in_array('/jquery-ui/js/'.$dependencia.'.js',$js))
                 {
-                    $js[] = '/public/jquery-ui/js/'.$dependencia.'.js';
+                    $js[] = '/jquery-ui/js/'.$dependencia.'.js';
                 }
             }
 
 
-            if(!in_array('/public/jquery-ui/js/'.$function.'.js',$js))
+            if(!in_array('/jquery-ui/js/'.$function.'.js',$js))
             {
-                $js[] = '/public/jquery-ui/js/'.$function.'.js';
+                $js[] = '/jquery-ui/js/'.$function.'.js';
             }
         
     }
