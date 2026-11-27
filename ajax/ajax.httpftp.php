@@ -44,16 +44,33 @@ function renameFile($path,$new_path)
 }
 
 
-function eliminarCarpeta($path)
+function eliminarCarpeta(string $path)
 {
     global $MyConfigure;
     $path = PROJECT_DIR."/public/upload/".$MyConfigure->getPathSite()."/".$path;
     if(file_exists($path))
     {
-         return rmdir ($path);
+         return rrmdir ($path);
     }
 
     return true;
+}
+
+function rrmdir(string $src) {
+    $dir = opendir($src);
+    while(false !== ( $file = readdir($dir)) ) {
+        if (( $file != '.' ) && ( $file != '..' )) {
+            $full = $src . '/' . $file;
+            if ( is_dir($full) ) {
+                rrmdir($full);
+            }
+            else {
+                unlink($full);
+            }
+        }
+    }
+    closedir($dir);
+    rmdir($src);
 }
 
 function eliminarArchivo($path)

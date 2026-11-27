@@ -1032,6 +1032,34 @@ function object_to_array($data)
     return $data;
 }
 
+/**
+ * Devuelve el identificador persistente de este navegador. En la base de datos
+ * solo se almacena su hash; la cookie nunca contiene datos de autenticacion.
+ */
+function getUserDeviceToken()
+{
+    $cookie_name = 'FrankyDevice';
+    $token = isset($_COOKIE[$cookie_name]) ? $_COOKIE[$cookie_name] : '';
+
+    if (!preg_match('/^[a-f0-9]{64}$/', $token)) {
+        $token = bin2hex(random_bytes(32));
+    }
+
+    $secure = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+        || (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443);
+
+    setcookie($cookie_name, $token, [
+        'expires' => time() + (365 * 24 * 60 * 60),
+        'path' => '/',
+        'secure' => $secure,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+    $_COOKIE[$cookie_name] = $token;
+
+    return $token;
+}
+
 function validLoginUserDevice()
 {
       global $MySession;
@@ -1066,7 +1094,8 @@ function validLoginUserDevice()
         elseif(preg_match('/Windows/i',$Mobile_detect->getUserAgent())) $os = 'Windows';
       }
 
-      $device_id =md5($Mobile_detect->getUserAgent());
+      $token = getUserDeviceToken();
+      $device_id = hash('sha256', $token);
       $UserdeviceEntity->id_user($MySession->GetVar('id'));
       $UserdeviceEntity->device_id($device_id);
       if($UserdeviceModel->getData($UserdeviceEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -1085,6 +1114,32 @@ function validLoginUserDevice()
 
       }
       else {
+
+        // Migra el registro previo basado en User-Agent para conservar su
+        // estado (incluido un bloqueo aplicado desde el administrador).
+        $legacyEntity = new \Base\entity\UserdeviceEntity();
+        $legacyEntity->id_user($MySession->GetVar('id'));
+        $legacyEntity->device_id(md5($Mobile_detect->getUserAgent()));
+        if($UserdeviceModel->getData($legacyEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+        {
+            $data_device = $UserdeviceModel->getRows();
+            if((int) $data_device['status'] === 0)
+            {
+                $MySession->EndSession();
+                $MyRequest->redirect();
+                return;
+            }
+
+            $UserdeviceEntity->id($data_device['id']);
+            $UserdeviceEntity->type($type);
+            $UserdeviceEntity->os($os);
+            $UserdeviceEntity->user_agent($Mobile_detect->getUserAgent());
+            $UserdeviceEntity->ip($MyRequest->getIp());
+            $UserdeviceEntity->device_id($device_id);
+            $UserdeviceEntity->access_last(date('Y-m-d H:i:s'));
+            $UserdeviceModel->save($UserdeviceEntity->getArrayCopy());
+            return;
+        }
 
         $UserdeviceEntity->type($type);
         $UserdeviceEntity->os($os);
@@ -1131,13 +1186,34 @@ function validUserDevice()
       $Mobile_detect      = new \Mobile_Detect();
 
 
-      $device_id =md5($Mobile_detect->getUserAgent());
+      $token = getUserDeviceToken();
+      $device_id = hash('sha256', $token);
 
       $UserdeviceEntity->id_user($MySession->GetVar('id'));
       $UserdeviceEntity->device_id($device_id);
       $UserdeviceEntity->status(1);
       if($UserdeviceModel->getData($UserdeviceEntity->getArrayCopy()) != REGISTRO_SUCCESS)
       {
+          // Permite que sesiones activas durante el despliegue migren su
+          // registro legado una vez, respetando el estado de bloqueo.
+          $legacyEntity = new \Base\entity\UserdeviceEntity();
+          $legacyEntity->id_user($MySession->GetVar('id'));
+          $legacyEntity->device_id(md5($Mobile_detect->getUserAgent()));
+          if($UserdeviceModel->getData($legacyEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+          {
+              $data_device = $UserdeviceModel->getRows();
+              if((int) $data_device['status'] === 1)
+              {
+                  $UserdeviceEntity->id($data_device['id']);
+                  $UserdeviceEntity->device_id($device_id);
+                  $UserdeviceEntity->user_agent($Mobile_detect->getUserAgent());
+                  $UserdeviceEntity->ip($MyRequest->getIp());
+                  $UserdeviceEntity->access_last(date('Y-m-d H:i:s'));
+                  $UserdeviceModel->save($UserdeviceEntity->getArrayCopy());
+                  return;
+              }
+          }
+
           $MySession->EndSession();
           $MyRequest->redirect();
       }

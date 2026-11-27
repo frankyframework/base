@@ -39,8 +39,8 @@ class mfm{
     public function newdir($newdir,$viewdir)
     {
         $new_title = $this->format_filename($newdir);
-        if(!is_dir(PROJECT_DIR.$viewdir . '/' . $new_title)) {
-            if(mkdir(PROJECT_DIR.$viewdir . '/' . $new_title, 0777)) {
+        if(!is_dir(PROJECT_DIR."/public/".$viewdir . '/' . $new_title)) {
+            if(mkdir(PROJECT_DIR."/public/".$viewdir . '/' . $new_title, 0777)) {
                     echo '<p class="successful">&quot;' . $new_title . '&quot;' . _("Carpeta creada") . '</p>';
             } else {
                     echo '<p class="failed">' . _("No se puede crear la carpeta") . '&quot;' . $new_title . '&quot;!<br />' . _("Revisar permisos de escritura") . '</p>';
@@ -55,7 +55,7 @@ class mfm{
         $html =  "";
 	$dir_array = array(); 
         $ruta_completa = array();
-	$handle = opendir(PROJECT_DIR.$dir);  
+	$handle = opendir(PROJECT_DIR."/public/".$dir);  
 	while($nombre = readdir($handle)) { 	
 		if(strpos($nombre, '.') === 0) continue;	
 		$ruta_completa[] =  $nombre; 
@@ -68,7 +68,7 @@ class mfm{
             foreach($ruta_completa as $v)
             {  
                 //echo $_SERVER["DOCUMENT_ROOT"].$dir.$v."<br />";
-		if(is_dir(PROJECT_DIR.$dir.$v)) {
+		if(is_dir(PROJECT_DIR."/public/".$dir.$v)) {
                    
                     $html .= '<li>';
                     $html .= '<a href="'.$dir."/".$v . '/" onclick="load(\'viewdir=' . $dir.$v . '&pwd='.$pwd.'&field='.$field.'\',\'view-files\'); return false;">' .$v . '</a>';
@@ -89,15 +89,15 @@ class mfm{
         $html = "";
         
         $html .= '<table id="file-list">';
-        $d = opendir(PROJECT_DIR.$c);
+        $d = opendir(PROJECT_DIR."/public/".$c);
         $i = 0;
         while($f = readdir($d)) {
             if(strpos($f, '.') === 0) continue;
             $ff = $c . '/' . $f; //   $ff = $c . '/' . $f;
-            if(!is_dir(PROJECT_DIR.$ff)) {
+            if(!is_dir(PROJECT_DIR."/public/".$ff)) {
                 $html .=  '<tr' . ($i%2 ? ' class="light"' : ' class="dark"') .'>';
                 //show preview and different icon, if file is image
-                if($imageinfo = @getimagesize(PROJECT_DIR.$ff)) {
+                if($imageinfo = @getimagesize(PROJECT_DIR."/public/".$ff)) {
                     $resize = '';
                     if($imageinfo[0] > $this->thmb_size or $imageinfo[1] > $this->thmb_size) {
                         if($imageinfo[0] > $imageinfo[1]) {
@@ -120,7 +120,7 @@ class mfm{
                     $html .=  '<td><a class="unknown" href="#" onclick="submit_url(\'' . $this->rootPath . '' . $ff . '\');">' . $f . '</a>'; 
                     $html .=  '</td>';
                 }
-                $html .=  '<td>' . $this->byte_convert(filesize(PROJECT_DIR.$ff)) . '</td>';
+                $html .=  '<td>' . $this->byte_convert(filesize(PROJECT_DIR."/public/".$ff)) . '</td>';
                 $html .=  '<td class="delete"><a href="#" title="' . _("Eliminar archivo") . '" onclick="delete_file(\'' . $c . '\',\'' . $f . '\');">' . _("Eliminar"). '</a></td>';
                 $html .=  '</tr>';
                 $i++;
@@ -142,10 +142,10 @@ class mfm{
     
     public function delete($viewdir,$deletefile)
     {
-        if(!file_exists(PROJECT_DIR.$viewdir. '/' . $deletefile )) {
+        if(!file_exists(PROJECT_DIR."/public/".$viewdir. '/' . $deletefile )) {
                 $html = '<p class="failed">' . _("El archivo no existe"). '</p>';
         } else {
-            if(unlink(PROJECT_DIR.$viewdir . '/' .$deletefile )) {
+            if(unlink(PROJECT_DIR."/public/".$viewdir . '/' .$deletefile )) {
                     $html = '<p class="successful">' . _("Archivo eliminado") . '</p>';
             } else {
                     $html = '<p class="failed">' . _("No se puede eliminar el archivo") . '</p>';

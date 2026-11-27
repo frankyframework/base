@@ -14,7 +14,12 @@ return array(
                          "permiso" =>   "admin_role",
                          "url" => $MyRequest->url(LISTA_ROLES),
                          "etiqueta" => _("Roles")
-                        )
+                        ),
+                          array(
+                            "permiso" =>   "mi_cuenta_dashboard",
+                            "url" => $MyRequest->url(MI_CUENTA),
+                            "etiqueta" => _("Panel de cliente")
+                     ),
 
         )
     ),
